@@ -1,0 +1,450 @@
+﻿@{
+    // Used Table [Member]
+    // 회원관리 - 가입
+    
+    ViewData["Title"] = "MemberReg Page";
+    @model Ki4C_Solution.Models.Common.Member.MemberRegModel
+    
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header">
+                    <h3 class="text-center font-weight-light my-4">회원가입</h3>
+                    <div class="d-flex justify-content-end">
+                        <a href="#">Home</a> &gt; 회원가입
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="CommonMember" asp-action="MemberReg" method="post" id="input-form">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Id" type="text" placeholder=" " asp-for="ID" value="" />
+                            <label for="input-Id">아이디<a style="color: red;">*</a></label>
+                            <!-- add ID Check Button-->
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-outline-success idCheckBtn " onclick="MemberRegJS.IdCheckClicked();">아이디 중복확인</button>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Password" type="password" placeholder=" " asp-for="Password" value="" />
+                            <label for="input-Password">비밀번호<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Password-Check" type="password" placeholder=" " asp-for="PasswordConfirm" value="" />
+                            <label for="input-Password-Check">비밀번호 확인<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Name" type="text" placeholder=" " asp-for="Name" value="" />
+                            <label for="input-Name">이름<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Email" type="email" placeholder=" " asp-for="Email" value=""/>
+                            <label for="input-Email">이메일<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Phone" type="text" placeholder=" " asp-for="Phone" value="" oninput="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                            <label for="input-Phone">휴대폰 번호<a style="color: red;">*</a></label>
+                            <!-- add Phone Number Check Button-->
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-outline-success justify-content-between phoneCheckBtn" onclick="MemberRegJS.PhoneCheckClicked();">번호 중복확인</button>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Address" type="text" placeholder=" " asp-for="Address" value="" onclick="MemberRegJS.daumAddressAPI();" />
+                            <label for="input-Address">주소<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Address-Detail" type="text" placeholder=" " asp-for="AddressDetail" value="" />
+                            <label for="input-Address-Detail">상세 주소<a style="color: red;">*</a></label>
+                        </div>
+                        
+                        <!-- 주민 번호-->
+                        @*
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Resident-Number" type="text" placeholder=" " asp-for="ResidentNumber" />
+                            <label for="input-Resident-Number">주민번호</label>
+                        </div>
+                        *@
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Company" type="text" placeholder=" " asp-for="Company" value="" />
+                            <label for="input-Company">회사명<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Department" type="text" placeholder=" " asp-for="Department" value="" />
+                            <label for="input-Department">부서명</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="input-Position" type="text" placeholder=" " asp-for="Position" value="" />
+                            <label for="input-Position">직급</label>
+                        </div>
+                        <!-- check1 ~ 8-->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="input-Check1" type="checkbox" placeholder=" " asp-for="Check1" onchange="MemberRegJS.check1Clicked();" />
+                            <label class="form-check-label" for="input-Check1">전체 동의</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="input-Check2" type="checkbox" placeholder=" " asp-for="Check2" />
+                            <label class="form-check-label" for="input-Check2">개인정보 수집 및 이용 동의(필수)<a style="color: red;">*</a></label>
+                            <input class="form-input text-end" id="input-Check2-Detail" type="checkbox" placeholder=" " onchange="MemberRegJS.check2_DetailShow();" />
+                            <label for="input-Check2-Detail" class="text-end">자세히 보기</label>
+
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="input-Check3" type="checkbox" placeholder=" " asp-for="Check3" />
+                            <label class="form-check-label" for="input-Check3">개인정보 취급위탁 동의(필수)<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="input-Check4" type="checkbox" placeholder=" " asp-for="Check4" />
+                            <label class="form-check-label" for="input-Check4">개인정보 국외이전 동의(필수)<a style="color: red;">*</a></label>
+                            </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="input-Check5" type="checkbox" placeholder=" " asp-for="Check5" />
+                            <label class="form-check-label" for="input-Check5">개인정보 공유 및 제공(제3자) 동의(필수)<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="input-Check6" type="checkbox" placeholder=" " asp-for="Check6" />
+                            <label class="form-check-label" for="input-Check6">서비스 이용약관(필수)<a style="color: red;">*</a></label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="input-Check7" type="checkbox" placeholder=" " asp-for="Check7" />
+                            <label class="form-check-label" for="input-Check7">만 16세 이상 서비스 이용 동의(필수)<a style="color: red;">*</a></label>
+                            </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" id="input-Check8" type="checkbox" placeholder=" " asp-for="Check8" />
+                            <label class="form-check-label" for="input-Check8">마케팅 수신동의(선택)</label>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4 mb-0">
+                            <button class="btn btn-primary" type="submit" >회원가입</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3 d-flex justify-content-center">
+                    <div class="small m-2"><a class="btn btn-primary" asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a></div>
+                    <div class="small m-2"><a class="btn btn-primary" asp-area="" asp-controller="CommonAuth" asp-action="FindIdInput">아이디 찾기</a></div>
+                    <div class="small m-2"><a class="btn btn-primary" asp-area="" asp-controller="CommonAuth" asp-action="FindPassInput">비밀번호 찾기</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model != null && Model.Equals("LoginFail"))
+{
+    <p>Login failed. Please try again.</p>
+}
+<!-- Modal -->
+<div class="modal fade" id="MemberRegFailModal" tabindex="-1" role="dialog" aria-labelledby="MemberRegFailLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="MemberRegFailLabel">회원가입 실패</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p> </p>
+                <p>이미 등록된 계정입니다. </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary closeBtn" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let MemberRegJS = {
+        init: function () {
+            this.setEvent();
+        },
+        setEvent : function(){
+            $('#input-form').submit(function (e) {
+                e.preventDefault();
+                if(MemberRegJS.inputNullCheckFunction()){
+                    this.submit();
+                };
+            });
+        },
+        daumAddressAPI : function(){
+            //daum 주소 API
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 상태라면 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var fullAddr = data.address; // 최종 주소 변수
+                    var extraAddr = ''; // 조합형 주소 변수
+                    // 기본 주소가 도로명 타입일때 조합한다.
+                    if (data.addressType === 'R') {
+                        //법정동명이 있을 경우 추가한다.
+                        if (data.bname !== '') {
+                            extraAddr += data.bname;
+                        }
+                        // 건물명이 있을 경우 추가한다.
+                        if (data.buildingName !== '') {
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+                        // 조합형 주소의 유무에 따라 양쪽에 괄호를 추가하고 최종 주소를 만든다.
+                        fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '');
+                    }
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('input-Address').value = fullAddr;
+                    // 커서를 상세주소 필드로 이동한다.
+                    document.getElementById('input-Address-Detail').focus();
+                }
+            }).open();
+        },
+        isEmpty: function (value) {
+            if (value == null || value == undefined || value == "") {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        check1Clicked : function(){
+            if ($('#input-Check1').is(':checked')) {
+                $('#input-Check2').prop('checked', true);
+                $('#input-Check3').prop('checked', true);
+                $('#input-Check4').prop('checked', true);
+                $('#input-Check5').prop('checked', true);
+                $('#input-Check6').prop('checked', true);
+                $('#input-Check7').prop('checked', true);
+                $('#input-Check8').prop('checked', true);
+            } else {
+                $('#input-Check2').prop('checked', false);
+                $('#input-Check3').prop('checked', false);
+                $('#input-Check4').prop('checked', false);
+                $('#input-Check5').prop('checked', false);
+                $('#input-Check6').prop('checked', false);
+                $('#input-Check7').prop('checked', false);
+                $('#input-Check8').prop('checked', false);
+            }
+
+        },
+        checkOrderClick : function(){
+            //this function is check 2~7 checkbox onclick event
+            // check1 is checked, if all checkbox is checked
+            if ($('#input-check2').is(':checked') && $('#input-check3').is(':checked') && $('#input-check4').is(':checked') && $('#input-check5').is(':checked') && $('#input-check6').is(':checked') && $('#input-check7').is(':checked')) {
+                $('#input-check1').prop('checked', true);
+            }else{
+                $('#input-check1').prop('checked', false);
+            }
+        },
+        inputNullCheckFunction : function(){
+            //this MemberReg page input null check function input tag id patten is 'input-ID'
+            if (MemberRegJS.isEmpty($('#input-Id').val())) {
+                alert('아이디를 입력해주세요.');
+                $('#input-id').focus();
+                return false;
+            }
+            if (MemberRegJS.isEmpty($('#input-Password').val())) {
+                alert('비밀번호를 입력해주세요.');
+                $('#input-pw').focus();
+                return false;
+            }
+            if (MemberRegJS.isEmpty($('#input-Password-Check').val())) {
+                alert('비밀번호 확인을 입력해주세요.');
+                $('#input-pw-check').focus();
+                return false;
+            }
+            if ($('#input-Password').val() != $('#input-Password-Check').val()) {
+                alert('비밀번호가 일치하지 않습니다.');
+                $('#input-pw-check').focus();
+                return false;
+            }
+            if (MemberRegJS.isEmpty($('#input-Name').val())) {
+                alert('이름을 입력해주세요.');
+                $('#input-Name').focus();
+                return false;
+            }
+            if (MemberRegJS.isEmpty($('#input-Email').val())) {
+                alert('이메일을 입력해주세요.');
+                $('#input-Email').focus();
+                return false;
+            }
+            if (MemberRegJS.isEmpty($('#input-Phone').val())) {
+                alert('휴대폰 번호를 입력해주세요.');
+                $('#input-Phone').focus();
+                return false;
+            }
+            if (MemberRegJS.isEmpty($('#input-Address').val())) {
+                alert('주소를 입력해주세요.');
+                $('#input-Address').focus();
+                return false;
+            }
+            //if (MemberRegJS.isEmpty($('#input-Resident-Number').val())) {
+            //    alert('주민번호를 입력해주세요.');
+            //    $('#input-detail-address').focus();
+            //    return false;
+            //}
+            //if (MemberRegJS.isEmpty($('#input-postcode').val())) {
+            //    alert('우편번호를 입력해주세요.');
+            //    $('#input-postcode').focus();
+            //    return false;
+            //}
+            if (MemberRegJS.isEmpty($('#input-Company').val())) {
+                alert('회사명을 입력해주세요.');
+                $('#input-Company').focus();
+                return false;
+            }
+            //if (MemberRegJS.isEmpty($('#input-Department').val())) {
+            //    alert('부서명을 입력해주세요.');
+            //    $('#input-Department').focus();
+            //    return false;
+            //}
+            //if (MemberRegJS.isEmpty($('#input-Position').val())) {
+            //    alert('직급을 입력해주세요.');
+            //    $('#input-Position').focus();
+            //    return false;
+            //}
+            //check2 ~ check8 is checked 
+            if (!$('#input-Check2').is(':checked') && !$('#input-Check3').is(':checked') && !$('#input-Check4').is(':checked') && !$('#input-Check5').is(':checked') && !$('#input-Check6').is(':checked') && !$('#input-Check7').is(':checked') && !$('#input-Check8').is(':checked')) {
+                alert('이용약관에 동의해주세요.');
+                return false;
+            }
+            return true;
+        },
+        MemberJoinReqest : function(){
+            //form data create obj end ajax request CommonMember/MemberReg
+            var formData = new FormData();
+            formData.append('id', $('#input-Id').val());
+            formData.append('password', $('#input-Password').val());
+            formData.append('name', $('#input-Name').val());
+            formData.append('email', $('#input-Email').val());
+            formData.append('phone', $('#input-Phone').val());
+            formData.append('address', $('#input-Address').val());
+            formData.append('company', $('#input-Company').val());
+            formData.append('department', $('#input-Department').val());
+            formData.append('position', $('#input-Position').val());
+            formData.append('residentNumber', $('#input-Resident-Number').val());
+            formData.append('postcode', $('#input-postcode').val());
+            formData.append('detailAddress', $('#input-detail-address').val());
+            formData.append('check1', $('#input-Check1').is(':checked'));
+            formData.append('check2', $('#input-Check2').is(':checked'));
+            formData.append('check3', $('#input-Check3').is(':checked'));
+            formData.append('check4', $('#input-Check4').is(':checked'));
+            formData.append('check5', $('#input-Check5').is(':checked'));
+            formData.append('check6', $('#input-Check6').is(':checked'));
+            formData.append('check7', $('#input-Check7').is(':checked'));
+            formData.append('check8', $('#input-Check8').is(':checked'));
+            $.ajax({
+                url: '/CommonMember/MemberReg',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.result == 'success') {
+                        alert('회원가입이 완료되었습니다.');
+                        location.href = '/CommonMember/Login';
+                    }
+                    else {
+                        alert('회원가입에 실패하였습니다.');
+                    }
+                },
+                error: function (request, status, error) {
+                    alert('회원가입에 실패하였습니다.');
+                }
+            });
+        },
+        MemberRegSubmit : function(){
+            // id input-form submit
+            $('#input-form').submit();
+        },
+        MemberRegSubmitEvent: function () {
+            // id input-form submit event
+            $('#input-form').submit(function (e) {
+                e.preventDefault();
+                if (MemberRegJS.MemberRegCheck()) {
+                    MemberRegJS.MemberJoinReqest();
+                }
+            });
+        },
+        IdCheckClicked: function () {
+            if (MemberRegJS.isEmpty($('#input-Id').val())) {
+                alert('아이디를 입력해주세요.');
+                $('#input-Id').focus();
+                return false;
+            }
+            $.ajax({
+                url: '/CommonMember/CheckID',
+                type: 'POST',
+                data: { id: $('#input-Id').val() },
+                success: function (data) {
+                    if (data.result == 'success') {
+                        alert('사용가능한 아이디입니다.');
+                        // .idCheckBtn button class btn-primary to btn-default
+                        $('.idCheckBtn').removeClass('btn-outline-success');
+                        $('.idCheckBtn').addClass('btn-default');
+                        // .idCheckBtn button class disabled
+                        $('.idCheckBtn').attr('disabled', true);
+                            
+                    }
+                    else {
+                        alert('이미 사용중인 아이디입니다.');
+                        $('#input-Id').focus();
+                    }
+                },
+                error: function (request, status, error) {
+                    alert('아이디 중복체크에 실패하였습니다.');
+                    // .idCheckBtn button class btn-primary to btn-default
+                    $('.idCheckBtn').removeClass('btn-outline-success');
+                    $('.idCheckBtn').addClass('btn-default');
+                    // .idCheckBtn button class disabled
+                    $('.idCheckBtn').attr('disabled', true);
+                }
+            });
+        },
+        PhoneCheckClicked: function () {
+            if (MemberRegJS.isEmpty($('#input-Phone').val())) {
+                alert('휴대폰 번호를 입력해주세요.');
+                $('#input-Phone').focus();
+                return false;
+            }
+            $.ajax({
+                url: '/CommonMember/CheckPhone',
+                type: 'POST',
+                data: { phone: $('#input-Phone').val() },
+                success: function (data) {
+                    if (data.result == 'success') {
+                        alert('사용가능한 휴대폰 번호입니다.');
+                        $('.phoneCheckBtn').removeClass('btn-outline-success');
+                        $('.phoneCheckBtn').addClass('btn-default');
+                        // .idCheckBtn button class disabled
+                        $('.phoneCheckBtn').attr('disabled', true);
+                    }
+                    else {
+                        alert('이미 사용중인 휴대폰 번호입니다.');
+                        $('#input-Phone').focus();
+                    }
+                },
+                error: function (request, status, error) {
+                    alert('휴대폰 번호 중복체크에 실패하였습니다.');
+                    $('.phoneCheckBtn').removeClass('btn-outline-success');
+                    $('.phoneCheckBtn').addClass('btn-default');
+                    // .idCheckBtn button class disabled
+                    $('.phoneCheckBtn').attr('disabled', true);
+                }
+            })
+        },
+    }
+
+    $(document).ready(function () {
+        MemberRegJS.init();
+    });
+
+    $(".btn-close, .closeBtn").click(function () {
+        $('#loginFailModal').modal('hide');
+        $('#loginSuccessModal').modal('hide');
+    });
+
+</script>
+
+
+
+                
+                
+                
+                
