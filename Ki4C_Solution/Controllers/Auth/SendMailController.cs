@@ -18,7 +18,7 @@ namespace Ki4C_Solution.Controllers.Auth
             {
                 System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
                 //발신자
-                mail.From = new System.Net.Mail.MailAddress("임윤식" + "<" + "lsun000@naver.com" + ">");
+                mail.From = new System.Net.Mail.MailAddress("임윤식" + "<" + "발신자이메일" + ">");
 
                 //수신자
                 mail.To.Add("amsomad@lklab.org");
@@ -53,7 +53,7 @@ namespace Ki4C_Solution.Controllers.Auth
                 smtp.Host = "smtp.naver.com";
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("lsun000@naver.com", "dbsskfo!2");
+                smtp.Credentials = new System.Net.NetworkCredential("이메일", "비밀번호");
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
                 return "메일 전송 완료";
@@ -71,7 +71,7 @@ namespace Ki4C_Solution.Controllers.Auth
             {
                 System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
                 mail.To.Add(to);
-                mail.From = new System.Net.Mail.MailAddress("임윤식" + "<" + "lsun000@naver.com" + ">");
+                mail.From = new System.Net.Mail.MailAddress("임윤식" + "<" + "" + ">");
                 mail.Subject = subject;
                 mail.Body = body;
                 mail.IsBodyHtml = true;
