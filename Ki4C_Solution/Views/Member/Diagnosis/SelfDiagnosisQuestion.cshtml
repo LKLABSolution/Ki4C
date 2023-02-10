@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <title>진단/자체 진단 문항</title>
+    <style>
+    /* CompanyBasicInformation.html */
+    h3 {
+        color:rgba(5, 146, 146, 0.769)
+    }
+    h4 {
+        color:rgba(5, 146, 146, 0.769)
+    }
+    #questions {
+        width: 43%;
+        display: block;
+        float: left;
+        margin-right: 20px;
+        text-align: left;
+    }
+    #answer {
+       width: 50%;
+       display: block;
+       float: left;
+    }
+    .multiple {
+        width: 90%; height: 40px;
+        padding: 10px; margin: 5px;
+        text-align: left;
+        background-color: rgba(191, 202, 202, 0.554);
+    }
+    #prevButton{
+        width: 80px; height: 30px;
+        font-size: 16px; font-weight: 600;
+        background-color: grey;
+        color: white;
+        border: none;
+    }
+    #nextButton{
+        width: 80px; height: 30px;
+        font-size: 16px; font-weight: 600;
+        background-color: grey;
+        color: white;
+        border: none;
+    }
+    #submitButton{
+        width: 80px; height: 30px;
+        font-size: 16px; font-weight: 600;
+        background-color: grey;
+        color: white;
+        border: none;
+    }
+    .hidden {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header></header>
+        <!-- 섹션 -->
+        <section style="width: 100%">
+            <!-- 콘텐츠 -->
+            <div id="wrap" style="width: 90%; text-align: center; border:1px solid red;">
+                <div id=contetns style="text-align: center;">
+                    <h2>디지털혁신역량(DIC, Digital Innovation Competency)</h2>
+                    <h2>자체 진단(제조업)</h2>
+                </div>
+                <!-- 자바스크립트문구 -->
+                <div id=contetns style="display: inline-block; width: 90%;
+                padding: 30px; background-color: rgba(211, 211, 211, 0.248);">
+                    <div id="questions"></div>
+                    <div id="answer"></div>
+                </div>
+                <!-- 자바스크립트문구 -->
+                <div style="padding-top: 30px; padding-bottom: 30px;">
+                    <button id="prevButton" class="hidden">이전 ⬅</button> 
+                    <button id="nextButton">다음 ➡</button> 
+                    <button id="submitButton" class="hidden">제출 ➡</button> 
+                </div>
+            </div>
+            <!-- 콘텐츠 -->
+        </section>
+        <!-- 섹션 -->
+        <footer></footer>
+    </div>
+    <!-- 스크립트 -->
+    <script src="js/SelfDiagnosisQuestion.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("header").load("../../../include/header.html"); 
+        });
+        $(function(){
+            $("footer").load("../../../include/footer.html"); 
+        });
+    </script> 
+</body>
+</html>

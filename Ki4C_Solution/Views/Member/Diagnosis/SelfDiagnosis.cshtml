@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <title>진단/자체 진단</title>
+    <style>
+     /* SelfDiagnosis.html */
+    #startButton{
+        width: 200px; height: 30px;
+        font-size: 16px; font-weight: 600;
+        background-color: orange;
+        color: white;
+        border: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header></header>
+        <!-- 섹션 -->
+        <section style="width: 100%">
+            <!-- 콘텐츠 -->
+            <div id="wrap" style="width: 80%; border:1px solid red;">
+                <div id=contetns style="text-align: center;">
+                    <h2>디지털혁신역량(DIC, Digital Innovation Competency)</h2>
+                    <h2>자체 진단(제조업)</h2>
+                    <div id=diagnosisImg>
+                        <img style="width: 300px; height: 250px; "src="img/diagnosisImg.png">
+                    </div>
+                    <br>
+                    <div style="margin-left: 100px; margin-right: 100px;">
+                        <p>세계 경제는 4차 산업혁명 본격 도래에 따른 디지털 전환이 가속화되며, 생산.유통,소비 전 과정에 걸쳐 디지털과 물리적 세상의 연결을 통해 자본 효율성을 최적화하는 '자본 생산성의 혁명'이 진행되고 있습니다. 디지털 전환은 'ICT를 활용해 새로운 솔루션 창출, 운영 혁신, 사업 기반 재구축 등으로 경쟁력을 제고하고 신성장을 추구하는 활동'을 의미하며, 디지털 전환 전략은 제조혁명과 4차 산업력명이 대두된 2010년대 등어와 개념이 화장되면서 더욱 가속화되는 추세입니다.</p>
+                        <p>이에 케이아이포씨(KI4C)에서는 WC300기업의 디지털 준비도 및 역량 수준에 대한 객관적 진단 및 평가를 통해 디지털혁신역량 자체 진단을 실시합니다.</p>
+                        <p><strong>개인정보 및 수집 및 동의</strong></p>
+                        <p>본 자체 진단 결과는 철저히 대외비로 처리됩니다.</p>
+                        <input type="checkbox" />당사는 상기 내용에 따른 정보 수집 및 이용에 동의합니다.
+                    </div>
+                    <div style="padding-top: 30px; padding-bottom: 30px;"> 
+                        <button onClick="location.href='/member/diagnosis/CompanyBasicInformation.html'" id="startButton">진단 시작하기</button>       
+                    </div>
+                </div>
+            </div>
+            <!-- 콘텐츠 -->
+        </section>
+        <!-- 섹션 -->
+        <footer></footer>
+    </div>
+    <!-- 스크립트 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("header").load("../../../include/header.html"); 
+        });
+        $(function(){
+            $("footer").load("../../../include/footer.html"); 
+        });
+    </script> 
+</body>
+</html>

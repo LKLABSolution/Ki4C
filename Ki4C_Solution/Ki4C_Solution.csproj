@@ -28,6 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Member\Diagnosis\CompanyBasicInformation.cshtml" />
+    <Content Remove="Views\Member\Diagnosis\SelfDiagnosis.cshtml" />
+    <Content Remove="Views\Member\Diagnosis\SelfDiagnosisQuestion.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
@@ -39,7 +45,7 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="wwwroot\index\" />
+    <Folder Include="wwwroot\index\images\Diagnosis\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +53,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Class1.txt</LastGenOutput>
     </None>
+    <None Include="Views\Member\Diagnosis\CompanyBasicInformation.cshtml" />
+    <None Include="Views\Member\Diagnosis\SelfDiagnosis.cshtml" />
+    <None Include="Views\Member\Diagnosis\SelfDiagnosisQuestion.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
