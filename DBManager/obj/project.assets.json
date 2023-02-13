@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SourceSvr\\ASPNET\\github\\DBManager\\DBManager.csproj",
+      "projectUniqueName": "C:\\dev\\Ki4C\\DBManager\\DBManager.csproj",
       "projectName": "DBManager",
-      "projectPath": "D:\\SourceSvr\\ASPNET\\github\\DBManager\\DBManager.csproj",
+      "projectPath": "C:\\dev\\Ki4C\\DBManager\\DBManager.csproj",
       "packagesPath": "C:\\Users\\ghflc\\.nuget\\packages\\",
-      "outputPath": "D:\\SourceSvr\\ASPNET\\github\\DBManager\\obj\\",
+      "outputPath": "C:\\dev\\Ki4C\\DBManager\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

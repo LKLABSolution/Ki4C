@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SourceSvr\\ASPNET\\github\\DBLogic\\DBLogic.csproj",
+      "projectUniqueName": "C:\\dev\\Ki4C\\DBLogic\\DBLogic.csproj",
       "projectName": "DBLogic",
-      "projectPath": "D:\\SourceSvr\\ASPNET\\github\\DBLogic\\DBLogic.csproj",
+      "projectPath": "C:\\dev\\Ki4C\\DBLogic\\DBLogic.csproj",
       "packagesPath": "C:\\Users\\ghflc\\.nuget\\packages\\",
-      "outputPath": "D:\\SourceSvr\\ASPNET\\github\\DBLogic\\obj\\",
+      "outputPath": "C:\\dev\\Ki4C\\DBLogic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
