@@ -1,7 +1,18 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DBManager",
+    "\\Ki4C_Solution",
+    "\\Ki4C_Solution\\Controllers",
+    "\\Ki4C_Solution\\Controllers\\Common",
+    "\\Ki4C_Solution\\Controllers\\Common\\Member",
+    "\\Ki4C_Solution\\Models",
+    "\\Ki4C_Solution\\Models\\Common",
+    "\\Ki4C_Solution\\Models\\Common\\Auth",
+    "\\Ki4C_Solution\\Views",
+    "\\Ki4C_Solution\\Views\\Common",
+    "\\Ki4C_Solution\\Views\\Common\\Member"
   ],
-  "SelectedNode": "\\Ki4C_Solution.sln",
+  "SelectedNode": "\\DBManager\\AspNetUserBase.cs",
   "PreviewInSolutionExplorer": false
 }

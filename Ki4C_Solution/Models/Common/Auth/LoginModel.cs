@@ -17,5 +17,8 @@ namespace Ki4C_Solution.Models.Common.Auth
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required]
+        public bool KeepLoggedIn { get; set;}
     }
 }

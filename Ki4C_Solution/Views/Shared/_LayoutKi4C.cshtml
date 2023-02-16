@@ -6,9 +6,14 @@
     <title>Ki4C</title>
     <link rel="stylesheet" type="text/css" href="~/index/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/index/css/bootstrap-theme.css">
-    <link rel="stylesheet" type="text/css" href="~/index/css/custom.css">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ki4C_Solution.styles.css" asp-append-version="true" />
+
+@*    <link rel="stylesheet" type="text/css" href="~/index/css/custom.css">
     <link rel="stylesheet" type="text/css" href="~/index/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="~/index/css/default.css">
+    <link rel="stylesheet" type="text/css" href="~/index/css/default.css">*@
     <link rel="shortcut icon" href="~/index/images/favicon/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="~/index/images/favicon/indigo-touch-icon.png">
     <script src="~/index/js/jquery.min.js"></script>
@@ -47,7 +52,7 @@
                     <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a></li>
                 </ul>
                 <ul class="rightMenu">
-                    <li><a href="join.html">회원가입</a></li>
+                    <li><a class="text-primary" asp-area="" asp-controller="CommonMember" asp-action="MemberReg">회원가입</a></li>
                     <li><a class="text-primary" asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a></li>
                 </ul>
             </div>
@@ -103,6 +108,7 @@
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

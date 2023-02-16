@@ -29,7 +29,7 @@ namespace DbManager
             this.DefineColumns(4);
         }
         
-        public string LofinProvider
+        public string LoginProvider
         {
             get
             {
@@ -135,27 +135,27 @@ namespace DbManager
             return await Service.GetForAspNetUsersJsonAsync(userId);
         }
         
-        public static AspNetUserLogin GetByKey(string lofinProvider, string providerKey)
+        public static AspNetUserLogin GetByKey(string loginProvider, string providerKey)
         {
-            return Service.GetByKey(lofinProvider, providerKey);
+            return Service.GetByKey(loginProvider, providerKey);
         }
         
-        public static string GetByKeyJson(string lofinProvider, string providerKey)
+        public static string GetByKeyJson(string loginProvider, string providerKey)
         {
-            return Service.GetByKeyJson(lofinProvider, providerKey);
+            return Service.GetByKeyJson(loginProvider, providerKey);
         }
         
-        public static async Task<AspNetUserLogin> GetByKeyAsync(string lofinProvider, string providerKey)
+        public static async Task<AspNetUserLogin> GetByKeyAsync(string loginProvider, string providerKey)
         {
-            return await Service.GetByKeyAsync(lofinProvider, providerKey);
+            return await Service.GetByKeyAsync(loginProvider, providerKey);
         }
         
-        public static async Task<string> GetByKeyJsonAsync(string lofinProvider, string providerKey)
+        public static async Task<string> GetByKeyJsonAsync(string loginProvider, string providerKey)
         {
-            return await Service.GetByKeyJsonAsync(lofinProvider, providerKey);
+            return await Service.GetByKeyJsonAsync(loginProvider, providerKey);
         }
         
-        public static AspNetUserLogin Insert(string lofinProvider, string providerKey, object providerDisplayName, string userId)
+        public static AspNetUserLogin Insert(string loginProvider, string providerKey, object providerDisplayName, string userId)
         {
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -164,10 +164,10 @@ namespace DbManager
             {
                 providerDisplayName = System.DBNull.Value;
             }
-            return Service.Insert(lofinProvider, providerKey, providerDisplayName, userId);
+            return Service.Insert(loginProvider, providerKey, providerDisplayName, userId);
         }
         
-        public static async Task<AspNetUserLogin> InsertAsync(string lofinProvider, string providerKey, object providerDisplayName, string userId)
+        public static async Task<AspNetUserLogin> InsertAsync(string loginProvider, string providerKey, object providerDisplayName, string userId)
         {
             // InsertAsync 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -176,7 +176,7 @@ namespace DbManager
             {
                 providerDisplayName = System.DBNull.Value;
             }
-            return await Service.InsertAsync(lofinProvider, providerKey, providerDisplayName, userId);
+            return await Service.InsertAsync(loginProvider, providerKey, providerDisplayName, userId);
         }
         
         public new AspNetUserLogin Insert()
@@ -184,7 +184,7 @@ namespace DbManager
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
             // 
-            return Insert(LofinProvider, ProviderKey, ProviderDisplayName, UserId);
+            return Insert(LoginProvider, ProviderKey, ProviderDisplayName, UserId);
         }
         
         public async Task<AspNetUserLogin> InsertAsync()
@@ -192,13 +192,13 @@ namespace DbManager
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
             // 
-            return await InsertAsync(LofinProvider, ProviderKey, ProviderDisplayName, UserId);
+            return await InsertAsync(LoginProvider, ProviderKey, ProviderDisplayName, UserId);
         }
         
         public new int Update()
         {
             // 인수를 해당 파라메타에 옮긴다
-            string lofinProviderParam = this.LofinProvider;
+            string loginProviderParam = this.LoginProvider;
             string providerKeyParam = this.ProviderKey;
             object providerDisplayNameParam;
             if ((this.IsProviderDisplayNameNull() == false))
@@ -211,13 +211,13 @@ namespace DbManager
             }
             string userIdParam = this.UserId;
             // update 실행
-            return Service.Update(lofinProviderParam, providerKeyParam, providerDisplayNameParam, userIdParam);
+            return Service.Update(loginProviderParam, providerKeyParam, providerDisplayNameParam, userIdParam);
         }
         
         public async Task<int> UpdateAsync()
         {
             // 인수를 해당 파라메타에 옮긴다
-            string lofinProviderParam = this.LofinProvider;
+            string loginProviderParam = this.LoginProvider;
             string providerKeyParam = this.ProviderKey;
             object providerDisplayNameParam;
             if ((this.IsProviderDisplayNameNull() == false))
@@ -229,45 +229,45 @@ namespace DbManager
                 providerDisplayNameParam = System.DBNull.Value;
             }
             string userIdParam = this.UserId;
-            return await Service.UpdateAsync(lofinProviderParam, providerKeyParam, providerDisplayNameParam, userIdParam);
+            return await Service.UpdateAsync(loginProviderParam, providerKeyParam, providerDisplayNameParam, userIdParam);
         }
         
-        public static int Update(string lofinProvider, string providerKey, object providerDisplayName, string userId)
+        public static int Update(string loginProvider, string providerKey, object providerDisplayName, string userId)
         {
             if ((providerDisplayName == null))
             {
                 providerDisplayName = System.DBNull.Value;
             }
-            return Service.Update(lofinProvider, providerKey, providerDisplayName, userId);
+            return Service.Update(loginProvider, providerKey, providerDisplayName, userId);
         }
         
-        public static async Task<int> UpdateAsync(string lofinProvider, string providerKey, object providerDisplayName, string userId)
+        public static async Task<int> UpdateAsync(string loginProvider, string providerKey, object providerDisplayName, string userId)
         {
             if ((providerDisplayName == null))
             {
                 providerDisplayName = System.DBNull.Value;
             }
-            return await Service.UpdateAsync(lofinProvider, providerKey, providerDisplayName, userId);
+            return await Service.UpdateAsync(loginProvider, providerKey, providerDisplayName, userId);
         }
         
-        public static int Delete(string lofinProvider, string providerKey)
+        public static int Delete(string loginProvider, string providerKey)
         {
-            return Service.Delete(lofinProvider, providerKey);
+            return Service.Delete(loginProvider, providerKey);
         }
         
-        public static async Task<int> DeleteAsync(string lofinProvider, string providerKey)
+        public static async Task<int> DeleteAsync(string loginProvider, string providerKey)
         {
-            return await Service.DeleteAsync(lofinProvider, providerKey);
+            return await Service.DeleteAsync(loginProvider, providerKey);
         }
         
         public new int Delete()
         {
-            return Service.Delete(LofinProvider, ProviderKey);
+            return Service.Delete(LoginProvider, ProviderKey);
         }
         
         public async Task<int> DeleteAsync()
         {
-            return await Service.DeleteAsync(LofinProvider, ProviderKey);
+            return await Service.DeleteAsync(LoginProvider, ProviderKey);
         }
     }
 }
@@ -372,49 +372,49 @@ namespace DbManager
             return await this.GetJsonDataSetAsync(selectCmd);
         }
         
-        public AspNetUserLogin GetByKey(string lofinProvider, string providerKey)
+        public AspNetUserLogin GetByKey(string loginProvider, string providerKey)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
-            selectCmd.CommandText = "SELECT * FROM AspNetUserLogins WHERE LofinProvider = @lofinProvider AND ProviderK" +
+            selectCmd.CommandText = "SELECT * FROM AspNetUserLogins WHERE LoginProvider = @loginProvider AND ProviderK" +
                 "ey = @providerKey";
             selectCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey";
-            AddParameters(selectCmd, paraNames, lofinProvider, providerKey);
+            string paraNames = "loginProvider,providerKey";
+            AddParameters(selectCmd, paraNames, loginProvider, providerKey);
             // 
             AspNetUserLogin entity = ((AspNetUserLogin)(this.GetEntity(selectCmd, typeof(AspNetUserLoginSet))));
             selectCmd.Dispose();
             return entity;
         }
         
-        public  string GetByKeyJson(string lofinProvider, string providerKey)
+        public  string GetByKeyJson(string loginProvider, string providerKey)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
-            selectCmd.CommandText = "SELECT * FROM AspNetUserLogins WHERE LofinProvider = @lofinProvider AND ProviderK" +
+            selectCmd.CommandText = "SELECT * FROM AspNetUserLogins WHERE LoginProvider = @loginProvider AND ProviderK" +
                 "ey = @providerKey";
             selectCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey";
-            AddParameters(selectCmd, paraNames, lofinProvider, providerKey);
+            string paraNames = "loginProvider,providerKey";
+            AddParameters(selectCmd, paraNames, loginProvider, providerKey);
             // 
             return this.GetJsonDataSet(selectCmd);
         }
         
-        public async Task<AspNetUserLogin> GetByKeyAsync(string lofinProvider, string providerKey)
+        public async Task<AspNetUserLogin> GetByKeyAsync(string loginProvider, string providerKey)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
-            selectCmd.CommandText = "SELECT * FROM AspNetUserLogins WHERE LofinProvider = @lofinProvider AND ProviderK" +
+            selectCmd.CommandText = "SELECT * FROM AspNetUserLogins WHERE LoginProvider = @loginProvider AND ProviderK" +
                 "ey = @providerKey";
             selectCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey";
-            AddParameters(selectCmd, paraNames, lofinProvider, providerKey);
+            string paraNames = "loginProvider,providerKey";
+            AddParameters(selectCmd, paraNames, loginProvider, providerKey);
             // 
             // GetByKeyAsync 를 호출한다
             AspNetUserLogin entity = ((AspNetUserLogin)(await this.GetEntityAsync(selectCmd, typeof(AspNetUserLoginSet))));
@@ -422,70 +422,70 @@ namespace DbManager
             return entity;
         }
         
-        public async Task<string> GetByKeyJsonAsync(string lofinProvider, string providerKey)
+        public async Task<string> GetByKeyJsonAsync(string loginProvider, string providerKey)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
-            selectCmd.CommandText = "SELECT * FROM AspNetUserLogins WHERE LofinProvider = @lofinProvider AND ProviderK" +
+            selectCmd.CommandText = "SELECT * FROM AspNetUserLogins WHERE LoginProvider = @loginProvider AND ProviderK" +
                 "ey = @providerKey";
             selectCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey";
-            AddParameters(selectCmd, paraNames, lofinProvider, providerKey);
+            string paraNames = "loginProvider,providerKey";
+            AddParameters(selectCmd, paraNames, loginProvider, providerKey);
             // 
             return await this.GetJsonDataSetAsync(selectCmd);
         }
         
-        public AspNetUserLogin Insert(string lofinProvider, string providerKey, object providerDisplayName, string userId)
+        public AspNetUserLogin Insert(string loginProvider, string providerKey, object providerDisplayName, string userId)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand insertCommand = DbCommandFactory.CreateDbCommand();
-            insertCommand.CommandText = "INSERT INTO AspNetUserLogins(LofinProvider, ProviderKey, ProviderDisplayName, Use" +
-                "rId) VALUES (@lofinProvider, @providerKey, @providerDisplayName, @userId) ";
+            insertCommand.CommandText = "INSERT INTO AspNetUserLogins(LoginProvider, ProviderKey, ProviderDisplayName, Use" +
+                "rId) VALUES (@loginProvider, @providerKey, @providerDisplayName, @userId) ";
             insertCommand.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey,providerDisplayName,userId";
-            AddParameters(insertCommand, paraNames, lofinProvider, providerKey, providerDisplayName, userId);
+            string paraNames = "loginProvider,providerKey,providerDisplayName,userId";
+            AddParameters(insertCommand, paraNames, loginProvider, providerKey, providerDisplayName, userId);
             // 
             // Insert 를 호출한다
             this.ExecuteNonQuery(insertCommand);
-            AspNetUserLogin entity = ((AspNetUserLogin)(this.GetByKey(lofinProvider, providerKey)));
+            AspNetUserLogin entity = ((AspNetUserLogin)(this.GetByKey(loginProvider, providerKey)));
             insertCommand.Dispose();
             return entity;
         }
         
-        public async Task<AspNetUserLogin> InsertAsync(string lofinProvider, string providerKey, object providerDisplayName, string userId)
+        public async Task<AspNetUserLogin> InsertAsync(string loginProvider, string providerKey, object providerDisplayName, string userId)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand insertCommand = DbCommandFactory.CreateDbCommand();
-            insertCommand.CommandText = "INSERT INTO AspNetUserLogins(LofinProvider, ProviderKey, ProviderDisplayName, Use" +
-                "rId) VALUES (@lofinProvider, @providerKey, @providerDisplayName, @userId) ";
+            insertCommand.CommandText = "INSERT INTO AspNetUserLogins(LoginProvider, ProviderKey, ProviderDisplayName, Use" +
+                "rId) VALUES (@loginProvider, @providerKey, @providerDisplayName, @userId) ";
             insertCommand.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey,providerDisplayName,userId";
-            AddParameters(insertCommand, paraNames, lofinProvider, providerKey, providerDisplayName, userId);
+            string paraNames = "loginProvider,providerKey,providerDisplayName,userId";
+            AddParameters(insertCommand, paraNames, loginProvider, providerKey, providerDisplayName, userId);
             // 
             // InsertAsync 를 호출한다
             await this.ExecuteNonQueryAsync(insertCommand);
-            AspNetUserLogin entity = ((AspNetUserLogin)(await this.GetByKeyAsync(lofinProvider, providerKey)));
+            AspNetUserLogin entity = ((AspNetUserLogin)(await this.GetByKeyAsync(loginProvider, providerKey)));
             insertCommand.Dispose();
             return entity;
         }
         
-        public int Update(string lofinProvider, string providerKey, object providerDisplayName, string userId)
+        public int Update(string loginProvider, string providerKey, object providerDisplayName, string userId)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand updateCmd = DbCommandFactory.CreateDbCommand();
             updateCmd.CommandText = "UPDATE AspNetUserLogins SET ProviderDisplayName = @providerDisplayName, UserId = " +
-                "@userId WHERE LofinProvider = @lofinProvider AND ProviderKey = @providerKey";
+                "@userId WHERE LoginProvider = @loginProvider AND ProviderKey = @providerKey";
             updateCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey,providerDisplayName,userId";
-            AddParameters(updateCmd, paraNames, lofinProvider, providerKey, providerDisplayName, userId);
+            string paraNames = "loginProvider,providerKey,providerDisplayName,userId";
+            AddParameters(updateCmd, paraNames, loginProvider, providerKey, providerDisplayName, userId);
             // 
             // Update 를 호출한다
             int executeCnt = this.ExecuteNonQuery(updateCmd);
@@ -493,17 +493,17 @@ namespace DbManager
             return executeCnt;
         }
         
-        public async Task<int> UpdateAsync(string lofinProvider, string providerKey, object providerDisplayName, string userId)
+        public async Task<int> UpdateAsync(string loginProvider, string providerKey, object providerDisplayName, string userId)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand updateCmd = DbCommandFactory.CreateDbCommand();
             updateCmd.CommandText = "UPDATE AspNetUserLogins SET ProviderDisplayName = @providerDisplayName, UserId = " +
-                "@userId WHERE LofinProvider = @lofinProvider AND ProviderKey = @providerKey";
+                "@userId WHERE LoginProvider = @loginProvider AND ProviderKey = @providerKey";
             updateCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey,providerDisplayName,userId";
-            AddParameters(updateCmd, paraNames, lofinProvider, providerKey, providerDisplayName, userId);
+            string paraNames = "loginProvider,providerKey,providerDisplayName,userId";
+            AddParameters(updateCmd, paraNames, loginProvider, providerKey, providerDisplayName, userId);
             // 
             // Update 를 호출한다
             int executeCnt = await this.ExecuteNonQueryAsync(updateCmd);
@@ -511,17 +511,17 @@ namespace DbManager
             return executeCnt;
         }
         
-        public int Delete(string lofinProvider, string providerKey)
+        public int Delete(string loginProvider, string providerKey)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand deleteCmd = DbCommandFactory.CreateDbCommand();
-            deleteCmd.CommandText = "DELETE FROM AspNetUserLogins WHERE LofinProvider = @lofinProvider AND ProviderKey" +
+            deleteCmd.CommandText = "DELETE FROM AspNetUserLogins WHERE LoginProvider = @loginProvider AND ProviderKey" +
                 " = @providerKey";
             deleteCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey";
-            AddParameters(deleteCmd, paraNames, lofinProvider, providerKey);
+            string paraNames = "loginProvider,providerKey";
+            AddParameters(deleteCmd, paraNames, loginProvider, providerKey);
             // 
             // Delete 를 호출한다
             int executeCnt = this.ExecuteNonQuery(deleteCmd);
@@ -529,17 +529,17 @@ namespace DbManager
             return executeCnt;
         }
         
-        public async Task<int> DeleteAsync(string lofinProvider, string providerKey)
+        public async Task<int> DeleteAsync(string loginProvider, string providerKey)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand deleteCmd = DbCommandFactory.CreateDbCommand();
-            deleteCmd.CommandText = "DELETE FROM AspNetUserLogins WHERE LofinProvider = @lofinProvider AND ProviderKey" +
+            deleteCmd.CommandText = "DELETE FROM AspNetUserLogins WHERE LoginProvider = @loginProvider AND ProviderKey" +
                 " = @providerKey";
             deleteCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "lofinProvider,providerKey";
-            AddParameters(deleteCmd, paraNames, lofinProvider, providerKey);
+            string paraNames = "loginProvider,providerKey";
+            AddParameters(deleteCmd, paraNames, loginProvider, providerKey);
             // 
             // Delete 를 호출한다
             int executeCnt = await this.ExecuteNonQueryAsync(deleteCmd);

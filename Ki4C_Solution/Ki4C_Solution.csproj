@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup Label="Globals">
     <SccProjectName>SAK</SccProjectName>
@@ -37,7 +37,6 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.0" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.10.0" />
@@ -56,6 +55,10 @@
     <None Include="Views\Member\Diagnosis\CompanyBasicInformation.cshtml" />
     <None Include="Views\Member\Diagnosis\SelfDiagnosis.cshtml" />
     <None Include="Views\Member\Diagnosis\SelfDiagnosisQuestion.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DBManager\DBManager.csproj" />
   </ItemGroup>
 
   <ItemGroup>

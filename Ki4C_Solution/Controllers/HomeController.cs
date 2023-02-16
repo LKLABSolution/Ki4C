@@ -17,6 +17,7 @@ namespace Ki4C_Solution.Controllers
 
         public IActionResult Index()
         {
+            DbManager.InputTypeSet inputTypeSet = DbManager.InputType.GetAll();
             return View();
         }
 

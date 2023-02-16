@@ -19,7 +19,7 @@ namespace DbManager
     
     
     // Table('AspNetRoles') Entity class
-    public partial class AspNetRol
+    public partial class AspNetRole
     {
     }
 }
@@ -44,7 +44,7 @@ namespace DbManager
     
     
     // Table('AspNetRoles')  Service class
-    public partial class AspNetRolService
+    public partial class AspNetRoleService
     {
     }
 }

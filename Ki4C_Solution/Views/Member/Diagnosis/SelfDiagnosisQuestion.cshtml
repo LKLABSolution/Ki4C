@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../css/style.css" />
-    <title>진단/자체 진단 문항</title>
+@{
+    // Used Table [Member]
+    // 마이페이지 - 탈퇴
+    ViewData["Title"] = "진단/자체 진단 문항";
+}
+
+
     <style>
     /* CompanyBasicInformation.html */
     h3 {
@@ -56,10 +56,8 @@
         display: none;
     }
     </style>
-</head>
-<body>
-    <div id="wrap">
-        <header></header>
+
+
         <!-- 섹션 -->
         <section style="width: 100%">
             <!-- 콘텐츠 -->
@@ -84,18 +82,6 @@
             <!-- 콘텐츠 -->
         </section>
         <!-- 섹션 -->
-        <footer></footer>
-    </div>
     <!-- 스크립트 -->
-    <script src="js/SelfDiagnosisQuestion.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(function(){
-            $("header").load("../../../include/header.html"); 
-        });
-        $(function(){
-            $("footer").load("../../../include/footer.html"); 
-        });
-    </script> 
-</body>
-</html>
+    <script src="~/index.js/SelfDiagnosisQuestion.js"></script>
+    <!-- 스크립트 -->

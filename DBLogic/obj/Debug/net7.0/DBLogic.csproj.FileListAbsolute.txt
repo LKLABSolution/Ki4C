@@ -1,0 +1,12 @@
+D:\SourceSvr\ASPNET\github\DBLogic\bin\Debug\net7.0\DBLogic.deps.json
+D:\SourceSvr\ASPNET\github\DBLogic\bin\Debug\net7.0\DBLogic.dll
+D:\SourceSvr\ASPNET\github\DBLogic\bin\Debug\net7.0\DBLogic.pdb
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\DBLogic.csproj.AssemblyReference.cache
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\DBLogic.GeneratedMSBuildEditorConfig.editorconfig
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\DBLogic.AssemblyInfoInputs.cache
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\DBLogic.AssemblyInfo.cs
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\DBLogic.csproj.CoreCompileInputs.cache
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\DBLogic.dll
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\refint\DBLogic.dll
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\DBLogic.pdb
+D:\SourceSvr\ASPNET\github\DBLogic\obj\Debug\net7.0\ref\DBLogic.dll

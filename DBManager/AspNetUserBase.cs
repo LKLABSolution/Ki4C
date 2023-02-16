@@ -269,11 +269,11 @@ namespace DbManager
             }
         }
         
-        public string SignUpTime
+        public System.DateTime SignUpTime
         {
             get
             {
-                return ((string)(this.IsnullZeroOrNull(20, typeof(string))));
+                return ((System.DateTime)(this.IsnullZeroOrNull(20, typeof(System.DateTime))));
             }
             set
             {

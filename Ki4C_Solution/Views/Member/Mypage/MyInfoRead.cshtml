@@ -21,7 +21,7 @@
                             <button type="submit" class="btn btn-primary btn-block">수정</button>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Id" type="text" placeholder=" " asp-for="ID" value="@Model.ID" readonly />
+                            <input class="form-control" id="input-Id" type="text" placeholder=" " asp-for="Id" value="@Model.Id" readonly />
                             <label for="input-Id">아이디<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
@@ -34,7 +34,7 @@
                             <label for="input-Password-Check">비밀번호 확인<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Name" type="text" placeholder=" " asp-for="Name" value="@Model.Name" readonly />
+                            <input class="form-control" id="input-Name" type="text" placeholder=" " asp-for="UserName" value="@Model.UserName" readonly />
                             <label for="input-Name">이름<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
@@ -42,7 +42,7 @@
                             <label for="input-Email">이메일<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Phone" type="text" placeholder=" " asp-for="Phone" value="@Model.Phone" readonly />
+                            <input class="form-control" id="input-Phone" type="text" placeholder=" " asp-for="PhoneNumber" value="@Model.PhoneNumber" readonly />
                             <label for="input-Phone">휴대폰 번호<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
@@ -61,17 +61,17 @@
                         </div>
                         *@
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Company" type="text" placeholder=" " asp-for="Company" value="@Model.Company" readonly />
+                            <input class="form-control" id="input-Company" type="text" placeholder=" " asp-for="CompanyName" value="@Model.CompanyName" readonly />
                             <label for="input-Company">회사명<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Department" type="text" placeholder=" " asp-for="Department" value="@Model.Department" readonly />
+                            <input class="form-control" id="input-Department" type="text" placeholder=" " asp-for="DepartmentName" value="@Model.DepartmentName" readonly />
                             <label for="input-Department">부서명</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Position" type="text" placeholder=" " asp-for="Position" value="@Model.Position" readonly/>
+                        @*<div class="form-floating mb-3">
+                            <input class="form-control" id="input-Position" type="text" placeholder=" " asp-for="Position" value="" readonly/>
                             <label for="input-Position">직급</label>
-                        </div>
+                        </div>*@
                         <div class="d-flex justify-content-center mt-4 mb-0">
                             <button type="submit" class="btn btn-primary btn-block">수정</button>
                         </div>

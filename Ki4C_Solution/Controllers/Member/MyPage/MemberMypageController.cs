@@ -17,18 +17,17 @@ namespace Ki4C_Solution.Controllers.Member.MyPage
             ViewData["Message"] = "MyInfoRead";
             // 임시 추가
             MemberRegModel memberRegModel = new MemberRegModel();
-            memberRegModel.ID = "test";
+            memberRegModel.Id = "test";
             memberRegModel.Password = "test";
             memberRegModel.PasswordConfirm = "test";
-            memberRegModel.Name = "test";
+            memberRegModel.UserName = "test";
             memberRegModel.Email = "test";
-            memberRegModel.Phone = "test";
+            memberRegModel.PhoneNumber = "test";
             memberRegModel.Address = "test";
             memberRegModel.AddressDetail = "test";
             memberRegModel.Birth = "test";
-            memberRegModel.Company = "test";
-            memberRegModel.Department = "test";
-            memberRegModel.Position = "test";
+            memberRegModel.CompanyName = "test";
+            memberRegModel.DepartmentName = "test";
             memberRegModel.Check1 = true;
             memberRegModel.Check2 = true;
             memberRegModel.Check3 = true;
@@ -46,18 +45,17 @@ namespace Ki4C_Solution.Controllers.Member.MyPage
             ViewData["Message"] = "MyInfoUpdate";
             // 임시 추가
             MemberRegModel memberRegModel = new MemberRegModel();
-            memberRegModel.ID = "test";
+            memberRegModel.Id = "test";
             memberRegModel.Password = "test";
             memberRegModel.PasswordConfirm = "test";
-            memberRegModel.Name = "test";
+            memberRegModel.UserName = "test";
             memberRegModel.Email = "test";
-            memberRegModel.Phone = "test";
+            memberRegModel.PhoneNumber = "test";
             memberRegModel.Address = "test";
             memberRegModel.AddressDetail = "test";
             memberRegModel.Birth = "test";
-            memberRegModel.Company = "test";
-            memberRegModel.Department = "test";
-            memberRegModel.Position = "test";
+            memberRegModel.CompanyName = "test";
+            memberRegModel.DepartmentName = "test";
             memberRegModel.Check1 = true;
             memberRegModel.Check2 = true;
             memberRegModel.Check3 = true;

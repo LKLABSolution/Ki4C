@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Ki4C_Solution.Controllers.Auth
+namespace Ki4C_Solution.Controllers.Common.Auth
 {
     public class SendMailController : Controller
     {

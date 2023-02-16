@@ -21,10 +21,10 @@ namespace DbManager
     // Table('AspNetRoles') Entity class
     // Do not add or change code here.
     [System.Serializable()]
-    public partial class AspNetRol : SoftBand.EntityManager.Entity
+    public partial class AspNetRole : SoftBand.EntityManager.Entity
     {
         
-        public AspNetRol()
+        public AspNetRole()
         {
             this.DefineColumns(4);
         }
@@ -77,11 +77,11 @@ namespace DbManager
             }
         }
         
-        public static AspNetRolService Service
+        public static AspNetRoleService Service
         {
             get
             {
-                return ((AspNetRolService)(GetServiceObject(typeof(AspNetRol), typeof(AspNetRolService))));
+                return ((AspNetRoleService)(GetServiceObject(typeof(AspNetRole), typeof(AspNetRoleService))));
             }
         }
         
@@ -105,7 +105,7 @@ namespace DbManager
             this[3] = System.DBNull.Value;
         }
         
-        public static AspNetRolSet GetAll()
+        public static AspNetRoleSet GetAll()
         {
             return Service.GetAll();
         }
@@ -115,7 +115,7 @@ namespace DbManager
             return Service.GetAllJson();
         }
         
-        public static async Task<AspNetRolSet> GetAllAsync()
+        public static async Task<AspNetRoleSet> GetAllAsync()
         {
             return await Service.GetAllAsync();
         }
@@ -125,7 +125,7 @@ namespace DbManager
             return await Service.GetAllJsonAsync();
         }
         
-        public static AspNetRol GetByKey(string id)
+        public static AspNetRole GetByKey(string id)
         {
             return Service.GetByKey(id);
         }
@@ -135,7 +135,7 @@ namespace DbManager
             return Service.GetByKeyJson(id);
         }
         
-        public static async Task<AspNetRol> GetByKeyAsync(string id)
+        public static async Task<AspNetRole> GetByKeyAsync(string id)
         {
             return await Service.GetByKeyAsync(id);
         }
@@ -145,7 +145,7 @@ namespace DbManager
             return await Service.GetByKeyJsonAsync(id);
         }
         
-        public static AspNetRol Insert(string id, string name, object normalizedName, object concurrencyStamp)
+        public static AspNetRole Insert(string id, string name, object normalizedName, object concurrencyStamp)
         {
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -161,7 +161,7 @@ namespace DbManager
             return Service.Insert(id, name, normalizedName, concurrencyStamp);
         }
         
-        public static async Task<AspNetRol> InsertAsync(string id, string name, object normalizedName, object concurrencyStamp)
+        public static async Task<AspNetRole> InsertAsync(string id, string name, object normalizedName, object concurrencyStamp)
         {
             // InsertAsync 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -177,7 +177,7 @@ namespace DbManager
             return await Service.InsertAsync(id, name, normalizedName, concurrencyStamp);
         }
         
-        public new AspNetRol Insert()
+        public new AspNetRole Insert()
         {
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -185,7 +185,7 @@ namespace DbManager
             return Insert(Id, Name, NormalizedName, ConcurrencyStamp);
         }
         
-        public async Task<AspNetRol> InsertAsync()
+        public async Task<AspNetRole> InsertAsync()
         {
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -315,12 +315,12 @@ namespace DbManager
     
     // Table('AspNetRoles')  Service class
     // Do not add or change code here.
-    public partial class AspNetRolService : SoftBand.EntityManager.Service
+    public partial class AspNetRoleService : SoftBand.EntityManager.Service
     {
         
-        public AspNetRolSet GetAll()
+        public AspNetRoleSet GetAll()
         {
-            return ((AspNetRolSet)(this.GetAll("AspNetRoles", typeof(AspNetRolSet))));
+            return ((AspNetRoleSet)(this.GetAll("AspNetRoles", typeof(AspNetRoleSet))));
         }
         
         public string GetAllJson()
@@ -328,9 +328,9 @@ namespace DbManager
             return this.GetAllJson("AspNetRoles");
         }
         
-        public async Task<AspNetRolSet> GetAllAsync()
+        public async Task<AspNetRoleSet> GetAllAsync()
         {
-            return ((AspNetRolSet)(await this.GetAllAsync("AspNetRoles", typeof(AspNetRolSet))));
+            return ((AspNetRoleSet)(await this.GetAllAsync("AspNetRoles", typeof(AspNetRoleSet))));
         }
         
         public async Task<string> GetAllJsonAsync()
@@ -338,7 +338,7 @@ namespace DbManager
             return await this.GetAllJsonAsync("AspNetRoles");
         }
         
-        public AspNetRol GetByKey(string id)
+        public AspNetRole GetByKey(string id)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
@@ -349,7 +349,7 @@ namespace DbManager
             string paraNames = "id";
             AddParameters(selectCmd, paraNames, id);
             // 
-            AspNetRol entity = ((AspNetRol)(this.GetEntity(selectCmd, typeof(AspNetRolSet))));
+            AspNetRole entity = ((AspNetRole)(this.GetEntity(selectCmd, typeof(AspNetRoleSet))));
             selectCmd.Dispose();
             return entity;
         }
@@ -368,7 +368,7 @@ namespace DbManager
             return this.GetJsonDataSet(selectCmd);
         }
         
-        public async Task<AspNetRol> GetByKeyAsync(string id)
+        public async Task<AspNetRole> GetByKeyAsync(string id)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
@@ -380,7 +380,7 @@ namespace DbManager
             AddParameters(selectCmd, paraNames, id);
             // 
             // GetByKeyAsync 를 호출한다
-            AspNetRol entity = ((AspNetRol)(await this.GetEntityAsync(selectCmd, typeof(AspNetRolSet))));
+            AspNetRole entity = ((AspNetRole)(await this.GetEntityAsync(selectCmd, typeof(AspNetRoleSet))));
             selectCmd.Dispose();
             return entity;
         }
@@ -399,7 +399,7 @@ namespace DbManager
             return await this.GetJsonDataSetAsync(selectCmd);
         }
         
-        public AspNetRol Insert(string id, string name, object normalizedName, object concurrencyStamp)
+        public AspNetRole Insert(string id, string name, object normalizedName, object concurrencyStamp)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand insertCommand = DbCommandFactory.CreateDbCommand();
@@ -413,12 +413,12 @@ namespace DbManager
             // 
             // Insert 를 호출한다
             this.ExecuteNonQuery(insertCommand);
-            AspNetRol entity = ((AspNetRol)(this.GetByKey(id)));
+            AspNetRole entity = ((AspNetRole)(this.GetByKey(id)));
             insertCommand.Dispose();
             return entity;
         }
         
-        public async Task<AspNetRol> InsertAsync(string id, string name, object normalizedName, object concurrencyStamp)
+        public async Task<AspNetRole> InsertAsync(string id, string name, object normalizedName, object concurrencyStamp)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand insertCommand = DbCommandFactory.CreateDbCommand();
@@ -432,7 +432,7 @@ namespace DbManager
             // 
             // InsertAsync 를 호출한다
             await this.ExecuteNonQueryAsync(insertCommand);
-            AspNetRol entity = ((AspNetRol)(await this.GetByKeyAsync(id)));
+            AspNetRole entity = ((AspNetRole)(await this.GetByKeyAsync(id)));
             insertCommand.Dispose();
             return entity;
         }
@@ -531,29 +531,29 @@ namespace DbManager
     // Table('AspNetRoles') EntitySet class
     // Do not add or change code here.
     [System.Serializable()]
-    public partial class AspNetRolSet : SoftBand.EntityManager.EntitySet, System.Collections.IEnumerable
+    public partial class AspNetRoleSet : SoftBand.EntityManager.EntitySet, System.Collections.IEnumerable
     {
         
         // Constructor
-        public AspNetRolSet() : 
+        public AspNetRoleSet() : 
                 this(null)
         {
         }
         
         // basic constructor
-        protected AspNetRolSet(object state)
+        protected AspNetRoleSet(object state)
         {
             this.Setup();
         }
         
         // remoting constructor...
-        protected AspNetRolSet(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : 
+        protected AspNetRoleSet(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context)
         {
             this.Setup();
         }
         
-        public AspNetRolBoundCollection Entities
+        public AspNetRoleBoundCollection Entities
         {
             get
             {
@@ -564,27 +564,27 @@ namespace DbManager
         // shared object initialization...
         private void Setup()
         {
-            this.EntityType = typeof(AspNetRol);
+            this.EntityType = typeof(AspNetRole);
         }
         
-        private AspNetRolBoundCollection GetBoundCollection()
+        private AspNetRoleBoundCollection GetBoundCollection()
         {
             return this.GetBoundCollection(0);
         }
         
-        private AspNetRolBoundCollection GetBoundCollection(int tableIndex)
+        private AspNetRoleBoundCollection GetBoundCollection(int tableIndex)
         {
-            return ((AspNetRolBoundCollection)(this.GetBoundCollection(this, tableIndex, typeof(AspNetRolBoundCollection))));
+            return ((AspNetRoleBoundCollection)(this.GetBoundCollection(this, tableIndex, typeof(AspNetRoleBoundCollection))));
         }
         
-        public partial class AspNetRolBoundCollection : SoftBand.EntityManager.EntityBoundCollection
+        public partial class AspNetRoleBoundCollection : SoftBand.EntityManager.EntityBoundCollection
         {
             
-            public new AspNetRol this[int index]
+            public new AspNetRole this[int index]
             {
                 get
                 {
-                    return ((AspNetRol)(this.EntitySet.GetEntity(this.TableIndex, index)));
+                    return ((AspNetRole)(this.EntitySet.GetEntity(this.TableIndex, index)));
                 }
             }
         }
