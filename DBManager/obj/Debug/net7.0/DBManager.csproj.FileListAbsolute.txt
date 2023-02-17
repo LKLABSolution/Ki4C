@@ -1,0 +1,12 @@
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\DBManager.csproj.AssemblyReference.cache
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\DBManager.GeneratedMSBuildEditorConfig.editorconfig
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\DBManager.AssemblyInfoInputs.cache
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\DBManager.AssemblyInfo.cs
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\DBManager.csproj.CoreCompileInputs.cache
+D:\SourceSvr\ASPNET\github\DBManager\bin\Debug\net7.0\DBManager.deps.json
+D:\SourceSvr\ASPNET\github\DBManager\bin\Debug\net7.0\DBManager.dll
+D:\SourceSvr\ASPNET\github\DBManager\bin\Debug\net7.0\DBManager.pdb
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\DBManager.dll
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\refint\DBManager.dll
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\DBManager.pdb
+D:\SourceSvr\ASPNET\github\DBManager\obj\Debug\net7.0\ref\DBManager.dll

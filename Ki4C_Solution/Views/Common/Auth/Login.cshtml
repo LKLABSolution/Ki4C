@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <form asp-controller="CommonAuth" asp-action="Login" method="post" id="input-form">
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="Input_Id" type="email" placeholder=" " asp-for="Id" />
+                            <input class="form-control" id="Input_Id" type="text" placeholder=" " asp-for="Id" />
                             <label for="Input_Email">아이디<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
@@ -47,7 +47,7 @@
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p id="resultText">@ViewData["ResultText"]</p>
+                <p id="ValidateMessage">@ViewData["ValidateMessage"]</p>
                 <p>등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.</p>
             </div>
             <div class="modal-footer">
@@ -98,7 +98,18 @@
                     alert('비밀번호를 입력해주세요.');
                     return;
                 }
-                this.submit();
+                this.submit(function (response){
+                    if(LoginJS.isEmpty(response.result)){
+                        console.log(response);
+                        alert(response.result.toString());
+                        return;
+                    }
+                    else
+                    {
+                        alert(response);
+                    }
+                
+                })
             });
         },
         isEmpty: function (value) {
@@ -137,7 +148,7 @@
     
     $(document).ready(function () {
         LoginJS.init();
-        if ($("#resultText").text() != ""){
+        if ($("#ValidateMessage").text() != "") {
             $('#loginFailModal').modal('show');
         }
     });

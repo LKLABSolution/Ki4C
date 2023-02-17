@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <form asp-controller="CommonMember" asp-action="MemberReg" method="post" id="input-form">
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Id" type="text" placeholder=" " asp-for="ID" value="" />
+                            <input class="form-control" id="input-Id" type="text" placeholder=" " asp-for="Id" value="lklabOrg" />
                             <label for="input-Id">아이디<a style="color: red;">*</a></label>
                             <!-- add ID Check Button-->
                             <div class="d-flex justify-content-end">
@@ -28,23 +28,23 @@
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Password" type="password" placeholder=" " asp-for="Password" value="" />
+                            <input class="form-control" id="input-Password" type="password" placeholder=" " asp-for="Password" value="@@QWERasdf" />
                             <label for="input-Password">비밀번호<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Password-Check" type="password" placeholder=" " asp-for="PasswordConfirm" value="" />
+                            <input class="form-control" id="input-Password-Check" type="password" placeholder=" " asp-for="PasswordConfirm" value="@@QWERasdf" />
                             <label for="input-Password-Check">비밀번호 확인<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Name" type="text" placeholder=" " asp-for="Name" value="" />
+                            <input class="form-control" id="input-Name" type="text" placeholder=" " asp-for="UserName" value="엘케이랩" />
                             <label for="input-Name">이름<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Email" type="email" placeholder=" " asp-for="Email" value=""/>
+                            <input class="form-control" id="input-Email" type="email" placeholder=" " asp-for="Email" value="lklab@lklab.org" />
                             <label for="input-Email">이메일<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Phone" type="text" placeholder=" " asp-for="Phone" value="" oninput="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                            <input class="form-control" id="input-Phone" type="text" placeholder=" " asp-for="PhoneNumber" value="01094967818" oninput="this.value=this.value.replace(/[^0-9]/g,'');"/>
                             <label for="input-Phone">휴대폰 번호<a style="color: red;">*</a></label>
                             <!-- add Phone Number Check Button-->
                             <div class="d-flex justify-content-end">
@@ -52,11 +52,11 @@
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Address" type="text" placeholder=" " asp-for="Address" value="" onclick="MemberRegJS.daumAddressAPI();" />
+                            <input class="form-control" id="input-Address" type="text" placeholder=" " asp-for="Address" value="서울 송파구 법원로 128 (문정동, 문정에스케이브이원지엘메트로시티)" onclick="MemberRegJS.daumAddressAPI();" />
                             <label for="input-Address">주소<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Address-Detail" type="text" placeholder=" " asp-for="AddressDetail" value="" />
+                            <input class="form-control" id="input-Address-Detail" type="text" placeholder=" " asp-for="AddressDetail" value="515호" />
                             <label for="input-Address-Detail">상세 주소<a style="color: red;">*</a></label>
                         </div>
                         
@@ -68,17 +68,17 @@
                         </div>
                         *@
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Company" type="text" placeholder=" " asp-for="Company" value="" />
+                            <input class="form-control" id="input-Company" type="text" placeholder=" " asp-for="CompanyName" value="엘케이랩" />
                             <label for="input-Company">회사명<a style="color: red;">*</a></label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Department" type="text" placeholder=" " asp-for="Department" value="" />
+                            <input class="form-control" id="input-Department" type="text" placeholder=" " asp-for="DepartmentName" value="SI사업부" />
                             <label for="input-Department">부서명</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="input-Position" type="text" placeholder=" " asp-for="Position" value="" />
+                        @*<div class="form-floating mb-3">
+                            <input class="form-control" id="input-Position" type="text" placeholder=" " asp-for="" value="" />
                             <label for="input-Position">직급</label>
-                        </div>
+                        </div>*@
                         <!-- check1 ~ 8-->
                         <div class="form-check mb-3">
                             <input class="form-check-input" id="input-Check1" type="checkbox" placeholder=" " asp-for="Check1" onchange="MemberRegJS.check1Clicked();" />
@@ -89,7 +89,6 @@
                             <label class="form-check-label" for="input-Check2">개인정보 수집 및 이용 동의(필수)<a style="color: red;">*</a></label>
                             <input class="form-input text-end" id="input-Check2-Detail" type="checkbox" placeholder=" " onchange="MemberRegJS.check2_DetailShow();" />
                             <label for="input-Check2-Detail" class="text-end">자세히 보기</label>
-
                         </div>
                         <div class="form-check mb-3">
                             <input class="form-check-input" id="input-Check3" type="checkbox" placeholder=" " asp-for="Check3" />
@@ -305,49 +304,6 @@
                 return false;
             }
             return true;
-        },
-        MemberJoinReqest : function(){
-            //form data create obj end ajax request CommonMember/MemberReg
-            var formData = new FormData();
-            formData.append('id', $('#input-Id').val());
-            formData.append('password', $('#input-Password').val());
-            formData.append('name', $('#input-Name').val());
-            formData.append('email', $('#input-Email').val());
-            formData.append('phone', $('#input-Phone').val());
-            formData.append('address', $('#input-Address').val());
-            formData.append('company', $('#input-Company').val());
-            formData.append('department', $('#input-Department').val());
-            formData.append('position', $('#input-Position').val());
-            formData.append('residentNumber', $('#input-Resident-Number').val());
-            formData.append('postcode', $('#input-postcode').val());
-            formData.append('detailAddress', $('#input-detail-address').val());
-            formData.append('check1', $('#input-Check1').is(':checked'));
-            formData.append('check2', $('#input-Check2').is(':checked'));
-            formData.append('check3', $('#input-Check3').is(':checked'));
-            formData.append('check4', $('#input-Check4').is(':checked'));
-            formData.append('check5', $('#input-Check5').is(':checked'));
-            formData.append('check6', $('#input-Check6').is(':checked'));
-            formData.append('check7', $('#input-Check7').is(':checked'));
-            formData.append('check8', $('#input-Check8').is(':checked'));
-            $.ajax({
-                url: '/CommonMember/MemberReg',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    if (data.result == 'success') {
-                        alert('회원가입이 완료되었습니다.');
-                        location.href = '/CommonMember/Login';
-                    }
-                    else {
-                        alert('회원가입에 실패하였습니다.');
-                    }
-                },
-                error: function (request, status, error) {
-                    alert('회원가입에 실패하였습니다.');
-                }
-            });
         },
         MemberRegSubmit : function(){
             // id input-form submit
