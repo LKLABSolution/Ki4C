@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace Ki4C_Solution.Controllers.Common.Auth
 {
@@ -15,14 +16,15 @@ namespace Ki4C_Solution.Controllers.Common.Auth
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        //private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CommonAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IHttpContextAccessor httpContextAccessor)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _httpContextAccessor = httpContextAccessor;
-        }
+        //public CommonAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IHttpContextAccessor httpContextAccessor)
+        //{
+        //    _userManager = userManager;
+        //    _signInManager = signInManager;
+        //    _httpContextAccessor = httpContextAccessor;
+        //}
+
 
         public IActionResult Login()
         {
@@ -59,6 +61,21 @@ namespace Ki4C_Solution.Controllers.Common.Auth
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme
                                                        , new ClaimsPrincipal(claimsIdentity), authProperties);
 
+                        try
+                        {
+                            aspNetUser.LockoutEnd = DateTimeOffset.Now.AddMinutes(10);
+                            aspNetUser.CountOfLogins = aspNetUser.CountOfLogins + 1;
+                            aspNetUser.FinalLogin = DateTime.Today;
+
+                            aspNetUser.Update();
+                        }
+                        catch (Exception ex)
+                        {
+                            ViewData["ValidateMessage"] = "로그인시 오류가 발생하였습니다. " + ex.Message;
+                            return View("../Common/Auth/Login");
+                        }
+
+                        ViewData["ValidateMessage"] = aspNetUser.UserName+ "고객님께서" + DateTime.Now.ToString() + "에 접속하였습니다.";
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -75,7 +92,7 @@ namespace Ki4C_Solution.Controllers.Common.Auth
             }
             catch (Exception ex)
             {
-                ViewData["ValidateMessage"] = "로그인시 ";
+                ViewData["ValidateMessage"] = "로그인시 오류가 발생하였습니다.";
                 ViewData["ExceptionObj"] = ex.ToString();
                 return View("../Common/Auth/Login");
             }
