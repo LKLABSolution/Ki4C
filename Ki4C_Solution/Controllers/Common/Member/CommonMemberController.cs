@@ -70,15 +70,15 @@ namespace Ki4C_Solution.Controllers.Common.Member
                     memberRegModel.PhoneNumber,         //PhoneNumber
                     false,                               //PhoneNumberConfirmed
                     false,                              //TwoFactorEnabled
-                    dateTime.AddMinutes(10).ToString("yyyy-MM-dd HH:mm:ss"),            //LockoutEnd
+                    DateTimeOffset.Now.AddMinutes(10),            //LockoutEnd
                     false,                               //LockoutEnabled
                     0,                                  //AccessFailedCount
                     memberRegModel.CompanyName,         //CompanyName
                     memberRegModel.DepartmentName,      //DepartmentName
                     "신규회원",                         //CustomerClass
                     1,                                  //CountOfLogins
-                    dateTime.ToString("yyyyMMdd"),      //FinalLogin
-                    dateTime.ToString("yyyyMMdd"),      //SignUpTime
+                    dateTime,      //FinalLogin
+                    dateTime,      //SignUpTime
                     "5",                                //ActivityInformation
                     "없음"                              //DiagnosisEvalutionStatus
                     );

@@ -211,7 +211,7 @@
           }
         }
       },
-      "SoftBand.EntityManager/1.2.1": {
+      "SoftBand.EntityManager/1.2.2": {
         "type": "package",
         "dependencies": {
           "Google.Protobuf": "3.21.5",
@@ -936,15 +936,15 @@
         "version.txt"
       ]
     },
-    "SoftBand.EntityManager/1.2.1": {
-      "sha512": "wxRFi4DKUkIbIE9rJJqxzKEsvdrAV8+BESNjaHwDYzMDytDclOx9gkik+s/Isphe2iuqBiMuc7YREhrkbuMm/g==",
+    "SoftBand.EntityManager/1.2.2": {
+      "sha512": "Hok4ImJqTFu1GEDekssXmbiHEF7nOtJeGF4lo3YX2XIOXBRzeblN+HA3zlmYBkZpLK3fkjoRj/IY4yLcIg7JeQ==",
       "type": "package",
-      "path": "softband.entitymanager/1.2.1",
+      "path": "softband.entitymanager/1.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net7.0/SoftBand.EntityManager.dll",
-        "softband.entitymanager.1.2.1.nupkg.sha512",
+        "softband.entitymanager.1.2.2.nupkg.sha512",
         "softband.entitymanager.nuspec"
       ]
     },
@@ -1618,7 +1618,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "SoftBand.EntityManager >= 1.2.1"
+      "SoftBand.EntityManager >= 1.2.2"
     ]
   },
   "packageFolders": {
@@ -1670,7 +1670,7 @@
         "dependencies": {
           "SoftBand.EntityManager": {
             "target": "Package",
-            "version": "[1.2.1, )"
+            "version": "[1.2.2, )"
           }
         },
         "imports": [
