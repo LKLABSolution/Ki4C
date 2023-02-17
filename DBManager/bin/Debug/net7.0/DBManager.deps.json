@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "DBManager/1.0.0": {
         "dependencies": {
-          "SoftBand.EntityManager": "1.2.1"
+          "SoftBand.EntityManager": "1.2.2"
         },
         "runtime": {
           "DBManager.dll": {}
@@ -160,7 +160,7 @@
           }
         }
       },
-      "SoftBand.EntityManager/1.2.1": {
+      "SoftBand.EntityManager/1.2.2": {
         "dependencies": {
           "Google.Protobuf": "3.21.5",
           "MySql.Data": "8.0.30",
@@ -170,8 +170,8 @@
         },
         "runtime": {
           "lib/net7.0/SoftBand.EntityManager.dll": {
-            "assemblyVersion": "1.2.1.1",
-            "fileVersion": "1.2.1.1"
+            "assemblyVersion": "1.2.1.2",
+            "fileVersion": "1.2.1.2"
           }
         }
       },
@@ -514,12 +514,12 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
-    "SoftBand.EntityManager/1.2.1": {
+    "SoftBand.EntityManager/1.2.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wxRFi4DKUkIbIE9rJJqxzKEsvdrAV8+BESNjaHwDYzMDytDclOx9gkik+s/Isphe2iuqBiMuc7YREhrkbuMm/g==",
-      "path": "softband.entitymanager/1.2.1",
-      "hashPath": "softband.entitymanager.1.2.1.nupkg.sha512"
+      "sha512": "sha512-Hok4ImJqTFu1GEDekssXmbiHEF7nOtJeGF4lo3YX2XIOXBRzeblN+HA3zlmYBkZpLK3fkjoRj/IY4yLcIg7JeQ==",
+      "path": "softband.entitymanager/1.2.2",
+      "hashPath": "softband.entitymanager.1.2.2.nupkg.sha512"
     },
     "System.Buffers/4.5.1": {
       "type": "package",

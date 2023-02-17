@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Wh4swt0Ec1yKy3YcfadFzUX71cn7kbDizcUWH5jG1beIQH0sGHLfp3i4gac7f+/ZUjUFhmpm4z5X+8I2wW9Yww==",
+  "dgSpecHash": "WOPwW7NWpwx6WrwH+UjivzdftZ4wKOtoFXVf0LG988vxEkV6Oa76CAQlMZ6huG1I6sC9bMqFjzc7hctlwn1Jew==",
   "success": true,
   "projectFilePath": "D:\\SourceSvr\\ASPNET\\github\\DBManager\\DBManager.csproj",
   "expectedPackageFiles": [
@@ -18,7 +18,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "C:\\Users\\ghflc\\.nuget\\packages\\softband.entitymanager\\1.2.1\\softband.entitymanager.1.2.1.nupkg.sha512",
+    "C:\\Users\\ghflc\\.nuget\\packages\\softband.entitymanager\\1.2.2\\softband.entitymanager.1.2.2.nupkg.sha512",
     "C:\\Users\\ghflc\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\ghflc\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.0\\system.configuration.configurationmanager.6.0.0.nupkg.sha512",
     "C:\\Users\\ghflc\\.nuget\\packages\\system.data.sqlclient\\4.8.3\\system.data.sqlclient.4.8.3.nupkg.sha512",

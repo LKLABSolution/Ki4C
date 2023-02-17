@@ -75,8 +75,8 @@ namespace Ki4C_Solution.Controllers.Common.Auth
                             return View("../Common/Auth/Login");
                         }
 
-                        ViewData["ValidateMessage"] = aspNetUser.UserName+ "고객님께서" + DateTime.Now.ToString() + "에 접속하였습니다.";
-                        return RedirectToAction("Index", "Home");
+                        ViewData["ValidateMessage"] = aspNetUser.UserName+ " 고객님께서 " + DateTime.Now.ToString() + "에 접속하였습니다.";
+                        return View("../Home/Index");
                     }
                     else
                     {

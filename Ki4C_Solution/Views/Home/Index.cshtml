@@ -114,4 +114,64 @@
     </section>
     <hr class="m-divider">
 
+    <!-- The Modal -->
+    <div class="modal fade" id="loginSuccessModal" tabindex="-1" role="dialog" aria-labelledby="loginSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginSuccessModalLabel">로그인 성공</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="ValidateMessage">@ViewData["ValidateMessage"]</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary closeBtn" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        let IndexJS = {
+            init: function () {
+                this.bindEvent();
+            },
+            bindEvent: function () {
+                $(".btn-login").on("click", function () {
+                    let id = $("#id").val();
+                    let pw = $("#pw").val();
+
+                    if (IndexJS.isEmpty(id)) {
+                        alert("아이디를 입력해주세요.");
+                        return;
+                    }
+
+                    if (IndexJS.isEmpty(pw)) {
+                        alert("비밀번호를 입력해주세요.");
+                        return;
+                    }
+
+                    $("#loginForm").submit();
+                });
+            },
+            isEmpty: function (value) {
+                if (value == null || value == undefined || value == "") {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+        }
+
+        $(document).ready(function () {
+            IndexJS.init();
+            if ($("#ValidateMessage").text() != "") {
+                $('#loginSuccessModal').modal('show');
+            }
+        });
+
+        $(".btn-close, .closeBtn").click(function () {
+            $('#loginSuccessModal').modal('hide');
+        });
+    </script>
