@@ -18,6 +18,7 @@ namespace Ki4C_Solution.Models.Common.Member
         [Required] public string PasswordHash { get; set; } = string.Empty;
         public string SecurityStamp { get; set; } = string.Empty;
         public string ConcurrencyStamp { get; set; } = string.Empty;
+        public string PhoneNumberCode { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         [Required] public bool PhoneNumberConfirmed { get; set; }
         [Required] public bool TwoFactorEnabled { get; set; }

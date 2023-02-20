@@ -1,0 +1,256 @@
+@{
+
+    ViewData["Title"] = "진단/자체 진단";
+}
+<style>
+    #table_1 {
+        border: "1";
+        max-width: 1000px;
+        height: 200px;
+        text-align: center;
+        background-color: skyblue;
+        border-color: white;
+        table-layout: fixed;
+    }
+
+    td {
+        padding: 5px;
+        width: 200px;
+    }
+
+    #category {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    #question {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    input[type="radio"] {
+        margin: 0px 50px;
+    }
+
+    #prevButton {
+        width: 80px;
+        height: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: grey;
+        color: white;
+        border: none;
+    }
+
+    #nextButton {
+        width: 80px;
+        height: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: grey;
+        color: white;
+        border: none;
+    }
+
+    #submitButton {
+        width: 80px;
+        height: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: grey;
+        color: white;
+        border: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+<!-- 섹션 -->
+<section>
+    <!-- 콘텐츠 -->
+    <div id="wrap" style="width: 90%;">
+        <div id=contetns>
+            <h2>디지털전환(DX) 수준진단</h2>
+            <hr style="border: solid 0.3px black;">
+            <p id="category"></p>
+            <p id="question"></p>
+            <p>※ 아래의 표를 참고하여 0 ~ 5 사이의 점수를 선택</p>
+        </div>
+        <!-- 콘텐츠 -->
+        <div id="wrap" style="width: 90%; text-align: center;">
+            <div>
+                <table id="table_1">
+                    <tr align="center" bgcolor="skyblue">
+                        <td>①</td>
+                        <td>②</td>
+                        <td>③</td>
+                        <td>④</td>
+                        <td>⑤</td>
+                    </tr>
+                    <tr id="questionData" align="center" bgcolor="white">
+                    </tr>
+                </table>
+                <div id="wrap" style="width: 80%; text-align: right;">
+                    <input type="radio" name="score"> 1점
+                    <input type="radio" name="score"> 2점
+                    <input type="radio" name="score"> 3점
+                    <input type="radio" name="score"> 4점
+                    <input type="radio" name="score"> 5점
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 50px; margin: auto;">
+            <button id="prevButton" class="hidden">이전 ⬅</button>
+            <button id="nextButton">다음 ➡</button>
+            <button id="submitButton" class="hidden">제출 ➡</button>
+        </div>
+        <!-- 콘텐츠 -->
+    </div>
+</section>
+<!-- 섹션 -->
+
+<script>
+    const category = document.querySelector("#category");
+    const question = document.querySelector("#question");
+    const questionData = document.querySelector("#questionData");
+    const prev = document.querySelector("#prevButton");
+    const next = document.querySelector("#nextButton");
+    const submit = document.querySelector("#submitButton");
+    const QUESTIONS_KEY = "expertDiagnosis";
+    const HIDDEN = "hidden"
+
+
+    function readQuestions(items, idx) {
+        category.innerText = "";
+        question.innerText = "";
+        questionData.innerText = "";
+
+        category.innerHTML = items['q1']
+        question.innerHTML = items['q2'] + ":" + items['q3']
+
+        for (i = 0; i < 5; i++) {
+            window["td_" + i] = document.createElement("td");
+            window["td_" + i].innerText = items['a'][i];
+
+            questionData.appendChild(window["td_" + i]);
+        }
+
+        if (idx > (parsedQuestions.length - 2)) {
+            next.classList.add(HIDDEN);
+            submit.classList.remove(HIDDEN);
+        } else if (idx !== 0 && idx < parsedQuestions.length) {
+            prev.classList.remove(HIDDEN);
+        } else if (idx === 0) {
+            prev.classList.add(HIDDEN);
+        }
+
+        prev.onclick = function () {
+            if (idx === parsedQuestions.length - 1) {
+                submit.classList.add(HIDDEN);
+                next.classList.remove(HIDDEN);
+            }
+            readQuestions(parsedQuestions[idx - 1], idx - 1);
+        };
+        next.onclick = function () {
+            readQuestions(parsedQuestions[idx + 1], idx + 1);
+        };
+
+    }
+
+    // 테스트 데이터
+    const data = [
+        {
+            q1: "디지털 전략",
+            q2: "디지털 혁신 추진 조직",
+            q3: "디지털 혁신을 추진하는 조직은 어느 수준입니까?",
+            a: ["IT 조직 및 인력이 부재함",
+                "IT 조직은 없으나 IT 업무수행 전담인력은 보유함",
+                "IT 조직 및 전담인력은 있으나 디지털 전환 추진조직은 없음",
+                "IT 부서 또는 타 부서에 디지털전환을 추진하는 별도조직이 있음",
+                "CEO 직속 디지털 전환을 추진하는 별도조직(CDO)이 존재함"]
+        }, {
+            q1: "디지털 전략",
+            q2: "디지털 전환 전략 및 목표관리",
+            q3: "디지털 전환(DX)과 관련된 전략수립, 추진조직 및 성과지표 관리업무는 어느 수준입니까?",
+            a: ["디지털 전환(DX) 관련 지식, 경험 및 추진조직이 없음",
+                "디지털 전환(DX) 관련된 중장기 전략은 수립되어 있으나 추진조직이 없음",
+                "디지털 전환(DX) 관련된 전략수립 및 추진조직은 있으나 실행실적은 없음",
+                "디지털 전환(DX) 관련된 전략수립, 추진조직 및 실행실적은 있으나 성과지표 관리는 안되고 있음",
+                "경영진의 책임하에 디지털 전환(DX) 전담부서를 구성하고 목표달성도를 성과관리시스템과 연계하여 관리하고 있음"]
+        }, {
+            q1: "디지털 비즈니스",
+            q2: "비즈니스 디지털화",
+            q3: "영업, 마케팅 및 판매 활동을 수행하는데 있어서 디지털기술 활용정도는 어느 수준입니까?",
+            a: ["영업, 마케팅 및 판매 활동에 있어서 디지털 기술을 활용 안하고 않음",
+                "영업, 마케팅 및 판매 활동에 있어서 디지털기술 활용을 위한 기본 계획이 수립되어 있음 (문서화)",
+                "영업, 마케팅 및 판매 활동에 있어서 디지털기술 활용을 위한 기본계획을 부분적으로 실행함",
+                "영업, 마케팅 및 판매 활동에 있어서 디지털기술 활용을 위한 기본계획을 전사적으로 실행함",
+                "디지털 기술을 활용해 영업, 마케팅 및 판매 활동을 실시간 디지털 시스템과 연계하여 관리하고 있음"]
+        }, {
+            q1: "디지털 오퍼레이션",
+            q2: "디지털기술 활용수준",
+            q3: "신제품 연구개발 활동을 수행하는데 디지털 요소기술 활용정도는 어느 수준입니까?",
+            a: ["신제품 연구개발(R&D) 활동에 디지털 요소기술을 활용하지 않음",
+                "디지털 요소기술을 활용한 R&D 수행 전략 설계 및 준비 단계임",
+                "디지털 요소기술을 활용한 R&D 활동을 부분적으로 실행하고 있음",
+                "디지털 요소기술을 활용한 R&D 활동을 전체적으로 실행하고 있음",
+                "디지털 기반의 제품개발 단계에서 디지털 요소기술 사용이 내재화됨 (예를 들어 AI, Big data, AR, 3D-PRINTER,. Digital Twin 등 디지털 도구를 활용함)"]
+        }, {
+            q1: "디지털 데이터",
+            q2: "데이터 통합 관리 체계",
+            q3: "조직 또는 직원은 개별 컴퓨터나 개인용 저장장치가 아닌 기업에서 관리하는 매체(중앙 서버, 클라우드 등)에서 디지털 기록/정보를 관리하고 있습니까?",
+            a: ["개인 차원에서 관리함",
+                "개별 조직 차원의 비공식화 관리함",
+                "개별 조직 차원의 자체 정보 관리함",
+                "중앙화된 데이터 관리함",
+                "조직이 관리하는 모든 매체(컴퓨터, 모바일, 스마트 기기 등)에서 생산되는 정보는 클라우드를 통해 완전 중앙화된 데이터 관리함."]
+        }, {
+            q1: "디지털 조직문화",
+            q2: "디지털화 스킬 및 역량 개발 지원",
+            q3: "전사적으로 디지털화 스킬 및 역량 개발을 위한 학습/교육 활동을 전사적으로 지원하고 있는가?",
+            a: ["디지털화 스킬 및 역량 개발 프로그램 마련을 위한 전략이 없거나 개념화 수준에 있음",
+                "디지털화 스킬 및 역량 개발 프로그램 등 역량강화 교육 계획 및 체계를 마련함",
+                "디지털화 스킬 및 역량 개발을 위해 외부와 연계된 교육프로그램이 있으며, 조직원은 해당 프로그램을 자율적으로 이수하고 있음",
+                "디지털화 스킬 및 역량 개발을 위한 사내 맞춤형 교육프로그램이 있으며, 조직원은 해당 프로그램을 자율적으로 이수하고 있음",
+                "디지털화 스킬 및 역량 개발을 위한 전사적 교육프로그램이 다양하게 있으며, 조직원은 정기적으로 교육 프로그램을 필수적으로 이수하고 있음"]
+        }
+    ]
+
+    localStorage.setItem(QUESTIONS_KEY, JSON.stringify(data));
+
+    const savedQuestions = localStorage.getItem(QUESTIONS_KEY);
+    const parsedQuestions = JSON.parse(savedQuestions);
+
+    readQuestions(parsedQuestions[0], 0);
+
+
+    function handleLinkClick(event) {
+        if (confirm("제출하시겠습니까?") == true) {
+            console.log(result);
+            window.location.href = "/member/diagnosis/DiagnosisFinished.html";
+        } else {
+            return false;
+        }
+    }
+    const result = [1, 4, 5, 5, 2, 3]
+    submit.addEventListener("click", handleLinkClick);
+
+
+    //javascript code all let ExpertDiagnosisQuestionJS object include
+    let ExpertDiagnosisQuestionJS = {
+        readQuestions: readQuestions,
+        handleLinkClick: handleLinkClick,
+        result: result
+    }
+
+    $(document).ready(function () {
+        ExpertDiagnosisQuestionJS.readQuestions(ExpertDiagnosisQuestionJS.parsedQuestions[0], 0);
+        ExpertDiagnosisQuestionJS.submit.addEventListener("click", ExpertDiagnosisQuestionJS.handleLinkClick);
+    });
+    
+
+
+
+</script>

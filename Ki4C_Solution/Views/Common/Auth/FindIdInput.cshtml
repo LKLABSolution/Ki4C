@@ -1,65 +1,118 @@
 ﻿@{
     // Used Table [Member]
     //메인 - 로그인 - 아이디 찾기 - 아이디찾기입력화면
-    ViewData["Title"] = "Find Id Input Page";
+    Layout = "_LayoutKi4C";
+    ViewData["Title"] = "아이디 찾기";
     @model Ki4C_Solution.Models.Common.Auth.CreateAccountModel;
 }
+<style>
+    /* FindIdInput.html */
+    #find-button{
+        font-size: 12px; font-weight: 600;
+        background-color: lightgray;
+        border-color: black;
+        width: 100px; height: 40px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin-right: 10px;
+    }
+    #cancle-button{
+        font-size: 12px; font-weight: 600;
+        background-color: white;
+        border-color: black;
+        width: 100px; height: 40px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
 
-<!-- Find Id page-->
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-5">
-            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                <div class="card-header"><h3 class="text-center font-weight-light my-4">아이디 찾기</h3></div>
-                <div class="card-body">
-                    <form asp-controller="CommonAuth" asp-action="FindId" method="post" id="input-form">
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="Input_Name" type="text" placeholder=" " asp-for="Name" />
-                            <label for="Input_Name">사용자 이름<a style="color: red;">*</a></label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="Input_Email" type="email" placeholder=" " asp-for="Email" oninput="this.value=this.value.replace(/(\s*)/g,'').replace(/[^a-zA-Z0-9~!@@#$%^&*()_+|<>?:{}]/g,'').replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,'').replace(/[^a-zA-Z0-9]/g,'').replace(/[^0-9]/g,'').replace(/[^-]/g,'').replace(/[^-]/g,'').replace(/[^@@]/g,'');"/>
-                            <label for="Input_Email">이메일 주소<a style="color: red;">*</a></label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="Input_Phone" type="text" placeholder=" " asp-for="Phone"  oninput="this.value=this.value.replace(/(\s*)/g,'').replace(/[^a-zA-Z0-9~!@@#$%^&*()_+|<>?:{}]/g,'').replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,'').replace(/[^a-zA-Z0-9]/g,'').replace(/[^0-9]/g,'');"/>
-                            <label for="Input_Phone">휴대폰 번호<a style="color: red;">*</a></label>
-                        </div>
-                        <div class="d-flex justify-content-center mt-4 mb-0">
-                            <button class="btn btn-primary" type="submit">아이디 찾기</button>
-                        </div>
-                    </form>
+    #find-button:hover, #find-button:active {
+        background-color: gray;
+        color: white;
+    }
+
+    #cancle-button:hover, #cancle-button:active {
+        background-color: lightgray;
+        color: black;
+    }
+</style>
+<section>
+    <!-- 콘텐츠 -->
+    <div id="wrap">
+        <h2>아이디 찾기</h2>
+        <div style="float: right;">
+            <a class="text-primary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            &gt;
+            아이디 찾기
+        </div>
+        <br>
+        <hr />
+        <!-- 아이디 찾기 -->
+        <div class="contents" style="margin: 0 auto;">
+            <div style="text-align: center; padding-right: 50px;">
+                <br>
+                <h1 style="padding-right: 100px;">아이디 찾기</h1>
+                <a style="font-size: 12px;">아이디를 찾기 위해 아래 정보를 입력해주세요.</a> <br> <br>
+                <a>이메일 </a> <a style="color: red;">*</a>
+                <form asp-controller="CommonAuth" asp-action="FindId" method="post" id="Login-form" style="padding-top: 10px; display: inline-block;">
+                    <input type="email" placeholder="이메일을 입력해주세요."
+                           style="max-width: 400px; width: 130%; height: 30px; font-size: 16px;
+                            margin-bottom: 3px;"
+                           onfocus="this.value='';" id="Input_Email" asp-for="Email" />
+                </form>
+                <div style="padding-left: 90px; padding-top: 20px;">
+                    <a href="#" style="display: inline-block;">
+                        <input id="find-button" type="submit" value="아이디 찾기" onclick="FindIdInputJS.submitBtnClick()" />
+                    </a>
+                    <a href="/common/auth/Login.html" style="display: inline-block;">
+                        <input id="cancle-button" type="submit" value="취소" />
+                    </a>
                 </div>
-                <div class="card-footer text-center py-3 d-flex justify-content-center">
-                    <div class="small m-2"><a class="btn btn-primary" asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a></div>
+                <br> <br>
+                <div style="display: flex; justify-content: center;">
+                    <div style="text-align: left; font-size: 12px;">
+                        비밀번호가 기억나지 않으실 때는
+                        <a style="display: inline-block;" asp-area="" asp-controller="CommonAuth" asp-action="FindPassInput">
+                            <input type="button" value="비밀번호 찾기" />
+                        </a>
+                        <p>
+                            이메일이 기억나지 않거나, 문의가 필요하시면 OOO@OOO.com 또는 02)2088-5953 으로 문의바랍니다.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+        <br> <br> <br>
+        <!-- 아이디 찾기 -->
     </div>
-</div>
+    <!-- 콘텐츠 -->
+</section>
 <script>
     let FindIdInputJS = {
         init: function () {
             this.setEvent();
         },
         setEvent: function () {
-            $('#input-form').submit(function (e) {
+            $('#Login-form').submit(function (e) {
                 e.preventDefault();
-                let name = $('#Input_Name').val();
+                //let name = $('#Input_Name').val();
                 let email = $('#Input_Email').val();
-                let phone = $('#Input_Phone').val();
+                //let phone = $('#Input_Phone').val();
                 if (FindIdInputJS.isEmpty(name)) {
-                    alert('사용자 이름을 입력해주세요.');
-                    return;
-                }
-                if (FindIdInputJS.isEmpty(email)) {
                     alert('이메일을 입력해주세요.');
                     return;
                 }
-                if (FindIdInputJS.isEmpty(phone)) {
-                    alert('휴대폰 번호를 입력해주세요.');
-                    return;
-                }
+                //if (FindIdInputJS.isEmpty(email)) {
+                //    alert('이메일을 입력해주세요.');
+                //    return;
+                //}
+                //if (FindIdInputJS.isEmpty(phone)) {
+                //    alert('휴대폰 번호를 입력해주세요.');
+                //    return;
+                //}
                 this.submit();
             });
         },
@@ -69,6 +122,9 @@
             } else {
                 return false;
             }
+        },
+        submitBtnClick : function () {
+            $('#Login-form').submit();
         }
     }
 
@@ -77,3 +133,5 @@
     });
 
 </script>
+
+

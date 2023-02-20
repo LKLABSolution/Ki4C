@@ -8,12 +8,43 @@ namespace Ki4C_Solution.Controllers.Member.Diagnosis
         {
             return View();
         }
+        //Application4Evaluation
+        public IActionResult Application4Evaluation()
+        {
+            return View("../Member/Diagnosis/Application4Evaluation");
+        }
 
         //CompanyBasicInformation
         public IActionResult CompanyBasicInformation()
         {
             return View("../Member/Diagnosis/CompanyBasicInformation");
         }
+        //DiagnosisFinished
+        public IActionResult DiagnosisFinished()
+        {
+            return View("../Member/Diagnosis/DiagnosisFinished");
+        }
+        //DiagnosisEvaluationList
+        public IActionResult DiagnosisEvaluationList()
+        {
+            return View("../Member/Diagnosis/DiagnosisEvaluationList");
+        }
+        //ExpertDiagnosis
+        public IActionResult ExpertDiagnosis()
+        {
+            return View("../Member/Diagnosis/ExpertDiagnosis");
+        }
+        //ExpertDiagnosisQuestion
+        public IActionResult ExpertDiagnosisQuestion()
+        {
+            return View("../Member/Diagnosis/ExpertDiagnosisQuestion");
+        }
+        //SelectedResultList
+        public IActionResult SelectedResultList()
+        {
+            return View("../Member/Diagnosis/SelectedResultList");
+        }
+
         //SelfDiagnosis
         public IActionResult SelfDiagnosis()
         {

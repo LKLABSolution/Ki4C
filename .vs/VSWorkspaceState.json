@@ -3,14 +3,16 @@
     "",
     "\\Ki4C_Solution",
     "\\Ki4C_Solution\\Controllers",
-    "\\Ki4C_Solution\\Controllers\\Auth",
     "\\Ki4C_Solution\\Controllers\\Common",
     "\\Ki4C_Solution\\Controllers\\Common\\Auth",
     "\\Ki4C_Solution\\Views",
-    "\\Ki4C_Solution\\Views\\Common",
-    "\\Ki4C_Solution\\Views\\Common\\Auth",
-    "\\Ki4C_Solution\\Views\\Home"
+    "\\Ki4C_Solution\\Views\\Home",
+    "\\Ki4C_Solution\\wwwroot",
+    "\\Ki4C_Solution\\wwwroot\\css",
+    "\\Ki4C_Solution\\wwwroot\\css\\Common",
+    "\\Ki4C_Solution\\wwwroot\\css\\Common\\Auth",
+    "\\Ki4C_Solution\\wwwroot\\js"
   ],
-  "SelectedNode": "\\DBManager\\AspNetUserBase.cs",
+  "SelectedNode": "\\Ki4C_Solution\\Views\\Shared\\_LayoutKi4C.cshtml",
   "PreviewInSolutionExplorer": false
 }

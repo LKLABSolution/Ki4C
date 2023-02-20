@@ -1,0 +1,137 @@
+﻿@{
+    // Used Table [Member]
+    // 고객관리시스템 - 고객목록
+    // 선행작업 - 관리자 로그인
+    Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg.cshtml";
+    ViewData["Title"] = "기준정보 관리/진단 종류";
+}
+<!-- 섹션 -->
+<section>
+    <!-- 콘텐츠 -->
+    <div id=contetns style="width: 100%;">
+        <h2>진단 평가영역 등록</h2>
+        <div style="float: right;">
+            <a href="#">Home</a>
+            &gt;
+            <a href="#">기준 정보</a>
+            &gt;
+            진단 평가영역 등록
+        </div>
+        <br>
+        <hr />
+        <!-- 진단 평가영역 등록 -->
+        <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
+            <a>진단구분선택: </a>
+            <form style="padding-top: 10px; padding-left: 32px; display: inline-block;">
+                <select style="max-width: 400px; width: 130%; height: 30px; font-size: 16px;
+                        margin-bottom: 3px;">
+                    <option value="none">=== 선택 ===</option>
+                    <option>디지털 전략</option>
+                    <option>디지털 비즈니스</option>
+                    <option>디지털 오퍼레이션</option>
+                    <option>디지털 데이터</option>
+                    <option>디지털 조직문화</option>
+                </select>
+            </form>
+            <br>
+            <a>진단평가영역 코드: </a>
+            <form style="padding-top: 10px; display: inline-block;">
+                <input type="text"
+                       style="max-width: 400px; width: 110%; height: 25px; font-size: 16px;
+                        margin-bottom: 3px;" />
+            </form>
+            <br>
+            <a>진단평가영역 내용: </a>
+            <form style="padding-top: 10px; display: inline-block;">
+                <input type="text"
+                       style="max-width: 400px; width: 110%; height: 25px; font-size: 16px;
+                        margin-bottom: 3px;" />
+            </form>
+            <div style="padding-top: 30px; padding-left: 50px;">
+                <input id="registButton" type="submit" value="등록" />
+                <input id="modifyButton" type="submit" value="수정" />
+            </div>
+        </div>
+        <!-- 진단 평가영역 등록 -->
+        <hr />
+        <!-- 진단 평가영역 목록 -->
+        <div style="display: inline-block;">
+            <div id="buttonLocation">
+                <input type="text" id="searchBox" placeholder="검색어 입력" />
+                <button id="searchButton">검색</button>
+            </div>
+            <br>
+            <div style="width: 90%; margin: auto;">
+                <table id="table">
+                    <tr align="center" bgcolor="skyblue">
+                        <td>번호</td>
+                        <td>진단평가 영역코드</td>
+                        <td>진단평가영역</td>
+                        <td>삭제</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>1</td>
+                        <td>C1</td>
+                        <td>디지털 혁신 추진 조직</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>2</td>
+                        <td>C2</td>
+                        <td>디지털 전환 전략 및 목표 관리</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>3</td>
+                        <td>C3</td>
+                        <td>디지털 경영계획</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>4</td>
+                        <td>C4</td>
+                        <td>수직적 가치사슬 디지털화 수준</td>
+                        <td><input type="checkbox"></td>
+                        </td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>5</td>
+                        <td>C5</td>
+                        <td>수평적 가치사슬 디지털화 수준</td>
+                        <td><input type="checkbox"></td>
+                        </td>
+                    </tr>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>6</td>
+                        <td>C6</td>
+                        <td>데이터 공유 전략 수준</td>
+                        <td><input type="checkbox"></td>
+                        </td>
+                    </tr>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>7</td>
+                        <td>C7</td>
+                        <td>디지털기술 활용전략과 투자 연계</td>
+                        <td><input type="checkbox"></td>
+                        </td>
+                    </tr>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>8</td>
+                        <td>C8</td>
+                        <td>디지털 전환(DX) 과제기획 및 투자</td>
+                        <td><input type="checkbox"></td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="buttonLocation">
+                <input id="deleteButton" type="submit" value="항목 삭제" />
+            </div>
+        </div>
+        <!-- 진단 평가영역 목록 -->
+        <!-- 콘텐츠 -->
+</section>
+<!-- 섹션 -->

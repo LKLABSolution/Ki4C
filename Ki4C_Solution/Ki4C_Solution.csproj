@@ -45,6 +45,7 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="wwwroot\index\images\Diagnosis\" />
+    <Folder Include="wwwroot\Include\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +64,13 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Manager\Diagnosis\DiagnosisMgrList.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

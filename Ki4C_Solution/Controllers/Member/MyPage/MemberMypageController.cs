@@ -83,7 +83,8 @@ namespace Ki4C_Solution.Controllers.Member.MyPage
             }
             return View("../Member/MyPage/MyInfoUpdateConfirm");
         }
-        
+
+
         public IActionResult MyInfoDelete()
         {
             return View("../Member/MyPage/MyInfoDelete");
@@ -93,6 +94,11 @@ namespace Ki4C_Solution.Controllers.Member.MyPage
             return View("../Member/MyPage/RegPostList");
         }
 
+        //DXSelfDiagnosisDetailView
+        public IActionResult DXSelfDiagnosisDetailView()
+        {
+            return View("../Member/MyPage/DXSelfDiagnosisDetailView");
+        }
 
 
         /// <summary>
