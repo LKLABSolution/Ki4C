@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-SelectedResultList",
+      "appliesTo": "Ki4C_Solution/Views/Member/Diagnosis/SelectedResultList.cshtml",
+      "type": "launch"
+    }
+  ]
+}
