@@ -1,33 +1,27 @@
 @{
-    // Used Table [Member]
-    // 마이페이지 - 탈퇴
     Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg_mgnt.cshtml";
     ViewData["Title"] = "기준정보 관리/진단 종류";
 }
-
-
 <style>
-    /* SelectedResultList.html */
     select {
         width: 100px;
     }
 </style>
-
 <!-- 섹션 -->
 <section>
     <!-- 콘텐츠 -->
     <div id=contetns style="width: 100%;">
-        <h2>선정 기업</h2>
+        <h2>진단평가 관리</h2>
         <div style="float: right;">
             <a href="#">Home</a>
             &gt;
             <a href="#">진단 관리</a>
             &gt;
-            선정 기업
+            진단평가 관리
         </div>
         <br>
         <hr />
-        <!-- 선정기업 목록 -->
+        <!-- 진단평가 관리 -->
         <div style="display: inline-block;">
             <div id="buttonLocation">
                 <form style="padding-top: 10px; display: inline-block;">
@@ -88,9 +82,12 @@
                     </tr>
                 </table>
             </div>
+            <div id="buttonLocation">
+                <input id="applyButton" type="submit" value="진단평가 신청하기" />
+            </div>
         </div>
-        <!-- 선정기업 목록 -->
+        <!-- 진단평가 관리 -->
     </div>
-    <!-- 콘텐츠 -->
+        <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->

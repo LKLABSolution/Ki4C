@@ -3,16 +3,14 @@
     "",
     "\\Ki4C_Solution",
     "\\Ki4C_Solution\\Controllers",
-    "\\Ki4C_Solution\\Controllers\\Common",
-    "\\Ki4C_Solution\\Controllers\\Common\\Auth",
+    "\\Ki4C_Solution\\Controllers\\Member",
+    "\\Ki4C_Solution\\Controllers\\Member\\MyPage",
     "\\Ki4C_Solution\\Views",
-    "\\Ki4C_Solution\\Views\\Home",
-    "\\Ki4C_Solution\\wwwroot",
-    "\\Ki4C_Solution\\wwwroot\\css",
-    "\\Ki4C_Solution\\wwwroot\\css\\Common",
-    "\\Ki4C_Solution\\wwwroot\\css\\Common\\Auth",
-    "\\Ki4C_Solution\\wwwroot\\js"
+    "\\Ki4C_Solution\\Views\\Member",
+    "\\Ki4C_Solution\\Views\\Member\\Diagnosis",
+    "\\Ki4C_Solution\\Views\\Member\\Mypage",
+    "\\Ki4C_Solution\\Views\\Shared"
   ],
-  "SelectedNode": "\\Ki4C_Solution\\Views\\Shared\\_LayoutKi4C.cshtml",
+  "SelectedNode": "\\Ki4C_Solution\\Ki4C_Solution.sln",
   "PreviewInSolutionExplorer": false
 }
