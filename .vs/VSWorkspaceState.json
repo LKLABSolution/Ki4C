@@ -2,15 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\Ki4C_Solution",
-    "\\Ki4C_Solution\\Controllers",
-    "\\Ki4C_Solution\\Controllers\\Member",
-    "\\Ki4C_Solution\\Controllers\\Member\\MyPage",
+    "\\Ki4C_Solution\\Controllers\\Common",
+    "\\Ki4C_Solution\\Controllers\\Common\\Auth",
     "\\Ki4C_Solution\\Views",
-    "\\Ki4C_Solution\\Views\\Member",
-    "\\Ki4C_Solution\\Views\\Member\\Diagnosis",
-    "\\Ki4C_Solution\\Views\\Member\\Mypage",
+    "\\Ki4C_Solution\\Views\\Home",
+    "\\Ki4C_Solution\\Views\\Manager",
+    "\\Ki4C_Solution\\Views\\Manager\\StandardInforMgr",
     "\\Ki4C_Solution\\Views\\Shared"
   ],
-  "SelectedNode": "\\Ki4C_Solution\\Ki4C_Solution.sln",
+  "SelectedNode": "\\Ki4C_Solution\\Views\\Shared\\_LayoutKi4C_Aside_dg.cshtml",
   "PreviewInSolutionExplorer": false
 }

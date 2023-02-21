@@ -73,29 +73,31 @@
         }
     }
 </style>
-<div style="padding: 10px; height: 80px; line-height: 30px; background: white;">
-    <div id=profile_img style="display: inline;">
-        <img style="width: 50px; height: 50px; "src="../../img/profile.png">
+<aside>
+    <div style="padding: 10px; height: 80px; line-height: 30px; background: white;">
+        <div id=profile_img style="display: inline;">
+            <img style="width: 50px; height: 50px; "src="~/images/profile.png">
+        </div>
+        <div style="display: inline; height: 20px; vertical-align: top; margin-left: 10px;">
+            관리자466
+        </div>
+        <div style="position: relative; left: 60px;">
+            <input id="mypageButton" type="submit" value="마이페이지"/>
+            <input id="logoutButton" type="submit" value="로그아웃"/>        
+        </div>
     </div>
-    <div style="display: inline; height: 20px; vertical-align: top; margin-left: 10px;">
-        관리자466
+    <div style="margin-top: 10px; padding: 10px; height: 30px; line-height: 30px; background: white;">
+        ▣ 기준 정보
     </div>
-    <div style="position: relative; left: 60px;">
-        <input id="mypageButton" type="submit" value="마이페이지"/>
-        <input id="logoutButton" type="submit" value="로그아웃"/>        
+    <div style="height: 300px; background: grey;">
+        <ul style="list-style:none; padding-left:0px;">
+            <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisType">◎ 진단 종류</a></li>
+            <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisClass">◎ 진단 구분</a></li>
+            <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationArea">◎ 진단 평가영역</a></li>
+            <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationQnA">◎ 평가문제와 지문</a></li>
+            <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisInputType">◎ 입력 형식</a></li>
+            <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationMeasurement">◎ 평가 척도</a></li>
+            <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosticLevel">◎ 진단 수준</a></li>            
+        </ul>
     </div>
-</div>
-<div style="margin-top: 10px; padding: 10px; height: 30px; line-height: 30px; background: white;">
-    ▣ 기준 정보
-</div>
-<div style="height: 300px; background: grey;">
-    <ul style="list-style:none; padding-left:0px;">
-        <li style="padding: 10px 0 0 10px;"><a href="/manager/StandardInforMgr/DiagnosisType.html">◎ 진단 종류</a></li>
-        <li style="padding: 10px 0 0 10px;"><a href="/manager/StandardInforMgr/DiagnosisClass.html">◎ 진단 구분</a></li>
-        <li style="padding: 10px 0 0 10px;"><a href="/manager/StandardInforMgr/DiagnosisEvaluationArea.html">◎ 진단 평가영역</a></li>
-        <li style="padding: 10px 0 0 10px;"><a href="/manager/StandardInforMgr/DiagnosisEvaluationQnA.html">◎ 평가문제와 지문</a></li>
-        <li style="padding: 10px 0 0 10px;"><a href="/manager/StandardInforMgr/DiagnosisInputType.html">◎ 입력 형식</a></li>
-        <li style="padding: 10px 0 0 10px;"><a href="/manager/StandardInforMgr/DiagnosisEvaluationMeasurement.html">◎ 평가 척도</a></li>
-        <li style="padding: 10px 0 0 10px;"><a href="/manager/StandardInforMgr/DiagnosticLevel.html">◎ 진단 수준</a></li>
-    </ul>
-</div>
+</aside>

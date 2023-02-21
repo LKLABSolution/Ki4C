@@ -68,27 +68,29 @@
         }
     }
 </style>
-<div style="padding: 10px; height: 80px; line-height: 30px; background: white;">
-    <div id=profile_img style="display: inline;">
-        <img style="width: 50px; height: 50px; "src="../../img/profile.png">
+<aside>
+    <div style="padding: 10px; height: 80px; line-height: 30px; background: white;">
+        <div id=profile_img style="display: inline;">
+            <img style="width: 50px; height: 50px; " src="~/images/profile.png">
+        </div>
+        <div style="display: inline-block; vertical-align: top;">
+            심사위원 홍길동  <br>
+            산업공학과 교수
+        </div>
+        <div style="position: relative; left: 60px;">
+            <input id="mypageButton" type="submit" value="마이페이지"/>
+            <input id="logoutButton" type="submit" value="로그아웃"/>        
+        </div>
     </div>
-    <div style="display: inline-block; vertical-align: top;">
-        심사위원 홍길동  <br>
-        산업공학과 교수
+    <div style="margin-top: 10px; padding: 10px; height: 30px; line-height: 30px; background: white;">
+        ▣ 진단관리
     </div>
-    <div style="position: relative; left: 60px;">
-        <input id="mypageButton" type="submit" value="마이페이지"/>
-        <input id="logoutButton" type="submit" value="로그아웃"/>        
+    <div style="height: 300px; background: grey;">
+        <ul style="list-style:none; padding-left:0px;">
+            <li style="padding: 10px 0 0 10px;"> <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="Application4Evaluation">◎ 진단 평가</a></li>
+            <li style="padding: 10px 0 0 10px;"> <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="Application4Evaluation">◎ 평가기업 신청</a></li>
+            <li style="padding: 10px 0 0 10px;"> <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="SelectedResultList">◎ 선정 기업</a></li>
+            <li style="padding: 10px 0 0 10px;"> <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="DiagnosticEvaluationList">◎ 진단평가 관리</a></li>            
+        </ul>
     </div>
-</div>
-<div style="margin-top: 10px; padding: 10px; height: 30px; line-height: 30px; background: white;">
-    ▣ 진단관리
-</div>
-<div style="height: 300px; background: grey;">
-    <ul style="list-style:none; padding-left:0px;">
-        <li style="padding: 10px 0 0 10px;"><a href="/member/diagnosis/Application4Evaluation.html">◎ 진단 평가</a></li>
-        <li style="padding: 10px 0 0 30px;"><a href="/member/diagnosis/Application4Evaluation.html">◎ 평가기업 신청</a></li>
-        <li style="padding: 10px 0 0 30px;"><a href="/member/diagnosis/SelectedResultList.html">◎ 선정 기업</a></li>
-        <li style="padding: 10px 0 0 10px;"><a href="/member/diagnosis/DiagnosticEvaluationList.html">◎ 진단평가 관리</a></li>
-    </ul>
-</div>
+</aside>
