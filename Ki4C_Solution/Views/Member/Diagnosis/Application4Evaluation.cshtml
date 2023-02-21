@@ -1,0 +1,90 @@
+@{
+    Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg_ev_mgnt.cshtml";
+    ViewData["Title"] = "기준정보 관리/진단 종류";
+}
+<!-- 섹션 -->
+<section>
+    <!-- 콘텐츠 -->
+    <div id=contetns style="width: 100%;">
+        <h2>평가기업 신청</h2>
+        <div style="float: right;">
+            <a href="#">Home</a>
+            &gt;
+            <a href="#">진단 관리</a>
+            &gt;
+            진단 평가
+        </div>
+        <br>
+        <hr />
+        <!-- 평가기업 신청 -->
+        <div style="display: inline-block;">
+            <div id="buttonLocation">
+                <form style="padding-top: 10px; display: inline-block;">
+                    <select style="height: 30px; font-size: 16px; padding-right: 30px;
+                            margin-bottom: 3px;">
+                        <option>기업</option>
+                        <option>진단일</option>
+                    </select>
+                </form>
+                <input id=searchBox type="text" placeholder="검색어 입력" />
+                <button id="searchButton">검색</button>
+            </div>
+            <br>
+            <div style="width: 90%; margin: auto;">
+                <table id="table">
+                    <tr align="center" bgcolor="skyblue">
+                        <td>번호</td>
+                        <td>기업</td>
+                        <td>진단일</td>
+                        <td>평가일</td>
+                        <td>신청평가위원수</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td><input type="checkbox"> 1</td>
+                        <td>(주) 기업명</td>
+                        <td>2022.08.31</td>
+                        <td>
+                            2022.09.01(1차)
+                            2022.09.03(2차)
+                        </td>
+                        <td>신청위원수: 1명</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="buttonLocation">
+                <input id="applyButton" type="submit" value="진단평가 신청하기" />
+            </div>
+        </div>
+    </div>
+        <!-- 평가기업 신청 -->
+        <!-- 콘텐츠 -->
+</section>
+<!-- 섹션 -->

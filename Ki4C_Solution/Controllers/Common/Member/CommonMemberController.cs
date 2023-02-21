@@ -33,6 +33,10 @@ namespace Ki4C_Solution.Controllers.Common.Member
         {
             return View("../Common/Member/MemberRegFinished");
         }
+        public IActionResult TermsConditionsPrivacy()
+        {
+            return View("../Common/Member/TermsConditionsPrivacy");
+        }
         [HttpGet]
         public IActionResult MemberReg()
         {

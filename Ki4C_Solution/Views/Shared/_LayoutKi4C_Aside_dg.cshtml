@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css" />
+    @*<link rel="stylesheet" href="~/css/style_wide.css" />*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <!-- header ------------------------------------------ -->
+        @{
+            await Html.RenderPartialAsync("~/Views/Shared/_Header.cshtml");
+        }
+        <!-- //header -->
+        <!-- nav --------------------------------------------- -->
+        @{
+            await Html.RenderPartialAsync("~/Views/Shared/_Aside_dg_ev_mgnt.cshtml");
+        }
+        <!-- //nav --------------------------------------------- -->
+        
+        @*
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+        *@
+
+        @RenderBody()
+      
+        <!-- footer ------------------------------------------ -->
+        @{
+            await Html.RenderPartialAsync("_Footer");
+        }
+        <!-- //footer -->
+    </div>
+    
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

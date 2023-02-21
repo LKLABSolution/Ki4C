@@ -4,45 +4,186 @@
     ViewData["Title"] = "진단/자체 진단 문항";
 }
 
-    <style>
-    /* CompanyBasicInformation.html */
-    .essay {
-        width: 100%;
-        background-color:transparent;
-        border: none;
+<style>
+/* CompanyBasicInformation.html */
+.essay {
+    width: 100%;
+    background-color:transparent;
+    border: none;
+}
+#saveButton{
+    width: 200px; height: 30px;
+    font-size: 16px; font-weight: 600;
+    background-color: black;
+    color: white;
+    border: none;
+}
+#startButton{
+    width: 200px; height: 30px;
+    font-size: 16px; font-weight: 600;
+    background-color: black;
+    color: white;
+    border: none;
+}
+/* 화면 너비 0 ~ 768px */
+@@media (max-width: 768px){
+    #saveButton {
+        width: 100px;
     }
-    #saveButton{
-        width: 200px; height: 30px;
-        font-size: 16px; font-weight: 600;
-        background-color: black;
-        color: white;
-        border: none;
+    #startButton {
+        width: 100px;
     }
-    #startButton{
-        width: 200px; height: 30px;
-        font-size: 16px; font-weight: 600;
-        background-color: black;
-        color: white;
-        border: none;
-    }
-    </style>
+}
+</style>
+<!-- 섹션 -->
+<section style="width: 100%">
+    <!-- 콘텐츠 -->
+    <div style="width: 90%">
+        <h2>기업 기초 정보</h2>
+        <hr/>
+        <!-- 자바스크립트문구 -->
+        <div id="questions"></div>
+            <!-- 자바스크립트문구 -->
+        <div style="text-align: center;"> 
+        <!-- <div style="padding-top: 30px; padding-bottom: 30px;">  -->
+            <button id="saveButton">저장하기</button> 
+            <button onClick="location.href='/member/diagnosis/SelfDiagnosisQuestion.html'" id="startButton">진단 시작하기</button>       
+        </div>
+    </div>
+    <!-- 콘텐츠 -->
+</section>
+<!-- 섹션 -->
 
-        <!-- 섹션 -->
-        <section style="width: 100%">
-            <!-- 콘텐츠 -->
-            <div style="width: 90%">
-                <h2>기업 기초 정보</h2>
-                <hr/>
-                <!-- 자바스크립트문구 -->
-                <div id="questions"></div>
-                 <!-- 자바스크립트문구 -->
-                <div style="padding-top: 30px; padding-bottom: 30px;"> 
-                    <button id="saveButton">저장하기</button> 
-                    <button onClick="location.href='/member/diagnosis/SelfDiagnosisQuestion.html'" id="startButton">진단 시작하기</button>       
-                </div>
-            </div>
-            <!-- 콘텐츠 -->
-        </section>
+<script>
+    let CompanyBasicInfomationJS = {
+        const questions;
+        const QUESTIONS_KEY;
+        // 테스트 데이터
+        const data = [
+            {
+                type: "essay",
+                q1: "기업명"
+            },
+            {
+                type: "multiple",
+                q1: "기업구분",
+                q2: "귀사의 기업 구분에 해당하는 항목은 무엇입니까?",
+                q3: ["중견기업", "중소기업", "기타"]
+            }, {
+                type: "multiple",
+                q1: "업종구분",
+                q2: "귀사의 업종에 해당하는 항목은 무엇입니까?",
+                q3: ["기계소재", "전기전자", "화학", "정보통신", "바이오의료", "에너지 자원", "지식서비스"]
+            }, {
+                type: "multiple",
+                q1: "기업규모(종업원수)",
+                q2: "귀사의 상시 종업원 수에 해당하는 항목은 무엇입니까?",
+                q3: ["19명 이하", "20-99명", "100-249명", "250-499명", "500명-999명", "1,000명 이상"]
+            }, {
+                type: "multiple",
+                q1: "기업매출",
+                q2: "귀사의 전년도 매출은 어떠한 수준입니까?",
+                q3: ["200억원 미만", "200억원 ~ 400억원 미만", "400억원 ~ 500억원 미만", "500억원 ~ 1,500억원 미만",
+                    "1,500억원 ~ 3,000억원 미만", "3,000억원 ~5,000억원 미만", "5,000억원 이상"]
+            }, {
+                type: "multiple",
+                q1: "기업소재지",
+                q2: "귀사의 소재지역(본사기준)에 해당하는 항목은 무엇입니까?",
+                q3: ["서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북",
+                    "충남", "전북", "전남", "경북", "경남", "제주"]
+            }
 
-    <!-- 스크립트 -->
-    <script src="~/index/js/CompanyBasicInformation.js"></script>
+        ];
+        
+        init : function(){
+            questions = document.querySelector("#questions");
+            QUESTIONS_KEY = "companyBasic";
+            this.readQuestions();
+
+        },
+        readQuestions(items): function() {
+
+            if (items['type'] === "essay") {
+                console.log("essay");
+                const div = document.createElement("div");
+                const h3 = document.createElement("h3");
+                const input = document.createElement("input"); const hr = document.createElement("hr");
+
+                div.appendChild(h3);
+                h3.innerText = items['q1']
+                input.setAttribute("class", "essay");
+                input.setAttribute("type", "text");
+                input.setAttribute("placeholder", "100자 이내");
+
+                div.appendChild(input);
+                div.appendChild(hr);
+                questions.appendChild(div);
+
+            }else {
+                const div = document.createElement("div");
+                const h3 = document.createElement("h3");
+                const p = document.createElement("p");
+                const hr = document.createElement("hr");
+
+                div.appendChild(h3);
+                div.appendChild(p);
+
+                h3.innerText = items['q1']
+                p.innerText = items['q2']
+                div.appendChild(h3);
+                div.appendChild(p);
+
+                for (i = 0; i < items['q3'].length; i++) {
+                    window["input_" + i] = document.createElement("input");
+                    window["input_" + i].setAttribute("type", "radio");
+
+                    window["label_" + i] = document.createElement("label");
+                    window["label_" + i].innerText = items['q3'][i]
+
+                    div.appendChild(window["input_" + i]);
+                    div.appendChild(window["label_" + i]);
+                }
+
+                div.appendChild(hr);
+                questions.appendChild(div)
+            }
+
+        },
+        saveQuestions : function(){
+            const essay = document.querySelectorAll(".essay");
+            const essayValue = [];
+            for (i = 0; i < essay.length; i++) {
+                essayValue.push(essay[i].value);
+            }
+            const radio = document.querySelectorAll("input[type=radio]:checked");
+            const radioValue = [];
+            for (i = 0; i < radio.length; i++) {
+                radioValue.push(radio[i].value);
+            }
+            const questionsValue = essayValue.concat(radioValue);
+            localStorage.setItem(QUESTIONS_KEY, JSON.stringify(questionsValue));
+        },
+        loadQuestions : function(){
+            const loadedQuestions = localStorage.getItem(QUESTIONS_KEY);
+            if (loadedQuestions !== null) {
+                const parsedQuestions = JSON.parse(loadedQuestions);
+                const essay = document.querySelectorAll(".essay");
+                for (i = 0; i < essay.length; i++) {
+                    essay[i].value = parsedQuestions[i];
+                }
+                const radio = document.querySelectorAll("input[type=radio]");
+                for (i = 0; i < radio.length; i++) {
+                    radio[i].value = parsedQuestions[i + essay.length];
+                }
+            }
+        },
+        deleteQuestions : function(){
+            localStorage.removeItem(QUESTIONS_KEY);
+        },
+
+    }
+
+    $(document).ready(function(){
+        companyBasic.init();
+    });
+</script>

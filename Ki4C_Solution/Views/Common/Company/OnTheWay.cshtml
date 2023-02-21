@@ -1,11 +1,42 @@
 ﻿@{
     // Used Table []
     // 찾아오는길
-    
+    Layout = "~/Views/Shared/_LayoutKi4C_Aside.cshtml";
     ViewData["Title"] = "OnTheWay Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">OnTheWay Page</h1>
-    <p>OnTheWay Page.</p>
-</div>
+<section>
+    <!-- 콘텐츠 -->
+    <div id=contetns style="width: 100%;">
+        <h2>찾아오시는 길</h2>
+        <div style="float: right;">
+            <a href="#">Home</a>
+            &gt;
+            <a href="#">회사소개</a>
+            &gt;
+            찾아오시는 길
+        </div>
+        <br>
+        <hr />
+        <!-- 찾아오시는 길 -->
+        <div style="width: 100%;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.156555573082!2d126.88057020000002!3d37.4806318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61e293684ea3%3A0x2df84ac52e3a85d6!2z7ISc7Jq47Yq567OE7IucIOq4iOyynOq1rCDqsIDsgrDrlJTsp4DthLgx66GcIDE3MQ!5e0!3m2!1sko!2skr!4v1675224697612!5m2!1sko!2skr"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div style="width: 45%; height: 30%; float: left; padding: 10px;">
+                <p>
+                    케이아이포씨(Ki4C) 협동조합
+                </p>
+            </div>
+            <div style="width: 45%; height: 30%; float: right;">
+                <p>
+                    서울특별시 금천구 가산디지털 1로 171, 303-316호, <br>
+                    3층(가산동, 가산에스케이브이원 센터) <br>
+                    TEL : 02)2088-5953 <br>
+                    FAX : 02)0244-8009 <br>
+                </p>
+            </div>
+        </div>
+        <!-- 찾아오시는 길 -->
+    </div>
+    <!-- 콘텐츠 -->
+</section>

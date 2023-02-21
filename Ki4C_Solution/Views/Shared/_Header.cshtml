@@ -1,0 +1,188 @@
+﻿<!-- 스타일 지정 -->
+<style type="text/css">
+    /* 회사 로고 */
+    #logoBox {
+        height: 50px;
+    }
+
+    #companyLogo {
+        width: 300px;
+        height: 50px;
+        /* padding: 10px 5px 0 20px; */
+    }
+
+    /* nav_1, 드롭다운 메뉴 */
+    #nav_1 {
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        background: black;
+        font-size: 18px;
+        font-weight: 500;
+        color: white;
+        float: left;
+    }
+
+        #nav_1 ul li {
+            list-style: none;
+        }
+
+        #nav_1 > ul > li {
+            float: left;
+            width: 130px;
+            position: relative;
+        }
+
+            #nav_1 > ul > li > ul {
+                width: 130px;
+                display: none;
+                position: absolute;
+                background: black;
+            }
+
+                #nav_1 > ul > li > ul > li {
+                    text-align: left;
+                    padding-top: 20px;
+                }
+
+            #nav_1 > ul > li:hover > ul {
+                display: block;
+            }
+
+            #nav_1 > ul > li > ul > li:hover {
+                background: orange;
+                transition: ease 1s;
+            }
+
+    /* nav_2, 햄버거 메뉴 */
+    input[id="menuicon"] {
+        display: none;
+    }
+
+        input[id="menuicon"] + label {
+            display: block;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            right: 0;
+            top: 17px;
+            right: 30px;
+            transition: all .35s;
+            cursor: pointer;
+        }
+
+        input[id="menuicon"]:checked + label {
+            z-index: 2;
+            right: 150px;
+        }
+
+        input[id="menuicon"] + label span {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            border-radius: 30px;
+            background: rgb(228, 224, 224);
+            transition: all .35s;
+        }
+
+            input[id="menuicon"] + label span:nth-child(1) {
+                top: 0;
+            }
+
+            input[id="menuicon"] + label span:nth-child(2) {
+                top: 50%;
+                transform: translateY(-50%)
+            }
+
+            input[id="menuicon"] + label span:nth-child(3) {
+                bottom: 0;
+            }
+
+        input[id="menuicon"]:checked + label span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        input[id="menuicon"]:checked + label span:nth-child(2) {
+            opacity: 0;
+        }
+
+        input[id="menuicon"]:checked + label span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+
+    div[class="sidebar"] {
+        width: 150px;
+        height: 300px;
+        background: black;
+        color: white;
+        position: fixed;
+        top: 10px;
+        right: -150px;
+        z-index: 1;
+        transition: all .35s;
+    }
+
+    input[id="menuicon"]:checked + label + div {
+        right: 0;
+    }
+</style>
+<!-- 스타일 지정 -->
+    <div id="logoBox">
+        <img id="companyLogo" src="~/images/companyLogo.png">
+    </div>
+    <hr style="margin: 0;" />
+
+    <!-- nav_1 -->
+    <nav id="nav_1">
+        <ul>
+        <li><a class="text-primary" asp-area="" asp-controller="Home" asp-action="Index">홈</a></li>
+            <li>
+                <a href="/common/company/Greetings.html">회사소개</a>
+                <ul>
+                    <li><a href="/common/company/Greetings.html">인사말</a></li>
+                    <li><a href="/common/company/IntroductionDX.html">DX 소개</a></li>
+                    <li style="padding-bottom: 10px;"><a href="/common/company/OnTheWay.html">찾아오시는 길</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/member/diagnosis/SelfDiagnosis.html">DX 진단</a>
+                <ul>
+                    <li><a href="/member/diagnosis/SelfDiagnosis.html">무료 체험</a></li>
+                    <li style="padding-bottom: 10px;"><a href="/member/diagnosis/ExpertDiagnosis.html">전문가 진단</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a style="float:right; padding: 0 10%" asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a>
+        <a style="float:right; padding: 0 5%" asp-area="" asp-controller="MemberMypage" asp-action="MyInfoRead">마이페이지</a>
+        <a style="float:right; padding: 0 1%" asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a>
+    </nav>
+    <!-- nav_1 -->
+    <!-- nav_2 -->
+    <nav id="nav_2">
+        <input type="checkbox" id="menuicon">
+        <label for="menuicon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div class="sidebar">
+            <ul style="list-style:none; padding-left:0px;">
+                <li style="padding: 10px 0 0 10px;"><a href="/Index.html">홈</a></li>
+                <li style="padding: 10px 0 0 10px;"><a href="/common/company/Greetings.html">회사 소개</a></li>
+                <li style="padding: 10px 0 0 20px;"><a href="/common/company/Greetings.html">인사말</a></li>
+                <li style="padding: 10px 0 0 20px;"><a href="/common/company/IntroductionDX.html">DX 소개</a></li>
+                <li style="padding: 10px 0 0 20px;"><a href="/common/company/OnTheWay.html">찾아오시는 길</a></li>
+                <li style="padding: 10px 0 0 10px;"><a href="/member/diagnosis/SelfDiagnosis.html">DX 진단</a></li>
+                <li style="padding: 10px 0 0 20px;"><a href="/member/diagnosis/SelfDiagnosis.html">무료 체험</a></li>
+                <li style="padding: 10px 0 0 20px;"><a href="/member/diagnosis/ExpertDiagnosis.html">전문가 진단</a></li>
+                <hr style="border: solid 1px grey;">
+                <li><a style="padding: 0px 0 0 50px;" asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a></li>
+                <li><a style="padding: 0px 0 0 50px;" asp-area="" asp-controller="CommonMember" asp-action="MemberReg">회원가입</a></li>
+                <li><a style="padding: 0px 0 0 50px;" asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- nav_2 -->

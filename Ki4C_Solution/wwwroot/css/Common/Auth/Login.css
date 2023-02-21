@@ -1,0 +1,45 @@
+﻿/* Login.html */
+.hr-sect {
+    display: flex;
+    flex-basis: 50%;
+    align-items: center;
+    color: rgba(35, 31, 31, 0.35);
+    margin: 8px 0px;
+}
+
+    .hr-sect::before,
+    .hr-sect::after {
+        content: "";
+        flex-grow: 1;
+        background: rgba(35, 31, 31, 0.35);
+        height: 1px;
+        font-size: 0px;
+        line-height: 0px;
+        margin: 0px 16px;
+    }
+
+#login-button {
+    font-size: 16px;
+    font-weight: 600;
+    background-color: lightgray;
+    border-color: black;
+    width: 200px;
+    height: 40px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#create-button {
+    font-size: 16px;
+    font-weight: 600;
+    background-color: white;
+    border-color: black;
+    width: 200px;
+    height: 40px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

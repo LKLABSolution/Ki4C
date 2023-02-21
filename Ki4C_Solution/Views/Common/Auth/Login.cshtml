@@ -1,79 +1,125 @@
 ﻿@{
+
     // Used Table [Login, Member]
     //메인 - 로그인
+    Layout = "~/Views/Shared/_LayoutKi4C.cshtml";
     ViewData["Title"] = "Login Page";
     @model Ki4C_Solution.Models.Common.Auth.LoginModel
 
 }
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-5">
-            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                <div class="card-header">
-                    <h3 class="text-center font-weight-light my-4"><img src="~/images/logo.png" alt="logo" width="80%" height="80%" /></h3>
-                    
-                    <h3 class="text-center font-weight-light my-4">로그인</h3></div>
-                <div class="card-body">
-                    <form asp-controller="CommonAuth" asp-action="Login" method="post" id="input-form">
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="Input_Id" type="text" placeholder=" " asp-for="Id" />
-                            <label for="Input_Email">아이디<a style="color: red;">*</a></label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="Input_Password" type="password" placeholder=" " asp-for="Password" />
-                            <label for="Input_Password">비밀번호<a style="color: red;">*</a></label>
-                        </div>
-                        <div class="d-flex justify-content-center mt-4 mb-0">
-                            <button class="btn btn-primary" type="submit">Login</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer text-center py-3 d-flex justify-content-center">
-                    <div class="small m-2"><a class="btn btn-primary" asp-area="" asp-controller="CommonMember" asp-action="MemberReg">회원가입</a></div>
-                    <div class="small m-2"><a class="btn btn-primary" asp-area="" asp-controller="CommonAuth" asp-action="FindIdInput">아이디 찾기</a></div>
-                    <div class="small m-2"><a class="btn btn-primary" asp-area="" asp-controller="CommonAuth" asp-action="FindPassInput">비밀번호 찾기</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<style>
+    /* Login.html */
+    .hr-sect {
+    display: flex;
+    flex-basis: 50%;
+    align-items: center;
+    color: rgba(35, 31, 31, 0.35);
+    margin: 8px 0px;
+    }
+    .hr-sect::before,
+    .hr-sect::after {
+        content: "";
+        flex-grow: 1;
+        background: rgba(35, 31, 31, 0.35);
+        height: 1px;
+        font-size: 0px;
+        line-height: 0px;
+        margin: 0px 16px;
+    }
+    #login-button{
+        font-size: 16px; font-weight: 600;
+        background-color: lightgray;
+        border-color: black;
+        width: 200px; height: 40px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    #create-button{
+        font-size: 16px; font-weight: 600;
+        background-color: white;
+        border-color: black;
+        width: 200px; height: 40px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
 
-<!-- Modal -->
-<div class="modal fade" id="loginFailModal" tabindex="-1" role="dialog" aria-labelledby="loginFailModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginFailModalLabel">로그인 실패</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="ValidateMessage">@ViewData["ValidateMessage"]</p>
-                <p>등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary closeBtn" data-dismiss="modal">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
+    #login-button:hover {
+        background-color: gray;
+        color: white;
+    }
 
-<!-- The Modal -->
-<div class="modal fade" id="loginSuccessModal" tabindex="-1" role="dialog" aria-labelledby="loginSuccessModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginSuccessModalLabel">로그인 성공</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>XXX 고객님 로그인 하였습니다. 메인페이지로 이동합니다.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary closeBtn" data-dismiss="modal">닫기</button>
-            </div>
+    #login-button:active {
+        background-color: darkgray;
+        color: white;
+    }
+
+    #create-button:hover {
+        background-color: lightgray;
+        color: black;
+    }
+
+    #create-button:active {
+        background-color: gray;
+        color: white;
+    }
+</style>
+<section>
+    <!-- 콘텐츠 -->
+    <div id="wrap" style="width: 80%;">
+        <h2>로그인</h2>
+        <div style="float: right;">
+            <a href="#">Home</a>
+            &gt;
+            로그인
         </div>
+        <br>
+        <hr />
+        <!-- 로그인 -->
+        <div class="contents" style="text-align: center;">
+            <div style="width: 100%; height: 130px;">
+                <h1 id="login">Log In <a style="color: red;">*</a></h1>
+                <form method="post" id="Login-form" asp-controller="CommonAuth" asp-action="Login">
+                    <input type="text" placeholder="이메일(email@address.com)"
+                           style="max-width: 300px; width: 80%; height: 30px; font-size: 16px;
+                            margin-bottom: 3px;"
+                           onfocus="this.value='';" id="Input_Id" asp-for="Id"/> <br>
+                    <input type="password" placeholder="비밀번호"
+                           style="max-width: 300px; width: 80%; height: 30px; font-size: 16px;"
+                           onfocus="this.value='';" id="Input_Password" asp-for="Password" />
+                </form>
+            </div>
+            <div class="check_area"
+                 style="font-size: 14px; position: relative; top: 10px;">
+                <input type="checkbox" id="idSaveCheck" name="IdCheck">
+                <label for="IdCheck">아이디 기억하기</label>
+            </div>
+            <br>
+            <div>
+                <a style="text-decoration:none; color:black;" asp-area="" asp-controller="CommonAuth" asp-action="FindIdInput">아이디 찾기</a>
+                <a style="text-decoration:none; color:black;" asp-area="" asp-controller="CommonAuth" asp-action="FindPassInput">비밀번호 찾기</a>
+            </div>
+            <br> <br>
+            <a href="#">
+                <input id="login-button" type="button" value="로그인" onclick="LoginJS.SubmitBtnClick()" />
+            </a>
+            <br>
+            <br>
+            <div class="hr-sect">또는</div>
+            <br>
+            <a style="display: inline-block;" asp-area="" asp-controller="CommonMember" asp-action="MemberReg">
+                <input id="create-button" type="button" value="계정 만들기" />
+            </a>
+        </div>
+        <br> <br> <br>
+        <!-- 로그인 -->
     </div>
-</div>
+    <!-- 콘텐츠 -->
+</section>
+
 
 <script>
     let LoginJS = {
@@ -81,7 +127,7 @@
             this.setEvent();
         },
         setEvent: function () {
-            $('#input-form').submit(function (e) {
+            $('#Login-form').submit(function (e) {
                 e.preventDefault();
                 let id = $('#Input_Id').val();
                 //let email = $('#Input_Email').val();
@@ -98,17 +144,16 @@
                     alert('비밀번호를 입력해주세요.');
                     return;
                 }
-                this.submit(function (response){
-                    if(LoginJS.isEmpty(response.result)){
+                this.submit(function (response) {
+                    if (LoginJS.isEmpty(response.result)) {
                         console.log(response);
                         alert(response.result.toString());
                         return;
                     }
-                    else
-                    {
+                    else {
                         alert(response);
                     }
-                
+
                 })
             });
         },
@@ -119,7 +164,7 @@
                 return false;
             }
         },
-        loginAPI : function(){
+        loginAPI: function () {
             let id = $('#Input_Id').val();
             let password = $('#Input_Password').val();
             let data = {
@@ -143,9 +188,14 @@
                     $('#loginFailModal').modal('show');
                 }
             });
+        },
+        SubmitBtnClick : function(){
+            //Form Submit trigger
+            $('#Login-form').submit();
+            
         }
     }
-    
+
     $(document).ready(function () {
         LoginJS.init();
         if ($("#ValidateMessage").text() != "") {

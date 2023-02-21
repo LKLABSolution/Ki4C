@@ -1,0 +1,255 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_LayoutKi4C_Aside_my.cshtml";
+    ViewData["Title"] = "마이페이지/진단 내역/결과 조회";
+    @model Ki4C_Solution.Models.Common.Member.MemberRegModel
+}
+
+    <style>
+        #box1 {
+            display:inline-block;
+            background: rgb(135, 198, 199); 
+            padding: 20px;
+        }
+        #box2 {
+            display:inline-block;
+            background: rgb(208, 249, 250);
+            padding: 20px;
+        }
+        #titleBox {
+            width: 20%; height: 100%;
+            display: inline-block;
+            float: left;
+            font-size: 22px;
+        }
+        #titleBox p {
+            width: 80%;
+            text-align: center;
+            margin: auto;
+            padding-top: 20px;
+            font-weight: 800;
+        }
+        #resultBox {
+            width: 70%; height: 100%;
+            float: left;
+            padding-top: 20px; padding-left: 20px;
+        }
+        #guide p:first-child {
+            font-weight: 600;
+        }
+        #boxHR {
+            border: dashed 1px black;
+        }
+        #request-button{
+            font-size: 14px; font-weight: 600;
+            background-color: white;
+            border-color: black;
+            width: 100px; height: 30px;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        #searchImg {
+            width: 20%;
+            height: 100%;
+            display: inline-block;
+            float: left;
+        }
+        #requestData {
+            width: 80%; height: 200px;
+            padding: 10px 0 0 30%;
+        }
+        @@media (max-width: 768px){
+        #titleBox {
+            width: 90%;
+        }
+        #titleBox p {
+            text-align: left;
+        }
+        #resultBox {
+            width: 95%;
+        }
+        #searchImg {
+            width: 120%;
+            text-align: center;
+        }
+        #requestData {
+            display: inline;
+        }
+     }
+    </style>
+
+<!-- 섹션 -->
+<section>
+    <!-- 콘텐츠 -->
+    <div id=contetns style="width: 100%;">
+        <h2>DX 자체 진단 결과 보고서</h2>
+        <div style="float: right;">
+            <a href="#">Home</a>
+            &gt;
+            <a href="#">마이페이지</a>
+            &gt;
+            <a href="#">진단내역</a>
+            &gt;
+            DX 자체 진단 결과 보고서
+        </div>
+        <br>
+        <hr />
+        <!-- DX 자체 진단 결과 보고서 -->
+        <div style="display: inline-block;">
+            <a id="cstmName"></a> 님, <br>
+            - 본 보고서는 귀하가 <a id="dgDate"></a> 진단에 응지문한 결과 결과 해석입니다. <br>
+            - 본 진단을 통해서 귀하에 대해 아래와 같은 사항을 발견하였습니다.
+        </div> <br> <br>
+        <div id="report" style="width: 90%"></div>
+        <!-- DX 자체 진단 결과 보고서 -->
+        <div style="width: 70%; margin: auto;">
+            <p style="font-size: 22px; font-weight: 700; text-align: center;">
+                체험 진단 결과에 따른 다음 단계가 준비되어 있습니다.
+            </p>
+        </div>
+        <div style="width: 80%; margin: auto;">
+            <div style="width: 80%; padding: 10px;">
+                <div id="searchImg">
+                    <img style="width: 150px; height: 150px; " src="../../../img/findDocument.png">
+                </div>
+                <div id="requestData">
+                    <p style="font-size: 18p; font-weight: 700;">상세 진단 요청</p>
+                    전문가 상담 및 상세 진단을 통해 기업별 맞춤 분석을 제공합니다. <br>
+                    진단 요청시 회사명과 상세 진단 요청사항을 작성해주시면 더욱 정확한 진단을 제공해드리겠습니다. <br> <br>
+                    <a href="#" style="display: inline-block;">
+                        <input id="request-button" type="submit" value="요청하기" />
+                        <input id="request-button" type="submit" value="다시 진단하기" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 콘텐츠 -->
+</section>
+<!-- 섹션 -->
+
+<script>
+    const cstmName = document.querySelector("#cstmName");
+    const dgDate = document.querySelector("#dgDate");
+    const report = document.querySelector("#report");
+    const DATA_KEY = "dgDetail";
+
+    cstmName.innerText = "홍길동"
+    dgDate.innerText = "03월 27일"
+
+    function readData(items) {
+        console.log(items)
+        const box = document.createElement("div");
+        const titleBox = document.createElement("div");
+        const p = document.createElement("p");
+        const resultBox = document.createElement("div");
+        const dgReult = document.createElement("div");
+        const hr = document.createElement("hr");
+        const guide = document.createElement("div");
+
+        if (items['type'] === "Customer Understanding" ||
+            items['type'] === "Technology & Infrastructure" ||
+            "People Organization & Culture") {
+            box.setAttribute("id", "box1");
+        } else {
+            box.setAttribute("id", "box2");
+        }
+        titleBox.setAttribute("id", "titleBox");
+        resultBox.setAttribute("id", "resultBox");
+        dgReult.setAttribute("id", "dgReult");
+        hr.setAttribute("id", "boxHR");
+        guide.setAttribute("id", "guide");
+
+        p.innerText = items['type']
+        dgReult.innerText = "📊 진단결과";
+        guide.innerText = "📄 한줄 가이드";
+
+        box.appendChild(titleBox);
+        titleBox.appendChild(p);
+        box.appendChild(resultBox);
+
+        for (i = 0; i < items['result'].length; i++) {
+            window["p_" + i] = document.createElement("p");
+            window["p_" + i].innerText = items['result'][i]
+
+            dgReult.appendChild(window["p_" + i]);
+        }
+
+        for (i = 0; i < items['guide_details'].length; i++) {
+            window["p_" + i] = document.createElement("p");
+            window["p_" + i].innerText = items['guide_details'][i]
+
+            guide.appendChild(window["p_" + i]);
+        }
+
+        resultBox.appendChild(dgReult);
+        resultBox.appendChild(hr);
+        resultBox.appendChild(guide);
+
+        report.appendChild(box);
+    }
+
+    // 테스트 데이터
+    const data = [
+        {
+            type: "Customer Understanding",
+            result: ["고객(기업고객 또는 최종소비자)이 우리 회사 제품/서비스를 사용/소비하는 과정에서 발생하는 이슈, 문의사항, 만족도 등에 대한 데이터를 취합하여 관리하며, 업무 수행시에 참조하고 있습니다.",
+                "고객과의 거래/협력/소통을 위하여 전통적인 방식(대면 방문, 유선 통화, 우편, FAX 등)과 디지털 기술이 반영된 방식(E-mail, SNS, 화상회의, 모바일앱 등)의 다양한 채널을 개별적으로 운영하고 있으며, 각 채널별로 고객데이터를 관리하고 있습니다."],
+            guide: "Customer Understanding은 고객경험/가치의 업무연계와 고객 채널/데이터 통합관리가 중요합니다.",
+            guide_details: ["고객경험/가치의 업무연계 측면에서 고객의 이슈, 문의사항, 만족도 등에 대한 데이터를 주기적 통합관리/모니터링하여 대응/조치하는 것이 필요합니다.",
+                "고객 채널 및 데이터 통합관리 측면에서 여러 채널을 연계하여 운영하고, 고객 데이터를 통합 관리하는 것이 필요합니다."]
+        },
+        {
+            type: "Strategy & Leadership",
+            result: ["디지털 전략(AI, Blockchain, Cloud 등 디지털 기술을 활용하여 사업 전반을 혁신하는 전략)을 정의하였으나, 이를 경영/투자에 반영하지 않고 있습니다.",
+                "디지털 기술을 적용하기 위한 별도의 디지털 전환(DT) 과제에 대한 기획과 투자가 없습니다."],
+            guide: "Strategy & Leadership은 디지털 전략과 투자간 연계와 디지털 전환(DT) 과제 기획/투자가 중요합니다.",
+            guide_details: ["디지털 전략과 투자간 연계 측면에서 디지털 전략을 전사 차원의 경영/투자에 반영하는 것이 필요합니다.",
+                "디지털 전환(DT) 과제 기획/투자 관점에서 디지털 신기술에 대한 PoC 소규모 투자 및 PJT 제한적 투자부터 시작하기 바랍니다."]
+        },
+        {
+            type: "Technology & Infrastructure",
+            result: ["업무 시스템에 대한 관리체계를 일부 정의하였습니다. 업무 시스템 정보는 제공하나, 체계적으로 통합 관리되지 않고 있습니다.",
+                "업무상 발생하는 데이터를 수집/분석하여 현황을 파악하고 있습니다. 업무 수행시 발생 건에 대한 현황/분석 정보를 의사결정권자들에게 리포팅하고 있습니다."],
+            guide: "Technology & Infrastructure는 업무시스템 관리체계와 데이터 분석의 업무 활용이 중요합니다.",
+            guide_details: ["애플리케이션 관리 측면에서 업무 시스템에 대한 표준화된 관리체계를 수립하고, 시스템 정보를 통합관리하는 것이 필요합니다.",
+                "데이터 분석의 업무 활용을 위하여 정기적 현황 분석을 통하여 업무 산황에 대한 전망/예측하는 체계를 정립하는 것이 필요합니다."]
+        },
+        {
+            type: "Operations",
+            result: ["업무 자동화 솔루션(예: 챗봇, RPA, 머신러닝 등) 도입에 대한 계획이 없거나, 검토 단계에 머물러 있습니다.",
+                "VDI(Virtual Desktop Infrastructure, 데스크탑 가상화) 등을 활용하여 인터넷에 접속하면 사내 업무 시스템을 사용할 수 있는 가상 업무환경을 제공합니다."],
+            guide: "Operation은 업무 자동화와 디지털 업무환경이 중요합니다.",
+            guide_details: ["업무 자동화 솔루션에 대한 업무 적용성을 검토하고, 일부 업무에 시범적용을 하는 것이 필요합니다.",
+                "디지털 업무환경 측면에서 가상 업무환경 및 모바일 서비스를 활용하여 기본 업무 기능(메일링, 결재, 일정관리 등)에 대한 모빌리티 서비스를 제공하는 것이 필요합니다."]
+        },
+        {
+            type: "People Organization & Culture",
+            result: ["디지털 전환(Digital Transfotmation) 관련 역할과 책임이 임시적으로 최소 수준으로 정의되어 있습니다.",
+                "디지털 전환(DT)을 시도하고 있으나, 새로운 시도에 대한 지원과 성공/실폐 사례에 대한 학슴은 거의 일어나지 않는 단계입니다."],
+            guide: "조직/문화는 디지털 전환(DT) 관련 업무 R&R 정착과 경험 기반 학습문화가 중요합니다.",
+            guide_details: ["조직 R&R 측면에서 전사/사업부의 디지털 전환(DT) 업무 R&R을 정의하는 것이 필요합니다.",
+                "업무문화 측면에서 디지털 전환(DT) 시도에 대한 전사 차원의 지원과 지식자산화(경험/사례 확보) 추진이 필요합니다."]
+        }
+    ]
+    localStorage.setItem(DATA_KEY, JSON.stringify(data));
+
+    const savedData = localStorage.getItem(DATA_KEY);
+    const parsedData = JSON.parse(savedData);
+    parsedData.forEach(readData);
+
+    let DXSelfDiagnosisDetailView = {
+        //javascript include here all
+        init: function () {
+            this.initData();
+            this.initEvent();
+        },
+
+    }
+
+    $(function () {
+        DXSelfDiagnosisDetailView.init();
+    });
+</script>

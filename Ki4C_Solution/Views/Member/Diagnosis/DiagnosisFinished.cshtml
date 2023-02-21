@@ -1,0 +1,47 @@
+@{
+    // Used Table [Member]
+    // 마이페이지 - 탈퇴
+    ViewData["Title"] = "진단/자체 진단 문항";
+}
+
+<style>
+    /* DiagnosisFinished.html */
+    #box-form {
+        width: 70%; height: 200px;
+        padding-top: 100px;
+        text-align: center;
+        margin: auto;
+        font-size: 26px; font-weight: 700;
+    }
+    #confirmButton{
+        font-size: 16px; font-weight: 600;
+        background-color: black;
+        color: white;
+        border: none;
+        width: 130px; height: 40px;
+    }
+    @@media (max-width: 768px){
+        #box-form {
+            width: 90%;
+        }
+    }
+</style>
+
+<!-- 섹션 -->
+<section>
+    <!-- 콘텐츠 -->
+    <div id="wrap">
+        <div id="box-form">
+            <p>
+                장 시간 디지털혁신역량 진단에 응지문해 주셔서 깊은 감사드립니다.
+            </p>
+        </div>
+        <div class="contents" style="display: flex; justify-content: center;">   
+            <button id="confirmButton" type="button" onClick="location.href='../../../Index.html'">
+                확인
+            </button>
+        </div>
+    </div>
+    <!-- 콘텐츠 -->
+</section>
+<!-- 섹션 -->

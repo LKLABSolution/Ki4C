@@ -170,6 +170,8 @@ namespace Ki4C_Solution.Controllers.Common.Auth
         // Views/Common/Auth/FindPassResultView
         public IActionResult FindPassResultView()
         {
+            //비밀번호 찾기 로직 구현
+            //이메일 발송 및 경호창리턴
             return View("../Common/Auth/FindPassResultView");
         }
 
