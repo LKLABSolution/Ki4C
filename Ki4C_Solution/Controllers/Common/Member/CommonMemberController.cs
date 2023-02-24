@@ -11,20 +11,15 @@ using System.Text;
 
 namespace Ki4C_Solution.Controllers.Common.Member
 {
-    public class CommonMemberController : Controller
+    public class CommonMemberController : BaseController
     {
-        public static User user = new User();
-        private readonly IConfiguration _configuration;
-
-        public CommonMemberController(IConfiguration configuration)
+        public CommonMemberController(IConfiguration configuration,IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
             _configuration = configuration;
         }
+        public static User user = new User();
+        private readonly IConfiguration _configuration;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
         public IActionResult MemberRegSubscription()
         {
             return View("../Common/Member/MemberRegSubscription");

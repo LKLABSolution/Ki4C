@@ -5,13 +5,12 @@ using System.Diagnostics;
 namespace Ki4C_Solution.Controllers.Member.MyPage
 {
     
-    public class MemberMypageController : Controller
+    public class MemberMypageController : BaseController
     {
-        public IActionResult MyInfo()
+        public MemberMypageController(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
-            return View("../Member/MyPage/MyInfo");
         }
-        
+
         public IActionResult MyInfoRead()
         {
             ViewData["Message"] = "MyInfoRead";

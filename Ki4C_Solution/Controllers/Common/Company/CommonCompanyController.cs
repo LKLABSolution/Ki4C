@@ -2,8 +2,11 @@
 
 namespace Ki4C_Solution.Controllers.Common.Company
 {
-    public class CommonCompanyController : Controller
+    public class CommonCompanyController : BaseController
     {
+        public CommonCompanyController(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        {
+        }
         public IActionResult Greetings()
         {
             return View("../Common/Company/Greetings");

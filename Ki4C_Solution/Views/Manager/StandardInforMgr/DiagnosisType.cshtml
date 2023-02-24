@@ -82,6 +82,14 @@
                         </td>
                     </tr>
                 </table>
+                <table id="DiagnosisTypeList">
+                    <tr align="center" bgcolor="skyblue">
+                        <td>번호</td>
+                        <td>진단종류코드</td>
+                        <td>진단종류명</td>
+                        <td>삭제</td>
+                    </tr>
+                </table>
             </div>
             <div id="buttonLocation">
                 <input id="deleteButton" type="submit" value="항목 삭제" />
@@ -91,3 +99,60 @@
         <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
+
+<script>
+    let DIagnosisTypeJS = {
+        init : function () {
+            let _this = this;
+            $('#registButton').on('click', function () {
+                _this.regist();
+            });
+            $('#modifyButton').on('click', function () {
+                _this.modify();
+            });
+            $('#deleteButton').on('click', function () {
+                _this.delete();
+            });
+        },
+        regist : function () {
+            alert('등록');
+        },
+        modify : function () {
+            alert('수정');
+        },
+        delete : function () {
+            alert('삭제');
+        },
+        DiagnosisTypeList : function () {
+            //ajax GetAllDiagnosisType()
+            //DiagnosisTypeList ajax Domain is DbManager.DIagnosisType url is /api/APIManagerStandardInforMgr/DiagnosisType/getAll
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisType/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                let html = '';
+                data.forEach(function(item) {
+                    html += '<tr align="center" bgcolor="white">';
+                    html += '<td>' + item.DiagnosisTypeNumber + '</td>';
+                    html += '<td>' + item.DiagnosisTypeCode + '</td>';
+                    html += '<td>' + item.DiagnosisTypeName + '</td>';
+                    html += '<td><input type="checkbox" value = ' + item.DiagnosisTypeNumber + '></td>';
+                    html += '</tr>';
+                });
+                $('#DiagnosisTypeList').append(html);
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+
+        },
+    }
+
+
+    $(document).ready(function () {
+        DIagnosisTypeJS.init();
+        DIagnosisTypeJS.DiagnosisTypeList();
+    });
+
+</script>

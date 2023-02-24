@@ -2,11 +2,10 @@
 
 namespace Ki4C_Solution.Controllers.Manager.StandardInforMgr
 {
-    public class ManagerStandardInforMgrController : Controller
+    public class ManagerStandardInforMgrController : BaseController
     {
-        public IActionResult Index()
+        public ManagerStandardInforMgrController(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
-            return View();
         }
 
         //DiagnosisClass
@@ -42,5 +41,14 @@ namespace Ki4C_Solution.Controllers.Manager.StandardInforMgr
         {
             return View("../Manager/StandardInforMgr/QnADetails");
         }
+
+        //DiagnosisType.getAll - Get acync
+        public async Task<IActionResult> GetAllDiagnosisType()
+        {
+            var result = await DbManager.DiagnosisType.GetAllJsonAsync();
+            return Json(result);
+        }
+
+
     }
 }

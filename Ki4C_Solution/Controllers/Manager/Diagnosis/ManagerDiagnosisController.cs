@@ -2,8 +2,11 @@
 
 namespace Ki4C_Solution.Controllers.Manager.Diagnosis
 {
-    public class ManagerDiagnosisController : Controller
+    public class ManagerDiagnosisController : BaseController
     {
+        public ManagerDiagnosisController(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        {
+        }
         public IActionResult Index()
         {
             return View();
