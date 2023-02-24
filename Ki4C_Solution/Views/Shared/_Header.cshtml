@@ -7,7 +7,7 @@
 
     #companyLogo {
         width: 300px;
-        height: 50px;
+        height: 40px;
         /* padding: 10px 5px 0 20px; */
     }
 
@@ -29,7 +29,7 @@
 
         #nav_1 > ul > li {
             float: left;
-            width: 130px;
+            width: 150px;
             position: relative;
         }
 
@@ -132,32 +132,27 @@
 <!-- 스타일 지정 -->
 <header>
     <div id="logoBox">
-        <img id="companyLogo" src="~/images/companyLogo.png">
+        <img id="companyLogo" src="~/images/logo.png">
     </div>
     <hr style="margin: 0;" />
 
     <!-- nav_1 -->
     <nav id="nav_1">
         <ul>
-        <li><a class="text-primary" asp-area="" asp-controller="Home" asp-action="Index">홈</a></li>
+            <li><a class="text-primary" asp-area="" asp-controller="Home" asp-action="Index">홈</a></li>
             <li>
-                <a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">회사소개</a>
+                <a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">DX진단 플랫폼 소개</a>
                 <ul>
                     <li><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">인사말</a></li>
                     <li><a asp-area="" asp-controller="CommonCompany" asp-action="IntroductionDX">DX 소개</a></li>
                     <li style="padding-bottom: 10px;"> <a asp-area="" asp-controller="CommonCompany" asp-action="OnTheWay">찾아오시는 길</a></li>
                 </ul>
             </li>
-            <li>
-                <a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 진단</a>
-                <ul>
-                    <li><a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">무료 체험</a></li>
-                    <li style="padding-bottom: 10px;"><a href="/member/diagnosis/ExpertDiagnosis.html">전문가 진단</a></li>
-                </ul>
-            </li>
+            <li><a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 자가진단</a></li>
+            <li><a asp-area="" asp-controller="MemberDiagnosis" asp-action="ExpertDiagnosis">DX 전문가 진단</a></li>
         </ul>
-        <a style="float:right; padding: 0 10%" asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a>
-        <a style="float:right; padding: 0 5%" asp-area="" asp-controller="MemberMypage" asp-action="MyInfoRead">마이페이지</a>
+        <a style="float:right; padding: 0 5%" asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a>
+        <a style="float:right; padding: 0 3%" asp-area="" asp-controller="MemberMypage" asp-action="MyInfoRead">마이페이지</a>
         <a style="float:right; padding: 0 1%" asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a>
     </nav>
     <!-- nav_1 -->
@@ -172,13 +167,12 @@
         <div class="sidebar">
             <ul style="list-style:none; padding-left:0px;">
                 <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="Home" asp-action="Index">홈</a></li>
-                <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">회사 소개</a></li>
+                <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">DX진단 플랫폼 소개</a></li>
                 <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">인사말</a></li>
                 <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="CommonCompany" asp-action="IntroductionDX">DX 소개</a></li>
                 <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="CommonCompany" asp-action="OnTheWay">찾아오시는 길</a></li>
-                <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 진단</a></li>
-                <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">무료 체험</a></li>
-                <li style="padding: 10px 0 0 20px;"><a href="/member/diagnosis/ExpertDiagnosis.html">전문가 진단</a></li>
+                <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 자가진단</a></li>
+                <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="MemberDiagnosis" asp-action="ExpertDiagnosis">DX 전문가 진단</a></li>
                 <hr style="border: solid 1px grey;">
                 <li><a style="padding: 0px 0 0 50px;" asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a></li>
                 <li><a style="padding: 0px 0 0 50px;" asp-area="" asp-controller="CommonMember" asp-action="MemberReg">회원가입</a></li>
