@@ -4,6 +4,7 @@
     // 선행작업 - 관리자 로그인
     Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg.cshtml";
     ViewData["Title"] = "기준정보 관리/진단 종류";
+    @model Ki4C_Solution.Models.Manager.StandardInfoMgr.DiagnosisType;
 }
 <!-- 섹션 -->
 <section>
@@ -22,18 +23,18 @@
         <!-- 진단 종류 등록 -->
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
             <a>진단종류코드: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="DiagnosisTypeCode" asp-for="DiagnosisTypeCode" />
+            </div>
             <br>
             <a>진단종류명: </a>
-            <form style="padding-top: 10px; padding-left: 14px; display: inline-block;">
+            <div style="padding-top: 10px; padding-left: 14px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="DiagnosisTypeName" asp-for="DiagnosisTypeName" />
+            </div>
             <div style="padding-top: 30px; padding-left: 50px;">
                 <input id="registButton" type="submit" value="등록" />
                 <input id="modifyButton" type="submit" value="수정" />
@@ -79,7 +80,6 @@
                         <td>A4</td>
                         <td>기타</td>
                         <td><input type="checkbox"></td>
-                        </td>
                     </tr>
                 </table>
                 <table id="DiagnosisTypeList">
@@ -116,37 +116,114 @@
         },
         regist : function () {
             alert('등록');
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisType/insert',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({
+                    DiagnosisTypeCode: $('#DiagnosisTypeCode').val(),
+                    DiagnosisTypeName: $('#DiagnosisTypeName').val()
+                })
+            }).done(function () {
+                alert('진단 종류 등록이 완료되었습니다.');
+                DIagnosisTypeJS.DiagnosisTypeList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
         },
         modify : function () {
             alert('수정');
+            let DiagnosisTypeNumber = [];
+            $('#DiagnosisTypeNumber:checked').each(function () {
+                DiagnosisTypeNumber.push($(this).val());
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisType/update',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({
+                    DiagnosisTypeNumber: DiagnosisTypeNumber,
+                    DiagnosisTypeCode: $('#DiagnosisTypeCode').val(),
+                    DiagnosisTypeName: $('#DiagnosisTypeName').val()
+                })
+            }).done(function () {
+                alert('진단 종류 수정이 완료되었습니다.');
+                DIagnosisTypeJS.DiagnosisTypeList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
         },
         delete : function () {
             alert('삭제');
+            //checkbox checked DiagnosisTypeCode & DiagnosisTypeName 가져오기
+            let DiagnosisTypeCode = [];
+            let DiagnosisTypeName = [];
+            let DiagnosisTypeNumber = [];
+            $('#DiagnosisTypeNumber:checked').each(function () {
+                DiagnosisTypeNumber.push($(this).val());
+                let code = $(this).parent().parent().find('td:eq(1)').text();
+                let name = $(this).parent().parent().find('td:eq(2)').text();
+                DiagnosisTypeCode.push(code);
+                DiagnosisTypeName.push(name);
+            });
+
+            if (DiagnosisTypeNumber.length == 0) {
+                alert('삭제할 항목을 선택해주세요.');
+                return;
+            }
+            alert('삭제할 항목 : ' + DiagnosisTypeNumber + '\n삭제할 항목 코드 : ' + DiagnosisTypeCode + '\n삭제할 항목 이름 : ' + DiagnosisTypeName);
+            // 하나씩 삭제
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisType/delete',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({
+                    DiagnosisTypeNumber: DiagnosisTypeNumber[0],
+                    DiagnosisTypeCode: DiagnosisTypeCode[0],
+                    DiagnosisTypeName: DiagnosisTypeName[0]
+                })
+            }).done(function () {
+                alert('진단 종류 삭제가 완료되었습니다.');
+                DIagnosisTypeJS.DiagnosisTypeList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
         },
         DiagnosisTypeList : function () {
-            //ajax GetAllDiagnosisType()
-            //DiagnosisTypeList ajax Domain is DbManager.DIagnosisType url is /api/APIManagerStandardInforMgr/DiagnosisType/getAll
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisType/getAll',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8'
             }).done(function (data) {
-                let html = '';
-                data.forEach(function(item) {
+                data = JSON.parse(data);
+                let html = '<tr align="center" bgcolor="skyblue">'
+                        + '<td> 번호 </td>'
+                        + '<td> 진단종류코드 </td>'
+                        + '<td> 진단종류명 </td>'
+                        + '<td> 삭제 </td>'
+                        + '</tr>';
+                data.forEach(function (item) {
                     html += '<tr align="center" bgcolor="white">';
                     html += '<td>' + item.DiagnosisTypeNumber + '</td>';
                     html += '<td>' + item.DiagnosisTypeCode + '</td>';
                     html += '<td>' + item.DiagnosisTypeName + '</td>';
-                    html += '<td><input type="checkbox" value = ' + item.DiagnosisTypeNumber + '></td>';
+                    html += '<td><input type="checkbox" id="DiagnosisTypeNumber" value="' + item.DiagnosisTypeNumber + '"></td>';
                     html += '</tr>';
                 });
+                DIagnosisTypeJS.RefreshDiagnosisTypeList();
                 $('#DiagnosisTypeList').append(html);
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
-
         },
+        // DiagnosisTypeList table tag refresh
+        RefreshDiagnosisTypeList : function () {
+            $('#DiagnosisTypeList').empty();
+        }
     }
 
 
