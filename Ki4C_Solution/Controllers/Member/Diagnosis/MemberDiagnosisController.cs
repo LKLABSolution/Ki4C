@@ -2,8 +2,11 @@
 
 namespace Ki4C_Solution.Controllers.Member.Diagnosis
 {
-    public class MemberDiagnosisController : Controller
+    public class MemberDiagnosisController : BaseController
     {
+        public MemberDiagnosisController(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+        {
+        }
         public IActionResult Index()
         {
             return View();
