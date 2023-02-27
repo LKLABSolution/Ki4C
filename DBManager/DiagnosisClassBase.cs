@@ -21,10 +21,10 @@ namespace DbManager
     // Table('DiagnosisClass') Entity class
     // Do not add or change code here.
     [System.Serializable()]
-    public partial class DiagnosisClas : SoftBand.EntityManager.Entity
+    public partial class DiagnosisClass : SoftBand.EntityManager.Entity
     {
         
-        public DiagnosisClas()
+        public DiagnosisClass()
         {
             this.DefineColumns(4);
         }
@@ -77,15 +77,15 @@ namespace DbManager
             }
         }
         
-        public static DiagnosisClasService Service
+        public static DiagnosisClassService Service
         {
             get
             {
-                return ((DiagnosisClasService)(GetServiceObject(typeof(DiagnosisClas), typeof(DiagnosisClasService))));
+                return ((DiagnosisClassService)(GetServiceObject(typeof(DiagnosisClass), typeof(DiagnosisClassService))));
             }
         }
         
-        public static DiagnosisClasSet GetAll()
+        public static DiagnosisClassSet GetAll()
         {
             return Service.GetAll();
         }
@@ -95,7 +95,7 @@ namespace DbManager
             return Service.GetAllJson();
         }
         
-        public static async Task<DiagnosisClasSet> GetAllAsync()
+        public static async Task<DiagnosisClassSet> GetAllAsync()
         {
             return await Service.GetAllAsync();
         }
@@ -105,12 +105,12 @@ namespace DbManager
             return await Service.GetAllJsonAsync();
         }
         
-        public static DiagnosisClasSet GetForDiagnosisType(int diagnosisTypeNumber)
+        public static DiagnosisClassSet GetForDiagnosisType(int diagnosisTypeNumber)
         {
             return Service.GetForDiagnosisType(diagnosisTypeNumber);
         }
         
-        public static async Task<DiagnosisClasSet> GetForDiagnosisTypeAsync(int diagnosisTypeNumber)
+        public static async Task<DiagnosisClassSet> GetForDiagnosisTypeAsync(int diagnosisTypeNumber)
         {
             return await Service.GetForDiagnosisTypeAsync(diagnosisTypeNumber);
         }
@@ -125,7 +125,7 @@ namespace DbManager
             return await Service.GetForDiagnosisTypeJsonAsync(diagnosisTypeNumber);
         }
         
-        public static DiagnosisClas GetByKey(int diagnosisClassNumber)
+        public static DiagnosisClass GetByKey(int diagnosisClassNumber)
         {
             return Service.GetByKey(diagnosisClassNumber);
         }
@@ -135,7 +135,7 @@ namespace DbManager
             return Service.GetByKeyJson(diagnosisClassNumber);
         }
         
-        public static async Task<DiagnosisClas> GetByKeyAsync(int diagnosisClassNumber)
+        public static async Task<DiagnosisClass> GetByKeyAsync(int diagnosisClassNumber)
         {
             return await Service.GetByKeyAsync(diagnosisClassNumber);
         }
@@ -145,7 +145,7 @@ namespace DbManager
             return await Service.GetByKeyJsonAsync(diagnosisClassNumber);
         }
         
-        public static DiagnosisClas Insert(int diagnosisTypeNumber, string diagnosisClassCode, string diagnosisClassName)
+        public static DiagnosisClass Insert(int diagnosisTypeNumber, string diagnosisClassCode, string diagnosisClassName)
         {
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -153,7 +153,7 @@ namespace DbManager
             return Service.Insert(diagnosisTypeNumber, diagnosisClassCode, diagnosisClassName);
         }
         
-        public static async Task<DiagnosisClas> InsertAsync(int diagnosisTypeNumber, string diagnosisClassCode, string diagnosisClassName)
+        public static async Task<DiagnosisClass> InsertAsync(int diagnosisTypeNumber, string diagnosisClassCode, string diagnosisClassName)
         {
             // InsertAsync 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -161,7 +161,7 @@ namespace DbManager
             return await Service.InsertAsync(diagnosisTypeNumber, diagnosisClassCode, diagnosisClassName);
         }
         
-        public new DiagnosisClas Insert()
+        public new DiagnosisClass Insert()
         {
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -169,7 +169,7 @@ namespace DbManager
             return Insert(DiagnosisTypeNumber, DiagnosisClassCode, DiagnosisClassName);
         }
         
-        public async Task<DiagnosisClas> InsertAsync()
+        public async Task<DiagnosisClass> InsertAsync()
         {
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
@@ -251,12 +251,12 @@ namespace DbManager
     
     // Table('DiagnosisClass')  Service class
     // Do not add or change code here.
-    public partial class DiagnosisClasService : SoftBand.EntityManager.Service
+    public partial class DiagnosisClassService : SoftBand.EntityManager.Service
     {
         
-        public DiagnosisClasSet GetAll()
+        public DiagnosisClassSet GetAll()
         {
-            return ((DiagnosisClasSet)(this.GetAll("DiagnosisClass", typeof(DiagnosisClasSet))));
+            return ((DiagnosisClassSet)(this.GetAll("DiagnosisClass", typeof(DiagnosisClassSet))));
         }
         
         public string GetAllJson()
@@ -264,9 +264,9 @@ namespace DbManager
             return this.GetAllJson("DiagnosisClass");
         }
         
-        public async Task<DiagnosisClasSet> GetAllAsync()
+        public async Task<DiagnosisClassSet> GetAllAsync()
         {
-            return ((DiagnosisClasSet)(await this.GetAllAsync("DiagnosisClass", typeof(DiagnosisClasSet))));
+            return ((DiagnosisClassSet)(await this.GetAllAsync("DiagnosisClass", typeof(DiagnosisClassSet))));
         }
         
         public async Task<string> GetAllJsonAsync()
@@ -274,7 +274,7 @@ namespace DbManager
             return await this.GetAllJsonAsync("DiagnosisClass");
         }
         
-        public DiagnosisClasSet GetForDiagnosisType(int diagnosisTypeNumber)
+        public DiagnosisClassSet GetForDiagnosisType(int diagnosisTypeNumber)
         {
             // Sql Command Statement
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
@@ -284,12 +284,12 @@ namespace DbManager
             // Make parameters
             string paraNames = "diagnosisTypeNumber";
             AddParameters(selectCmd, paraNames, diagnosisTypeNumber);
-            DiagnosisClasSet entitySet = ((DiagnosisClasSet)(this.GetEntitySet(selectCmd, typeof(DiagnosisClasSet))));
+            DiagnosisClassSet entitySet = ((DiagnosisClassSet)(this.GetEntitySet(selectCmd, typeof(DiagnosisClassSet))));
             selectCmd.Dispose();
             return entitySet;
         }
         
-        public async Task<DiagnosisClasSet> GetForDiagnosisTypeAsync(int diagnosisTypeNumber)
+        public async Task<DiagnosisClassSet> GetForDiagnosisTypeAsync(int diagnosisTypeNumber)
         {
             // Sql Command Statement
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
@@ -299,7 +299,7 @@ namespace DbManager
             // Make parameters
             string paraNames = "diagnosisTypeNumber";
             AddParameters(selectCmd, paraNames, diagnosisTypeNumber);
-            DiagnosisClasSet entitySet = ((DiagnosisClasSet)(await this.GetEntitySetAsync(selectCmd, typeof(DiagnosisClasSet))));
+            DiagnosisClassSet entitySet = ((DiagnosisClassSet)(await this.GetEntitySetAsync(selectCmd, typeof(DiagnosisClassSet))));
             selectCmd.Dispose();
             return entitySet;
         }
@@ -330,7 +330,7 @@ namespace DbManager
             return await this.GetJsonDataSetAsync(selectCmd);
         }
         
-        public DiagnosisClas GetByKey(int diagnosisClassNumber)
+        public DiagnosisClass GetByKey(int diagnosisClassNumber)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
@@ -341,7 +341,7 @@ namespace DbManager
             string paraNames = "diagnosisClassNumber";
             AddParameters(selectCmd, paraNames, diagnosisClassNumber);
             // 
-            DiagnosisClas entity = ((DiagnosisClas)(this.GetEntity(selectCmd, typeof(DiagnosisClasSet))));
+            DiagnosisClass entity = ((DiagnosisClass)(this.GetEntity(selectCmd, typeof(DiagnosisClassSet))));
             selectCmd.Dispose();
             return entity;
         }
@@ -360,7 +360,7 @@ namespace DbManager
             return this.GetJsonDataSet(selectCmd);
         }
         
-        public async Task<DiagnosisClas> GetByKeyAsync(int diagnosisClassNumber)
+        public async Task<DiagnosisClass> GetByKeyAsync(int diagnosisClassNumber)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand selectCmd = DbCommandFactory.CreateDbCommand();
@@ -372,7 +372,7 @@ namespace DbManager
             AddParameters(selectCmd, paraNames, diagnosisClassNumber);
             // 
             // GetByKeyAsync 를 호출한다
-            DiagnosisClas entity = ((DiagnosisClas)(await this.GetEntityAsync(selectCmd, typeof(DiagnosisClasSet))));
+            DiagnosisClass entity = ((DiagnosisClass)(await this.GetEntityAsync(selectCmd, typeof(DiagnosisClassSet))));
             selectCmd.Dispose();
             return entity;
         }
@@ -391,7 +391,7 @@ namespace DbManager
             return await this.GetJsonDataSetAsync(selectCmd);
         }
         
-        public DiagnosisClas Insert(int diagnosisTypeNumber, string diagnosisClassCode, string diagnosisClassName)
+        public DiagnosisClass Insert(int diagnosisTypeNumber, string diagnosisClassCode, string diagnosisClassName)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand insertCommand = DbCommandFactory.CreateDbCommand();
@@ -405,12 +405,12 @@ namespace DbManager
             AddParameters(insertCommand, paraNames, diagnosisTypeNumber, diagnosisClassCode, diagnosisClassName);
             // 
             // Insert 를 호출한다
-            DiagnosisClas entity = ((DiagnosisClas)(this.GetByKey(System.Convert.ToInt32(this.ExecuteScalar(insertCommand)))));
+            DiagnosisClass entity = ((DiagnosisClass)(this.GetByKey(System.Convert.ToInt32(this.ExecuteScalar(insertCommand)))));
             insertCommand.Dispose();
             return entity;
         }
         
-        public async Task<DiagnosisClas> InsertAsync(int diagnosisTypeNumber, string diagnosisClassCode, string diagnosisClassName)
+        public async Task<DiagnosisClass> InsertAsync(int diagnosisTypeNumber, string diagnosisClassCode, string diagnosisClassName)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand insertCommand = DbCommandFactory.CreateDbCommand();
@@ -424,7 +424,7 @@ namespace DbManager
             AddParameters(insertCommand, paraNames, diagnosisTypeNumber, diagnosisClassCode, diagnosisClassName);
             // 
             // InsertAsync 를 호출한다
-            DiagnosisClas entity = ((DiagnosisClas)(await this.GetByKeyAsync(System.Convert.ToInt32(await this.ExecuteScalarAsync(insertCommand)))));
+            DiagnosisClass entity = ((DiagnosisClass)(await this.GetByKeyAsync(System.Convert.ToInt32(await this.ExecuteScalarAsync(insertCommand)))));
             insertCommand.Dispose();
             return entity;
         }
@@ -525,29 +525,29 @@ namespace DbManager
     // Table('DiagnosisClass') EntitySet class
     // Do not add or change code here.
     [System.Serializable()]
-    public partial class DiagnosisClasSet : SoftBand.EntityManager.EntitySet, System.Collections.IEnumerable
+    public partial class DiagnosisClassSet : SoftBand.EntityManager.EntitySet, System.Collections.IEnumerable
     {
         
         // Constructor
-        public DiagnosisClasSet() : 
+        public DiagnosisClassSet() : 
                 this(null)
         {
         }
         
         // basic constructor
-        protected DiagnosisClasSet(object state)
+        protected DiagnosisClassSet(object state)
         {
             this.Setup();
         }
         
         // remoting constructor...
-        protected DiagnosisClasSet(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : 
+        protected DiagnosisClassSet(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context)
         {
             this.Setup();
         }
         
-        public DiagnosisClasBoundCollection Entities
+        public DiagnosisClassBoundCollection Entities
         {
             get
             {
@@ -558,27 +558,27 @@ namespace DbManager
         // shared object initialization...
         private void Setup()
         {
-            this.EntityType = typeof(DiagnosisClas);
+            this.EntityType = typeof(DiagnosisClass);
         }
         
-        private DiagnosisClasBoundCollection GetBoundCollection()
+        private DiagnosisClassBoundCollection GetBoundCollection()
         {
             return this.GetBoundCollection(0);
         }
         
-        private DiagnosisClasBoundCollection GetBoundCollection(int tableIndex)
+        private DiagnosisClassBoundCollection GetBoundCollection(int tableIndex)
         {
-            return ((DiagnosisClasBoundCollection)(this.GetBoundCollection(this, tableIndex, typeof(DiagnosisClasBoundCollection))));
+            return ((DiagnosisClassBoundCollection)(this.GetBoundCollection(this, tableIndex, typeof(DiagnosisClassBoundCollection))));
         }
         
-        public partial class DiagnosisClasBoundCollection : SoftBand.EntityManager.EntityBoundCollection
+        public partial class DiagnosisClassBoundCollection : SoftBand.EntityManager.EntityBoundCollection
         {
             
-            public new DiagnosisClas this[int index]
+            public new DiagnosisClass this[int index]
             {
                 get
                 {
-                    return ((DiagnosisClas)(this.EntitySet.GetEntity(this.TableIndex, index)));
+                    return ((DiagnosisClass)(this.EntitySet.GetEntity(this.TableIndex, index)));
                 }
             }
         }

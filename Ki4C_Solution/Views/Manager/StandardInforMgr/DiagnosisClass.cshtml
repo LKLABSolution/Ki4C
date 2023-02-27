@@ -4,6 +4,7 @@
     // 선행작업 - 관리자 로그인
     Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg.cshtml";
     ViewData["Title"] = "기준정보 관리/진단 종류";
+    @model Ki4C_Solution.Models.Manager.StandardInfoMgr.DiagnosisClass;
 }
 <!-- 섹션 -->
 <section>
@@ -22,33 +23,29 @@
         <!-- 진단 구분 등록 -->
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
             <a>진단종류선택: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <select style="max-width: 400px; width: 130%; height: 30px; font-size: 16px;
-                        margin-bottom: 3px;">
+                        margin-bottom: 3px;" id="DiagnosisTypeSelecter">
                     <option>=== 선택 ===</option>
-                    <option>기업 기초 정보</option>
-                    <option>자체 진단</option>
-                    <option>전문가 진단</option>
-                    <option>기타</option>
                 </select>
-            </form>
+            </div>
             <br>
             <a>진단구분코드: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="DiagnosisClassCode" asp-for="DiagnosisClassCode" />
+            </div>
             <br>
             <a>진단구분명: </a>
-            <form style="padding-top: 10px; padding-left: 14px; display: inline-block;">
+            <div style="padding-top: 10px; padding-left: 14px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="DiagnosisClassName" asp-for="DiagnosisClassName" />
+            </div>
             <div style="padding-top: 30px; padding-left: 50px;">
-                <input id="registButton" type="submit" value="등록" />
-                <input id="modifyButton" type="submit" value="수정" />
+                <input id="registButton" type="button" value="등록" />
+                <input id="modifyButton" type="button" value="수정" />
             </div>
         </div>
         <!-- 진단 구분 등록 -->
@@ -61,7 +58,7 @@
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                <table id="table">
+                @*<table id="table">
                     <tr align="center" bgcolor="skyblue">
                         <td>번호</td>
                         <td>진단구분코드</td>
@@ -91,15 +88,15 @@
                         <td>B4</td>
                         <td>디지털 데이터</td>
                         <td><input type="checkbox"></td>
-                        </td>
                     </tr>
                     <tr align="center" bgcolor="white">
                         <td>5</td>
                         <td>B5</td>
                         <td>디지털 조직문화</td>
                         <td><input type="checkbox"></td>
-                        </td>
                     </tr>
+                </table>*@
+                <table class="display" id="DiagnosisClassList">
                 </table>
             </div>
             <div id="buttonLocation">
@@ -110,3 +107,228 @@
         <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
+
+<script>
+    let DiagnosisClassJS = {
+        init: function () {
+            let _this = this;
+            $('#registButton').on('click', function () {
+                if(_this.ValidateCheck()){
+                    _this.regist();
+                };
+            });
+            $('#modifyButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.modify();
+                }
+            });
+            $('#deleteButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.delete();
+                }
+            });
+            $('#searchButton').on('click', function () {
+                _this.search();
+            });
+            $(document).on('click', '#DiagnosisClassNumber', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().parent().siblings().find('#DiagnosisClassNumber').prop('checked', false);
+                }
+            });
+            $(document).on('change', '#DiagnosisClassNumber', function () {
+                _this.checkedChange();
+            });
+        },
+        regist : function () {
+            //regist button DiagnosisTypeNumber & DiagnosisClassCode & DiagnosisClassName
+            let DiagnosisTypeNumber = $('#DiagnosisTypeSelecter option:selected').val();
+            let DiagnosisClassCode = $('#DiagnosisClassCode').val();
+            let DiagnosisClassName = $('#DiagnosisClassName').val();
+            let data = {
+                "DiagnosisTypeNumber": DiagnosisTypeNumber,
+                "DiagnosisClassCode": DiagnosisClassCode,
+                "DiagnosisClassName": DiagnosisClassName
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisClass/insert',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('등록이 완료되었습니다.');
+                DiagnosisClassJS.DiagnosisClassList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+            
+        },
+        modify : function () {
+            //api/APIManagerStandardInforMgr/DiagnosisClass/update
+            let DiagnosisClassNumber = $('input:checkbox[id="DiagnosisClassNumber"]:checked').val();
+            let DiagnosisTypeNumber = $('#DiagnosisTypeSelecter option:selected').val();
+            let DiagnosisClassCode = $('#DiagnosisClassCode').val();
+            let DiagnosisClassName = $('#DiagnosisClassName').val();
+            let data = {
+                "DiagnosisClassNumber": DiagnosisClassNumber,
+                "DiagnosisTypeNumber": DiagnosisTypeNumber,
+                "DiagnosisClassCode": DiagnosisClassCode,
+                "DiagnosisClassName": DiagnosisClassName
+            };
+            $.ajax({
+                type: 'PUT',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisClass/update',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('수정이 완료되었습니다.');
+                DiagnosisClassJS.DiagnosisClassList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        delete : function () {
+            //checkbox checked value get DiagnosisClassNumber
+            let DiagnosisClassCode = [];
+            let DiagnosisClassName = [];
+            let DiagnosisClassNumber = [];
+            $('input:checkbox[id="DiagnosisClassNumber"]:checked').each(function () {
+                DiagnosisClassNumber.push($(this).val());
+                let code = $(this).parent().parent().find('td:eq(2)').text();
+                let name = $(this).parent().parent().find('td:eq(3)').text();
+                DiagnosisClassCode.push(code);
+                DiagnosisClassName.push(name);
+            });
+            if (DiagnosisClassNumber.length == 0) {
+                alert('삭제할 항목을 선택해주세요.');
+                return;
+            }
+
+            let data = {
+                "DiagnosisClassNumber": DiagnosisClassNumber[0]
+            };
+
+            if (confirm('\n삭제할 항목 코드 : ' + DiagnosisClassCode + '\n삭제할 항목 이름 : ' + DiagnosisClassName + '\n 해당 진단 항목을 삭제하시겠습니까?')) {
+                // 하나씩 삭제
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/APIManagerStandardInforMgr/DiagnosisClass/delete',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data)
+                }).done(function () {
+                    alert('삭제가 완료되었습니다.');
+                    DiagnosisClassJS.DiagnosisClassList();
+                }).fail(function (error) {
+                    alert(JSON.stringify(error));
+                });
+            } else {
+                alert('항목 이름 : ' + DiagnosisClassName + ' \n 취소 되었습니다.');
+            }
+
+
+        },
+        search : function (){
+            //search button
+        },
+        DiagnosisClassList : function () {
+            //api/APIManagerStandardInforMgr/DiagnosisClass/getAll
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisClass/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                let html = '<thead><tr align="center" bgcolor="skyblue">'
+                    + '<td> 번호 </td>'
+                    + '<td> 진단종류 </td>'
+                    + '<td> 진단구분코드 </td>'
+                    + '<td> 진단구분명 </td>'
+                    + '<td> 삭제 </td>'
+                    + '</tr></thead><tbody>';
+                data.forEach(function (item) {
+                    html += '<tr align="center" bgcolor="white">';
+                    html += '<td>' + item.DiagnosisClassNumber + '</td>';
+                    html += '<td>' + item.DiagnosisTypeNumber + '</td>';
+                    html += '<td>' + item.DiagnosisClassCode + '</td>';
+                    html += '<td>' + item.DiagnosisClassName + '</td>';
+                    html += '<td><input type="checkbox" id="DiagnosisClassNumber" value="' + item.DiagnosisClassNumber + '"></td>';
+                    html += '</tr>';
+                });
+                html += '</tbody>';
+                DiagnosisClassJS.RefreshDiagnosisTypeList();
+                $('#DiagnosisClassList').append(html);
+                $('#DiagnosisClassList').DataTable();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        DiagnosisTypeList : function(){
+            //DiagnosisTypeSelecter select tag add option
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisType/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                let html = '<option value="0">진단종류</option>';
+                data.forEach(function (item) {
+                    html += '<option value="' + item.DiagnosisTypeNumber + '">' + item.DiagnosisTypeNumber + ' - ' + item.DiagnosisTypeCode + ' - ' + item.DiagnosisTypeName + '</option>';
+                });
+                $('#DiagnosisTypeSelecter').empty();
+                $('#DiagnosisTypeSelecter').append(html);
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        RefreshDiagnosisTypeList : function () {
+            $('#DiagnosisClassList').empty();
+        },
+        checkedChange: function () {
+            let DiagnosisTypeNumber = [];
+            let DiagnosisClassCode = [];
+            let DiagnosisClassName = [];
+            $('#DiagnosisClassNumber:checked').each(function () {
+                let typeNumber = $(this).parent().parent().find('td:eq(1)').text();
+                let code = $(this).parent().parent().find('td:eq(2)').text();
+                let name = $(this).parent().parent().find('td:eq(3)').text();
+                DiagnosisTypeNumber.push(typeNumber);
+                DiagnosisClassCode.push(code);
+                DiagnosisClassName.push(name);                 
+            });
+            $('#DiagnosisTypeSelecter').val(DiagnosisTypeNumber);
+            $('#DiagnosisClassCode').val(DiagnosisClassCode);
+            $('#DiagnosisClassName').val(DiagnosisClassName);
+        },
+        ValidateCheck : function () {
+            let DiagnosisTypeNumber = $('#DiagnosisTypeSelecter option:selected').val();
+            let DiagnosisClassCode = $('#DiagnosisClassCode').val();
+            let DiagnosisClassName = $('#DiagnosisClassName').val();
+            if (DiagnosisTypeNumber == 0) {
+                alert('진단종류를 선택해주세요.');
+                return false;
+            }
+            if (DiagnosisClassCode == '') {
+                alert('진단구분코드를 입력해주세요.');
+                return false;
+            }
+            if (DiagnosisClassName == '') {
+                alert('진단구분명을 입력해주세요.');
+                return false;
+            }
+            return true;
+        }
+
+    }
+
+    $(document).ready(function () {
+        DiagnosisClassJS.init();
+        DiagnosisClassJS.DiagnosisTypeList();
+        DiagnosisClassJS.DiagnosisClassList();
+    });
+
+
+</script>

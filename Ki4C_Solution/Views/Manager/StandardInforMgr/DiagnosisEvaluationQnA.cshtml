@@ -21,55 +21,36 @@
         <hr />
         <!-- 평가문제 등록 -->
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
-            <form style="padding-right: 30px; display: inline-block;">
+            <div style="padding-right: 30px; display: inline-block;">
                 <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
-                        margin-bottom: 3px;">
-                    <option value="none">진단구분선택</option>
-                    <option>디지털 전략</option>
-                    <option>디지털 비즈니스</option>
-                    <option>디지털 오퍼레이션</option>
-                    <option>디지털 데이터</option>
-                    <option>디지털 조직문화</option>
+                        margin-bottom: 3px;" id="DiagnosisClassSelecter">
                 </select>
-            </form>
-            <form style="padding-left: 50px; display: inline-block;">
+            </div>
+            <div style="padding-left: 50px; display: inline-block;">
                 <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
-                        margin-bottom: 3px;">
-                    <option value="none">진단평가영역 선택</option>
-                    <option>디지털 혁신 추진 조직</option>
-                    <option>디지털 전환 전략 및 목표관리</option>
-                    <option>디지털 경영계획</option>
-                    <option>수직적 가치사슬 디지털화 수준</option>
-                    <option>수평적 가치사슬 디지털화 수준</option>
-                    <option>데이터 공유 전략 수준</option>
-                    <option>디지털기술 활용전략과 투자 연계</option>
-                    <option>디지털 전환(DX) 과제기획 및 투자</option>
+                        margin-bottom: 3px;" id="DiagnosisEvaluationAreaSelecter">
+
                 </select>
-            </form>
-            <form style="padding-left: 50px; display: inline-block;">
+            </div>
+            <div style="padding-left: 50px; display: inline-block;">
                 <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
-                        margin-bottom: 3px;">
-                    <option value="none">답변 스타일 선택</option>
-                    <option>단답형</option>
-                    <option>장문형</option>
-                    <option>객관식 질문</option>
-                    <option>체크박스</option>
+                        margin-bottom: 3px;" id="inputTypeSelecter">
                 </select>
-            </form>
+            </div>
             <br>
             <a>평가문제 코드: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="EvaluationQuestionCode" />
+            </div>
             <br>
             <a>평가문제: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="EvaluationQuestionContents" />
+            </div>
             <div style="padding-top: 30px; padding-left: 50px;">
                 <input id="registButton" type="submit" value="등록" />
                 <input id="modifyButton" type="submit" value="수정" />
@@ -85,45 +66,7 @@
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                <table id="table">
-                    <tr align="center" bgcolor="skyblue">
-                        <td>번호</td>
-                        <td>평가문제코드</td>
-                        <td>평가문제명</td>
-                        <td>삭제</td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>1</td>
-                        <td>D1</td>
-                        <td><a href="javascript:showPopUp()">디지털 혁신 추진하는 조직은 어느 수준입니까?</a></td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>2</td>
-                        <td>D2</td>
-                        <td>디지털 전환(DX)과 관련된 전략수립, 추진조직</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>3</td>
-                        <td>D3</td>
-                        <td>전사적인 디지털 경영계획...</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>4</td>
-                        <td>D4</td>
-                        <td>수직적 가치사슬(제품 기획 및 제품 개발에서...)</td>
-                        <td><input type="checkbox"></td>
-                        </td>
-                    </tr>
-                    </tr>
-                    </tr>
-                    </tr>
-                    </tr>
-                    </tr>
-                    </tr>
-                    </tr>
+                <table id="DiagnosisEvaluationQuestionList" class="diaplay">
                 </table>
             </div>
             <div id="buttonLocation">
@@ -135,17 +78,47 @@
 </section>
 <!-- 섹션 -->
 <script>
-    let DiagnosisEvaluationQnA = {
+    let DiagnosisClassSelecterObj = [];
+    let DiagnosisEvaluationAreaSelecterObj = [];
+    let DiagnosisEvaluationQnAJS = {
         init: function () {
             let _this = this;
             $('#registButton').on('click', function () {
-                _this.regist();
+                if(_this.ValidateCheck()){
+                    _this.regist();
+                }
             });
             $('#modifyButton').on('click', function () {
-                _this.modify();
+                if (_this.ValidateCheck()){
+                    _this.modify();
+                }
             });
             $('#deleteButton').on('click', function () {
-                _this.delete();
+                if(_this.ValidateCheck()){
+                    _this.delete();
+                }
+            });
+            $('#DiagnosisClassSelecter').on('change', function () {
+                var diagnosisClassNumber = $(this).val();
+                console.log(diagnosisClassNumber);
+                diagnosisClassNumber = parseInt(diagnosisClassNumber);
+                DiagnosisEvaluationQnAJS.RefreshDiagnosisEvaluationAreaSelecter();
+
+                if (diagnosisClassNumber) {
+                    // filter area list by selected diagnosis class
+                    var filteredAreaList = $.grep(DiagnosisEvaluationAreaSelecterObj, function (area) {
+                    return area.DiagnosisClassNumber == diagnosisClassNumber;
+                    });
+
+                    if(filteredAreaList.length == 0){
+                        $(DiagnosisEvaluationAreaSelecter).append('<option value="0">평가구분을 선택해주세요.</option>');
+                    }
+
+                    // populate evaluation area options
+                    $.each(filteredAreaList, function(index, value) {
+                        $(DiagnosisEvaluationAreaSelecter).append('<option value="' + value.AreaNumber + '">' + value.EvaluationAreaName + '</option>');
+                    });
+                }
             });
         },
         regist: function () {
@@ -158,36 +131,6 @@
             alert('삭제');
         },
         showPopUp : function () {
-            //창 크기 지정
-            let width = 800;
-            let height = 600;
-
-            //pc화면기준 가운데 정렬
-            let left = (window.screen.width / 2) - (width / 2);
-            let top = (window.screen.height / 4);
-
-            //윈도우 속성 지정
-            let windowStatus = 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top + ', scrollbars=yes, status=yes, resizable=yes, titlebar=yes';
-
-            //연결하고싶은url
-            const url = "QnADetails.html";
-
-            $.ajax(){
-                url: '/Manager/StandardInforMgr/QnADetails',
-                type: 'GET',
-                dataType: 'html',
-                success: function (data) {
-                    //성공시
-                    $('#QnADetails').html(data);
-                },
-                error: function (request, status, error) {
-                    //실패시
-                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-                }
-            }
-           
-            //등록된 url 및 window 속성 기준으로 팝업창을 연다.
-            window.open(url, "hello popup", windowStatus);
         },
         isEmpty: function (value) {
             if (value == null || value == undefined || value == "") {
@@ -196,7 +139,85 @@
                 return false;
             }
         },
+        ValidateCheck : function(){
+            if ($('#DiagnosisClassSelecter option:selected').val() == 0) {
+                alert('진단구분를 선택해주세요.');
+                return false;
+            }
+            if ($('#DiagnosisEvaluationAreaSelecter option:selected').val() == 0) {
+                alert('진단영역를 선택해주세요.');
+                return false;
+            }
+            if ($('#inputTypeSelecter option:selected').val() == 0) {
+                alert('진단종류를 선택해주세요.');
+                return false;
+            }
+            if ($('#EvaluationQuestionCode').val() == '') {
+                alert('진단평가영역코드를 입력해주세요.');
+                return false;
+            }
+            if ($('#EvaluationQuestionContents').val() == '') {
+                alert('진단평가영역명을 입력해주세요.');
+                return false;
+            }
+            return true;
+        },
+        DiagnosisClassList : function(){
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisClass/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    data = JSON.parse(data);
+                    DiagnosisClassSelecterObj = data;
+                    console.log(data)
+                    let html = '';
+                    html += '<option value="0">진단구분</option>';
+                    $.each(data, function (index, item) {
+                        html += '<option value="' + item.DiagnosisClassNumber + '">' + item.DiagnosisClassNumber + ' - ' + item.DiagnosisClassCode + ' - ' + item.DiagnosisClassName + '</option>';
+                    });
+                    DiagnosisEvaluationQnAJS.RefreshDiagnosisClassSelecter();
+                    $('#DiagnosisClassSelecter').html(html);
+                }
+            });
+        },
+        DiagnosisEvaluationAreaList : function(){
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    data = JSON.parse(data);
+                    DiagnosisEvaluationAreaSelecterObj = data;
+                    console.log(data)
+                    //let html = '';
+                    //html += '<option value="0">진단영역</option>';
+                    //$.each(data, function (index, item) {
+                    //    html += '<option value="' + item.EvaluationAreaCode + '">' + item.EvaluationAreaName + '</option>';
+                    //});
+                    //$('#DiagnosisEvaluationAreaSelecter').html(html);
+                }
+            });
+        },
+        RefreshDiagnosisEvaluationAreaSelecter: function () {
+            $('#DiagnosisEvaluationAreaSelecter').empty();
+        },
+        RefreshDiagnosisClassSelecter : function(){
+            $('#DiagnosisClassSelecter').empty();
+        }
+
     };
+
+    //ready
+    $(document).ready(function () {
+        DiagnosisEvaluationQnAJS.init();
+        DiagnosisEvaluationQnAJS.DiagnosisClassList();
+        DiagnosisEvaluationQnAJS.DiagnosisEvaluationAreaList();
+    });
+
+
     function showPopUp() {
 
         //창 크기 지정

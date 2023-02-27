@@ -53,7 +53,7 @@ namespace DbManager
             }
         }
         
-        public string EvaluationQuesttionCode
+        public string EvaluationQuestionCode
         {
             get
             {
@@ -145,20 +145,20 @@ namespace DbManager
             return await Service.GetByKeyJsonAsync(evaluationQuestionNumber);
         }
         
-        public static EvaluationQuestion Insert(int areaNumber, string evaluationQuesttionCode, string evaluationQuestionContents)
+        public static EvaluationQuestion Insert(int areaNumber, string evaluationQuestionCode, string evaluationQuestionContents)
         {
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
             // 
-            return Service.Insert(areaNumber, evaluationQuesttionCode, evaluationQuestionContents);
+            return Service.Insert(areaNumber, evaluationQuestionCode, evaluationQuestionContents);
         }
         
-        public static async Task<EvaluationQuestion> InsertAsync(int areaNumber, string evaluationQuesttionCode, string evaluationQuestionContents)
+        public static async Task<EvaluationQuestion> InsertAsync(int areaNumber, string evaluationQuestionCode, string evaluationQuestionContents)
         {
             // InsertAsync 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
             // 
-            return await Service.InsertAsync(areaNumber, evaluationQuesttionCode, evaluationQuestionContents);
+            return await Service.InsertAsync(areaNumber, evaluationQuestionCode, evaluationQuestionContents);
         }
         
         public new EvaluationQuestion Insert()
@@ -166,7 +166,7 @@ namespace DbManager
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
             // 
-            return Insert(AreaNumber, EvaluationQuesttionCode, EvaluationQuestionContents);
+            return Insert(AreaNumber, EvaluationQuestionCode, EvaluationQuestionContents);
         }
         
         public async Task<EvaluationQuestion> InsertAsync()
@@ -174,7 +174,7 @@ namespace DbManager
             // Insert 명령은 Table Key가 자동 발생키로 구성되어 있지 않는 Table에 
             // 제한적으로 사용할 수 있습니다
             // 
-            return await InsertAsync(AreaNumber, EvaluationQuesttionCode, EvaluationQuestionContents);
+            return await InsertAsync(AreaNumber, EvaluationQuestionCode, EvaluationQuestionContents);
         }
         
         public new int Update()
@@ -182,10 +182,10 @@ namespace DbManager
             // 인수를 해당 파라메타에 옮긴다
             int evaluationQuestionNumberParam = this.EvaluationQuestionNumber;
             int areaNumberParam = this.AreaNumber;
-            string evaluationQuesttionCodeParam = this.EvaluationQuesttionCode;
+            string evaluationQuestionCodeParam = this.EvaluationQuestionCode;
             string evaluationQuestionContentsParam = this.EvaluationQuestionContents;
             // update 실행
-            return Service.Update(evaluationQuestionNumberParam, areaNumberParam, evaluationQuesttionCodeParam, evaluationQuestionContentsParam);
+            return Service.Update(evaluationQuestionNumberParam, areaNumberParam, evaluationQuestionCodeParam, evaluationQuestionContentsParam);
         }
         
         public async Task<int> UpdateAsync()
@@ -193,19 +193,19 @@ namespace DbManager
             // 인수를 해당 파라메타에 옮긴다
             int evaluationQuestionNumberParam = this.EvaluationQuestionNumber;
             int areaNumberParam = this.AreaNumber;
-            string evaluationQuesttionCodeParam = this.EvaluationQuesttionCode;
+            string evaluationQuestionCodeParam = this.EvaluationQuestionCode;
             string evaluationQuestionContentsParam = this.EvaluationQuestionContents;
-            return await Service.UpdateAsync(evaluationQuestionNumberParam, areaNumberParam, evaluationQuesttionCodeParam, evaluationQuestionContentsParam);
+            return await Service.UpdateAsync(evaluationQuestionNumberParam, areaNumberParam, evaluationQuestionCodeParam, evaluationQuestionContentsParam);
         }
         
-        public static int Update(int evaluationQuestionNumber, int areaNumber, string evaluationQuesttionCode, string evaluationQuestionContents)
+        public static int Update(int evaluationQuestionNumber, int areaNumber, string evaluationQuestionCode, string evaluationQuestionContents)
         {
-            return Service.Update(evaluationQuestionNumber, areaNumber, evaluationQuesttionCode, evaluationQuestionContents);
+            return Service.Update(evaluationQuestionNumber, areaNumber, evaluationQuestionCode, evaluationQuestionContents);
         }
         
-        public static async Task<int> UpdateAsync(int evaluationQuestionNumber, int areaNumber, string evaluationQuesttionCode, string evaluationQuestionContents)
+        public static async Task<int> UpdateAsync(int evaluationQuestionNumber, int areaNumber, string evaluationQuestionCode, string evaluationQuestionContents)
         {
-            return await Service.UpdateAsync(evaluationQuestionNumber, areaNumber, evaluationQuesttionCode, evaluationQuestionContents);
+            return await Service.UpdateAsync(evaluationQuestionNumber, areaNumber, evaluationQuestionCode, evaluationQuestionContents);
         }
         
         public static int Delete(int evaluationQuestionNumber)
@@ -395,18 +395,18 @@ namespace DbManager
             return await this.GetJsonDataSetAsync(selectCmd);
         }
         
-        public EvaluationQuestion Insert(int areaNumber, string evaluationQuesttionCode, string evaluationQuestionContents)
+        public EvaluationQuestion Insert(int areaNumber, string evaluationQuestionCode, string evaluationQuestionContents)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand insertCommand = DbCommandFactory.CreateDbCommand();
-            insertCommand.CommandText = "INSERT INTO EvaluationQuestion(AreaNumber, EvaluationQuesttionCode, EvaluationQue" +
-                "stionContents) OUTPUT INSERTED.EvaluationQuestionNumber\r\nVALUES (@areaNumber, @e" +
-                "valuationQuesttionCode, @evaluationQuestionContents) ";
+            insertCommand.CommandText = "INSERT INTO EvaluationQuestion(AreaNumber, EvaluationQuestionCode, EvaluationQues" +
+                "tionContents) OUTPUT INSERTED.EvaluationQuestionNumber\r\nVALUES (@areaNumber, @ev" +
+                "aluationQuestionCode, @evaluationQuestionContents) ";
             insertCommand.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "areaNumber,evaluationQuesttionCode,evaluationQuestionContents";
-            AddParameters(insertCommand, paraNames, areaNumber, evaluationQuesttionCode, evaluationQuestionContents);
+            string paraNames = "areaNumber,evaluationQuestionCode,evaluationQuestionContents";
+            AddParameters(insertCommand, paraNames, areaNumber, evaluationQuestionCode, evaluationQuestionContents);
             // 
             // Insert 를 호출한다
             EvaluationQuestion entity = ((EvaluationQuestion)(this.GetByKey(System.Convert.ToInt32(this.ExecuteScalar(insertCommand)))));
@@ -414,18 +414,18 @@ namespace DbManager
             return entity;
         }
         
-        public async Task<EvaluationQuestion> InsertAsync(int areaNumber, string evaluationQuesttionCode, string evaluationQuestionContents)
+        public async Task<EvaluationQuestion> InsertAsync(int areaNumber, string evaluationQuestionCode, string evaluationQuestionContents)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand insertCommand = DbCommandFactory.CreateDbCommand();
-            insertCommand.CommandText = "INSERT INTO EvaluationQuestion(AreaNumber, EvaluationQuesttionCode, EvaluationQue" +
-                "stionContents) OUTPUT INSERTED.EvaluationQuestionNumber\r\nVALUES (@areaNumber, @e" +
-                "valuationQuesttionCode, @evaluationQuestionContents) ";
+            insertCommand.CommandText = "INSERT INTO EvaluationQuestion(AreaNumber, EvaluationQuestionCode, EvaluationQues" +
+                "tionContents) OUTPUT INSERTED.EvaluationQuestionNumber\r\nVALUES (@areaNumber, @ev" +
+                "aluationQuestionCode, @evaluationQuestionContents) ";
             insertCommand.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "areaNumber,evaluationQuesttionCode,evaluationQuestionContents";
-            AddParameters(insertCommand, paraNames, areaNumber, evaluationQuesttionCode, evaluationQuestionContents);
+            string paraNames = "areaNumber,evaluationQuestionCode,evaluationQuestionContents";
+            AddParameters(insertCommand, paraNames, areaNumber, evaluationQuestionCode, evaluationQuestionContents);
             // 
             // InsertAsync 를 호출한다
             EvaluationQuestion entity = ((EvaluationQuestion)(await this.GetByKeyAsync(System.Convert.ToInt32(await this.ExecuteScalarAsync(insertCommand)))));
@@ -433,19 +433,19 @@ namespace DbManager
             return entity;
         }
         
-        public int Update(int evaluationQuestionNumber, int areaNumber, string evaluationQuesttionCode, string evaluationQuestionContents)
+        public int Update(int evaluationQuestionNumber, int areaNumber, string evaluationQuestionCode, string evaluationQuestionContents)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand updateCmd = DbCommandFactory.CreateDbCommand();
-            updateCmd.CommandText = "UPDATE EvaluationQuestion SET AreaNumber = @areaNumber, EvaluationQuesttionCode =" +
-                " @evaluationQuesttionCode, EvaluationQuestionContents = @evaluationQuestionConte" +
-                "nts WHERE EvaluationQuestionNumber = @evaluationQuestionNumber";
+            updateCmd.CommandText = "UPDATE EvaluationQuestion SET AreaNumber = @areaNumber, EvaluationQuestionCode = " +
+                "@evaluationQuestionCode, EvaluationQuestionContents = @evaluationQuestionContent" +
+                "s WHERE EvaluationQuestionNumber = @evaluationQuestionNumber";
             updateCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "evaluationQuestionNumber,areaNumber,evaluationQuesttionCode,evaluationQuestionCon" +
-                "tents";
-            AddParameters(updateCmd, paraNames, evaluationQuestionNumber, areaNumber, evaluationQuesttionCode, evaluationQuestionContents);
+            string paraNames = "evaluationQuestionNumber,areaNumber,evaluationQuestionCode,evaluationQuestionCont" +
+                "ents";
+            AddParameters(updateCmd, paraNames, evaluationQuestionNumber, areaNumber, evaluationQuestionCode, evaluationQuestionContents);
             // 
             // Update 를 호출한다
             int executeCnt = this.ExecuteNonQuery(updateCmd);
@@ -453,19 +453,19 @@ namespace DbManager
             return executeCnt;
         }
         
-        public async Task<int> UpdateAsync(int evaluationQuestionNumber, int areaNumber, string evaluationQuesttionCode, string evaluationQuestionContents)
+        public async Task<int> UpdateAsync(int evaluationQuestionNumber, int areaNumber, string evaluationQuestionCode, string evaluationQuestionContents)
         {
             // IDbCommand 명령문
             System.Data.IDbCommand updateCmd = DbCommandFactory.CreateDbCommand();
-            updateCmd.CommandText = "UPDATE EvaluationQuestion SET AreaNumber = @areaNumber, EvaluationQuesttionCode =" +
-                " @evaluationQuesttionCode, EvaluationQuestionContents = @evaluationQuestionConte" +
-                "nts WHERE EvaluationQuestionNumber = @evaluationQuestionNumber";
+            updateCmd.CommandText = "UPDATE EvaluationQuestion SET AreaNumber = @areaNumber, EvaluationQuestionCode = " +
+                "@evaluationQuestionCode, EvaluationQuestionContents = @evaluationQuestionContent" +
+                "s WHERE EvaluationQuestionNumber = @evaluationQuestionNumber";
             updateCmd.CommandType = System.Data.CommandType.Text;
             // 
             // Add parameter
-            string paraNames = "evaluationQuestionNumber,areaNumber,evaluationQuesttionCode,evaluationQuestionCon" +
-                "tents";
-            AddParameters(updateCmd, paraNames, evaluationQuestionNumber, areaNumber, evaluationQuesttionCode, evaluationQuestionContents);
+            string paraNames = "evaluationQuestionNumber,areaNumber,evaluationQuestionCode,evaluationQuestionCont" +
+                "ents";
+            AddParameters(updateCmd, paraNames, evaluationQuestionNumber, areaNumber, evaluationQuestionCode, evaluationQuestionContents);
             // 
             // Update 를 호출한다
             int executeCnt = await this.ExecuteNonQueryAsync(updateCmd);
