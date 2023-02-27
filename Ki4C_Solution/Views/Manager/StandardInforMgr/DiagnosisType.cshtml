@@ -50,7 +50,7 @@
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                <table id="table">
+@*                <table id="table">
                     <tr align="center" bgcolor="skyblue">
                         <td>번호</td>
                         <td>진단종류코드</td>
@@ -81,14 +81,8 @@
                         <td>기타</td>
                         <td><input type="checkbox"></td>
                     </tr>
-                </table>
-                <table id="DiagnosisTypeList">
-                    <tr align="center" bgcolor="skyblue">
-                        <td>번호</td>
-                        <td>진단종류코드</td>
-                        <td>진단종류명</td>
-                        <td>삭제</td>
-                    </tr>
+                </table>*@
+                <table class="diaplay" id="DiagnosisTypeList">
                 </table>
             </div>
             <div id="buttonLocation">
@@ -96,6 +90,7 @@
             </div>
         </div>
         <!-- 진단 종류 목록 -->
+    </div>
         <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
@@ -105,13 +100,26 @@
         init : function () {
             let _this = this;
             $('#registButton').on('click', function () {
-                _this.regist();
+                if (_this.ValidateCheck()) {
+                    _this.regist();
+                };;
             });
             $('#modifyButton').on('click', function () {
-                _this.modify();
+                if (_this.ValidateCheck()) {
+                    _this.modify();
+                };;
             });
             $('#deleteButton').on('click', function () {
-                _this.delete();
+                    _this.delete();
+            });
+            $(document).on('click', '#DiagnosisTypeNumber', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().parent().siblings().find('#DiagnosisTypeNumber').prop('checked', false);
+                }
+            });
+            //checked change event function call and init() add
+            $(document).on('change', '#DiagnosisTypeNumber', function () {
+                _this.checkedChange();
             });
         },
         regist : function () {
@@ -139,12 +147,12 @@
                 DiagnosisTypeNumber.push($(this).val());
             });
             $.ajax({
-                type: 'POST',
+                type: 'PUT',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisType/update',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify({
-                    DiagnosisTypeNumber: DiagnosisTypeNumber,
+                    DiagnosisTypeNumber: DiagnosisTypeNumber[0],
                     DiagnosisTypeCode: $('#DiagnosisTypeCode').val(),
                     DiagnosisTypeName: $('#DiagnosisTypeName').val()
                 })
@@ -161,10 +169,11 @@
             let DiagnosisTypeCode = [];
             let DiagnosisTypeName = [];
             let DiagnosisTypeNumber = [];
+
             $('#DiagnosisTypeNumber:checked').each(function () {
                 DiagnosisTypeNumber.push($(this).val());
                 let code = $(this).parent().parent().find('td:eq(1)').text();
-                let name = $(this).parent().parent().find('td:eq(2)').text();
+                let name= $(this).parent().parent().find('td:eq(2)').text();
                 DiagnosisTypeCode.push(code);
                 DiagnosisTypeName.push(name);
             });
@@ -173,24 +182,27 @@
                 alert('삭제할 항목을 선택해주세요.');
                 return;
             }
-            alert('삭제할 항목 : ' + DiagnosisTypeNumber + '\n삭제할 항목 코드 : ' + DiagnosisTypeCode + '\n삭제할 항목 이름 : ' + DiagnosisTypeName);
-            // 하나씩 삭제
-            $.ajax({
-                type: 'POST',
-                url: '/api/APIManagerStandardInforMgr/DiagnosisType/delete',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify({
-                    DiagnosisTypeNumber: DiagnosisTypeNumber[0],
-                    DiagnosisTypeCode: DiagnosisTypeCode[0],
-                    DiagnosisTypeName: DiagnosisTypeName[0]
-                })
-            }).done(function () {
-                alert('진단 종류 삭제가 완료되었습니다.');
-                DIagnosisTypeJS.DiagnosisTypeList();
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            });
+            if (confirm('\n삭제할 항목 코드 : ' + DiagnosisTypeCode + '\n삭제할 항목 이름 : ' + DiagnosisTypeName + '\n 해당 진단 종류를 삭제하시겠습니까?')) {
+                // 하나씩 삭제
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/APIManagerStandardInforMgr/DiagnosisType/delete',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        DiagnosisTypeNumber: DiagnosisTypeNumber[0],
+                        DiagnosisTypeCode: DiagnosisTypeCode[0],
+                        DiagnosisTypeName: DiagnosisTypeName[0]
+                    })
+                }).done(function () {
+                    alert('진단 종류 삭제가 완료되었습니다.');
+                    DIagnosisTypeJS.DiagnosisTypeList();
+                }).fail(function (error) {
+                    alert(JSON.stringify(error));
+                });
+            }else{
+                alert('항목 이름 : ' + DiagnosisTypeName + ' \n 취소 되었습니다.');
+            }
         },
         DiagnosisTypeList : function () {
             $.ajax({
@@ -200,12 +212,12 @@
                 contentType: 'application/json; charset=utf-8'
             }).done(function (data) {
                 data = JSON.parse(data);
-                let html = '<tr align="center" bgcolor="skyblue">'
-                        + '<td> 번호 </td>'
-                        + '<td> 진단종류코드 </td>'
-                        + '<td> 진단종류명 </td>'
-                        + '<td> 삭제 </td>'
-                        + '</tr>';
+                let html = '<thead><tr align="center" bgcolor="skyblue">'
+                    + '<td> 번호 </td>'
+                    + '<td> 진단종류코드 </td>'
+                    + '<td> 진단종류명 </td>'
+                    + '<td> 삭제 </td>'
+                    + '</tr></thead><tbody>';
                 data.forEach(function (item) {
                     html += '<tr align="center" bgcolor="white">';
                     html += '<td>' + item.DiagnosisTypeNumber + '</td>';
@@ -214,8 +226,10 @@
                     html += '<td><input type="checkbox" id="DiagnosisTypeNumber" value="' + item.DiagnosisTypeNumber + '"></td>';
                     html += '</tr>';
                 });
+                html += '</tbody>';
                 DIagnosisTypeJS.RefreshDiagnosisTypeList();
                 $('#DiagnosisTypeList').append(html);
+                $('#DiagnosisTypeList').dataTable();
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
@@ -223,8 +237,40 @@
         // DiagnosisTypeList table tag refresh
         RefreshDiagnosisTypeList : function () {
             $('#DiagnosisTypeList').empty();
-        }
+        },
+        checkedChange : function () {
+            let DiagnosisTypeCode = [];
+            let DiagnosisTypeName = [];
+            $('#DiagnosisTypeNumber:checked').each(function () {
+                let code = $(this).parent().parent().find('td:eq(1)').text();
+                let name= $(this).parent().parent().find('td:eq(2)').text();
+                DiagnosisTypeCode.push(code);
+                DiagnosisTypeName.push(name);
+            });
+            $('#DiagnosisTypeCode').val(DiagnosisTypeCode);
+            $('#DiagnosisTypeName').val(DiagnosisTypeName);
+        },
+        ValidateCheck: function () {
+            if ($('#DiagnosisTypeCode').val() == '') {
+                alert('진단 종류 코드를 입력해주세요.');
+                $('#DiagnosisTypeCode').focus();
+                return false;
+            }
+            if ($('#DiagnosisTypeName').val() == '') {
+                alert('진단 종류 이름을 입력해주세요.');
+                $('#DiagnosisTypeName').focus();
+                return false;
+            }
+            return true;
+        },
+
+         
+
+
+
     }
+
+
 
 
     $(document).ready(function () {

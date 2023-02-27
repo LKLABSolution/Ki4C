@@ -79,7 +79,7 @@ namespace Ki4C_Solution.Controllers.Common.Member
                     dateTime,      //FinalLogin
                     dateTime,      //SignUpTime
                     "5",                                //ActivityInformation
-                    "없음"                              //DiagnosisEvalutionStatus
+                    "없음"                              //DiagnosisEvaluationStatus
                     );
             }
             catch(Exception ex)

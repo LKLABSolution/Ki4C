@@ -19,7 +19,7 @@ namespace DbManager
     
     
     // Table('DiagnosisClass') Entity class
-    public partial class DiagnosisClas
+    public partial class DiagnosisClass
     {
     }
 }
@@ -44,7 +44,7 @@ namespace DbManager
     
     
     // Table('DiagnosisClass')  Service class
-    public partial class DiagnosisClasService
+    public partial class DiagnosisClassService
     {
     }
 }

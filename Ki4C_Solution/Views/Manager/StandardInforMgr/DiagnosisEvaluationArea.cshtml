@@ -4,6 +4,7 @@
     // 선행작업 - 관리자 로그인
     Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg.cshtml";
     ViewData["Title"] = "기준정보 관리/진단 종류";
+    @model Ki4C_Solution.Models.Manager.StandardInfoMgr.DiagnosisEvaluationArea;
 }
 <!-- 섹션 -->
 <section>
@@ -22,31 +23,25 @@
         <!-- 진단 평가영역 등록 -->
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
             <a>진단구분선택: </a>
-            <form style="padding-top: 10px; padding-left: 32px; display: inline-block;">
+            <div style="padding-top: 10px; padding-left: 32px; display: inline-block;">
                 <select style="max-width: 400px; width: 130%; height: 30px; font-size: 16px;
-                        margin-bottom: 3px;">
-                    <option value="none">=== 선택 ===</option>
-                    <option>디지털 전략</option>
-                    <option>디지털 비즈니스</option>
-                    <option>디지털 오퍼레이션</option>
-                    <option>디지털 데이터</option>
-                    <option>디지털 조직문화</option>
+                        margin-bottom: 3px;" id="DiagnosisClassSelecter">
                 </select>
-            </form>
+            </div>
             <br>
             <a>진단평가영역 코드: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 110%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="DiagnosisEvaluationAreaCode" />
+            </div>
             <br>
             <a>진단평가영역 내용: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 110%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="DiagnosisEvaluationAreaName" />
+            </div>
             <div style="padding-top: 30px; padding-left: 50px;">
                 <input id="registButton" type="submit" value="등록" />
                 <input id="modifyButton" type="submit" value="수정" />
@@ -62,7 +57,7 @@
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                <table id="table">
+                @*<table id="table">
                     <tr align="center" bgcolor="skyblue">
                         <td>번호</td>
                         <td>진단평가 영역코드</td>
@@ -125,6 +120,8 @@
                         <td><input type="checkbox"></td>
                         </td>
                     </tr>
+                </table>*@
+                <table id="DiagnosisEvaluationAreaList" class="display">
                 </table>
             </div>
             <div id="buttonLocation">
@@ -135,3 +132,210 @@
         <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
+
+
+<script>
+    let DiagnosisEvaluationAreaJS = {
+        init : function(){
+            let _this = this;
+            $('#registButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.regist();
+                };
+            });
+            $('#modifyButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.modify();
+                }
+            });
+            $('#deleteButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.delete();
+                }
+            });
+            $('#searchButton').on('click', function () {
+                _this.search();
+            });
+            $(document).on('click', '#DiagnosisEvaluationAreaNumber', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().parent().siblings().find('#DiagnosisEvaluationAreaNumber').prop('checked', false);
+                }
+            });
+            $(document).on('change', '#DiagnosisEvaluationAreaNumber', function () {
+                _this.checkedChange();
+            });
+        },
+        regist : function(){
+            // /api/APIManagerStandardInforMgr/DiagnosisEvaluationAreaDiagnosisEvaluationArea/insert
+            // DiagnosisClassSelecter selected.val add data
+            let DiagnosisClassNumber = $('#DiagnosisClassSelecter option:selected').val();
+            let DiagnosisEvaluationAreaCode = $('#DiagnosisEvaluationAreaCode').val();
+            let DiagnosisEvaluationAreaName = $('#DiagnosisEvaluationAreaName').val();
+            let data = {
+                DiagnosisClassNumber: DiagnosisClassNumber,
+                DiagnosisEvaluationAreaCode: DiagnosisEvaluationAreaCode,
+                DiagnosisEvaluationAreaName: DiagnosisEvaluationAreaName
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/insert',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {   
+                alert('등록되었습니다.');
+                DiagnosisEvaluationAreaJS.DiagnosisEvaluationAreaList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        modify : function(){
+            //api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/update
+            let DiagnosisEvaluationAreaNumber = $('input:checkbox[id="DiagnosisEvaluationAreaNumber"]:checked').val();
+            let DiagnosisClassNumber = $('#DiagnosisClassSelecter option:selected').val();
+            let DiagnosisEvaluationAreaCode = $('#DiagnosisEvaluationAreaCode').val();
+            let DiagnosisEvaluationAreaName = $('#DiagnosisEvaluationAreaName').val();
+            let data = {
+                DiagnosisEvaluationAreaNumber: DiagnosisEvaluationAreaNumber,
+                DiagnosisClassNumber: DiagnosisClassNumber,
+                DiagnosisEvaluationAreaCode: DiagnosisEvaluationAreaCode,
+                DiagnosisEvaluationAreaName: DiagnosisEvaluationAreaName
+            };
+            $.ajax({
+                type: 'PUT',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/update',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function (data) {
+                data = JSON.parse(data);
+                alert('수정되었습니다.');
+                DiagnosisEvaluationAreaJS.DiagnosisEvaluationAreaList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+
+        },
+        delete : function(){
+            //api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/delete
+            let DiagnosisEvaluationAreaNumber = $('input:checkbox[id="DiagnosisEvaluationAreaNumber"]:checked').val();
+            let data = {
+                DiagnosisEvaluationAreaNumber: DiagnosisEvaluationAreaNumber
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/delete',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function (data) {
+                data = JSON.parse(data);
+                alert('삭제되었습니다.');
+                DiagnosisEvaluationAreaJS.DiagnosisEvaluationAreaList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        search : function(){
+        },
+        checkedChange : function(){
+            let DiagnosisClassNumber = [];
+            let DiagnosisEvaluationAreaNumber = [];
+            let EvaluationAreaCode = [];
+            let EvaluationAreaName = [];
+            $('#DiagnosisEvaluationAreaNumber:checked').each(function () {
+                let typeNumber = $(this).parent().parent().find('td:eq(1)').text();
+                let code = $(this).parent().parent().find('td:eq(2)').text();
+                let name = $(this).parent().parent().find('td:eq(3)').text();
+                DiagnosisClassNumber.push(typeNumber);
+                EvaluationAreaCode.push(code);
+                EvaluationAreaName.push(name);
+            });
+            $('#DiagnosisClassSelecter').val(DiagnosisClassNumber);
+            $('#DiagnosisEvaluationAreaCode').val(EvaluationAreaCode);
+            $('#DiagnosisEvaluationAreaName').val(EvaluationAreaName);
+
+        },
+        ValidateCheck : function(){
+            if ($('#DiagnosisClassSelecter option:selected').val() == 0) {
+                alert('진단종류를 선택해주세요.');
+                return false;
+            }
+            if ($('#DiagnosisEvaluationAreaCode').val() == '') {
+                alert('진단평가영역코드를 입력해주세요.');
+                return false;
+            }
+            if ($('#DiagnosisEvaluationAreaName').val() == '') {
+                alert('진단평가영역명을 입력해주세요.');
+                return false;
+            }
+            return true;
+        },
+        DiagnosisClassList: function () {
+            //api/APIManagerStandardInforMgr/DiagnosisClass/getAll
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisClass/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                let html = '<option value="0">진단종류</option>';
+                data.forEach(function (item) {
+                    html += '<option value="' + item.DiagnosisClassNumber + '">' + item.DiagnosisClassNumber + ' - ' + item.DiagnosisClassCode + ' - ' + item.DiagnosisClassName + '</option>';
+                });
+                $('#DiagnosisClassSelecter').empty();
+                $('#DiagnosisClassSelecter').append(html);
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        DiagnosisEvaluationAreaList : function () {
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                let html = '<thead><tr align="center" bgcolor="skyblue">';
+                html += '<td>번호</td>';
+                html += '<td>진단구분 코드</td>';
+                html += '<td>진단평가 영역코드</td>';
+                html += '<td>진단평가영역</td>';
+                html += '<td>삭제</td>';
+                html += '</tr></thead><tbody>';
+                data.forEach(function (item) {
+                    html += '<tr align="center" bgcolor="white">';
+                    html += '<td data-sort="' + item.AreaNumber + '">' + item.AreaNumber + '</td>';
+                    html += '<td data-sort="'+ item.DiagnosisClassNumber + '">' + item.DiagnosisClassNumber + '</td>';
+                    html += '<td data-sort="'+ item.EvaluationAreaCode + '">' + item.EvaluationAreaCode + '</td>';
+                    html += '<td data-sort="'+ item.EvaluationAreaName + '">' + item.EvaluationAreaName + '</td>';
+                    html += '<td><input type="checkbox" id="DiagnosisEvaluationAreaNumber" value ="' + item.AreaNumber + '"></td>';
+                    html += '</tr>';
+                });
+                html += '</tbody>';
+                DiagnosisEvaluationAreaJS.RefreshDiagnosisEvaluationAreaList();
+                $('#DiagnosisEvaluationAreaList').append(html);
+                $('#DiagnosisEvaluationAreaList').DataTable();
+
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        RefreshDiagnosisEvaluationAreaList: function () {
+            $('#DiagnosisEvaluationAreaList').empty();
+            $('#DiagnosisEvaluationAreaListTest').empty();
+        },
+
+    }
+
+    //ready
+    $(document).ready(function () {
+        DiagnosisEvaluationAreaJS.init();
+        DiagnosisEvaluationAreaJS.DiagnosisClassList();
+        DiagnosisEvaluationAreaJS.DiagnosisEvaluationAreaList();
+    });
+
+
+</script>
