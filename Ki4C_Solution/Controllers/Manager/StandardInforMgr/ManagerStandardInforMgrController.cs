@@ -33,22 +33,14 @@ namespace Ki4C_Solution.Controllers.Manager.StandardInforMgr
         {
             return View("../Manager/StandardInforMgr/DiagnosisType");
         }
-        public IActionResult DiagnosticLevel()
+        public IActionResult DiagnosisLevel()
         {
-            return View("../Manager/StandardInforMgr/DiagnosticLevel");
+            return View("../Manager/StandardInforMgr/DiagnosisLevel");
         }
         public IActionResult QnADetails()
         {
-            return View("../Manager/StandardInforMgr/QnADetails");
+            return PartialView("../Manager/StandardInforMgr/QnADetails");
         }
-
-        //DiagnosisType.getAll - Get acync
-        public async Task<IActionResult> GetAllDiagnosisType()
-        {
-            var result = await DbManager.DiagnosisType.GetAllJsonAsync();
-            return Json(result);
-        }
-
 
     }
 }

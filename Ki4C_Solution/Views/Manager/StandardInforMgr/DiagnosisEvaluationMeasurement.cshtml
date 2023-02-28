@@ -36,18 +36,18 @@
         <!-- 입력 형식 -->
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
             <a>평가척도 코드: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="MeasurementCode" />
+            </div>
             <br>
             <a>평가척도명: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="MeasurementName" />
+            </div>
             <div style="padding-top: 30px; padding-left: 50px;">
                 <input id="registButton" type="submit" value="등록" />
                 <input id="modifyButton" type="submit" value="수정" />
@@ -63,49 +63,7 @@
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                <table id="table">
-                    <tr align="center" bgcolor="skyblue">
-                        <td>번호</td>
-                        <td>평가척도 코드</td>
-                        <td>평가척도 명</td>
-                        <td>삭제</td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>1</td>
-                        <td>F1</td>
-                        <td>1</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>2</td>
-                        <td>F2</td>
-                        <td>2</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>3</td>
-                        <td>F3</td>
-                        <td>3</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>4</td>
-                        <td>F4</td>
-                        <td>4</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>5</td>
-                        <td>F5</td>
-                        <td>5</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                    </tr>
+                <table id="DiagnosisEvaluationMeasurementList" class="display">
                 </table>
             </div>
             <div id="buttonLocation">
@@ -116,3 +74,178 @@
         <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
+
+<script>
+    let MeasurementJS = {
+        init : function(){
+            let _this = this;
+            $('#registButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.regist();
+                }
+            });
+            $('#modifyButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.modify();
+                }
+            });
+            $('#deleteButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.delete();
+                }
+            });
+            $(document).on('click', '#MeasurementNumber', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().parent().siblings().find('#MeasurementNumber').prop('checked', false);
+                }
+            });
+            $(document).on('change', '#MeasurementNumber', function () {
+                _this.checkedChange();
+            });
+        },
+        ValidateCheck : function(){
+            if ($('input:checkbox[id="MeasurementNumber"]:checked') == null || $('input:checkbox[id="MeasurementNumber"]:checked').length == 0) {
+                alert("평가척도를 선택해주세요.");
+                return false;
+            };
+            let MeasurementCode = $('#MeasurementCode').val();
+            let MeasurementName = $('#MeasurementName').val();
+            if (MeasurementCode == "") {
+                alert("평가척도 코드를 입력해주세요.");
+                return false;
+            }
+            if (MeasurementName == "") {
+                alert("평가척도 명을 입력해주세요.");
+                return false;
+            }
+            return true;
+        },
+        isEmpty : function (value) {
+            if (value == null || value == undefined || value == "") {
+                return true;
+            }
+            return false;
+        },
+        checkedChange : function(){
+            let MeasurementNumber = [];
+            let MeasurementCode = [];
+            let MeasurementName = [];
+            $('input:checkbox[id="MeasurementNumber"]:checked').each(function () {
+                MeasurementNumber.push($(this).val());
+                let code = $(this).parent().parent().find('td:eq(1)').text();
+                let name = $(this).parent().parent().find('td:eq(2)').text();
+                MeasurementCode.push(code);
+                MeasurementName.push(name);
+            });
+            console.log(MeasurementNumber, MeasurementCode, MeasurementName)
+            $('#MeasurementCode').val(MeasurementCode);
+            $('#MeasurementName').val(MeasurementName);
+        },
+        MeasurementList : function(){
+            // /api/APIManagerStandardInforMgr/Measurement/getAll
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/Measurement/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                let html = '';
+                html += '<thead>';
+                html += '<tr align="center" bgcolor="skyblue">';
+                html += '<th>번호</th>';
+                html += '<th>평가척도 코드</th>';
+                html += '<th>평가척도 명</th>';
+                html += '<th>삭제</th>';
+                html += '</tr>';
+                html += '</thead>';
+                html += '<tbody>';
+                $.each(data, function (index, item) {
+                    html += '<tr align="center" bgcolor="white">';
+                    html += '<td>' + item.MeasurementNumber + '</td>';
+                    html += '<td>' + item.MeasurementCode + '</td>';
+                    html += '<td>' + item.MeasurementName + '</td>';
+                    html += '<td><input type="checkbox" id="MeasurementNumber" value="' + item.MeasurementNumber + '"></td>';
+                    html += '</tr>';
+                });
+                html += '</tbody>';
+                MeasurementJS.RefreshMeasurementList();
+                $('#DiagnosisEvaluationMeasurementList').html(html);
+                $('#DiagnosisEvaluationMeasurementList').DataTable();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        RefreshMeasurementList : function(){
+            $('#DiagnosisEvaluationMeasurementList').empty();
+        },
+        regist : function(){
+            alert('등록');
+            let MeasurementCode = $('#MeasurementCode').val();
+            let MeasurementName = $('#MeasurementName').val()
+            let data = {
+                "MeasurementCode": MeasurementCode,
+                "MeasurementName": MeasurementName
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/Measurement/insert',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('등록이 완료되었습니다.');
+                MeasurementJS.MeasurementList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        modify : function(){
+            alert('수정');
+            let data = {
+                MeasurementNumber: $('input:checkbox[id="MeasurementNumber"]:checked').val(),
+                MeasurementCode: $('#MeasurementCode').val(),
+                MeasurementName: $('#MeasurementName').val()
+            };
+            $.ajax({
+                type: 'PUT',
+                url: '/api/APIManagerStandardInforMgr/Measurement/update',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('수정이 완료되었습니다.');
+                MeasurementJS.MeasurementList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        delete : function(){
+            let MeasurementNumber = $('input:checkbox[id="MeasurementNumber"]:checked').val();
+            let data = {
+                MeasurementNumber: MeasurementNumber
+            };
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/APIManagerStandardInforMgr/Measurement/delete/',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('삭제가 완료되었습니다.');
+                MeasurementJS.MeasurementList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+
+
+    }
+
+    //ready
+    $(document).ready(function () {
+        MeasurementJS.init();
+        MeasurementJS.MeasurementList();
+    });
+
+</script>

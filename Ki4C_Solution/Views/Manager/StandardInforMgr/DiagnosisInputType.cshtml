@@ -22,18 +22,18 @@
         <!-- 입력 형식 -->
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
             <a>입력형식 코드: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="InputTypeCodeText"/>
+            </div>
             <br>
             <a>입력형식명: </a>
-            <form style="padding-top: 10px; display: inline-block;">
+            <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
-                        margin-bottom: 3px;" />
-            </form>
+                        margin-bottom: 3px;" id="InputTypeNameText" />
+            </div>
             <div style="padding-top: 30px; padding-left: 50px;">
                 <input id="registButton" type="submit" value="등록" />
                 <input id="modifyButton" type="submit" value="수정" />
@@ -49,45 +49,7 @@
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                <table id="table">
-                    <tr align="center" bgcolor="skyblue">
-                        <td>번호</td>
-                        <td>입력형식 코드</td>
-                        <td>입력형식 명</td>
-                        <td>삭제</td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>1</td>
-                        <td>E1</td>
-                        <td>text</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>2</td>
-                        <td>E2</td>
-                        <td>checkbox</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>3</td>
-                        <td>E3</td>
-                        <td>radio</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>4</td>
-                        <td>E4</td>
-                        <td>기타</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                    </tr>
+                <table id="InputTypeList" class="display">
                 </table>
             </div>
             <div id="buttonLocation">
@@ -98,3 +60,182 @@
         <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
+
+
+<script>
+
+    let InputTypeJS = {
+        init : function(){
+            let _this = this;
+            $('#registButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.regist();
+                };
+            });
+            $('#modifyButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.modify();
+                }
+            });
+            $('#deleteButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.delete();
+                }
+            });
+            $('#searchButton').on('click', function () {
+                _this.search();
+            });
+            $(document).on('click', '#InputTypeNumber', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().parent().siblings().find('#InputTypeNumber').prop('checked', false);
+                }
+            });
+            $(document).on('change', '#InputTypeNumber', function () {
+                _this.checkedChange();
+            });
+        },
+        InputTypeList : function(){
+            // /api/APIManagerStandardInforMgr/InputType/getAll
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/InputType/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                let html = '<thead><tr align="center" bgcolor="skyblue">';
+                html += '<td>번호</td>';
+                html += '<td>입력형태코드</td>';
+                html += '<td>입력형태이름</td>';
+                html += '<td>삭제</td>';
+                html += '</tr></thead><tbody>';
+                $.each(data, function (index, item) {
+                    html += '<tr align="center">';
+                    html += '<td>' + item.InputTypeNumber + '</td>';
+                    html += '<td>' + item.InputTypeCode + '</td>';
+                    html += '<td>' + item.InputTypeName + '</td>';
+                    html += '<td><input type="checkbox" id="InputTypeNumber" value="' + item.InputTypeNumber + '"></td>';
+                    html += '</tr>';
+                });
+
+                html += '</tbody>';
+                InputTypeJS.ReflashInputTypeList();
+                $('#InputTypeList').append(html);
+                $('#InputTypeList').DataTable();
+
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        ReflashInputTypeList : function(){
+            $('#InputTypeList').empty();
+        },
+        ValidateCheck : function(){
+            if ($('#InputTypeCodeText').val() == '') {
+                alert('입력형식 코드를 입력해주세요.');
+                return false;
+            }
+            if ($('#InputTypeNameText').val() == '') {
+                alert('입력형식명을 입력해주세요.');
+                return false;
+            }
+            return true;
+        },
+        regist : function(){
+            let data = {
+                InputTypeCode: $('#InputTypeCodeText').val(),
+                InputTypeName: $('#InputTypeNameText').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/InputType/insert',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('등록되었습니다.');
+                InputTypeJS.InputTypeList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        modify : function(){
+            if (InputTypeJS.isEmpty($('input:checkbox[id="InputTypeNumber"]:checked').val())){
+                alert('항목을 선택해주세요.');
+                return false;
+            }
+            let data = {
+                InputTypeNumber: $('input:checkbox[id="InputTypeNumber"]:checked').val(),
+                InputTypeCode: $('#InputTypeCodeText').val(),
+                InputTypeName: $('#InputTypeNameText').val()
+            };
+            $.ajax({
+                type: 'PUT',
+                url: '/api/APIManagerStandardInforMgr/InputType/update',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('수정되었습니다.');
+                InputTypeJS.InputTypeList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        delete : function(){
+            if (InputTypeJS.isEmpty($('input:checkbox[id="InputTypeNumber"]:checked').val())){
+                alert('항목을 선택해주세요.');
+                return false;
+            }
+            let data = {
+                InputTypeNumber: $('input:checkbox[id="InputTypeNumber"]:checked').val()
+            };
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/APIManagerStandardInforMgr/InputType/delete',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('삭제되었습니다.');
+                InputTypeJS.InputTypeList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        checkedChange : function(){
+            let InputTypeNumber = [];
+            let InputTypeCode = [];
+            let InputTypeName = [];
+            $('input:checkbox[id="InputTypeNumber"]:checked').each(function () {
+                InputTypeNumber.push($(this).val());
+                let code = $(this).parent().parent().find('td:eq(1)').text();
+                let name = $(this).parent().parent().find('td:eq(2)').text();
+                InputTypeCode.push(code);
+                InputTypeName.push(name);
+            });
+            console.log(InputTypeName);
+            $('#InputTypeNumber').val(InputTypeNumber);
+            $('#InputTypeCodeText').val(InputTypeCode);
+            $('#InputTypeNameText').val(InputTypeName);
+        },
+        search : function(){
+        },
+        isEmpty : function(value){
+            if (value == null || value == undefined || value == '') {
+                return true;
+            }
+            return false;
+        }
+
+    }
+
+    //ready
+    $(document).ready(function () {
+        InputTypeJS.init();
+        InputTypeJS.InputTypeList();
+    });
+
+
+
+</script>

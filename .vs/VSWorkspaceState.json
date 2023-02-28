@@ -1,6 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Ki4C_Solution",
+    "\\Ki4C_Solution\\Controllers",
+    "\\Ki4C_Solution\\Controllers\\Common",
+    "\\Ki4C_Solution\\Controllers\\Common\\Member",
+    "\\Ki4C_Solution\\Controllers\\Manager",
+    "\\Ki4C_Solution\\Controllers\\Manager\\Diagnosis",
+    "\\Ki4C_Solution\\Views",
+    "\\Ki4C_Solution\\Views\\Manager",
+    "\\Ki4C_Solution\\Views\\Manager\\Diagnosis"
   ],
+  "SelectedNode": "\\Ki4C_Solution\\Views\\Manager\\StandardInforMgr\\DiagnosisEvaluationQnA.cshtml",
   "PreviewInSolutionExplorer": false
 }

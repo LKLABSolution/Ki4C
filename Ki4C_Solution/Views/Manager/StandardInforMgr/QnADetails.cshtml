@@ -1,10 +1,4 @@
-﻿@{
-    // Used Table [Member]
-    // 고객관리시스템 - 고객목록
-    // 선행작업 - 관리자 로그인
-    Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg.cshtml";
-    ViewData["Title"] = "기준정보 관리/진단 종류";
-}
+﻿
 <!-- 섹션 -->
 <section>
     <!-- 콘텐츠 -->
@@ -14,10 +8,10 @@
         <h4 style="display: inline;">평가문제 코드:</h4><h4 style="display: inline;">D1</h4> <br>
         <h4 style="display: inline;">평가 문제:</h4><h4 style="display: inline;">디지털 혁신을 추진하는 조직은 어느 수준입니까?</h4>
         <hr style="border: solid 0.3px black;" />
-        <form id="answer-form">
+        <div id="answer-form">
             <input type="text" placeholder="추가할 지문을 입력하세요" required />
             <button>추가</button>
-        </form>
+        </div>
         <ul id="answer-list"></ul>
     </div>
     <br>
@@ -26,69 +20,7 @@
     </div>
 </section>
 <script>
-let QnADetailsJS = {
-    const answerForm ;
-    const answerInput;
-    const answerList ;
 
-    const ANSWERS_KEY = "answers";
-
-    let answers = [];
-
-    saveAnswers : function(){
-        localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
-    },
-    deleteAnswer : function(event){
-        const li = event.target.parentElement;
-        li.remove();
-        answers = answers.filter((answer) => answer.id !== parseInt(li.id));
-        saveAnswers();
-    },
-    paintAnswer : function(newAnswer){
-        const li = document.createElement("li");
-        li.id = newAnswer.id;
-        const span = document.createElement("span");
-        span.innerText = newAnswer.text;
-        const button = document.createElement("button");
-        button.innerText = "삭제";
-        button.addEventListener("click", deleteAnswer)
-        li.appendChild(span);
-        li.appendChild(button);
-        answerList.appendChild(li);
-    },
-    handleAnswerSubmit : function(event){
-        event.preventDefault();
-        const newAnswer = answerInput.value;
-        answerInput.value = "";
-        const newAnswerObj = {
-            text: newAnswer,
-            id: Date.now(),
-        };
-        answers.push(newAnswerObj);
-        paintAnswer(newAnswerObj);
-        saveAnswers();
-    },
-    init : function(){
-        answerForm = document.querySelector("#answer-form");
-        answerInput = answerForm.querySelector("input");
-        answerList = document.getElementById("answer-list");
-        answerForm.addEventListener("submit", handleAnswerSubmit);
-        if (localStorage.getItem(ANSWERS_KEY) !== null) {
-            answers = JSON.parse(localStorage.getItem(ANSWERS_KEY));
-            answers.forEach(paintAnswer);
-        }
-    },       
-    isEmpty : {
-        if (localStorage.getItem(ANSWERS_KEY) !== null) {
-        answers = JSON.parse(localStorage.getItem(ANSWERS_KEY));
-        answers.forEach(paintAnswer);
-        }
-    },
-};
-
-$(function(){
-    QnADetailsJS.init();
-})
 
 const answerForm = document.querySelector("#answer-form");
 const answerInput = answerForm.querySelector("input");
