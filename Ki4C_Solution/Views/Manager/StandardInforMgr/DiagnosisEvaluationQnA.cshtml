@@ -66,7 +66,7 @@
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                <table id="DiagnosisEvaluationQuestionList" class="diaplay">
+                <table id="DiagnosisEvaluationQuestionList" class="display">
                 </table>
             </div>
             <div id="buttonLocation">
@@ -80,6 +80,8 @@
 <script>
     let DiagnosisClassSelecterObj = [];
     let DiagnosisEvaluationAreaSelecterObj = [];
+    let DiagnosisEvaluationQuestionListObj = [];
+
     let DiagnosisEvaluationQnAJS = {
         init: function () {
             let _this = this;
@@ -94,13 +96,12 @@
                 }
             });
             $('#deleteButton').on('click', function () {
-                if(_this.ValidateCheck()){
+                if (_this.DeleteValidateCheck()) {
                     _this.delete();
                 }
             });
             $('#DiagnosisClassSelecter').on('change', function () {
                 var diagnosisClassNumber = $(this).val();
-                console.log(diagnosisClassNumber);
                 diagnosisClassNumber = parseInt(diagnosisClassNumber);
                 DiagnosisEvaluationQnAJS.RefreshDiagnosisEvaluationAreaSelecter();
 
@@ -109,28 +110,105 @@
                     var filteredAreaList = $.grep(DiagnosisEvaluationAreaSelecterObj, function (area) {
                     return area.DiagnosisClassNumber == diagnosisClassNumber;
                     });
-
                     if(filteredAreaList.length == 0){
-                        $(DiagnosisEvaluationAreaSelecter).append('<option value="0">평가구분을 선택해주세요.</option>');
+                        $(DiagnosisEvaluationAreaSelecter).append('<option value="0">평가구분없음</option>');
+                        //disable
+                        $(DiagnosisEvaluationAreaSelecter).prop('disabled', true);
+                    }else{
+                        $.each(filteredAreaList, function (index, value) {
+                            $(DiagnosisEvaluationAreaSelecter).append('<option value="' + value.AreaNumber + '">' + value.AreaNumber + ' - ' + value.EvaluationAreaCode + ' - ' + value.EvaluationAreaName + '</option>');
+                        });
+                        $(DiagnosisEvaluationAreaSelecter).prop('disabled', false);
                     }
-
-                    // populate evaluation area options
-                    $.each(filteredAreaList, function(index, value) {
-                        $(DiagnosisEvaluationAreaSelecter).append('<option value="' + value.AreaNumber + '">' + value.EvaluationAreaName + '</option>');
-                    });
                 }
             });
+            $(document).on('click', '#EvaluationQuestionNumber', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().parent().siblings().find('#EvaluationQuestionNumber').prop('checked', false);
+                }
+            });
+            $(document).on('change', '#EvaluationQuestionNumber', function () {
+                _this.checkedChange();
+            });
+            $('#DiagnosisEvaluationQuestionList tbody tr').on('click',function(){
+                $(this).find('td:last-child input[type=checkbox]').prop('checked', true);
+                console.log(this)
+                console.log('zasdfasdf')
+            })
         },
         regist: function () {
             alert('등록');
+            let DiagnosisEvaluationAreaNumber = $('#DiagnosisEvaluationAreaSelecter option:selected').val();
+            let EvaluationQuestionCode = $('#EvaluationQuestionCode').val();
+            let EvaluationQuestionContents = $('#EvaluationQuestionContents').val();
+            let data = {
+                "DiagnosisEvaluationAreaNumber": DiagnosisEvaluationAreaNumber,
+                "EvaluationQuestionCode": EvaluationQuestionCode,
+                "EvaluationQuestionContents": EvaluationQuestionContents
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationQuestion/insert',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('등록이 완료되었습니다.');
+                DiagnosisEvaluationQnAJS.DiagnosisEvaluationQuestionList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
         },
         modify: function () {
             alert('수정');
+            let EvaluationQuestionNumber = $('#EvaluationQuestionNumber:checked').val();
+            let DiagnosisEvaluationAreaNumber = $('#DiagnosisEvaluationAreaSelecter option:selected').val();
+            let EvaluationQuestionCode = $('#EvaluationQuestionCode').val();
+            let EvaluationQuestionContents = $('#EvaluationQuestionContents').val();
+            let data = {
+                "EvaluationQuestionNumber": EvaluationQuestionNumber,
+                "DiagnosisEvaluationAreaNumber": DiagnosisEvaluationAreaNumber,
+                "EvaluationQuestionCode": EvaluationQuestionCode,
+                "EvaluationQuestionContents": EvaluationQuestionContents
+            };
+            $.ajax({
+                type: 'PUT',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationQuestion/update',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('수정이 완료되었습니다.');
+                DiagnosisEvaluationQnAJS.DiagnosisEvaluationQuestionList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
         },
         delete: function () {
             alert('삭제');
+            let EvaluationQuestionNumber = $('#EvaluationQuestionNumber:checked').val();
+            if (EvaluationQuestionNumber.length == null || EvaluationQuestionNumber.length == 0) {
+                alert('삭제할 항목을 선택해주세요.');
+                return;
+            }
+            let data = {
+                "EvaluationQuestionNumber": EvaluationQuestionNumber
+            };
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationQuestion/delete',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('삭제가 완료되었습니다.');
+                DiagnosisEvaluationQnAJS.DiagnosisEvaluationQuestionList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
         },
-        showPopUp : function () {
+        QuestionDetailInfo: function () {
+            alert('상세정보');
         },
         isEmpty: function (value) {
             if (value == null || value == undefined || value == "") {
@@ -140,6 +218,10 @@
             }
         },
         ValidateCheck : function(){
+            if ($('input:checkbox[id="EvaluationQuestionNumber"]:checked').length == null || $('input:checkbox[id="EvaluationQuestionNumber"]:checked').length == 0) {
+                alert('수정 및 삭제할 항목을 선택해주세요.');
+                return false;
+            }
             if ($('#DiagnosisClassSelecter option:selected').val() == 0) {
                 alert('진단구분를 선택해주세요.');
                 return false;
@@ -162,6 +244,13 @@
             }
             return true;
         },
+        DeleteValidateCheck : function(){
+            if ($('input:checkbox[id="EvaluationQuestionNumber"]:checked').length == null || $('input:checkbox[id="EvaluationQuestionNumber"]:checked').length == 0) {
+                alert('삭제할 항목을 선택해주세요.');
+                return false;
+            }
+            return true;
+        },
         DiagnosisClassList : function(){
             $.ajax({
                 type: 'GET',
@@ -171,7 +260,6 @@
                 success: function (data) {
                     data = JSON.parse(data);
                     DiagnosisClassSelecterObj = data;
-                    console.log(data)
                     let html = '';
                     html += '<option value="0">진단구분</option>';
                     $.each(data, function (index, item) {
@@ -191,13 +279,58 @@
                 success: function (data) {
                     data = JSON.parse(data);
                     DiagnosisEvaluationAreaSelecterObj = data;
-                    console.log(data)
-                    //let html = '';
-                    //html += '<option value="0">진단영역</option>';
-                    //$.each(data, function (index, item) {
-                    //    html += '<option value="' + item.EvaluationAreaCode + '">' + item.EvaluationAreaName + '</option>';
-                    //});
-                    //$('#DiagnosisEvaluationAreaSelecter').html(html);
+                }
+            });
+        },
+        DiagnosisInputTypeList : function(){
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/InputType/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    data = JSON.parse(data);
+                    let html = '';
+                    html += '<option value="0">진단종류</option>';
+                    $.each(data, function (index, item) {
+                        html += '<option value="' + item.InputTypeNumber + '">' + item.InputTypeNumber + ' - ' + item.InputTypeCode  + ' - ' + item.InputTypeName + '</option>';
+                    });
+                    $('#inputTypeSelecter').html(html);
+                }
+            });
+        },
+        DiagnosisEvaluationQuestionList : function(){
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationQuestion/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    data = JSON.parse(data);
+                    let html = '';
+                    html += '<thead>';
+                    html += '<tr>';
+                    html += '<th>문제번호</th>';
+                    html += '<th>진단영역번호</th>';
+                    html += '<th>평가문제코드</th>';
+                    html += '<th>평가문제명</th>';
+                    html += '<th>선택</th>';
+                    html += '</tr>';
+                    html += '</thead>';
+                    html += '<tbody>';
+                    $.each(data, function (index, item) {
+                        html += '<tr>';
+                        html += '<td>' + item.EvaluationQuestionNumber+ '</td>';
+                        html += '<td>' + item.AreaNumber+ '</td>';
+                        html += '<td>' + item.EvaluationQuestionCode+ '</td>';
+                        html += '<td>' + item.EvaluationQuestionContents+ '</td>';
+                        html += '<td><input type="checkbox" id="EvaluationQuestionNumber" value="' + item.EvaluationQuestionNumber + '"></td>';
+                        html += '</tr>';
+                    });
+                    html += '</tbody>';
+                    DiagnosisEvaluationQnAJS.RefreshDiagnosisEvaluationQuestionList();
+                    $('#DiagnosisEvaluationQuestionList').html(html);
+                    $('#DiagnosisEvaluationQuestionList').DataTable();
                 }
             });
         },
@@ -206,8 +339,33 @@
         },
         RefreshDiagnosisClassSelecter : function(){
             $('#DiagnosisClassSelecter').empty();
-        }
+        },
+        RefreshDiagnosisEvaluationQuestionList : function(){
+            $('#DiagnosisEvaluationQuestionList').empty();
+        },
+        checkedChange : function(){
+            //checkbox checked 
+            let DiagnosisEvaluationAreaNumber = [];
+            let EvaluationQuestionNumber = [];
+            let EvaluationQuestionCode = [];
+            let EvaluationQuestionContents = [];
 
+            $('input:checkbox[id="EvaluationQuestionNumber"]:checked').each(function () {
+                let number = $(this).parent().parent().find('td:eq(0)').text();
+                let AreaNumber = $(this).parent().parent().find('td:eq(1)').text();
+                let code = $(this).parent().parent().find('td:eq(2)').text();
+                let Contents = $(this).parent().parent().find('td:eq(3)').text();
+                EvaluationQuestionNumber.push(number);
+                DiagnosisEvaluationAreaNumber.push(AreaNumber);
+                EvaluationQuestionCode.push(code);
+                EvaluationQuestionContents.push(Contents);
+            });
+            //해당 내용에 적합한 로직 추가 작성 23-02-28
+            //$('#EvaluationQuestionNumber').val(EvaluationQuestionNumber);
+            //$('#DiagnosisEvaluationAreaSelecter').val(DiagnosisEvaluationAreaNumber);
+            $('#EvaluationQuestionCode').val(EvaluationQuestionCode);
+            $('#EvaluationQuestionContents').val(EvaluationQuestionContents);
+        }
     };
 
     //ready
@@ -215,6 +373,8 @@
         DiagnosisEvaluationQnAJS.init();
         DiagnosisEvaluationQnAJS.DiagnosisClassList();
         DiagnosisEvaluationQnAJS.DiagnosisEvaluationAreaList();
+        DiagnosisEvaluationQnAJS.DiagnosisInputTypeList();
+        DiagnosisEvaluationQnAJS.DiagnosisEvaluationQuestionList();
     });
 
 

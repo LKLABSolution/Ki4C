@@ -82,7 +82,7 @@
                         <td><input type="checkbox"></td>
                     </tr>
                 </table>*@
-                <table class="diaplay" id="DiagnosisTypeList">
+                <table class="display" id="DiagnosisTypeList">
                 </table>
             </div>
             <div id="buttonLocation">
@@ -178,14 +178,14 @@
                 DiagnosisTypeName.push(name);
             });
 
-            if (DiagnosisTypeNumber.length == 0) {
+            if (DiagnosisTypeNumber.length  == null || DiagnosisTypeNumber.length == 0) {
                 alert('삭제할 항목을 선택해주세요.');
                 return;
             }
             if (confirm('\n삭제할 항목 코드 : ' + DiagnosisTypeCode + '\n삭제할 항목 이름 : ' + DiagnosisTypeName + '\n 해당 진단 종류를 삭제하시겠습니까?')) {
                 // 하나씩 삭제
                 $.ajax({
-                    type: 'POST',
+                    type: 'DELETE',
                     url: '/api/APIManagerStandardInforMgr/DiagnosisType/delete',
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',

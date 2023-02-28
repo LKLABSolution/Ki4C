@@ -1,0 +1,285 @@
+﻿@{
+    // Used Table [Member]
+    // 고객관리시스템 - 고객목록
+    // 선행작업 - 관리자 로그인
+    Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg_ev_mgnt.cshtml";
+    ViewData["Title"] = "기준정보 관리/진단 종류";
+}
+<!-- 섹션 -->
+<section>
+    <!-- 콘텐츠 -->
+    <div id=contetns style="width: 100%;">
+        <h2>진단 수준 등록 및 목록</h2>
+        <div style="float: right;">
+            <a href="#">Home</a>
+            &gt;
+            <a href="#">기준 정보</a>
+            &gt;
+            진단 수준 등록 및 목록
+        </div>
+        <br>
+        <hr />
+        <!-- 진단 수준 등록 -->
+        <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
+            <a>진단 수준 코드: </a>
+            <div style="padding-top: 10px; display: inline-block;">
+                <input type="text"
+                       style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
+                        margin-bottom: 3px;" id="DiagnosisLevelCode" />
+            </div>
+            <br>
+            <a>진단 수준 명: </a>
+            <div style="padding-top: 10px; display: inline-block;">
+                <input type="text"
+                       style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
+                        margin-bottom: 3px;" id="DiagnosisLevelName" />
+            </div>
+            <div style="padding-top: 30px; padding-left: 50px;">
+                <input id="registButton" type="submit" value="등록" />
+                <input id="modifyButton" type="submit" value="수정" />
+            </div>
+        </div>
+        <!-- 진단수준 등록 -->
+        <hr />
+        <!-- 진단수준 목록 -->
+        <div style="display: inline-block;">
+            <div id="buttonLocation">
+                <input type="text" id="searchBox" placeholder="검색어 입력" />
+                <button id="searchButton">검색</button>
+            </div>
+            <br>
+            <div style="width: 90%; margin: auto;">
+                <table id="table">
+                    <tr align="center" bgcolor="skyblue">
+                        <td>번호</td>
+                        <td>진단수준코드</td>
+                        <td>진단수준명</td>
+                        <td>삭제</td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>1</td>
+                        <td>G1</td>
+                        <td>Level 1</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>2</td>
+                        <td>G2</td>
+                        <td>Level 2</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>3</td>
+                        <td>G3</td>
+                        <td>Level 3</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>4</td>
+                        <td>G4</td>
+                        <td>Level 4</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr align="center" bgcolor="white">
+                        <td>5</td>
+                        <td>G5</td>
+                        <td>Level 5</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+                <table id="DiagnosisLevelList" class="display"></table>
+            </div>
+            <div id="buttonLocation">
+                <input id="deleteButton" type="submit" value="항목 삭제" />
+            </div>
+        </div>
+        <!-- 진단수준 목록 -->
+        <!-- 콘텐츠 -->
+</section>
+<!-- 섹션 -->
+
+<script>
+
+    let DiagnosisLevelJS = {
+        init: function () {
+            let _this = this;
+            $('#registButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.regist();
+                }
+            });
+            $('#modifyButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.modify();
+                }
+            });
+            $('#deleteButton').on('click', function () {
+                if (_this.ValidateCheck()) {
+                    _this.delete();
+                }
+            });
+            $(document).on('click', '#DiagnosisLevelNumber', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().parent().siblings().find('#DiagnosisLevelNumber').prop('checked', false);
+                }
+            });
+            $(document).on('change', '#DiagnosisLevelNumber', function () {
+                _this.checkedChange();
+            });
+        },
+        // /api/APIManagerStandardInforMgr/DiagnosisEvaluationQuestion/CRUD
+        regist: function () {
+            let data = {
+                DiagnosisLevelCode: $('#DiagnosisLevelCode').val(),
+                DiagnosisLevelName: $('#DiagnosisLevelName').val()
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisLevel/insert',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('등록이 완료되었습니다.');
+                DiagnosisLevelJS.DiagnosisLevelList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        modify: function () {
+            let DiagnosisLevelNumber = $('#DiagnosisLevelNumber:checked').val();
+            if(DiagnosisLevelNumber == null || DiagnosisLevelNumber.length == 0){
+                alert('수정할 항목을 선택해주세요.');
+                return;
+            }
+            let DiagnosisLevelCode = $('#DiagnosisLevelCode').val();
+            let DiagnosisLevelName = $('#DiagnosisLevelName').val();
+            let data = {
+                DiagnosisLevelNumber : DiagnosisLevelNumber,
+                DiagnosisLevelCode: DiagnosisLevelCode,
+                DiagnosisLevelName: DiagnosisLevelName
+            };
+            $.ajax({
+                type: 'PUT',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisLevel/update',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('수정이 완료되었습니다.');
+                DiagnosisLevelJS.DiagnosisLevelList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        delete: function () {
+            let DiagnosisLevelNumber = $('#DiagnosisLevelNumber:checked').val();
+            let DiagnosisLevelCode = $('#DiagnosisLevelCode').val();
+            let DiagnosisLevelName = $('#DiagnosisLevelName').val();
+            if (DiagnosisLevelNumber == null || DiagnosisLevelNumber.length == 0) {
+                alert('삭제할 항목을 선택해주세요.');
+                return;
+            }            
+            let data = {
+                DiagnosisLevelNumber: DiagnosisLevelNumber,
+                DiagnosisLevelCode: DiagnosisLevelCode,
+                DiagnosisLevelName: DiagnosisLevelName
+            };
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisLevel/delete',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function () {
+                alert('삭제가 완료되었습니다.');
+                DiagnosisLevelJS.DiagnosisLevelList();
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        ValidateCheck: function () {
+            if ($('#DiagnosisLevelCode').val() == "") {
+                alert("진단 수준 코드를 입력해주세요.");
+                return false;
+            }
+            if ($('#DiagnosisLevelName').val() == "") {
+                alert("진단 수준 명을 입력해주세요.");
+                return false;
+            }
+            return true;
+        },
+        // /api/APIManagerStandardInforMgr/DiagnosisLevel/getAll
+        DiagnosisLevelList : function(){
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisLevel/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    data = JSON.parse(data);
+                    let html = '';
+                    html += '<thead>';
+                    html += '<tr align="center" bgcolor="skyblue">';
+                    html += '<th>번호</th>';
+                    html += '<th>진단수준코드</th>';
+                    html += '<th>진단수준명</th>';
+                    html += '<th>선택</th>';
+                    html += '</tr>';
+                    html += '</thead>';
+                    html += '<tbody>';
+                    $.each(data, function (index, item) {
+                        html += '<tr align="center" bgcolor="white">';
+                        html += '<td>' + item.DiagnosisLevelNumber + '</td>';
+                        html += '<td>' + item.DiagnosisLevelCode + '</td>';
+                        html += '<td>' + item.DiagnosisLevelName + '</td>';
+                        html += '<td><input type="checkbox" id="DiagnosisLevelNumber" value="' + item.DiagnosisLevelNumber + '"></td>';
+                        html += '</tr>';
+                    });
+                    html += '</tbody>';
+                    DiagnosisLevelJS.RefreshDiagnosisLevelList();
+                    $('#DiagnosisLevelList').append(html);
+                    $('#DiagnosisLevelList').DataTable();
+
+                }
+            });
+        },
+        RefreshDiagnosisLevelList : function(){
+            $('#DiagnosisLevelList').empty();
+        },
+        checkedChange : function(){
+            //checkbox checked
+            let DiagnosisLevelNumber = [];
+            let DiagnosisLevelCode = [];
+            let DiagnosisLevelName = [];
+
+            $('input:checkbox[id="DiagnosisLevelNumber"]:checked').each(function () {
+                let number = $(this).parent().parent().find('td:eq(0)').text();
+                let code = $(this).parent().parent().find('td:eq(1)').text();
+                let name = $(this).parent().parent().find('td:eq(2)').text();
+                DiagnosisLevelNumber.push(number);
+                DiagnosisLevelCode.push(code);
+                DiagnosisLevelName.push(name);
+            });
+            // Number 미사용 - 해당 내용에 적합한 로직 추가 작성 23-02-28
+            $('#DiagnosisLevelCode').val(DiagnosisLevelCode);
+            $('#DiagnosisLevelName').val(DiagnosisLevelName);
+        }
+
+
+    }
+
+    //ready
+    $(document).ready(function () {
+        DiagnosisLevelJS.init();
+        DiagnosisLevelJS.DiagnosisLevelList();
+    });
+
+
+</script>

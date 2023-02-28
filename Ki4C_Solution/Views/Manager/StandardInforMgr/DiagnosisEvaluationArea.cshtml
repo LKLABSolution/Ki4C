@@ -223,7 +223,7 @@
                 DiagnosisEvaluationAreaNumber: DiagnosisEvaluationAreaNumber
             };
             $.ajax({
-                type: 'POST',
+                type: 'DELETE',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/delete',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -244,10 +244,10 @@
             let EvaluationAreaCode = [];
             let EvaluationAreaName = [];
             $('#DiagnosisEvaluationAreaNumber:checked').each(function () {
-                let typeNumber = $(this).parent().parent().find('td:eq(1)').text();
+                let classNumber = $(this).parent().parent().find('td:eq(1)').text();
                 let code = $(this).parent().parent().find('td:eq(2)').text();
                 let name = $(this).parent().parent().find('td:eq(3)').text();
-                DiagnosisClassNumber.push(typeNumber);
+                DiagnosisClassNumber.push(classNumber);
                 EvaluationAreaCode.push(code);
                 EvaluationAreaName.push(name);
             });
@@ -267,6 +267,10 @@
             }
             if ($('#DiagnosisEvaluationAreaName').val() == '') {
                 alert('진단평가영역명을 입력해주세요.');
+                return false;
+            }
+            if ($('#DiagnosisEvaluationAreaNumber:checked') == null || $('#DiagnosisEvaluationAreaNumber:checked').length == 0) {
+                alert('진단평가영역을 선택해주세요.');
                 return false;
             }
             return true;
@@ -326,6 +330,13 @@
         RefreshDiagnosisEvaluationAreaList: function () {
             $('#DiagnosisEvaluationAreaList').empty();
             $('#DiagnosisEvaluationAreaListTest').empty();
+        },
+        isEmpty : function (value) {
+            if (value == null || value == undefined || value == "") {
+                return true;
+            } else {
+                return false;
+            }
         },
 
     }
