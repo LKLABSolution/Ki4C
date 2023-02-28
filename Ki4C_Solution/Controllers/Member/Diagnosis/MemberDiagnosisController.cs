@@ -58,5 +58,10 @@ namespace Ki4C_Solution.Controllers.Member.Diagnosis
         {
             return View("../Member/Diagnosis/SelfDiagnosisQuestion");
         }
+        //SelectedDiagnosticEvaluation
+        public IActionResult SelectedDiagnosticEvaluation()
+        {
+            return View("../Member/Diagnosis/SelectedDiagnosticEvaluation");
+        }
     }
 }
