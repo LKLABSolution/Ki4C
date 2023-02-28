@@ -1,26 +1,38 @@
 ﻿@{
     // Used Table []
-    // DX 소개
+    // DX진단 플랫폼 소개 / DX진단 플랫폼 주요내용
     Layout = "~/Views/Shared/_LayoutKi4C_Aside.cshtml";
     ViewData["Title"] = "IntroductionDX Page";
 }
-
+<style>
+        #menuIdx {
+        float: right;
+        height: 25px;
+        line-height: 25px;
+    }
+</style>
 <section>
     <!-- 콘텐츠 -->
     <div id=contetns style="width: 100%;">
         <h2>DX 소개</h2>
-        <div style="float: right;">
+        <br />
+        <div id="menuIdx">
+            <div style="float: left;">
+                <img id=home_img src="~/images/home-1.png">
+            </div>
             <a href="#">Home</a>
             &gt;
-            <a href="#">회사소개</a>
+            <a href="#">DX진단 플랫폼 소개</a>
             &gt;
-            DX 소개
+            DX진단 플랫폼 주요내용
         </div>
         <br>
-        <hr />
+        <hr style="border: solid 0.5px black; width: 100%;" />
         <!-- DX 소개 -->
-        <div id=intro style="width: 100%; border:1px solid red; float: left;">
-            <h3>4차 산업혁명시대•••함께 상생하고 번영한다</h3>
+        <div id=intro style="width: 100%; float: left;">
+            <br />
+            <h3>DX진단은 오늘날 기업의 핵심 역량을 평가하는 지표입니다.</h3>
+            <br />
             <div>
                 <p>
                     케이아이포씨 협동조합, 디지털 트랜스포메이션 진단 및 컨설팅 서비스 제공 <br>
