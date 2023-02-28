@@ -2,57 +2,62 @@
 <style type="text/css">
     /* 회사 로고 */
     #logoBox {
-        height: 50px;
+        padding: 5px;
+        height: 40px;
     }
 
     #companyLogo {
         width: 300px;
-        height: 40px;
-        /* padding: 10px 5px 0 20px; */
+        height: 30px;
     }
 
     /* nav_1, 드롭다운 메뉴 */
-    #nav_1 {
+    /* 전체영역에서 여백을 없애줌 */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    /* ul li태그에 리스트 스타일을 없앰 */
+    ul li {
+        list-style: none;
+    }
+    /* a태그에 텍스트 밑줄을 없애기 */
+    a {
+        text-decoration: none;
+    }
+    /* menu박스 가운데정렬, 글자가운데 정렬 */
+    #menu {
+        font-weight: 700;
         width: 100%;
         height: 50px;
+        background: white;
+        line-height: 50px;
+        margin: 0 auto;
         text-align: center;
-        background: black;
-        font-size: 18px;
-        font-weight: 500;
-        color: white;
-        float: left;
     }
 
-        #nav_1 ul li {
-            list-style: none;
+    /* menu태그 자식의 ul의 자식 li를 왼쪽정렬과 넓이 160설정 */
+    #menu > ul > li {
+        float: left;
+        width: 160px;
+        position: relative;
+    }
+        #menu > ul > li > ul {
+            width: 180px;
+            display: none;
+            position: absolute;
+            font-size: 14px;
+            background: white;
         }
+    #menu > ul > li:hover > ul {
+        display: block;
+    }
 
-        #nav_1 > ul > li {
-            float: left;
-            width: 150px;
-            position: relative;
+        #menu > ul > li > ul > li:hover {
+            background: #34B0C7;
+            color: white;
+            transition: ease 0.03s;
         }
-
-            #nav_1 > ul > li > ul {
-                width: 130px;
-                display: none;
-                position: absolute;
-                background: black;
-            }
-
-                #nav_1 > ul > li > ul > li {
-                    text-align: left;
-                    padding-top: 20px;
-                }
-
-            #nav_1 > ul > li:hover > ul {
-                display: block;
-            }
-
-            #nav_1 > ul > li > ul > li:hover {
-                background: orange;
-                transition: ease 1s;
-            }
 
     /* nav_2, 햄버거 메뉴 */
     input[id="menuicon"] {
@@ -114,16 +119,26 @@
         }
 
     div[class="sidebar"] {
-        width: 150px;
-        height: 300px;
-        background: black;
-        color: white;
+        font-size: 13px;
+        width: 170px;
+        height: 100%;
+        background: white;
         position: fixed;
         top: 10px;
-        right: -150px;
+        right: -170px;
         z-index: 1;
         transition: all .35s;
     }
+        div[class="sidebar"] > ul > li {
+            width: 100%;
+            height: 20px;
+        }
+
+        div[class="sidebar"] > ul > li:hover {
+            color: white;
+            background-color: #34B0C7;
+
+        }
 
     input[id="menuicon"]:checked + label + div {
         right: 0;
@@ -134,26 +149,37 @@
     <div id="logoBox">
         <img id="companyLogo" src="~/images/logo.png">
     </div>
-    <hr style="margin: 0;" />
+    <hr style="margin: 0; border: 0.2px solid lightgrey;" />
 
     <!-- nav_1 -->
-    <nav id="nav_1">
+    <nav id="menu">
         <ul>
-            <li><a class="text-primary" asp-area="" asp-controller="Home" asp-action="Index">홈</a></li>
+            <li>
+                <a class="text-primary" asp-area="" asp-controller="Home" asp-action="Index">홈</a>
+            </li>
             <li>
                 <a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">DX진단 플랫폼 소개</a>
                 <ul>
-                    <li><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">인사말</a></li>
-                    <li><a asp-area="" asp-controller="CommonCompany" asp-action="IntroductionDX">DX 소개</a></li>
-                    <li style="padding-bottom: 10px;"> <a asp-area="" asp-controller="CommonCompany" asp-action="OnTheWay">찾아오시는 길</a></li>
+                    <li><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">DX진단 필요성</a></li>
+                    <li><a asp-area="" asp-controller="CommonCompany" asp-action="IntroductionDX">DX진단 플랫폼 주요내용</a></li>
                 </ul>
             </li>
-            <li><a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 자가진단</a></li>
-            <li><a asp-area="" asp-controller="MemberDiagnosis" asp-action="ExpertDiagnosis">DX 전문가 진단</a></li>
+            <li>
+                <a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 자가진단</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="MemberDiagnosis" asp-action="ExpertDiagnosis">DX 전문가 진단</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="MemberMypage" asp-action="MyInfoRead">마이페이지</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a>
+            </li>
         </ul>
-        <a style="float:right; padding: 0 5%" asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a>
-        <a style="float:right; padding: 0 3%" asp-area="" asp-controller="MemberMypage" asp-action="MyInfoRead">마이페이지</a>
-        <a style="float:right; padding: 0 1%" asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a>
     </nav>
     <!-- nav_1 -->
     <!-- nav_2 -->
@@ -168,15 +194,14 @@
             <ul style="list-style:none; padding-left:0px;">
                 <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="Home" asp-action="Index">홈</a></li>
                 <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">DX진단 플랫폼 소개</a></li>
-                <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">인사말</a></li>
-                <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="CommonCompany" asp-action="IntroductionDX">DX 소개</a></li>
-                <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="CommonCompany" asp-action="OnTheWay">찾아오시는 길</a></li>
+                <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="CommonCompany" asp-action="Greetings">DX진단 필요성</a></li>
+                <li style="padding: 10px 0 0 20px;"><a asp-area="" asp-controller="CommonCompany" asp-action="IntroductionDX">DX진단 플랫폼 주요내용</a></li>
                 <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 자가진단</a></li>
                 <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="MemberDiagnosis" asp-action="ExpertDiagnosis">DX 전문가 진단</a></li>
-                <hr style="border: solid 1px grey;">
-                <li><a style="padding: 0px 0 0 50px;" asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a></li>
-                <li><a style="padding: 0px 0 0 50px;" asp-area="" asp-controller="CommonMember" asp-action="MemberReg">회원가입</a></li>
-                <li><a style="padding: 0px 0 0 50px;" asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a></li>
+                <hr style="border: solid 0.3px lightgrey;" />
+                <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="Home" asp-action="TViewPageList">TViewPageList</a></li>
+                <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="CommonMember" asp-action="MemberReg">회원가입</a></li>
+                <li style="padding: 10px 0 0 10px;"><a asp-area="" asp-controller="CommonAuth" asp-action="Login">로그인</a></li>
             </ul>
         </div>
     </nav>

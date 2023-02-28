@@ -1,12 +1,61 @@
-﻿<aside>
-    <div style="padding: 10px; height: 30px; line-height: 30px; background: white;">
-        ▣ 회사 소개
+﻿<style>
+    #menuBox {
+        padding: 5px;
+        width: 90%;
+        height: 60px;
+        text-align: center;
+        background: #fafafa;
+        margin: auto;
+    }
+    #menuTitle {
+        width: 90%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: #34B0C7;
+    }
+    #menuLogo {
+        width: 70px;
+        height: 55px;
+    }
+    #lnb {
+        width: 90%;
+        background: #fafafa;
+        font-size: 16px;
+        font-weight: 600;
+        margin: auto;
+    }
+    .menu {
+        height: 40px;
+        line-height: 40px;
+    }
+    .menu:hover {
+        background-color: #34B0C7;
+        color: white;
+        transition: 0.2s;
+    }
+    .menu a {
+        padding-left: 10px;
+    }
+</style>
+<aside>
+    <div id="menuBox">
+        <img id="menuLogo" src="~/images/menu1.png">
     </div>
-    <div style="height: 300px; background: grey;">
+    <div id="menuTitle">
+        DX진단 플랫폼 소개
+    </div>
+    <hr style="border: solid 0.5px black;">
+    <div id="lnb" style="height: 300px;">
         <ul style="list-style:none; padding-left:0px;">
-            <li style="padding: 10px 0 0 10px;"><a class="text-primary" asp-area="" asp-controller="CommonCompany" asp-action="Greetings">◎ 인사말</a></li>
-            <li style="padding: 10px 0 0 10px;"><a class="text-primary" asp-area="" asp-controller="CommonCompany" asp-action="IntroductionDX">◎ DX 소개</a></li>
-            <li style="padding: 10px 0 0 10px;"><a class="text-primary" asp-area="" asp-controller="CommonCompany" asp-action="OnTheWay">◎ 찾아오시는 길</a></li>
+            <li class="menu">
+                <a class="text-primary" asp-area="" asp-controller="CommonCompany" asp-action="Greetings">DX진단 필요성</a>
+            </li>
+            <li class="menu">
+                <a class="text-primary" asp-area="" asp-controller="CommonCompany" asp-action="IntroductionDX">DX진단 플랫폼 주요내용</a>
+            </li>
         </ul>
     </div>
 </aside>

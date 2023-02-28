@@ -8,25 +8,31 @@
         <h1 class="display-4">Welcome</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>*@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
 
 <!-- 스타일 지정 -->
 <style type="text/css">
     /* 메인 화면 */
-    #mainImg {
-        width: 100%;
-        height: 100%;
-        vertical-align: middle;
-    }
     section {
         float: left;
         width: 96.6%;
-        height: calc( 100% - 300px );
-        background: black;
+        height: calc( 100% - 500px );
+        background: #fafafa;
         display: flex;
+    }
+    #mainImg {
+        width: 100%;
+        height: 600px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    #image-thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     .contents {
         width: 100%;
-        margin: 10px auto;
         position: relative;
     }
     .contents-text {
@@ -37,7 +43,7 @@
         transform: translate(-30%, -50%);
         color: white;
     }
-    .contents-text p:first-child {
+    .type1 {
         font-size: 40px;
         font-weight: 800;
     }
@@ -48,17 +54,64 @@
         color: white;
         font-size: 24px;
     }
+    @@media (max-width: 768px) {
+        #mainImg {
+            width: 90%;
+            height: 650px;
+            margin: 0 auto;
+        }
+        .type1 {
+            font-size: 25px;
+            font-weight: 800;
+        }
+        .contents-text {
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            width: 320px;
+            transform: translate(-30%, -50%);
+            word-break: break-all;
+        }
+        #btn1 {
+            width: 200px;
+            height: 40px;
+            background-color: #34B0C7;
+            font-size: 20px;
+            border: none;
+        }
+        footer {
+            border: solid 1px red;
+            margin: 0 auto;
+        }
+/*        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }*/
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+    }
 </style>
 <!-- 스타일 지정 -->
 <section class="content">
-    <img id="mainImg" src="~/index/images/p-images/section1_bg.png" alt="">
-    <div class="contents-text">
-        <p>AI 기반 DX 진단 서비스</p>
-        <p>국내 창업기업, 중소기업, 중견기업 대상 DT역량 진단</p>
-        <a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">
-            <input id="btn1" type="submit" value="무료 체험" />
-        </a>
-        <p>케이아이포씨(Ki4C) 협동조합 AI 기반 DX진단 Service 전문가가 도와드립니다.</p>
+    <div id="wrap" style="width: 100%;">
+        <div id="mainImg">
+            <img id="image-thumbnail" src="~/index/images/p-images/section1_bg.png" alt="">
+        </div>
+        <div class="contents-text">
+            <p class="type1">AI 기반 DX 진단 서비스</p>
+            <p>국내 창업기업, 중소기업, 중견기업 대상 DT역량 진단</p>
+            <br />
+            <a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">
+                <input id="btn1" type="submit" value="무료 체험" />
+            </a>
+            <br /> <br />
+            <p>케이아이포씨(Ki4C) 협동조합 AI 기반 DX진단 Service 전문가가 도와드립니다.</p>
+            <br />
+            <p class="type1">AI 기반 DX 진단 서비스</p>
+            <p>국내 창업기업, 중소기업, 중견기업 대상 DT역량 진단</p>
+        </div>
     </div>
 </section>
 
@@ -70,17 +123,14 @@
                 $(".btn-login").on("click", function () {
                     let id = $("#id").val();
                     let pw = $("#pw").val();
-
                     if (IndexJS.isEmpty(id)) {
                         alert("아이디를 입력해주세요.");
                         return;
                     }
-
                     if (IndexJS.isEmpty(pw)) {
                         alert("비밀번호를 입력해주세요.");
                         return;
                     }
-
                     $("#loginForm").submit();
                 });
             },
@@ -92,14 +142,12 @@
                 }
             },
         }
-
         $(document).ready(function () {
             IndexJS.init();
             if ($("#ValidateMessage").text() != "") {
                 $('#loginSuccessModal').modal('show');
             }
         });
-
         $(".btn-close, .closeBtn").click(function () {
             $('#loginSuccessModal').modal('hide');
         });</script>
