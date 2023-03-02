@@ -59,11 +59,11 @@
                         margin-bottom: 3px;" id="inputTypeSelecter">
                 </select>
             </div>
-            <div id="answer-form">
-                <input type="text" id="answer-input" placeholder="추가할 지문을 입력하세요" required />
-                <button id="answer-addBtn">추가</button>
+            <div id="answerForm">
+                <input type="text" id="answerInput" placeholder="추가할 지문을 입력하세요" required />
+                <button id="answerButton" type="button">추가</button>
             </div>
-            <ul id="answer-list"></ul>
+            <ul id="answerList"></ul>
             <br>
             <div style="display: inline-block;">
                 <h4 style="display: inline;">지문:</h4>
@@ -117,9 +117,10 @@
                     _this.delete();
                 }
             });
-            $('answer-addBtn').on('click',function(){
+            $('#answerButton').on('click', function () {
                 _this.addAnswer();
-            })
+            });
+
             $('#DiagnosisClassSelecter').on('change', function () {
                 var diagnosisClassNumber = $(this).val();
                 diagnosisClassNumber = parseInt(diagnosisClassNumber);
@@ -251,7 +252,7 @@
                 return false;
             }
             if ($('#inputTypeSelecter option:selected').val() == 0) {
-                alert('진단종류를 선택해주세요.');
+                alert('입력방식을 선택해주세요.');
                 return false;
             }
             if ($('#EvaluationQuestionCode').val() == '') {
@@ -311,7 +312,7 @@
                 success: function (data) {
                     data = JSON.parse(data);
                     let html = '';
-                    html += '<option value="0">진단종류</option>';
+                    html += '<option value="0">입력방식</option>';
                     $.each(data, function (index, item) {
                         html += '<option value="' + item.InputTypeNumber + '">' + item.InputTypeNumber + ' - ' + item.InputTypeCode  + ' - ' + item.InputTypeName + '</option>';
                     });
@@ -388,7 +389,7 @@
         },
         addAnswer : function(){
             // answer-input text add answer-list
-            let answer = $('#answer-input').val();
+            let answer = $('#answerInput').val();
             let html = '';
             html += '<li class="list-group-item">';
             html += '<div class="row">';
@@ -400,8 +401,8 @@
             html += '</div>';
             html += '</div>';
             html += '</li>';
-            $('#answer-list').append(html);
-            $('#answer-input').val('');
+            $('#answerList').append(html);
+            $('#answerInput').val('');
         },
         deleteAnswer : function(obj){
             $(obj).parent().parent().parent().remove();
