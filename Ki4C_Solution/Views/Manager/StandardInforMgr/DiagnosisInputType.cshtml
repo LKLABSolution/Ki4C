@@ -107,7 +107,7 @@
                 contentType: 'application/json; charset=utf-8'
             }).done(function (data) {
                 data = JSON.parse(data);
-                let html = '<thead><tr align="center" bgcolor="skyblue">';
+                let html = '<thead><tr align="center" bgcolor="#2B92D5" style="color:#F8F8FF">';
                 html += '<td>번호</td>';
                 html += '<td>입력형태코드</td>';
                 html += '<td>입력형태이름</td>';
@@ -125,7 +125,11 @@
                 html += '</tbody>';
                 InputTypeJS.ReflashInputTypeList();
                 $('#InputTypeList').append(html);
-                $('#InputTypeList').DataTable();
+                $('#InputTypeList').DataTable({
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.13.3/i18n/ko.json'
+                    },
+                });
 
             }).fail(function (error) {
                 alert(JSON.stringify(error));

@@ -156,7 +156,7 @@
                 data = JSON.parse(data);
                 let html = '';
                 html += '<thead>';
-                html += '<tr align="center" bgcolor="skyblue">';
+                html += '<tr align="center" bgcolor="#2B92D5" style="color:#F8F8FF">';
                 html += '<th>번호</th>';
                 html += '<th>평가척도 코드</th>';
                 html += '<th>평가척도 명</th>';
@@ -175,7 +175,11 @@
                 html += '</tbody>';
                 MeasurementJS.RefreshMeasurementList();
                 $('#DiagnosisEvaluationMeasurementList').html(html);
-                $('#DiagnosisEvaluationMeasurementList').DataTable();
+                $('#DiagnosisEvaluationMeasurementList').DataTable({
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.13.3/i18n/ko.json'
+                    },
+                });
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });

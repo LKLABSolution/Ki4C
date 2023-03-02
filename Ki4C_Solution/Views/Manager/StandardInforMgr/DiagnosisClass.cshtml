@@ -286,7 +286,7 @@
                 contentType: 'application/json; charset=utf-8'
             }).done(function (data) {
                 data = JSON.parse(data);
-                let html = '<thead><tr id="header" align="center" bgcolor="#34B0C7">'
+                let html = '<thead><tr align="center" bgcolor="#2B92D5" style="color:#F8F8FF">'
                     + '<td> 번호 </td>'
                     + '<td> 진단종류 </td>'
                     + '<td> 진단구분코드 </td>'
@@ -305,7 +305,11 @@
                 html += '</tbody>';
                 DiagnosisClassJS.RefreshDiagnosisTypeList();
                 $('#DiagnosisClassList').append(html);
-                $('#DiagnosisClassList').DataTable();
+                $('#DiagnosisClassList').DataTable({
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.13.3/i18n/ko.json'
+                    },
+                });
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });

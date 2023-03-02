@@ -306,7 +306,7 @@
                 contentType: 'application/json; charset=utf-8'
             }).done(function (data) {
                 data = JSON.parse(data);
-                let html = '<thead><tr align="center" bgcolor="skyblue">';
+                let html = '<thead><tr align="center" bgcolor="#2B92D5" style="color:#F8F8FF">';
                 html += '<td>번호</td>';
                 html += '<td>진단구분 코드</td>';
                 html += '<td>진단평가 영역코드</td>';
@@ -325,7 +325,11 @@
                 html += '</tbody>';
                 DiagnosisEvaluationAreaJS.RefreshDiagnosisEvaluationAreaList();
                 $('#DiagnosisEvaluationAreaList').append(html);
-                $('#DiagnosisEvaluationAreaList').DataTable();
+                $('#DiagnosisEvaluationAreaList').DataTable({
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.13.3/i18n/ko.json'
+                    },
+                });
 
             }).fail(function (error) {
                 alert(JSON.stringify(error));

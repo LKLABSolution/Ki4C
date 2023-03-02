@@ -230,7 +230,7 @@
                     data = JSON.parse(data);
                     let html = '';
                     html += '<thead>';
-                    html += '<tr align="center" bgcolor="skyblue">';
+                    html += '<tr align="center" bgcolor="#2B92D5" style="color:#F8F8FF">';
                     html += '<th>번호</th>';
                     html += '<th>진단수준코드</th>';
                     html += '<th>진단수준명</th>';
@@ -249,7 +249,11 @@
                     html += '</tbody>';
                     DiagnosisLevelJS.RefreshDiagnosisLevelList();
                     $('#DiagnosisLevelList').append(html);
-                    $('#DiagnosisLevelList').DataTable();
+                    $('#DiagnosisLevelList').DataTable({
+                        language: {
+                            url: 'https://cdn.datatables.net/plug-ins/1.13.3/i18n/ko.json'
+                        },
+                    });
 
                 }
             });
