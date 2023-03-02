@@ -17,7 +17,7 @@
             12	로그인수	CountOfLogins	int	NOT NULL
             13	최종로그인	FinalLogin	datetime	NOT NULL
             14	활동정보	ActivityInformation	varchar(2)	NOT NULL
-            15	평가신청상태	DiagnosticEvaluationStatus	varchar(1)	NOT NULL
+            15	평가신청상태	DiagnosisEvaluationStatus	varchar(1)	NOT NULL
          */
         public int CustomerNumber { get; set; }
         public int CustomerClassNumberFK { get; set; }
@@ -33,7 +33,7 @@
         public int CountOfLogins { get; set; }
         public string FinalLogin { get; set; }
         public string ActivityInformation { get; set; }
-        public string DiagnosticEvaluationStatus { get; set; }
+        public string DiagnosisEvaluationStatus { get; set; }
 
         public Customer()
         {
@@ -51,10 +51,10 @@
             CountOfLogins = 0;
             FinalLogin = string.Empty;
             ActivityInformation = string.Empty;
-            DiagnosticEvaluationStatus = string.Empty;
+            DiagnosisEvaluationStatus = string.Empty;
         }
 
-        public Customer(int customerNumber, int customerClassNumberFK, int evaluatorSelectionNumberFK, string customerClassName, string id, string email, string companyName, string department, string cellPhone, string receiveMailing, string signUpTime, int countOfLogins, string finalLogin, string activityInformation, string diagnosticEvaluationStatus)
+        public Customer(int customerNumber, int customerClassNumberFK, int evaluatorSelectionNumberFK, string customerClassName, string id, string email, string companyName, string department, string cellPhone, string receiveMailing, string signUpTime, int countOfLogins, string finalLogin, string activityInformation, string DiagnosisEvaluationStatus)
         {
             CustomerNumber = customerNumber;
             CustomerClassNumberFK = customerClassNumberFK;
@@ -70,12 +70,12 @@
             CountOfLogins = countOfLogins;
             FinalLogin = finalLogin;
             ActivityInformation = activityInformation;
-            DiagnosticEvaluationStatus = diagnosticEvaluationStatus;
+            DiagnosisEvaluationStatus = DiagnosisEvaluationStatus;
         }
 
         public override string ToString()
         {
-            return $"{nameof(CustomerNumber)}: {CustomerNumber}, {nameof(CustomerClassNumberFK)}: {CustomerClassNumberFK}, {nameof(EvaluatorSelectionNumberFK)}: {EvaluatorSelectionNumberFK}, {nameof(CustomerClassName)}: {CustomerClassName}, {nameof(ID)}: {ID}, {nameof(Email)}: {Email}, {nameof(CompanyName)}: {CompanyName}, {nameof(Department)}: {Department}, {nameof(CellPhone)}: {CellPhone}, {nameof(ReceiveMailing)}: {ReceiveMailing}, {nameof(SignUpTime)}: {SignUpTime}, {nameof(CountOfLogins)}: {CountOfLogins}, {nameof(FinalLogin)}: {FinalLogin}, {nameof(ActivityInformation)}: {ActivityInformation}, {nameof(DiagnosticEvaluationStatus)}: {DiagnosticEvaluationStatus}";
+            return $"{nameof(CustomerNumber)}: {CustomerNumber}, {nameof(CustomerClassNumberFK)}: {CustomerClassNumberFK}, {nameof(EvaluatorSelectionNumberFK)}: {EvaluatorSelectionNumberFK}, {nameof(CustomerClassName)}: {CustomerClassName}, {nameof(ID)}: {ID}, {nameof(Email)}: {Email}, {nameof(CompanyName)}: {CompanyName}, {nameof(Department)}: {Department}, {nameof(CellPhone)}: {CellPhone}, {nameof(ReceiveMailing)}: {ReceiveMailing}, {nameof(SignUpTime)}: {SignUpTime}, {nameof(CountOfLogins)}: {CountOfLogins}, {nameof(FinalLogin)}: {FinalLogin}, {nameof(ActivityInformation)}: {ActivityInformation}, {nameof(DiagnosisEvaluationStatus)}: {DiagnosisEvaluationStatus}";
         }
 
     }
