@@ -2,15 +2,17 @@
   "ExpandedNodes": [
     "",
     "\\Ki4C_Solution",
-    "\\Ki4C_Solution\\Controllers",
-    "\\Ki4C_Solution\\Controllers\\Common",
-    "\\Ki4C_Solution\\Controllers\\Common\\Member",
-    "\\Ki4C_Solution\\Controllers\\Manager",
-    "\\Ki4C_Solution\\Controllers\\Manager\\Diagnosis",
+    "\\Ki4C_Solution\\Models",
+    "\\Ki4C_Solution\\Models\\Manager",
+    "\\Ki4C_Solution\\Models\\Manager\\StandardInfoMgr",
     "\\Ki4C_Solution\\Views",
-    "\\Ki4C_Solution\\Views\\Manager",
-    "\\Ki4C_Solution\\Views\\Manager\\Diagnosis"
+    "\\Ki4C_Solution\\Views\\Home",
+    "\\Ki4C_Solution\\Views\\Member",
+    "\\Ki4C_Solution\\Views\\Member\\Diagnosis",
+    "\\Ki4C_Solution\\Views\\Shared",
+    "\\Ki4C_Solution\\wwwroot",
+    "\\Ki4C_Solution\\wwwroot\\css"
   ],
-  "SelectedNode": "\\Ki4C_Solution\\Views\\Manager\\StandardInforMgr\\DiagnosisEvaluationQnA.cshtml",
+  "SelectedNode": "\\Ki4C_Solution\\Views\\Member\\Diagnosis\\SelectedResultList.cshtml",
   "PreviewInSolutionExplorer": false
 }

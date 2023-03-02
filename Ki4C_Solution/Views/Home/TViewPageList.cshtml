@@ -4,7 +4,7 @@
     ViewData["Title"] = "TViewPageList Page";
 }
 
-<table class="table">
+<table class="display" id="TViewPageList">
     <thead>
         <tr>
             <th scope="col">Page Name</th>
@@ -12,6 +12,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>swagger</td>
+            <td>
+                <p>swagger home</p>
+                <a class="text-primary" href="/swagger/index.html">/swagger/index.html</a>
+            </td>
+        </tr>
         <tr>
             <td>Index</td>
             <td>
@@ -262,3 +269,13 @@
         </tr>
     </tbody>
 </table>
+
+<script>
+    $(document).ready(function () {
+        $('#TViewPageList').DataTable({
+            "paging": false,
+            "searching": true,
+            "ordering": false,
+        });
+    });
+</script>
