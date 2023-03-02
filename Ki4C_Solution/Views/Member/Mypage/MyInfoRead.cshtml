@@ -6,9 +6,34 @@
 }
 
 <style>
-    select {
-        width: 100px;
+    .inputType1 {
+        width: 150px;
+        height: 25px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 5px;
     }
+    .btnType1 {
+        font-size: 12px;
+        font-weight: 500;
+        color: white;
+        background-color: #34B0C7;
+        border: none;
+        width: 80px;
+        height: 25px;
+        border-radius: 20px;
+    }
+
+    select {
+        width: 150px;
+        height: 20px;
+        padding: 3px;
+        margin-top: 10px;
+        border: solid 0.3px #34B0C7;
+        border-radius: 0.5em;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    }
+
 </style>
 
 <!-- 섹션 -->
@@ -30,7 +55,7 @@
         <hr style="width: 100%" />
         <!-- 진단 내역 -->
         <div style="display: inline-block;">
-            <div id="buttonLocation">
+            <div id="buttonLocation" style="margin-bottom: 10px;">
                 <form style="padding-top: 10px; display: inline-block;">
                     <select style="height: 30px; font-size: 16px; padding-right: 30px;
                             margin-bottom: 3px;">
@@ -39,13 +64,12 @@
                         <option>진단결과</option>
                     </select>
                 </form>
-                <input id="searchBox" type="text" placeholder="검색어 입력" />
-                <button id="searchButton">검색</button>
+                <input class="inputType1" id="searchBox" type="text" placeholder="검색어 입력" />
+                <button class="btnType1" id="searchButton">검색</button>
             </div>
-            <br> <br>
             <div style="width: 90%; margin: auto;">
                 <table id="table">
-                    <tr align="center" bgcolor="skyblue">
+                    <tr id="header" align="center" bgcolor="#34B0C7">
                         <td>번호</td>
                         <td>진단 종류</td>
                         <td>제출일</td>

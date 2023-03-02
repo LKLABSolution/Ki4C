@@ -5,37 +5,48 @@
     @model Ki4C_Solution.Models.Common.Auth.CreateAccountModel;
 }
 <style>
-    /* FindPassInput.html */
-    #find-button{
-        font-size: 12px; font-weight: 600;
-        background-color: lightgray;
-        border-color: black;
-        width: 100px; height: 40px;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-        margin-right: 10px;
-    }
-    #cancle-button{
-        font-size: 12px; font-weight: 600;
-        background-color: white;
-        border-color: black;
-        width: 100px; height: 40px;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-    }
-
-    #find-button:hover, #find-button:active {
-        background-color: gray;
+    .btnType1 {
+        font-size: 12px;
+        font-weight: 600;
         color: white;
+        background-color: #34B0C7;
+        border: none;
+        width: 80px;
+        height: 25px;
+        border-radius: 20px;
     }
 
-    #cancle-button:hover, #cancle-button:active {
-        background-color: lightgray;
-        color: black;
+        .btnType1:hover {
+            background-color: #2B92D5;
+            color: white;
+        }
+
+        .btnType1:active {
+            background-color: #34E9F9;
+            color: white;
+        }
+
+    .inputType1 {
+        width: 100px;
+        height: 45px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    #findParagraph {
+        width: 50%;
+        padding-left: 100px;
+        margin: 0 auto;
+        text-align: left;
+        font-size: 12px;
+    }
+    /* 화면 너비 0 ~ 768px */
+    @@media (max-width: 768px) {
+        #findParagraph {
+            width: 65%;
+            padding-right: 100px;
+        }
     }
 </style>
 <section>
@@ -58,19 +69,18 @@
                 <br>
                 <h1 style="padding-right: 100px;">비밀번호 찾기</h1>
                 <a style="font-size: 12px;">비밀번호를 찾기 위해 아래 정보를 입력해주세요.</a> <br> <br>
-                <a>아이디 </a>
                 <form asp-controller="CommonAuth" asp-action="FindPassword" method="post" id="Login-form">
+                    <a>아이디 </a>
                     <div style="padding-top: 10px; display: inline-block;">
-                        <input type="text" placeholder="아이디를 입력해주세요."
+                        <input class="inputType1" type="text" placeholder="아이디를 입력해주세요."
                                style="max-width: 400px; width: 130%; height: 30px; font-size: 16px;
                                 margin-bottom: 3px;"
                                onfocus="this.value='';" id="Input_Id" /> <br>
                     </div>
                     <br>
                     <a>이메일 </a>
-                    <br>
                     <div style="padding-top: 10px; display: inline-block;">
-                        <input type="text" placeholder="이메일을 입력해주세요."
+                        <input class="inputType1" type="text" placeholder="이메일을 입력해주세요."
                                style="max-width: 400px; width: 130%; height: 30px; font-size: 16px;
                                 margin-bottom: 3px;"
                                onfocus="this.value='';" id="Input_Email" /><br>
@@ -78,19 +88,19 @@
                 </form>
                 <div style="padding-left: 90px; padding-top: 20px;">
                     <a href="#" style="display: inline-block;">
-                        <input id="find-button" type="submit" value="비밀번호 찾기" onclick="FindPassInputJS.submitBtnClick();" />
+                        <input class="btnType1" id="find-button" type="submit" value="비밀번호 찾기" onclick="FindPassInputJS.submitBtnClick();" />
                     </a>
                     <a style="display: inline-block;" asp-area="" asp-controller="CommonAuth" asp-action="Login">
-                        <input id="cancle-button" type="submit" value="취소" />
+                        <input class="btnType1" id="cancle-button" type="submit" value="취소" />
                     </a>
                 </div>
             </div>
             <br> <br>
-            <div style="display: flex; justify-content: center;">
-                <div style="text-align: left; font-size: 12px;">
+            <div style="display: flex;">
+                <div id="findParagraph">
                     아이디가 기억나지 않으실 때는
                     <a href="/common/auth/FindIdInput.html" style="display: inline-block;">
-                        <input type="button" value="아이디 찾기" />
+                        <input class="btnType1" type="button" value="아이디 찾기" />
                     </a>
                     <p>
                         이메일이 기억나지 않거나, 문의가 필요하시면 OOO@OOO.com 또는 02)2088-5953 으로 문의바랍니다.

@@ -1,20 +1,47 @@
 ﻿<style>
+    #table {
+        border: "1";
+        width: 800px;
+        height: 100px;
+        text-align: center;
+        background-color: #34B0C7;
+        border-color: white;
+        table-layout: fixed;
+    }
+
+    td {
+        font-size: 14px;
+        word-wrap: break-word;
+    }
+
+    #header td {
+        color: white;
+        font-weight: 700;
+    }
     #mypageButton {
+        width: 70px;
+        height: 20px;
         font-size: 12px;
-        font-weight: 600;
-        background-color: red;
+        font-weight: 400;
+        background-color: #34B0C7;
         color: white;
         border: none;
         border-radius: 30px;
     }
 
     #logoutButton {
+        width: 70px;
+        height: 20px;
         font-size: 12px;
-        font-weight: 600;
-        background-color: black;
+        font-weight: 400;
+        background-color: #2A3142;
         color: white;
         border: none;
         border-radius: 30px;
+    }
+    #buttonLocation {
+        float: right;
+        margin-right: -50px;
     }
     #menuBox {
         padding: 5px;
@@ -26,7 +53,7 @@
     }
 
     #menuTitle {
-        width: 90%;
+        width: 95%;
         height: 50px;
         line-height: 50px;
         text-align: center;
@@ -70,7 +97,7 @@
         <div style="display: inline; height: 20px; vertical-align: top; margin-left: 10px;">
             관리자466
         </div>
-        <div style="position: relative; left: 60px;">
+        <div style="position: relative; left: 40px;">
             <input id="mypageButton" type="submit" value="마이페이지" />
             <input id="logoutButton" type="submit" value="로그아웃" />
         </div>

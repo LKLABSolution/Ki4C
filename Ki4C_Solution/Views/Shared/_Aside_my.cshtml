@@ -1,24 +1,37 @@
 ﻿<style>
     #table {
         border: "1";
-        width: 800px; height: 100px;
+        width: 800px;
+        height: 100px;
         text-align: center;
-        background-color:skyblue; border-color: white;
+        background-color: #34B0C7;
+        border-color: white;
         table-layout: fixed;
     }
     td {
+        font-size: 14px;
         word-wrap: break-word;
-    } 
-    #mypageButton{
-        font-size: 12px; font-weight: 600;
-        background-color: red;
+    }
+    #header td {
+        color: white;
+        font-weight: 700;
+    }
+    #mypageButton {
+        width: 70px;
+        height: 20px;
+        font-size: 12px;
+        font-weight: 400;
+        background-color: #34B0C7;
         color: white;
         border: none;
         border-radius: 30px;
     }
-    #logoutButton{
-        font-size: 12px; font-weight: 600;
-        background-color: black;
+    #logoutButton {
+        width: 70px;
+        height: 20px;
+        font-size: 12px;
+        font-weight: 400;
+        background-color: #2A3142;
         color: white;
         border: none;
         border-radius: 30px;
@@ -29,26 +42,7 @@
             padding-right: 30px;
             margin-bottom: 3px;
     }
-    #searchBox {
-        width: 150px; height: 25px;
-    }
-    #searchButton {
-        background-color: white;
-        font-weight: 500;
-        border-color: grey;
-        color: black;
-        width: 80px; height: 30px;
-        margin: 10px;
-        border-radius: 30px;
-    }
-    #delete-button {        
-        background-color: white;
-        font-size: 16px; font-weight: 600;
-        border-color: grey;
-        width: 150px; height: 40px;
-        margin: 10px;
-        border-radius: 30px;
-    }
+
     #buttonLocation {
         float: right; margin-right: -50px;
     }
@@ -114,11 +108,11 @@
         <div id=profile_img style="display: inline;">
             <img style="width: 50px; height: 50px; " src="~/images/profile.png">
         </div>
-        <div style="display: inline-block; vertical-align: top;">
+        <div style="display: inline-block; font-size: 14px; vertical-align: top;">
             홍길동  <br>
             산업공학과
         </div>
-        <div style="position: relative; left: 60px;">
+        <div style="position: relative; left: 40px;">
             <input id="mypageButton" type="submit" value="마이페이지" />
             <input id="logoutButton" type="submit" value="로그아웃" />
         </div>

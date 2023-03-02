@@ -36,28 +36,30 @@
         text-align: center;
     }
 
-    /* menu태그 자식의 ul의 자식 li를 왼쪽정렬과 넓이 160설정 */
-    #menu > ul > li {
-        float: left;
-        width: 160px;
-        position: relative;
-    }
-        #menu > ul > li > ul {
-            width: 180px;
-            display: none;
-            position: absolute;
-            font-size: 14px;
-            background: white;
+        /* menu태그 자식의 ul의 자식 li를 왼쪽정렬과 넓이 160설정 */
+        #menu > ul > li {
+            float: left;
+            width: 160px;
+            position: relative;
         }
-    #menu > ul > li:hover > ul {
-        display: block;
-    }
 
-        #menu > ul > li > ul > li:hover {
-            background: #34B0C7;
-            color: white;
-            transition: ease 0.03s;
-        }
+            #menu > ul > li > ul {
+                width: 180px;
+                display: none;
+                position: absolute;
+                font-size: 14px;
+                background: white;
+            }
+
+            #menu > ul > li:hover > ul {
+                display: block;
+            }
+
+            #menu > ul > li > ul > li:hover {
+                background: #34B0C7;
+                color: white;
+                transition: ease 0.03s;
+            }
 
     /* nav_2, 햄버거 메뉴 */
     input[id="menuicon"] {
@@ -129,19 +131,57 @@
         z-index: 1;
         transition: all .35s;
     }
+
         div[class="sidebar"] > ul > li {
             width: 100%;
             height: 20px;
         }
 
-        div[class="sidebar"] > ul > li:hover {
-            color: white;
-            background-color: #34B0C7;
-
-        }
+            div[class="sidebar"] > ul > li:hover {
+                color: white;
+                background-color: #34B0C7;
+            }
 
     input[id="menuicon"]:checked + label + div {
         right: 0;
+    }
+    /* 모달창 */
+
+    .modal {
+        position: fixed;
+        top: 20%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 2;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .modal_body {
+        position: relative;
+        text-align: center;
+        padding: 50px 100px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        width: 200px;
+        height: 100px;
+        padding: 40px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    }
+
+    #YesBtn, #NoBtn {
+        width: 80px;
+        height: 30px;
+        background-color: #34B0C7;
+        border-radius: 30px;
+        color: white;
+        border: none;
+        margin: 5px;
     }
 </style>
 <!-- 스타일 지정 -->
@@ -165,7 +205,7 @@
                 </ul>
             </li>
             <li>
-                <a asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 자가진단</a>
+                <a class="btn-open-popup" asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">DX 자가진단</a>
             </li>
             <li>
                 <a asp-area="" asp-controller="MemberDiagnosis" asp-action="ExpertDiagnosis">DX 전문가 진단</a>
@@ -181,6 +221,13 @@
             </li>
         </ul>
     </nav>
+    <div class="modal hidden">
+        <div class="modal_body">
+            이전에 작성중인 데이터가 있습니까? <br> 이어서 진행할까요? <br> <br>
+            <button id="YesBtn">예</button>
+            <button id="NoBtn">아니오</button>
+        </div>
+    </div>
     <!-- nav_1 -->
     <!-- nav_2 -->
     <nav id="nav_2">
@@ -207,3 +254,27 @@
     </nav>
     <!-- nav_2 -->
 </header>
+<script>
+    /* 모달창 */
+    const modal = document.querySelector('.modal');
+    const btnOpenPopup = document.querySelector('.btn-open-popup');
+    const YesBtn = document.querySelector('#YesBtn');
+    const NoBtn = document.querySelector('#NoBtn');
+    function modalOpen() {
+        event.preventDefault();
+        modal.classList.remove("hidden")
+    }
+    function roadData() {
+        modal.classList.add("hidden")
+        // 데이터 로드하고 자가진단 사이트 이동
+    }
+    function noRoadData() {
+        modal.classList.add("hidden")
+        // 데이터 로드하지 않고 자가진단 사이트 이동
+    }
+
+    btnOpenPopup.addEventListener("click", modalOpen);
+    YesBtn.addEventListener("click", roadData);
+    NoBtn.addEventListener("click", noRoadData);
+
+</script>
