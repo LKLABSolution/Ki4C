@@ -5,6 +5,111 @@
     Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg.cshtml";
     ViewData["Title"] = "기준정보 관리/진단 종류";
 }
+<style>
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 1.5em;
+        height: 1.5em;
+        border: 2px solid #ccc;
+        border-radius: 0.25em;
+        outline: none;
+        transition: all 0.2s;
+        margin-right: 0.5em;
+        position: relative;
+    }
+
+    input[type="checkbox"]::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.2em;
+        color: #2B92D5;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    input[type="checkbox"]:checked {
+        border-color: #2B92D5;
+        transform: scale(1.2);
+    }
+
+    input[type="checkbox"]:checked::before {
+        opacity: 1;
+        content: "\2714";
+    }
+
+    .dataTables_paginate .paginate_button {
+        border: 2px solid #ccc;
+        background-color: #fff;
+        color: #2B92D5;
+        border-radius: 0.25em;
+        padding: 0.5em 1em;
+        margin-right: 0.5em;
+        transition: all 0.2s;
+    }
+
+        .dataTables_paginate .paginate_button:hover {
+            background-color: #2B92D5;
+            color: #fff;
+            border-color: #2B92D5;
+        }
+
+    .dataTables_filter input[type="search"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 2.5em;
+        border: 2px solid #ccc;
+        border-radius: 0.25em;
+        outline: none;
+        transition: all 0.2s;
+        padding: 0.5em;
+    }
+
+        .dataTables_filter input[type="search"]:focus {
+            border-color: #2B92D5;
+        }
+
+    .dataTables_length select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /*width: 1.5em;
+        height: 1.5em;*/
+        border: 2px solid #ccc;
+        border-radius: 0.25em;
+        outline: none;
+        transition: all 0.2s;
+        margin-right: 0.5em;
+        position: relative;
+    }
+
+        .dataTables_length select::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            color: #2B92D5;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .dataTables_length select:focus {
+            border-color: #2B92D5;
+        }
+
+            .dataTables_length select:focus::before {
+                opacity: 1;
+                content: "\25BC";
+            }
+</style>
 <!-- 섹션 -->
 <section>
     <!-- 콘텐츠 -->
@@ -25,11 +130,13 @@
         <hr style="width: 100%" />
         <!-- 평가문제 등록 -->
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
+            <a>평가구문 : </a>
             <div style="padding-right: 30px; display: inline-block;">
                 <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
                         margin-bottom: 3px;" id="DiagnosisClassSelecter">
                 </select>
             </div>
+            <a>평가영역 : </a>
             <div style="padding-left: 50px; display: inline-block;">
                 <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
                         margin-bottom: 3px;" id="DiagnosisEvaluationAreaSelecter">
@@ -41,24 +148,34 @@
                 </select>
             </div>*@
             <br>
-            <a>평가문제 코드: </a>
+            <a>평가문제 코드 : </a>
             <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="EvaluationQuestionCode" />
             </div>
             <br>
-            <a>평가문제: </a>
+            <a>평가문제 : </a>
             <div style="padding-top: 10px; display: inline-block;">
                 <input type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="EvaluationQuestionContents" />
             </div>
-            <div style="padding-left: 50px; display: inline-block;">
+            <br>
+            <a>입력방식 : </a>
+            <div style="padding-top: 10px; display: inline-block;">
                 <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
                         margin-bottom: 3px;" id="inputTypeSelecter">
                 </select>
             </div>
+            <br>
+            <a>평가척도 : </a>
+            <div style="padding-top: 10px; display: inline-block;">
+                <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
+                        margin-bottom: 3px;" id="MeasurementSelecter">
+                </select>
+            </div>
+            <br>
             <div id="answerForm">
                 <input type="text" id="answerInput" placeholder="추가할 지문을 입력하세요" required />
                 <button id="answerButton" type="button">추가</button>
@@ -151,11 +268,6 @@
             $(document).on('change', '#EvaluationQuestionNumber', function () {
                 _this.checkedChange();
             });
-            $('#DiagnosisEvaluationQuestionList tbody tr').on('click',function(){
-                $(this).find('td:last-child input[type=checkbox]').prop('checked', true);
-                console.log(this)
-                console.log('zasdfasdf')
-            })
         },
         regist: function () {
             alert('등록');
@@ -320,6 +432,23 @@
                 }
             });
         },
+        DiagnosisMeasurementList : function(){
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/Measurement/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    data = JSON.parse(data);
+                    let html = '';
+                    html += '<option value="0">측정단위</option>';
+                    $.each(data, function (index, item) {
+                        html += '<option value="' + item.MeasurementNumber + '">' + item.MeasurementNumber + ' - ' + item.MeasurementCode + ' - ' + item.MeasurementName + '점' + '</option>';
+                    });
+                    $('#MeasurementSelecter').html(html);
+                }
+            });
+        },
         DiagnosisEvaluationQuestionList : function(){
             $.ajax({
                 type: 'GET',
@@ -330,17 +459,17 @@
                     data = JSON.parse(data);
                     let html = '';
                     html += '<thead>';
-                    html += '<tr>';
-                    html += '<th>문제번호</th>';
-                    html += '<th>진단영역번호</th>';
-                    html += '<th>평가문제코드</th>';
-                    html += '<th>평가문제명</th>';
-                    html += '<th>선택</th>';
+                    html += '<tr align="center" bgcolor="#2B92D5" style="color:#F8F8FF">';
+                    html += '<td>문제번호</td>';
+                    html += '<td>진단영역번호</td>';
+                    html += '<td>평가문제코드</td>';
+                    html += '<td>평가문제명</td>';
+                    html += '<td>선택</td>';
                     html += '</tr>';
                     html += '</thead>';
                     html += '<tbody>';
                     $.each(data, function (index, item) {
-                        html += '<tr>';
+                        html += '<tr align="center" bgcolor="white">';
                         html += '<td>' + item.EvaluationQuestionNumber+ '</td>';
                         html += '<td>' + item.AreaNumber+ '</td>';
                         html += '<td>' + item.EvaluationQuestionCode+ '</td>';
@@ -351,7 +480,11 @@
                     html += '</tbody>';
                     DiagnosisEvaluationQnAJS.RefreshDiagnosisEvaluationQuestionList();
                     $('#DiagnosisEvaluationQuestionList').html(html);
-                    $('#DiagnosisEvaluationQuestionList').DataTable();
+                    $('#DiagnosisEvaluationQuestionList').DataTable({
+                        language: {
+                            url: 'https://cdn.datatables.net/plug-ins/1.13.3/i18n/ko.json'
+                        },
+                    });
                 }
             });
         },
@@ -415,6 +548,7 @@
         DiagnosisEvaluationQnAJS.DiagnosisClassList();
         DiagnosisEvaluationQnAJS.DiagnosisEvaluationAreaList();
         DiagnosisEvaluationQnAJS.DiagnosisInputTypeList();
+        DiagnosisEvaluationQnAJS.DiagnosisMeasurementList();
         DiagnosisEvaluationQnAJS.DiagnosisEvaluationQuestionList();
     });
 
