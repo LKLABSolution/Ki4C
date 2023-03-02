@@ -8,7 +8,6 @@
 
 }
 <style>
-    /* Login.html */
     .hr-sect {
     display: flex;
     flex-basis: 50%;
@@ -26,45 +25,31 @@
         line-height: 0px;
         margin: 0px 16px;
     }
-    #login-button{
-        font-size: 16px; font-weight: 600;
-        background-color: lightgray;
-        border-color: black;
-        width: 200px; height: 40px;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-    }
-    #create-button{
-        font-size: 16px; font-weight: 600;
-        background-color: white;
-        border-color: black;
-        width: 200px; height: 40px;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-    }
-
-    #login-button:hover {
-        background-color: gray;
+    .btnType1 {
+        font-size: 16px;
+        font-weight: 600;
         color: white;
+        background-color: #34B0C7;
+        border: none;
+        width: 200px;
+        height: 40px;
+        border-radius: 20px;
     }
+        .btnType1:hover {
+            background-color: #2B92D5;
+            color: white;
+        }
 
-    #login-button:active {
-        background-color: darkgray;
-        color: white;
-    }
-
-    #create-button:hover {
-        background-color: lightgray;
-        color: black;
-    }
-
-    #create-button:active {
-        background-color: gray;
-        color: white;
+        .btnType1:active {
+            background-color: #34E9F9;
+            color: white;
+        }
+    .inputType1 {
+        width: 100px;
+        height: 45px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 5px;
     }
 </style>
 <section>
@@ -89,11 +74,11 @@
                 <h1 id="login">Log In <a style="color: red;">*</a></h1>
                 <br />
                 <form method="post" id="Login-form" asp-controller="CommonAuth" asp-action="Login">
-                    <input type="text" placeholder="이메일(email@address.com)"
+                    <input class="inputType1" type="text" placeholder="이메일(email@address.com)"
                            style="max-width: 300px; width: 80%; height: 30px; font-size: 16px;
                             margin-bottom: 3px;"
                            onfocus="this.value='';" id="Input_Id" asp-for="Id" /> <br>
-                    <input type="password" placeholder="비밀번호"
+                    <input class="inputType1" type="password" placeholder="비밀번호"
                            style="max-width: 300px; width: 80%; height: 30px; font-size: 16px;"
                            onfocus="this.value='';" id="Input_Password" asp-for="Password" />
                 </form>
@@ -106,18 +91,19 @@
             <br>
             <div>
                 <a style="text-decoration:none; color:black;" asp-area="" asp-controller="CommonAuth" asp-action="FindIdInput">아이디 찾기</a>
+                <a style="color: lightgray;"> | </a>
                 <a style="text-decoration:none; color:black;" asp-area="" asp-controller="CommonAuth" asp-action="FindPassInput">비밀번호 찾기</a>
             </div>
             <br> <br>
             <a href="#">
-                <input id="login-button" type="button" value="로그인" onclick="LoginJS.SubmitBtnClick()" />
+                <input class="btnType1" id="login-button" type="button" value="로그인" onclick="LoginJS.SubmitBtnClick()" />
             </a>
             <br>
             <br>
             <div class="hr-sect">또는</div>
             <br>
             <a style="display: inline-block;" asp-area="" asp-controller="CommonMember" asp-action="MemberReg">
-                <input id="create-button" type="button" value="계정 만들기" />
+                <input class="btnType1" id="create-button" type="button" value="계정 만들기" />
             </a>
         </div>
         <br> <br> <br>

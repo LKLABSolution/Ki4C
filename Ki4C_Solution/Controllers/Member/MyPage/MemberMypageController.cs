@@ -38,7 +38,7 @@ namespace Ki4C_Solution.Controllers.Member.MyPage
             return View("../Member/MyPage/MyInfoRead", memberRegModel);
         }
 
-        [HttpPost]
+        //[HttpPost] 오류나서 주석 처리
         public IActionResult MyInfoUpdate()
         {
             ViewData["Message"] = "MyInfoUpdate";

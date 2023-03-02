@@ -2,51 +2,61 @@
     // Used Table [Member]
     // 마이페이지 - 내 정보 수정
     Layout = "~/Views/Shared/_LayoutKi4C_Aside_my.cshtml";
-    ViewData["Title"] = "마이페이지/내정보보기";
+    ViewData["Title"] = "마이페이지/내정보수정";
     @model Ki4C_Solution.Models.Common.Member.MemberRegModel
 }
 
 <style>
-    /* MyInfoUpdate.html */
-    #input-form {
-        width: 300px; height: 25px;
+    #data {
+        width: 70%;
+        padding-left: 320px;
+        margin: 0 auto;
+    }
+    #dataBtn {
+        width: 70%;
+        padding-left: 310px;
+        margin: 0 auto;
+    }
+    #data  a {
         font-size: 14px;
-        border: 1px solid grey;
-        margin-bottom: 3px;
+        font-weight: 500;
     }
-    #modify-button{
-        background-color: white;
-        font-size: 16px; font-weight: 600;
-        border-color: grey;
-        color: black;
-        width: 130px; height: 30px;
-        margin: 10px;
-        border-radius: 30px;
+    .inputType1 {
+        width: 250px;
+        height: 25px;
+        font-size: 14px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 5px;
+        margin-bottom: 5px;
     }
-    #cancle-button {           
-        background-color: white;
-        font-size: 16px; font-weight: 600;
-        border-color: grey;
-        color: black;
-        width: 130px; height: 30px;
-        margin: 10px;
-        border-radius: 30px;
+    .btnType1 {
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+        background-color: #34B0C7;
+        border: none;
+        width: 130px;
+        height: 30px;
+        margin: 5px;
+        border-radius: 20px;
     }
 
     /* 화면 너비 0 ~ 768px */
-    @@media (max-width: 768px){
-        #input-form {
-            width: 250px;
+    @@media (max-width: 768px) {
+        #data {
+            width: 80%;
+            padding-left: 30px;
+            margin: 0 auto;
         }
-        #modify-button{
-            width: 80px;
-            font-size: 14px;
+        #dataBtn {
+            width: 80%;
+            padding-left: 5px;
+            margin: 0 auto;
         }
-        #cancle-button {           
-            width: 80px;
-            font-size: 14px;
+        #btnType1 {
+            width: 40px;
         }
-
     }
 </style>
 <!-- 섹션 -->
@@ -67,47 +77,46 @@
         <br>
         <hr style="width: 100%" />
         <!-- 내 정보 수정 -->
-        <div style="width: 80%; background-color: blanchedalmond;
-                margin: auto; padding: 20px 10px; text-align: center;">
+        <div style="width: 100%; height: 100px; background-color: #34B0C7; font-size: 14px; color: white; text-align: center; line-height: 100px; font-weight: 600; ">
             개인정보 수정 후 반드시 '수정' 버튼을 클릭하시기 바랍니다.
         </div>
-        <div style="width: 70%; margin: auto;">
+        <div id="data">
             <br>
-            <a style="font-size: 14px;">이메일 </a> <a style="color: red;">*</a> <br>
+            <a>이메일 </a> <a style="color: red;">*</a> <br>
             <form style="padding-top: 5px; padding-bottom: 10px; display: inline-block;">
-                <input id="input-form" type="text" placeholder="이메일 주소는 아이디로 사용됩니다." />
+                <input class="inputType1" id="email" type="text" placeholder="이메일 주소는 아이디로 사용됩니다." />
             </form> <br>
-            <a style="font-size: 14px;">비밀번호 </a> <a style="color: red;">*</a> <br>
+            <a>비밀번호 </a> <a style="color: red;">*</a> <br>
             <form style="padding-top: 5px; padding-bottom: 10px; display: inline-block;">
-                <input id="input-form" type="text" placeholder="영문+숫자+특수기호 포함 8~12자리" />
+                <input class="inputType1" id="password" type="text" placeholder="영문+숫자+특수기호 포함 8~12자리" />
             </form> <br>
-            <a style="font-size: 14px;">비밀번호 확인 </a> <a style="color: red;">*</a> <br>
+            <a>비밀번호 확인 </a> <a style="color: red;">*</a> <br>
             <form style="padding-top: 5px; padding-bottom: 10px; display: inline-block;">
-                <input id="input-form" type="text" />
+                <input class="inputType1" id="passwordAgain" type="text" />
             </form> <br>
-            <a style="font-size: 14px;">이름 </a> <a style="color: red;">*</a> <br>
+            <a>이름 </a> <a style="color: red;">*</a> <br>
             <form style="padding-top: 5px; padding-bottom: 10px; display: inline-block;">
-                <input id="input-form" type="text" />
+                <input class="inputType1" id="name" type="text" />
             </form> <br>
-            <a style="font-size: 14px;">휴대전화번호 </a> <a style="color: red;">*</a> <br>
+            <a>휴대전화번호 </a> <a style="color: red;">*</a> <br>
             <form style="padding-top: 5px; display: inline-block;">
-                <input id="input-form" type="text" placeholder="대한민국(+82)" />
+                <input class="inputType1" id="phoneNumber1" type="text" placeholder="대한민국(+82)" />
             </form> <br>
             <form style="padding-top: 5px; padding-bottom: 10px; display: inline-block;">
-                <input id="input-form" type="text" placeholder="번호를 입력해주세요." />
+                <input class="inputType1" id="phoneNumber2" type="text" placeholder="번호를 입력해주세요." />
             </form> <br>
-            <a style="font-size: 14px;">회사명 </a> <a style="color: red;">*</a> <br>
+            <a>회사명 </a> <a style="color: red;">*</a> <br>
             <form style="padding-top: 5px; padding-bottom: 10px; display: inline-block;">
-                <input id="input-form" type="text" />
+                <input class="inputType1" id="companyName" type="text" />
             </form> <br>
-            <a style="font-size: 14px;">부서명</a> <br>
+            <a>부서명</a> <br>
             <form style="padding-top: 5px; padding-bottom: 10px; display: inline-block;">
-                <input id="input-form" type="text" />
+                <input class="inputType1" id="departmentName" type="text" />
             </form> <br> <br>
         </div>
-        <div style="width: 70%; margin: auto;">
-            <input id="modify-button" type="submit" value="수정" />
-            <input id="cancle-button" type="submit" value="취소" />
+        <div id="dataBtn">
+            <input class="btnType1" id="modify-button" type="submit" value="수정" />
+            <input class="btnType1" id="cancle-button" type="submit" value="취소" />
         </div>
         <!-- 내 정보 수정 -->
     </div>

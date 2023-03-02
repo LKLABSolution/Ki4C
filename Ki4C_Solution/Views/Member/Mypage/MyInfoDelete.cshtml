@@ -4,15 +4,54 @@
 }
 
 <style>
-    table{
-        border-top: 1px solid #444444;
-        border-collapse : collapse;
+    .btnType1 {
+        font-size: 12px;
+        font-weight: 600;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 80px;
+        height: 25px;
+        border-radius: 20px;
+        margin: 5px;
+    }
+    .btnType2 {
+        font-weight: 600;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 150px;
+        height: 40px;
+        margin: 10px;
+        border-radius: 30px;
+    }
+        .btnType2:hover {
+            background-color: #34B0C7;
+            color: white;
+        }
+
+        .btnType2:active {
+            background-color: #34E9F9;
+            color: white;
+        }
+    .inputType1 {
+        width: 130px;
+        height: 25px;
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
+    }
+    table {
+        border-top: 1px solid #2B92D5;
+        border-collapse: collapse;
+        background-color: white;
     }
     th {
-            width: 150px;
-            height: 30px;
-            border-bottom: 1px solid #444444;
-            border-left: 1px solid #444444;
+        width: 150px;
+        height: 30px;
+        font-size: 14px;
+        border-bottom: 1px solid #2B92D5;
+        border-left: 1px solid #2B92D5;
     }
     th:first-child {
         border-left: none;
@@ -39,25 +78,31 @@
         <!-- 탈퇴 -->
         <div style="width: 80%; margin: auto;">
             <div style="width: 90%; height: 100px;">
-                <a style="color: red;">*</a> <a style="color:rgb(17, 100, 100)">본인인증을 위해 탈퇴를 하시려면 1:1 문의를 이용해주시기 바랍니다.</a>
-                <input id="question-button" type="submit" value="본인인증 문의" />
+                <a style="color: red;">*</a>
+                <a style="color: #2B92D5; font-weight: 600;">
+                    본인인증을 위해 탈퇴를 하시려면 1:1 문의를 이용해주시기 바랍니다.
+                </a>
+                <input class="btnType1" id="question-button" type="submit" value="본인인증 문의" />
                 <p>본인인증 문의 없이 탈퇴할 경우, 30일 이내 재가입(인증)이 불가능 합니다.</p>
             </div>
-            <div style="width:s 100%; height: 200px;">
-                <a style="color: red;">*</a> <a style="color:rgb(17, 100, 100)">정확한 본인확인을 위해 비밀번호를 입력해주세요.</a>
+            <div style="width: 100%; height: 200px;">
+                <a style="color: red;">*</a>
+                <a style="color: #2B92D5; font-weight: 600;">
+                    정확한 본인확인을 위해 비밀번호를 입력해주세요.
+                </a>
                 <br> <br>
                 <table>
                     <tr>
                         <th scope="col">이메일<a style="color: red;">*</a>
                         <th scope="col">onlookertozip</th>
                         <th scope="col">비밀번호</th>
-                        <th scope="col"><input></th>
+                        <th scope="col"><input class="inputType1"/></th>
                     </tr>
                 </table>
             </div>
         </div>
         <div style="width: 40%; margin: auto;">
-            <input id="delete-button" type="submit" value="회원 탈퇴하기" />
+            <input class="btnType2" id="delete-button" type="submit" value="회원 탈퇴하기" />
         </div>
     </div>
     <!-- 진단 내역 -->

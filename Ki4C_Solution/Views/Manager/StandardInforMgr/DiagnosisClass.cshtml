@@ -6,6 +6,47 @@
     ViewData["Title"] = "기준정보 관리/진단 종류";
     @model Ki4C_Solution.Models.Manager.StandardInfoMgr.DiagnosisClass;
 }
+<style>
+    .inputType1 {
+        width: 150px;
+        height: 25px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .btnType1 {
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        background-color: #34B0C7;
+        border: none;
+        width: 80px;
+        height: 30px;
+        border-radius: 20px;
+    }
+
+    .btnType2 {
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        background-color: #34B0C7;
+        border: none;
+        width: 100px;
+        height: 30px;
+        border-radius: 20px;
+    }
+
+    select {
+        width: 150px;
+        height: 20px;
+        padding: 3px;
+        margin-top: 10px;
+        border: solid 0.3px #34B0C7;
+        border-radius: 0.5em;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    }
+</style>
 <!-- 섹션 -->
 <section>
     <!-- 콘텐츠 -->
@@ -23,9 +64,9 @@
             진단 구분 등록
         </div>
         <br>
-        <hr style="border: solid 0.5px black; width: 100%;" />
+        <hr style="width: 100%" />
         <!-- 진단 구분 등록 -->
-        <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
+        <div style="padding-top: 30px; padding-left: 30px; height: 250px;">
             <a>진단종류선택: </a>
             <div style="padding-top: 10px; display: inline-block;">
                 <select style="max-width: 400px; width: 130%; height: 30px; font-size: 16px;
@@ -36,20 +77,20 @@
             <br>
             <a>진단구분코드: </a>
             <div style="padding-top: 10px; display: inline-block;">
-                <input type="text"
+                <input class="inputType1" type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="DiagnosisClassCode" asp-for="DiagnosisClassCode" />
             </div>
             <br>
             <a>진단구분명: </a>
             <div style="padding-top: 10px; padding-left: 14px; display: inline-block;">
-                <input type="text"
+                <input class="inputType1" type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="DiagnosisClassName" asp-for="DiagnosisClassName" />
             </div>
             <div style="padding-top: 30px; padding-left: 50px;">
-                <input id="registButton" type="button" value="등록" />
-                <input id="modifyButton" type="button" value="수정" />
+                <input class="btnType1" id="registButton" type="button" value="등록" />
+                <input class="btnType1" id="modifyButton" type="button" value="수정" />
             </div>
         </div>
         <!-- 진단 구분 등록 -->
@@ -57,13 +98,13 @@
         <!-- 진단 구분 목록 -->
         <div style="display: inline-block;">
             <div id="buttonLocation">
-                <input type="text" id="searchBox" placeholder="검색어 입력" />
-                <button id="searchButton">검색</button>
+                <input class="inputType1" type="text" id="searchBox" placeholder="검색어 입력" />
+                <button class="btnType1" id="searchButton">검색</button>
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
                 @*<table id="table">
-                    <tr align="center" bgcolor="skyblue">
+                    <tr id="header" align="center" bgcolor="#34B0C7">
                         <td>번호</td>
                         <td>진단구분코드</td>
                         <td>진단구분명</td>
@@ -104,7 +145,7 @@
                 </table>
             </div>
             <div id="buttonLocation">
-                <input id="deleteButton" type="submit" value="항목 삭제" />
+                <input class="btnType2" id="deleteButton" type="submit" value="항목 삭제" />
             </div>
         </div>
         <!-- 진단 구분 목록 -->
@@ -245,7 +286,7 @@
                 contentType: 'application/json; charset=utf-8'
             }).done(function (data) {
                 data = JSON.parse(data);
-                let html = '<thead><tr align="center" bgcolor="skyblue">'
+                let html = '<thead><tr id="header" align="center" bgcolor="#34B0C7">'
                     + '<td> 번호 </td>'
                     + '<td> 진단종류 </td>'
                     + '<td> 진단구분코드 </td>'
