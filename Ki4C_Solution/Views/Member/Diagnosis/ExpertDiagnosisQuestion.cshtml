@@ -8,9 +8,14 @@
         max-width: 1000px;
         height: 200px;
         text-align: center;
-        background-color: skyblue;
+        background-color: #2B92D5;
         border-color: white;
         table-layout: fixed;
+    }
+
+    #header td {
+        color: white;
+        font-weight: 700;
     }
 
     td {
@@ -28,42 +33,38 @@
         font-weight: 500;
     }
 
-    input[type="radio"] {
-        margin: 0px 50px;
+    [type="radio"] {
+        vertical-align: middle;
+        appearance: none;
+        border: max(2px, 0.1em) solid white;
+        background-color: white;
+        border-radius: 50%;
+        width: 1.1em;
+        height: 1.1em;
     }
-
-    #prevButton {
-        width: 80px;
-        height: 30px;
-        font-size: 16px;
-        font-weight: 600;
-        background-color: grey;
-        color: white;
-        border: none;
-    }
-
-    #nextButton {
-        width: 80px;
-        height: 30px;
-        font-size: 16px;
-        font-weight: 600;
-        background-color: grey;
-        color: white;
-        border: none;
-    }
-
-    #submitButton {
-        width: 80px;
-        height: 30px;
-        font-size: 16px;
-        font-weight: 600;
-        background-color: grey;
-        color: white;
-        border: none;
-    }
+        [type="radio"]:checked {
+            appearance: none;
+            border: 0.4em solid #2A3142;
+            background-color: #2B92D5;
+        }
 
     .hidden {
         display: none;
+    }
+    .btnType1 {
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 80px;
+        height: 30px;
+        border-radius: 20px;
+    }
+    @@media (max-width: 768px) {
+        #table_1 {
+            font-size: 12px;
+        }
     }
 </style>
 
@@ -73,38 +74,40 @@
     <div id="wrap" style="width: 90%;">
         <div id=contetns>
             <h2>디지털전환(DX) 수준진단</h2>
-            <hr style="border: solid 0.3px black;">
+            <br>
+            <hr style="width: 100%" />
+            <br>
             <p id="category"></p>
             <p id="question"></p>
-            <p>※ 아래의 표를 참고하여 0 ~ 5 사이의 점수를 선택</p>
+            <p>※ 아래의 표를 참고하여 0 ~ 5 사이의 점수를 선택</p> <br>
         </div>
         <!-- 콘텐츠 -->
         <div id="wrap" style="width: 90%; text-align: center;">
             <div>
                 <table id="table_1">
-                    <tr align="center" bgcolor="skyblue">
-                        <td>①</td>
-                        <td>②</td>
-                        <td>③</td>
-                        <td>④</td>
-                        <td>⑤</td>
+                    <tr id="header" align="center" bgcolor="#2B92D5">
+                        <td>① 1점 <input type="radio" name="score"></td>
+                        <td>② 2점 <input type="radio" name="score"></td>
+                        <td>③ 3점 <input type="radio" name="score"></td>
+                        <td>④ 4점 <input type="radio" name="score"></td>
+                        <td>⑤ 5점 <input type="radio" name="score"></td>
                     </tr>
                     <tr id="questionData" align="center" bgcolor="white">
                     </tr>
                 </table>
-                <div id="wrap" style="width: 80%; text-align: right;">
+                @*<div id="wrap" style="width: 80%; text-align: right;">
                     <input type="radio" name="score"> 1점
                     <input type="radio" name="score"> 2점
                     <input type="radio" name="score"> 3점
                     <input type="radio" name="score"> 4점
                     <input type="radio" name="score"> 5점
-                </div>
+                </div>*@
             </div>
         </div>
         <div style="text-align: center; padding-top: 50px; margin: auto;">
-            <button id="prevButton" class="hidden">이전 ⬅</button>
-            <button id="nextButton">다음 ➡</button>
-            <button id="submitButton" class="hidden">제출 ➡</button>
+            <button class="btnType1 hidden" id="prevButton">이전 ⬅</button>
+            <button class="btnType1" id="nextButton">다음 ➡</button>
+            <button class="btnType1 hidden" id="submitButton">제출 ➡</button>
         </div>
         <!-- 콘텐츠 -->
     </div>

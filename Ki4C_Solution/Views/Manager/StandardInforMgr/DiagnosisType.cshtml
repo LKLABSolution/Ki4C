@@ -28,20 +28,20 @@
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
             <a>진단종류코드: </a>
             <div style="padding-top: 10px; display: inline-block;">
-                <input type="text"
+                <input class="inputType1" type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="DiagnosisTypeCode" asp-for="DiagnosisTypeCode" />
             </div>
             <br>
             <a>진단종류명: </a>
             <div style="padding-top: 10px; padding-left: 14px; display: inline-block;">
-                <input type="text"
+                <input class="inputType1" type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="DiagnosisTypeName" asp-for="DiagnosisTypeName" />
             </div>
             <div style="padding-top: 30px; padding-left: 50px;">
-                <input id="registButton" type="submit" value="등록" />
-                <input id="modifyButton" type="submit" value="수정" />
+                <input class="btnType1" id="registButton" type="submit" value="등록" />
+                <input class="btnType1" id="modifyButton" type="submit" value="수정" />
             </div>
         </div>
         <!-- 진단 종류 등록 -->
@@ -49,59 +49,58 @@
         <!-- 진단 종류 목록 -->
         <div style="display: inline-block;">
             <div id="buttonLocation">
-                <input type="text" placeholder="검색어 입력" />
-                <button id="searchButton">검색</button>
+                <input class="inputType1" type="text" placeholder="검색어 입력" />
+                <button class="btnType1" id="searchButton">검색</button>
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
                 @*                <table id="table">
-                    <tr align="center" bgcolor="skyblue">
-                        <td>번호</td>
-                        <td>진단종류코드</td>
-                        <td>진단종류명</td>
-                        <td>삭제</td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>1</td>
-                        <td>A1</td>
-                        <td>기업 기초 정보</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>2</td>
-                        <td>A2</td>
-                        <td>자체 진단</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>3</td>
-                        <td>A3</td>
-                        <td>전문가 진단</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>4</td>
-                        <td>A4</td>
-                        <td>기타</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                </table>*@
+                        <tr align="center" bgcolor="skyblue">
+                            <td>번호</td>
+                            <td>진단종류코드</td>
+                            <td>진단종류명</td>
+                            <td>삭제</td>
+                        </tr>
+                        <tr align="center" bgcolor="white">
+                            <td>1</td>
+                            <td>A1</td>
+                            <td>기업 기초 정보</td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr align="center" bgcolor="white">
+                            <td>2</td>
+                            <td>A2</td>
+                            <td>자체 진단</td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr align="center" bgcolor="white">
+                            <td>3</td>
+                            <td>A3</td>
+                            <td>전문가 진단</td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                        <tr align="center" bgcolor="white">
+                            <td>4</td>
+                            <td>A4</td>
+                            <td>기타</td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                    </table>*@
                 <table class="display" id="DiagnosisTypeList">
                 </table>
             </div>
             <div id="buttonLocation">
-                <input id="deleteButton" type="submit" value="항목 삭제" />
+                <input class="inputType2" id="deleteButton" type="submit" value="항목 삭제" />
             </div>
         </div>
         <!-- 진단 종류 목록 -->
     </div>
-        <!-- 콘텐츠 -->
+    <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
 
-<script>
-    let DIagnosisTypeJS = {
-        init : function () {
+<script>let DIagnosisTypeJS = {
+        init: function () {
             let _this = this;
             $('#registButton').on('click', function () {
                 if (_this.ValidateCheck()) {
@@ -114,7 +113,7 @@
                 };;
             });
             $('#deleteButton').on('click', function () {
-                    _this.delete();
+                _this.delete();
             });
             $(document).on('click', '#DiagnosisTypeNumber', function () {
                 if ($(this).is(':checked')) {
@@ -126,7 +125,7 @@
                 _this.checkedChange();
             });
         },
-        regist : function () {
+        regist: function () {
             alert('등록');
             $.ajax({
                 type: 'POST',
@@ -144,7 +143,7 @@
                 alert(JSON.stringify(error));
             });
         },
-        modify : function () {
+        modify: function () {
             alert('수정');
             let DiagnosisTypeNumber = [];
             $('#DiagnosisTypeNumber:checked').each(function () {
@@ -167,7 +166,7 @@
                 alert(JSON.stringify(error));
             });
         },
-        delete : function () {
+        delete: function () {
             alert('삭제');
             //checkbox checked DiagnosisTypeCode & DiagnosisTypeName 가져오기
             let DiagnosisTypeCode = [];
@@ -177,12 +176,12 @@
             $('#DiagnosisTypeNumber:checked').each(function () {
                 DiagnosisTypeNumber.push($(this).val());
                 let code = $(this).parent().parent().find('td:eq(1)').text();
-                let name= $(this).parent().parent().find('td:eq(2)').text();
+                let name = $(this).parent().parent().find('td:eq(2)').text();
                 DiagnosisTypeCode.push(code);
                 DiagnosisTypeName.push(name);
             });
 
-            if (DiagnosisTypeNumber.length  == null || DiagnosisTypeNumber.length == 0) {
+            if (DiagnosisTypeNumber.length == null || DiagnosisTypeNumber.length == 0) {
                 alert('삭제할 항목을 선택해주세요.');
                 return;
             }
@@ -204,11 +203,11 @@
                 }).fail(function (error) {
                     alert(JSON.stringify(error));
                 });
-            }else{
+            } else {
                 alert('항목 이름 : ' + DiagnosisTypeName + ' \n 취소 되었습니다.');
             }
         },
-        DiagnosisTypeList : function () {
+        DiagnosisTypeList: function () {
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisType/getAll',
@@ -243,15 +242,15 @@
             });
         },
         // DiagnosisTypeList table tag refresh
-        RefreshDiagnosisTypeList : function () {
+        RefreshDiagnosisTypeList: function () {
             $('#DiagnosisTypeList').empty();
         },
-        checkedChange : function () {
+        checkedChange: function () {
             let DiagnosisTypeCode = [];
             let DiagnosisTypeName = [];
             $('#DiagnosisTypeNumber:checked').each(function () {
                 let code = $(this).parent().parent().find('td:eq(1)').text();
-                let name= $(this).parent().parent().find('td:eq(2)').text();
+                let name = $(this).parent().parent().find('td:eq(2)').text();
                 DiagnosisTypeCode.push(code);
                 DiagnosisTypeName.push(name);
             });
@@ -272,7 +271,7 @@
             return true;
         },
 
-         
+
 
 
 
@@ -284,6 +283,4 @@
     $(document).ready(function () {
         DIagnosisTypeJS.init();
         DIagnosisTypeJS.DiagnosisTypeList();
-    });
-
-</script>
+    });</script>

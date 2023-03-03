@@ -6,6 +6,7 @@
     ViewData["Title"] = "기준정보 관리/진단 종류";
 }
 <style>
+    /* 테이블 기본 설정 */
     input[type="checkbox"] {
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -79,6 +80,7 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        width: 1000px;
         /*width: 1.5em;
         height: 1.5em;*/
         border: 2px solid #ccc;
@@ -129,35 +131,36 @@
         <br>
         <hr style="width: 100%" />
         <!-- 평가문제 등록 -->
-        <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
+        <div style="padding-top: 10px; padding-left: 30px; height: 350px;">
             <a>평가구문 : </a>
             <div style="padding-right: 30px; display: inline-block;">
                 <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
                         margin-bottom: 3px;" id="DiagnosisClassSelecter">
                 </select>
             </div>
+            <br />
             <a>평가영역 : </a>
             <div style="padding-left: 50px; display: inline-block;">
                 <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
                         margin-bottom: 3px;" id="DiagnosisEvaluationAreaSelecter">
                 </select>
             </div>
-@*            <div style="padding-left: 50px; display: inline-block;">
-                <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
-                        margin-bottom: 3px;" id="inputTypeSelecter">
-                </select>
-            </div>*@
+            @*            <div style="padding-left: 50px; display: inline-block;">
+            <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
+                    margin-bottom: 3px;" id="inputTypeSelecter">
+            </select>
+        </div>*@
             <br>
             <a>평가문제 코드 : </a>
             <div style="padding-top: 10px; display: inline-block;">
-                <input type="text"
+                <input class="inputType1" type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="EvaluationQuestionCode" />
             </div>
             <br>
             <a>평가문제 : </a>
             <div style="padding-top: 10px; display: inline-block;">
-                <input type="text"
+                <input class="inputType1" type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="EvaluationQuestionContents" />
             </div>
@@ -176,18 +179,19 @@
                 </select>
             </div>
             <br>
-            <div id="answerForm">
-                <input type="text" id="answerInput" placeholder="추가할 지문을 입력하세요" required />
-                <button id="answerButton" type="button">추가</button>
+            <a>지문 : </a>
+            <div id="answerForm" style="display: inline-block;">
+                <input class="inputType2" type="text" id="answerInput" placeholder="추가할 지문을 입력하세요" required />
+                <button class="btnType1" id="answerButton" type="button">추가</button>
             </div>
             <ul id="answerList"></ul>
             <br>
-            <div style="display: inline-block;">
-                <h4 style="display: inline;">지문:</h4>
-            </div>
+            @*<div style="display: inline-block;">
+            <h4 style="display: inline;">지문:</h4>
+        </div>*@
             <div style="padding-top: 30px; padding-left: 50px;">
-                <input id="registButton" type="submit" value="등록" />
-                <input id="modifyButton" type="submit" value="수정" />
+                <input class="btnType1" id="registButton" type="submit" value="등록" />
+                <input class="btnType1" id="modifyButton" type="submit" value="수정" />
             </div>
         </div> <br> <br> <br>
         <!-- 평가문제 등록 -->
@@ -195,16 +199,17 @@
         <!-- 평가문제 목록 -->
         <div style="display: inline-block;">
             <div id="buttonLocation">
-                <input type="text" placeholder="검색어 입력" />
-                <button id="searchButton">검색</button>
+                <input class="inputType1" type="text" placeholder="검색어 입력" />
+                <button class="btnType1" id="searchButton">검색</button>
             </div>
             <br>
-            <div style="width: 90%; margin: auto;">
-                <table id="DiagnosisEvaluationQuestionList" class="display">
+            <div style="width: 80%; margin: 0 auto;">
+                <table class="table display"
+                       id="DiagnosisEvaluationQuestionList">
                 </table>
             </div>
             <div id="buttonLocation">
-                <input id="deleteButton" type="submit" value="항목 삭제" />
+                <input class="btnType2" id="deleteButton" type="submit" value="항목 삭제" />
             </div>
         </div>
         <!-- 평가문제 목록 -->
@@ -527,10 +532,10 @@
             html += '<li class="list-group-item">';
             html += '<div class="row">';
             html += '<div class="col-10">';
-            html += '<input type="text" class="form-control" value="' + answer + '" readonly>';
+            html += '<input class="inputType2" type="text" class="form-control" value="' + answer + '" readonly>';
             html += '</div>';
             html += '<div class="col-2">';
-            html += '<button type="button" class="btn btn-danger" onclick="DiagnosisEvaluationQnAJS.deleteAnswer(this)">삭제</button>';
+            html += '<button class="btnType1" type="button" class="btn btn-danger" onclick="DiagnosisEvaluationQnAJS.deleteAnswer(this)">삭제</button>';
             html += '</div>';
             html += '</div>';
             html += '</li>';

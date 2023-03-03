@@ -5,27 +5,6 @@
     Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg_ev_mgnt.cshtml";
     ViewData["Title"] = "진단 관리";
 }
-<style>
-/* DiagnosisMgrList.html */
-#table {
-    border: "1";
-    width: 800px; height: 100px;
-    text-align: center;
-    background-color:skyblue; border-color: white;
-}
-#buttonLocation {
-    float: right; margin-right: -50px;
-}
-@@media (max-width: 768px){
-    #table {
-        width: 100%;
-    }
-    #buttonLocation {
-        margin-right: 10px;
-    }
-}
-</style>
-
 <!-- 섹션 -->
 <section>
     <!-- 콘텐츠 -->
@@ -42,12 +21,12 @@
             진단 관리
         </div>
         <br>
-        <hr style="border: solid 0.5px black; width: 100%;" />
+        <hr style="width: 100%;" /> <br> <br> <br>
         <!-- 진단 관리 목록 -->
         <div style="display: inline-block;">
             <div style="width: 90%; margin: auto;">
                 <table id="table">
-                    <tr align="center" bgcolor="skyblue">
+                    <tr id="header" align="center" bgcolor="#34B0C7">
                         <td>번호</td>
                         <td>기업</td>
                         <td>진단일</td>
@@ -94,7 +73,7 @@
                     </tr>
                 </table> <br>
                 <div id="buttonLocation">
-                    <input id="applyButton" type="submit" value="진단평가 신청하기" />
+                    <input class="btnType2" id="applyButton" type="submit" value="진단평가 신청하기" />
                 </div>
             </div>
         </div>
