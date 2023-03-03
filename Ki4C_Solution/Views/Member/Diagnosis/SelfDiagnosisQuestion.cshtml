@@ -8,10 +8,10 @@
 <style>
     /* CompanyBasicInformation.html */
     h3 {
-        color:rgba(5, 146, 146, 0.769)
+        color: #2B92D5;
     }
     h4 {
-        color:rgba(5, 146, 146, 0.769)
+        color: #2B92D5;
     }
     #data {
         display: inline-block;
@@ -33,34 +33,26 @@
     }
     .multiple {
         width: 90%;
-        padding: 10px; margin: 5px;
+        padding: 10px;
+        margin: 5px;
         text-align: left;
-        background-color: rgba(191, 202, 202, 0.554);
+        background-color: #2B92D5;
+        color: white;
+        /*        background-color: rgba(191, 202, 202, 0.554);*/
         display: inline-block;
-    }
-    #prevButton{
-        width: 80px; height: 30px;
-        font-size: 16px; font-weight: 600;
-        background-color: grey;
-        color: white;
-        border: none;
-    }
-    #nextButton{
-        width: 80px; height: 30px;
-        font-size: 16px; font-weight: 600;
-        background-color: grey;
-        color: white;
-        border: none;
-    }
-    #submitButton{
-        width: 80px; height: 30px;
-        font-size: 16px; font-weight: 600;
-        background-color: grey;
-        color: white;
-        border: none;
     }
     .hidden {
         display: none;
+    }
+    .btnType1 {
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 80px;
+        height: 30px;
+        border-radius: 20px;
     }
 
     @@media (max-width: 768px){
@@ -77,6 +69,9 @@
         #answer {
             width: 95%;
         }
+        h2 {
+            font-size: 20px;
+        }
         }
 </style>
 
@@ -87,7 +82,7 @@
         <div id="contetns" style="text-align: center;">
             <h2>디지털혁신역량(DIC, Digital Innovation Competency)</h2>
             <h2>자체 진단(제조업)</h2>
-        </div>
+        </div> <br>
         <!-- 자바스크립트문구 -->
         <div id="data">
             <div id="questions"></div>
@@ -95,9 +90,9 @@
         </div>
         <!-- 자바스크립트문구 -->
         <div style="padding-top: 30px; padding-bottom: 30px;">
-            <button id="prevButton" class="hidden">이전 ⬅</button>
-            <button id="nextButton">다음 ➡</button>
-            <button id="submitButton" class="hidden">제출 ➡</button>
+            <button class="btnType1 hidden" id="prevButton">이전 ⬅</button>
+            <button class="btnType1" id="nextButton">다음 ➡</button>
+            <button class="btnType1 hidden" id="submitButton">제출 ➡</button>
         </div>
     </div>
     <!-- 콘텐츠 -->

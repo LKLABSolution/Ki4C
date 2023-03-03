@@ -5,49 +5,48 @@
 }
 
 <style>
-/* CompanyBasicInformation.html */
-.essay {
-    width: 100%;
-    background-color:transparent;
-    border: none;
-}
-#saveButton{
-    width: 200px; height: 30px;
-    font-size: 16px; font-weight: 600;
-    background-color: black;
-    color: white;
-    border: none;
-}
-#startButton{
-    width: 200px; height: 30px;
-    font-size: 16px; font-weight: 600;
-    background-color: black;
-    color: white;
-    border: none;
-}
-/* 화면 너비 0 ~ 768px */
-@@media (max-width: 768px){
-    #saveButton {
-        width: 100px;
+    /* CompanyBasicInformation.html */
+    .essay {
+        width: 100%;
+        background-color:transparent;
+        border: none;
     }
-    #startButton {
-        width: 100px;
+    .btnType1 {
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 130px;
+        height: 30px;
+        border-radius: 20px;
     }
-}
+    [type="radio"] {
+        margin: 3px;
+    }
+    label {
+        margin-right: 5px;
+    }
+    /* 화면 너비 0 ~ 768px */
+    @@media (max-width: 768px) {
+        .btnType1 {
+            width: 100px;
+        }
+    }
 </style>
 <!-- 섹션 -->
 <section style="width: 100%">
     <!-- 콘텐츠 -->
     <div style="width: 90%">
         <h2>기업 기초 정보</h2>
-        <hr/>
+        <hr/> <br>
         <!-- 자바스크립트문구 -->
         <div id="questions"></div>
         <!-- 자바스크립트문구 -->
         <div style="text-align: center;"> 
         <!-- <div style="padding-top: 30px; padding-bottom: 30px;">  -->
-            <button id="saveButton">저장하기</button> 
-            <button onClick="location.href='/MemberDiagnosis/SelfDiagnosisQuestion'" id="startButton">진단 시작하기</button>       
+            <button class="btnType1" id="saveButton">저장하기</button> 
+            <button class="btnType1" onClick="location.href='/MemberDiagnosis/SelfDiagnosisQuestion'" id="startButton">진단 시작하기</button>       
         </div>
     </div>
     <!-- 콘텐츠 -->
@@ -64,7 +63,9 @@
             console.log("essay");
             const div = document.createElement("div");
             const h3 = document.createElement("h3");
-            const input = document.createElement("input"); const hr = document.createElement("hr");
+            const input = document.createElement("input");
+            const hr = document.createElement("hr");
+            const br = document.createElement("br")
 
             div.appendChild(h3);
             h3.innerText = items['q1']
@@ -74,6 +75,7 @@
 
             div.appendChild(input);
             div.appendChild(hr);
+            div.appendChild(br);
             questions.appendChild(div);
 
         } else {
@@ -81,6 +83,8 @@
             const h3 = document.createElement("h3");
             const p = document.createElement("p");
             const hr = document.createElement("hr");
+            const br = document.createElement("br")
+            const br2 = document.createElement("br")
 
             div.appendChild(h3);
             div.appendChild(p);
@@ -89,10 +93,12 @@
             p.innerText = items['q2']
             div.appendChild(h3);
             div.appendChild(p);
+            div.appendChild(br);
 
             for (i = 0; i < items['q3'].length; i++) {
                 window["input_" + i] = document.createElement("input");
                 window["input_" + i].setAttribute("type", "radio");
+                window["input_" + i].setAttribute("name", "check_" + items['q1']);
 
                 window["label_" + i] = document.createElement("label");
                 window["label_" + i].innerText = items['q3'][i]
@@ -102,6 +108,7 @@
             }
 
             div.appendChild(hr);
+            div.appendChild(br2);
             questions.appendChild(div)
         }
     }

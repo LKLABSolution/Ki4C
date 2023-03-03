@@ -5,62 +5,62 @@
     @model Ki4C_Solution.Models.Common.Member.MemberRegModel
 }
 
-    <style>
-        #box1 {
-            display:inline-block;
-            background: rgb(135, 198, 199); 
-            padding: 20px;
-        }
-        #box2 {
-            display:inline-block;
-            background: rgb(208, 249, 250);
-            padding: 20px;
-        }
-        #titleBox {
-            width: 20%; height: 100%;
-            display: inline-block;
-            float: left;
-            font-size: 22px;
-        }
-        #titleBox p {
-            width: 80%;
-            text-align: center;
-            margin: auto;
-            padding-top: 20px;
-            font-weight: 800;
-        }
-        #resultBox {
-            width: 70%; height: 100%;
-            float: left;
-            padding-top: 20px; padding-left: 20px;
-        }
-        #guide p:first-child {
-            font-weight: 600;
-        }
-        #boxHR {
-            border: dashed 1px black;
-        }
-        #request-button{
-            font-size: 14px; font-weight: 600;
-            background-color: white;
-            border-color: black;
-            width: 100px; height: 30px;
-            border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-        #searchImg {
-            width: 20%;
-            height: 100%;
-            display: inline-block;
-            float: left;
-        }
-        #requestData {
-            width: 80%; height: 200px;
-            padding: 10px 0 0 30%;
-        }
-        @@media (max-width: 768px){
+<style>
+    #box1 {
+        display: inline-block;
+        background: #77D6FF;
+        padding: 20px;
+    }
+    #box2 {
+        display: inline-block;
+        background: #34B0C7;
+        padding: 20px;
+    }
+    #titleBox {
+        width: 20%; height: 100%;
+        display: inline-block;
+        float: left;
+        font-size: 22px;
+    }
+    #titleBox p {
+        width: 80%;
+        text-align: center;
+        margin: auto;
+        padding-top: 20px;
+        font-weight: 800;
+    }
+    #resultBox {
+        width: 70%; height: 100%;
+        float: left;
+        padding-top: 20px; padding-left: 20px;
+    }
+    #guide p:first-child {
+        font-weight: 600;
+    }
+    #boxHR {
+        border: dashed 1px black;
+    }
+    #searchImg {
+        width: 20%;
+        height: 100%;
+        display: inline-block;
+        float: left;
+    }
+    #requestData {
+        width: 80%; height: 200px;
+        padding: 10px 0 0 30%;
+    }
+    .btnType1 {
+        font-size: 12px;
+        font-weight: 500;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 130px;
+        height: 25px;
+        border-radius: 20px;
+    }
+    @@media (max-width: 768px){
         #titleBox {
             width: 90%;
         }
@@ -77,13 +77,12 @@
         #requestData {
             display: inline;
         }
-     }
-    </style>
-
+    }
+</style>
 <!-- 섹션 -->
 <section>
     <!-- 콘텐츠 -->
-    <div id=contetns style="width: 100%;">
+    <div id=contents style="width: 100%;">
         <h2>DX 자체 진단 결과 보고서</h2>
         <div id="menuIdx">
             <div style="float: left;">
@@ -98,36 +97,42 @@
             DX 자체 진단 결과 보고서
         </div>
         <br>
-        <hr />
+        <hr style="width: 100%;" />
         <!-- DX 자체 진단 결과 보고서 -->
         <div style="display: inline-block;">
             <a id="cstmName"></a> 님, <br>
             - 본 보고서는 귀하가 <a id="dgDate"></a> 진단에 응지문한 결과 결과 해석입니다. <br>
             - 본 진단을 통해서 귀하에 대해 아래와 같은 사항을 발견하였습니다.
         </div> <br> <br>
-        <div id="report" style="width: 90%"></div>
+        <div id="report" style="width: 90%; margin: auto;"></div>
+        <br> <br>
         <!-- DX 자체 진단 결과 보고서 -->
-        <div style="width: 70%; margin: auto;">
-            <p style="font-size: 22px; font-weight: 700; text-align: center;">
-                체험 진단 결과에 따른 다음 단계가 준비되어 있습니다.
-            </p>
-        </div>
-        <div style="width: 80%; margin: auto;">
-            <div style="width: 80%; padding: 10px;">
-                <div id="searchImg">
-                    <img style="width: 150px; height: 150px; " src="~/images/findDocument.png">
-                </div>
-                <div id="requestData">
-                    <p style="font-size: 18p; font-weight: 700;">상세 진단 요청</p>
-                    전문가 상담 및 상세 진단을 통해 기업별 맞춤 분석을 제공합니다. <br>
-                    진단 요청시 회사명과 상세 진단 요청사항을 작성해주시면 더욱 정확한 진단을 제공해드리겠습니다. <br> <br>
-                    <a href="#" style="display: inline-block;">
-                        <input id="request-button" type="submit" value="요청하기" />
-                        <input id="request-button" type="submit" value="다시 진단하기" />
-                    </a>
+        <!-- 체험 진단 다음 -->
+        <div>
+            <div style="width: 70%; margin: auto;">
+                <p style="font-size: 22px; font-weight: 700; text-align: center;">
+                    체험 진단 결과에 따른 다음 단계가 준비되어 있습니다.
+                </p> <br>
+            </div>
+            <div style="width: 80%; margin: auto;">
+                <div style="width: 80%; padding: 10px;">
+                    <div id="searchImg">
+                        <img style="width: 150px; height: 150px; " src="~/images/findDocument.png">
+                    </div>
+                    <div id="requestData">
+                        <p style="font-size: 18p; font-weight: 700;">상세 진단 요청</p>
+                        전문가 상담 및 상세 진단을 통해 기업별 맞춤 분석을 제공합니다. <br>
+                        진단 요청시 회사명과 상세 진단 요청사항을 작성해주시면 더욱 정확한 진단을 제공해드리겠습니다. <br> <br>
+                        <a href="#" style="display: inline-block;">
+                            <input class="btnType1" id="request-button" type="submit" value="요청하기" />
+                            <input class="btnType1" id="request-button" type="submit" value="다시 진단하기" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- 체험 진단 다음 -->
+    </div>
     </div>
     <!-- 콘텐츠 -->
 </section>

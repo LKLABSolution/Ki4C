@@ -27,20 +27,20 @@
         <div style="padding-top: 30px; padding-left: 30px; height: 200px;">
             <a>입력형식 코드: </a>
             <div style="padding-top: 10px; display: inline-block;">
-                <input type="text"
+                <input class="inputType1" type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="InputTypeCodeText" />
             </div>
             <br>
             <a>입력형식명: </a>
             <div style="padding-top: 10px; display: inline-block;">
-                <input type="text"
+                <input class="inputType1" type="text"
                        style="max-width: 400px; width: 130%; height: 25px; font-size: 16px;
                         margin-bottom: 3px;" id="InputTypeNameText" />
             </div>
             <div style="padding-top: 30px; padding-left: 50px;">
-                <input id="registButton" type="submit" value="등록" />
-                <input id="modifyButton" type="submit" value="수정" />
+                <input class="btnType1" id="registButton" type="submit" value="등록" />
+                <input class="btnType1" id="modifyButton" type="submit" value="수정" />
             </div>
         </div>
         <!-- 진단 평가영역 등록 -->
@@ -48,8 +48,8 @@
         <!-- 진단 평가영역 목록 -->
         <div style="display: inline-block;">
             <div id="buttonLocation">
-                <input type="text" placeholder="검색어 입력" />
-                <button id="searchButton">검색</button>
+                <input class="inputType1" type="text" placeholder="검색어 입력" />
+                <button class="btnType1" id="searchButton">검색</button>
             </div>
             <br>
             <div style="width: 90%; margin: auto;">
@@ -57,7 +57,7 @@
                 </table>
             </div>
             <div id="buttonLocation">
-                <input id="deleteButton" type="submit" value="항목 삭제" />
+                <input class="btnType2" id="deleteButton" type="submit" value="항목 삭제" />
             </div>
         </div>
         <!-- 입력 형식 -->
