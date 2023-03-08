@@ -1,0 +1,193 @@
+﻿<style>
+    #table {
+        border: "1";
+        width: 800px;
+        height: 100px;
+        text-align: center;
+        background-color: #34B0C7;
+        border-color: white;
+        table-layout: fixed;
+    }
+
+    td {
+        font-size: 14px;
+        word-wrap: break-word;
+    }
+
+    #header td {
+        color: white;
+        font-weight: 700;
+    }
+
+    #mypageButton {
+        width: 70px;
+        height: 20px;
+        font-size: 12px;
+        font-weight: 400;
+        background-color: #34B0C7;
+        color: white;
+        border: none;
+        border-radius: 30px;
+    }
+
+    #logoutButton {
+        width: 70px;
+        height: 20px;
+        font-size: 12px;
+        font-weight: 400;
+        background-color: #2A3142;
+        color: white;
+        border: none;
+        border-radius: 30px;
+    }
+
+    #searchBox {
+        width: 130px;
+        height: 30px;
+    }
+
+    #buttonLocation {
+        float: right;
+        margin-right: -50px;
+    }
+
+    #menuBox {
+        padding: 5px;
+        width: 90%;
+        height: 60px;
+        text-align: center;
+        background: #fafafa;
+        margin: auto;
+    }
+
+    #menuTitle {
+        width: 90%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: #34B0C7;
+    }
+
+    #menuLogo {
+        width: 70px;
+        height: 55px;
+    }
+
+    #lnb {
+        width: 90%;
+        background: #fafafa;
+        font-size: 16px;
+        font-weight: 600;
+        margin: auto;
+    }
+
+    .menu {
+        height: 40px;
+        line-height: 40px;
+    }
+
+        .menu:hover {
+            background-color: #34B0C7;
+            color: white;
+        }
+
+        .menu a {
+            padding-left: 10px;
+        }
+
+    .inputType1 {
+        width: 150px;
+        height: 25px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 2px;
+    }
+
+    .inputType2 {
+        width: 500px;
+        height: 25px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 2px;
+    }
+
+    .btnType1 {
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 80px;
+        height: 30px;
+        border-radius: 20px;
+    }
+
+    .btnType2 {
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 100px;
+        height: 30px;
+        border-radius: 20px;
+    }
+
+    select {
+        width: 150px;
+        height: 20px;
+        padding: 3px;
+        margin-top: 10px;
+        border: solid 0.3px #34B0C7;
+        border-radius: 0.5em;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    @@media (max-width: 768px) {
+        #table {
+            width: 100%;
+        }
+
+        #searchBox {
+            width: 100px;
+        }
+
+        #buttonLocation {
+            margin-right: 10px;
+        }
+
+        .inputType2 {
+            width: 150px;
+        }
+    }
+</style>
+<aside>
+    <div style="padding: 10px; height: 80px; line-height: 30px; background: white;">
+        <div id=profile_img style="display: inline;">
+            <img style="width: 50px; height: 50px; " src="~/images/profile.png">
+        </div>
+        <div style="display: inline; height: 20px; vertical-align: top; margin-left: 10px;">
+            관리자466
+        </div>
+        <div style="position: relative; left: 40px;">
+            <input id="mypageButton" type="submit" value="마이페이지" />
+            <input id="logoutButton" type="submit" value="로그아웃" />
+        </div>
+    </div>
+    <div id="menuBox">
+        <img id="menuLogo" src="~/images/menu1.png">
+    </div>
+    <div id="menuTitle">
+        고객관리 시스템
+    </div>
+    <hr style="border: solid 0.5px black;">
+    <div id="lnb" style="height: 300px;">
+        <ul style="list-style:none; padding-left:0px;">
+            <li class="menu">
+                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisType">고객 목록</a>
+            </li>
+        </ul>
+    </div>
+</aside>
