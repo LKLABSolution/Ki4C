@@ -14,13 +14,13 @@
         border: solid 0.5px #2B92D5;
         border-radius: 10px;
         padding: 2px;
+        margin-right: 5px;
     }
 
     #DiagnosisEvaluationAreaList_length > label > select {
         width: 150px;
-        height: 20px;
+        height: 25px;
         padding: 3px;
-        margin-top: 10px;
         border: solid 0.3px #34B0C7;
         border-radius: 0.5em;
         box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
@@ -74,76 +74,8 @@
         <hr />
         <!-- 진단 평가영역 목록 -->
         <div style="display: inline-block;">
-            <div id="buttonLocation">
-                <input class="inputType1" type="text" id="searchBox" placeholder="검색어 입력" />
-                <button class="btnType1" id="searchButton">검색</button>
-            </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                @*<table id="table">
-                    <tr align="center" bgcolor="skyblue">
-                        <td>번호</td>
-                        <td>진단평가 영역코드</td>
-                        <td>진단평가영역</td>
-                        <td>삭제</td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>1</td>
-                        <td>C1</td>
-                        <td>디지털 혁신 추진 조직</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>2</td>
-                        <td>C2</td>
-                        <td>디지털 전환 전략 및 목표 관리</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>3</td>
-                        <td>C3</td>
-                        <td>디지털 경영계획</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>4</td>
-                        <td>C4</td>
-                        <td>수직적 가치사슬 디지털화 수준</td>
-                        <td><input type="checkbox"></td>
-                        </td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>5</td>
-                        <td>C5</td>
-                        <td>수평적 가치사슬 디지털화 수준</td>
-                        <td><input type="checkbox"></td>
-                        </td>
-                    </tr>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>6</td>
-                        <td>C6</td>
-                        <td>데이터 공유 전략 수준</td>
-                        <td><input type="checkbox"></td>
-                        </td>
-                    </tr>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>7</td>
-                        <td>C7</td>
-                        <td>디지털기술 활용전략과 투자 연계</td>
-                        <td><input type="checkbox"></td>
-                        </td>
-                    </tr>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>8</td>
-                        <td>C8</td>
-                        <td>디지털 전환(DX) 과제기획 및 투자</td>
-                        <td><input type="checkbox"></td>
-                        </td>
-                    </tr>
-                </table>*@
                 <table id="DiagnosisEvaluationAreaList" class="display">
                 </table>
             </div>
@@ -157,9 +89,8 @@
 <!-- 섹션 -->
 
 
-<script>
-    let DiagnosisEvaluationAreaJS = {
-        init : function(){
+<script>let DiagnosisEvaluationAreaJS = {
+        init: function () {
             let _this = this;
             $('#registButton').on('click', function () {
                 if (_this.ValidateCheck()) {
@@ -188,7 +119,7 @@
                 _this.checkedChange();
             });
         },
-        regist : function(){
+        regist: function () {
             // /api/APIManagerStandardInforMgr/DiagnosisEvaluationAreaDiagnosisEvaluationArea/insert
             // DiagnosisClassSelecter selected.val add data
             let DiagnosisClassNumber = $('#DiagnosisClassSelecter option:selected').val();
@@ -205,14 +136,14 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data)
-            }).done(function () {   
+            }).done(function () {
                 alert('등록되었습니다.');
                 DiagnosisEvaluationAreaJS.DiagnosisEvaluationAreaList();
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
         },
-        modify : function(){
+        modify: function () {
             //api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/update
             let DiagnosisEvaluationAreaNumber = $('input:checkbox[id="DiagnosisEvaluationAreaNumber"]:checked').val();
             let DiagnosisClassNumber = $('#DiagnosisClassSelecter option:selected').val();
@@ -239,7 +170,7 @@
             });
 
         },
-        delete : function(){
+        delete: function () {
             //api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/delete
             let DiagnosisEvaluationAreaNumber = $('input:checkbox[id="DiagnosisEvaluationAreaNumber"]:checked').val();
             let data = {
@@ -259,9 +190,9 @@
                 alert(JSON.stringify(error));
             });
         },
-        search : function(){
+        search: function () {
         },
-        checkedChange : function(){
+        checkedChange: function () {
             let DiagnosisClassNumber = [];
             let DiagnosisEvaluationAreaNumber = [];
             let EvaluationAreaCode = [];
@@ -279,7 +210,7 @@
             $('#DiagnosisEvaluationAreaName').val(EvaluationAreaName);
 
         },
-        ValidateCheck : function(){
+        ValidateCheck: function () {
             if ($('#DiagnosisClassSelecter option:selected').val() == 0) {
                 alert('진단종류를 선택해주세요.');
                 return false;
@@ -317,7 +248,7 @@
                 alert(JSON.stringify(error));
             });
         },
-        DiagnosisEvaluationAreaList : function () {
+        DiagnosisEvaluationAreaList: function () {
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/getAll',
@@ -335,9 +266,9 @@
                 data.forEach(function (item) {
                     html += '<tr align="center" bgcolor="white">';
                     html += '<td data-sort="' + item.AreaNumber + '">' + item.AreaNumber + '</td>';
-                    html += '<td data-sort="'+ item.DiagnosisClassNumber + '">' + item.DiagnosisClassNumber + '</td>';
-                    html += '<td data-sort="'+ item.EvaluationAreaCode + '">' + item.EvaluationAreaCode + '</td>';
-                    html += '<td data-sort="'+ item.EvaluationAreaName + '">' + item.EvaluationAreaName + '</td>';
+                    html += '<td data-sort="' + item.DiagnosisClassNumber + '">' + item.DiagnosisClassNumber + '</td>';
+                    html += '<td data-sort="' + item.EvaluationAreaCode + '">' + item.EvaluationAreaCode + '</td>';
+                    html += '<td data-sort="' + item.EvaluationAreaName + '">' + item.EvaluationAreaName + '</td>';
                     html += '<td><input type="checkbox" id="DiagnosisEvaluationAreaNumber" value ="' + item.AreaNumber + '"></td>';
                     html += '</tr>';
                 });
@@ -358,7 +289,7 @@
             $('#DiagnosisEvaluationAreaList').empty();
             $('#DiagnosisEvaluationAreaListTest').empty();
         },
-        isEmpty : function (value) {
+        isEmpty: function (value) {
             if (value == null || value == undefined || value == "") {
                 return true;
             } else {
@@ -373,7 +304,27 @@
         DiagnosisEvaluationAreaJS.init();
         DiagnosisEvaluationAreaJS.DiagnosisClassList();
         DiagnosisEvaluationAreaJS.DiagnosisEvaluationAreaList();
-    });
 
+        const tableName = 'DiagnosisEvaluationAreaList'
+        const insideTable = document.querySelector(`#${tableName}`);
+        if (matchMedia("screen and (min-width: 768px)").matches) {
+            // 768px 이상에서 사용할 JavaScript
+            insideTable.style.width = "700px";
+        } else {
+            // 768px 미만에서 사용할 JavaScript
+            insideTable.style.width = "350px";
+        }
+        insideTable.style.padding = "5px";
 
-</script>
+        const search = document.querySelector(`#${tableName}_filter`);
+        //const searchLabel = document.querySelector(`#${tableName}_filter label`);
+        //searchLabel.innerText = searchLabel.innerText.replace("검색:", "");
+        const button = document.createElement("button");
+        button.classList.add("btnType1");
+        button.id = "searchButton";
+        button.innerText = "검색";
+        search.appendChild(button);
+
+        const searchBox = document.querySelector(`#${tableName}_filter label input`);
+        searchBox.placeholder = "검색어 입력";
+    });</script>

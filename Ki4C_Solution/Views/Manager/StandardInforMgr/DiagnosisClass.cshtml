@@ -13,13 +13,13 @@
         border: solid 0.5px #2B92D5;
         border-radius: 10px;
         padding: 2px;
+        margin-right: 5px;
     }
 
     #DiagnosisClassList_length > label > select {
         width: 150px;
-        height: 20px;
+        height: 25px;
         padding: 3px;
-        margin-top: 10px;
         border: solid 0.3px #34B0C7;
         border-radius: 0.5em;
         box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
@@ -75,68 +75,25 @@
         <hr />
         <!-- 진단 구분 목록 -->
         <div style="display: inline-block;">
-            <div id="buttonLocation">
-                <input class="inputType1" type="text" id="searchBox" placeholder="검색어 입력" />
-                <button class="btnType1" id="searchButton">검색</button>
-            </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                @*<table id="table">
-                    <tr id="header" align="center" bgcolor="#34B0C7">
-                        <td>번호</td>
-                        <td>진단구분코드</td>
-                        <td>진단구분명</td>
-                        <td>삭제</td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>1</td>
-                        <td>B1</td>
-                        <td>디지털 전략</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>2</td>
-                        <td>B2</td>
-                        <td>디지털 비즈니스</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>3</td>
-                        <td>B3</td>
-                        <td>디지털 오퍼레이션</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>4</td>
-                        <td>B4</td>
-                        <td>디지털 데이터</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>5</td>
-                        <td>B5</td>
-                        <td>디지털 조직문화</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                </table>*@
-                <table class="display" id="DiagnosisClassList">
-                </table>
+                <table class="display" id="DiagnosisClassList"></table>
             </div>
             <div id="buttonLocation">
                 <input class="btnType2" id="deleteButton" type="submit" value="항목 삭제" />
             </div>
         </div>
         <!-- 진단 구분 목록 -->
-        <!-- 콘텐츠 -->
+    </div>
+    <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
 
-<script>
-    let DiagnosisClassJS = {
+<script>let DiagnosisClassJS = {
         init: function () {
             let _this = this;
             $('#registButton').on('click', function () {
-                if(_this.ValidateCheck()){
+                if (_this.ValidateCheck()) {
                     _this.regist();
                 };
             });
@@ -162,7 +119,7 @@
                 _this.checkedChange();
             });
         },
-        regist : function () {
+        regist: function () {
             //regist button DiagnosisTypeNumber & DiagnosisClassCode & DiagnosisClassName
             let DiagnosisTypeNumber = $('#DiagnosisTypeSelecter option:selected').val();
             let DiagnosisClassCode = $('#DiagnosisClassCode').val();
@@ -184,9 +141,9 @@
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
-            
+
         },
-        modify : function () {
+        modify: function () {
             //api/APIManagerStandardInforMgr/DiagnosisClass/update
             let DiagnosisClassNumber = $('input:checkbox[id="DiagnosisClassNumber"]:checked').val();
             let DiagnosisTypeNumber = $('#DiagnosisTypeSelecter option:selected').val();
@@ -211,7 +168,7 @@
                 alert(JSON.stringify(error));
             });
         },
-        delete : function () {
+        delete: function () {
             //checkbox checked value get DiagnosisClassNumber
             let DiagnosisClassCode = [];
             let DiagnosisClassName = [];
@@ -252,10 +209,10 @@
 
 
         },
-        search : function (){
+        search: function () {
             //search button
         },
-        DiagnosisClassList : function () {
+        DiagnosisClassList: function () {
             //api/APIManagerStandardInforMgr/DiagnosisClass/getAll
             $.ajax({
                 type: 'GET',
@@ -292,7 +249,7 @@
                 alert(JSON.stringify(error));
             });
         },
-        DiagnosisTypeList : function(){
+        DiagnosisTypeList: function () {
             //DiagnosisTypeSelecter select tag add option
             $.ajax({
                 type: 'GET',
@@ -311,7 +268,7 @@
                 alert(JSON.stringify(error));
             });
         },
-        RefreshDiagnosisTypeList : function () {
+        RefreshDiagnosisTypeList: function () {
             $('#DiagnosisClassList').empty();
         },
         checkedChange: function () {
@@ -324,13 +281,13 @@
                 let name = $(this).parent().parent().find('td:eq(3)').text();
                 DiagnosisTypeNumber.push(typeNumber);
                 DiagnosisClassCode.push(code);
-                DiagnosisClassName.push(name);                 
+                DiagnosisClassName.push(name);
             });
             $('#DiagnosisTypeSelecter').val(DiagnosisTypeNumber);
             $('#DiagnosisClassCode').val(DiagnosisClassCode);
             $('#DiagnosisClassName').val(DiagnosisClassName);
         },
-        ValidateCheck : function () {
+        ValidateCheck: function () {
             let DiagnosisTypeNumber = $('#DiagnosisTypeSelecter option:selected').val();
             let DiagnosisClassCode = $('#DiagnosisClassCode').val();
             let DiagnosisClassName = $('#DiagnosisClassName').val();
@@ -355,9 +312,27 @@
         DiagnosisClassJS.init();
         DiagnosisClassJS.DiagnosisTypeList();
         DiagnosisClassJS.DiagnosisClassList();
-        const searchBox = document.querySelector("#DiagnosisClassList_filter label input");
+
+        const tableName = 'DiagnosisClassList';
+        const insideTable = document.querySelector(`#${tableName}`);
+        if (matchMedia("screen and (min-width: 768px)").matches) {
+            // 768px 이상에서 사용할 JavaScript
+            insideTable.style.width = "700px";
+        } else {
+            // 768px 미만에서 사용할 JavaScript
+            insideTable.style.width = "350px";
+        }
+        insideTable.style.padding = "5px";
+
+        const search = document.querySelector(`#${tableName}_filter`);
+        //const searchLabel = document.querySelector(`#${tableName}_filter label`);
+        //searchLabel.innerText = searchLabel.innerText.replace("검색:", "");
+        const button = document.createElement("button");
+        button.classList.add("btnType1");
+        button.id = "searchButton";
+        button.innerText = "검색";
+        search.appendChild(button);
+
+        const searchBox = document.querySelector(`#${tableName}_filter label input`);
         searchBox.placeholder = "검색어 입력";
-    });
-
-
-</script>
+    });</script>
