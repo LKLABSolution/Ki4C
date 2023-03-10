@@ -23,6 +23,18 @@
         border-radius: 0.5em;
         box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
     }
+
+    #DiagnosisEvaluationMeasurementList_paginate {
+        float: left;
+        margin-left: 25%;
+    }
+
+    @@media (max-width: 768px) {
+        #DiagnosisEvaluationMeasurementList_paginate {
+            float: left;
+            margin-left: 15%;
+        }
+    }
 </style>
 <!-- 섹션 -->
 <section>
@@ -255,7 +267,7 @@
         MeasurementJS.init();
         MeasurementJS.MeasurementList();
 
-        const tableName = 'MeasurementList';
+        const tableName = 'DiagnosisEvaluationMeasurementList';
         const insideTable = document.querySelector(`#${tableName}`);
         if (matchMedia("screen and (min-width: 768px)").matches) {
             // 768px 이상에서 사용할 JavaScript
