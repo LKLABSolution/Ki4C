@@ -108,6 +108,7 @@
             <div style="padding-top: 30px; padding-left: 50px;">
                 <input class="btnType1" id="registButton" type="submit" value="등록" />
                 <input class="btnType1" id="modifyButton" type="submit" value="수정" />
+                <input class="btnType1" id="QuestionDetailsButton" type="button" value="문제수정" />
             </div>
         </div> <br> <br> <br>
         <!-- 평가문제 등록 -->
@@ -150,6 +151,15 @@
                     _this.delete();
                 }
             });
+            $('#QuestionDetailsButton').on('click', function () {
+                let EvaluationQuestionNumber = $('#EvaluationQuestionNumber:checked').val();
+                if (EvaluationQuestionNumber.length == null || EvaluationQuestionNumber.length == 0) {
+                    alert('삭제할 항목을 선택해주세요.');
+                    return;
+                }else{
+                    _this.QuestionDetails();
+                }
+            });
             $('#answerButton').on('click', function () {
                 _this.addAnswer();
             });
@@ -184,6 +194,11 @@
             $(document).on('change', '#EvaluationQuestionNumber', function () {
                 _this.checkedChange();
             });
+        },
+        QuestionDetails : function(){
+            //QnADetails.cshtml page model open
+            let EvaluationQuestionNumber = $('#EvaluationQuestionNumber:checked').val();
+
         },
         regist: function () {
             alert('등록');
@@ -373,6 +388,7 @@
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     data = JSON.parse(data);
+                    DiagnosisEvaluationQuestionListObj = data;
                     let html = '';
                     html += '<thead>';
                     html += '<tr align="center" bgcolor="#2B92D5" style="color:#F8F8FF">';
@@ -398,9 +414,13 @@
                     $('#DiagnosisEvaluationQuestionList').html(html);
                     $('#DiagnosisEvaluationQuestionList').DataTable({
                         language: {
-                            url: 'https://cdn.datatables.net/plug-ins/1.13.3/i18n/ko.json'
+                            url: '../../lib/ko.json'
                         },
-                    });
+                        buttons: [
+                            'copy', 'excel', 'pdf'
+                        ]
+                    })
+                    ;
                 }
             });
         },

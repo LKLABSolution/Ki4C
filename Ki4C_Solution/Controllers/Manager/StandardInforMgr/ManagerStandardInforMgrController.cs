@@ -42,5 +42,9 @@ namespace Ki4C_Solution.Controllers.Manager.StandardInforMgr
             return PartialView("../Manager/StandardInforMgr/QnADetails");
         }
 
+        public IActionResult QuestionDetails()
+        {
+            return PartialView("../Manager/StandardInforMgr/DiagnosisQuestionDetails");
+        }
     }
 }
