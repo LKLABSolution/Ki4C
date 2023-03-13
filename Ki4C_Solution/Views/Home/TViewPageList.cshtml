@@ -162,60 +162,84 @@
         <tr>
             <td>DiagnosisMgrList</td>
             <td>
+                <p>진단관리/목록</p>
                 <a class="text-primary" asp-area="" asp-controller="ManagerDiagnosis" asp-action="DiagnosisMgrList">/manager/diagnosis/DiagnosisMgrList.html</a>
+            </td>
+        </tr>
+        <tr>
+            <td>DiagnosisDetailView</td>
+            <td>
+                <p>진단관리/상세보기</p>
+                <a class="text-primary" asp-area="" asp-controller="ManagerDiagnosis" asp-action="DiagnosisDetailView">/manager/diagnosis/DiagnosisDetailView.html</a>
+            </td>
+        </tr>
+        <tr>
+            <td>DiagnosisEvaluationDetailView</td>
+            <td>
+                <p>진단평가관리/상세보기</p>
+                <a class="text-primary" asp-area="" asp-controller="ManagerDiagnosis" asp-action="DiagnosisEvaluationDetailView">/manager/diagnosis/DiagnosisEvaluationDetailView.html</a>
             </td>
         </tr>
         <tr>
             <td>MemberList</td>
             <td>
+                <p>고객관리시스템 / 고객목록</p>
                 <a class="text-primary" asp-area="" asp-controller="ManagerMember" asp-action="MemberList">/manager/member/MemberList.html</a>
             </td>
         </tr>
         <tr>
             <td>MemberDetailVeiw</td>
             <td>
-                <a class="text-dark" asp-area="" asp-controller="ManagerMember" asp-action="MemberDetailView">/manager/member/MemberDetailView</a>
+                <p>고객관리시스템/상세보기</p>
+                <a class="text-dark" asp-area="" asp-controller="ManagerMember" asp-action="MemberDetailView">/manager/member/MemberDetailView.html</a>
+            </td>
+        </tr>
+        <tr>
+            <td>DiagnosisType</td>
+            <td>
+                <p>기준 정보/진단 종류</p>
+                <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisType">/manager/StandardInforMgr/DiagnosisType</a>
             </td>
         </tr>
         <tr>
             <td>DiagnosisClass</td>
             <td>
+                <p>기준 정보/진단 구분</p>
                 <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisClass">/manager/StandardInforMgr/DiagnosisClass</a>
             </td>
         </tr>
         <tr>
             <td>DiagnosisEvaluationArea</td>
             <td>
+                <p>기준 정보/진단 평가영역</p>
                 <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationArea">/manager/StandardInforMgr/DiagnosisEvaluationArea</a>
-            </td>
-        </tr>
-        <tr>
-            <td>DiagnosisEvaluationMeasurement</td>
-            <td>
-                <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationMeasurement">/manager/StandardInforMgr/DiagnosisEvaluationMeasurement</a>
             </td>
         </tr>
         <tr>
             <td>DiagnosisEvaluationQnA</td>
             <td>
+                <p>기준 정보/진단 평가문제와 지문</p>
                 <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationQnA">/manager/StandardInforMgr/DiagnosisEvaluationQnA</a>
             </td>
         </tr>
         <tr>
             <td>DiagnosisInputType</td>
             <td>
+                <p>기준 정보/진단 입력형식</p>
                 <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisInputType">/manager/StandardInforMgr/DiagnosisInputType</a>
             </td>
         </tr>
         <tr>
-            <td>DiagnosisType</td>
+            <td>DiagnosisEvaluationMeasurement</td>
             <td>
-                <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisType">/manager/StandardInforMgr/DiagnosisType</a>
+                <p>기준 정보/진단 평가영역</p>
+                <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationMeasurement">/manager/StandardInforMgr/DiagnosisEvaluationMeasurement</a>
             </td>
         </tr>
         <tr>
             <td>DiagnosisLevel</td>
             <td>
+                <p>기준 정보/진단 수준</p>
                 <a class="text-dark" asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisLevel">/manager/StandardInforMgr/DiagnosisLevel</a>
             </td>
         </tr>
@@ -228,37 +252,71 @@
         <tr>
             <td>Application4Evaluation</td>
             <td>
+                <p>진단평가/평가기업신청</p>
                 <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="Application4Evaluation">/Member/Diagnosis/Application4Evaluation</a>
+            </td>
+        </tr>
+        <tr>
+            <td>SelectedResultList</td>
+            <td>
+                <p>진단평가/선정기업 목록</p>
+                <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="SelectedResultList">/Member/Diagnosis/SelectedResultList</a>
             </td>
         </tr>
         <tr>
             <td>CompanyBasicInformation</td>
             <td>
+                <p>자체 진단/기업 기초 정보</p>
                 <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="CompanyBasicInformation">/Member/Diagnosis/CompanyBasicInformation</a>
             </td>
         </tr>
         <tr>
             <td>SelfDiagnosis</td>
             <td>
+                <p>자체 진단/시작화면</p>
                 <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosis">/Member/Diagnosis/SelfDiagnosis</a>
             </td>
         </tr>
         <tr>
             <td>SelfDiagnosisQuestion</td>
             <td>
+                <p>자체 진단/문항</p>
                 <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="SelfDiagnosisQuestion">/Member/Diagnosis/SelfDiagnosisQuestion</a>
             </td>
         </tr>
         <tr>
-            <td>SelfDiagnosisQuestion</td>
+            <td>ExpertDiagnosis</td>
             <td>
+                <p>전문가 진단/시작화면</p>
+                <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="ExpertDiagnosis">/Member/Diagnosis/ExpertDiagnosis</a>
+            </td>
+        </tr>
+        <tr>
+            <td>ExpertDiagnosisQuestion</td>
+            <td>
+                <p>전문가 진단/문항</p>
                 <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="ExpertDiagnosisQuestion">/Member/Diagnosis/ExpertDiagnosisQuestion</a>
             </td>
         </tr>
         <tr>
             <td>SelectedDiagnosisEvaluation</td>
             <td>
+                <p>진단평가/선정기업 진단평가</p>
                 <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="SelectedDiagnosisEvaluation">/Member/Diagnosis/SelectedDiagnosisEvaluation</a>
+            </td>
+        </tr>
+        <tr>
+            <td>DiagnosisEvaluationDetailed</td>
+            <td>
+                <p>진단평가관리/진단평가상세조회</p>
+                <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="DiagnosisEvaluationDetailed">/Member/Diagnosis/DiagnosisEvaluationDetailed</a>
+            </td>
+        </tr>
+        <tr>
+            <td>DiagnosisEvaluationList</td>
+            <td>
+                <p>진단평가관리/진단평가목록</p>
+                <a class="text-dark" asp-area="" asp-controller="MemberDiagnosis" asp-action="DiagnosisEvaluationList">/Member/Diagnosis/DiagnosisEvaluationList</a>
             </td>
         </tr>
         <tr>

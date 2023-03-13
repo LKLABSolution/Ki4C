@@ -22,5 +22,15 @@ namespace Ki4C_Solution.Controllers.Manager.Diagnosis
         {
             return View("../Manager/Diagnosis/DiagnosisMgrList");
         }
+        //DiagnosisDetailView
+        public IActionResult DiagnosisDetailView()
+        {
+            return View("../Manager/Diagnosis/DiagnosisDetailView");
+        }
+        //DiagnosisEvaluationDetailView
+        public IActionResult DiagnosisEvaluationDetailView()
+        {
+            return View("../Manager/Diagnosis/DiagnosisEvaluationDetailView");
+        }
     }
 }

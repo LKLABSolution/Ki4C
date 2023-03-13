@@ -2,10 +2,258 @@
     // Used Table [Member]
     // 고객관리시스템 - 고객목록
     // 선행작업 - 관리자 로그인
+    Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg.cshtml";
     ViewData["Title"] = "MemberList Page";
 }
-
+<style>
+    #DiagnosisClassList_filter > label > input {
+        width: 150px;
+        height: 25px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 2px;
+    }
+    #DiagnosisClassList_length > label > select {
+        width: 150px;
+        height: 20px;
+        padding: 3px;
+        margin-top: 10px;
+        border: solid 0.3px #34B0C7;
+        border-radius: 0.5em;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    }
+</style>
 <div class="text-center">
     <h1 class="display-4">MemberList Page</h1>
     <p>MemberList Page.</p>
 </div>
+
+@{
+    Layout = "~/Views/Shared/_LayoutKi4C_Aside_dg.cshtml";
+    ViewData["Title"] = "기준정보 관리/진단 종류";
+    @model Ki4C_Solution.Models.Manager.StandardInfoMgr.DiagnosisClass;
+}
+<!-- 섹션 -->
+<section>
+    <!-- 콘텐츠 -->
+    <div id=contetns style="width: 100%;">
+        <h2>고객관리 시스템</h2>
+        <br />
+        <div id="menuIdx">
+            <div style="float: left;">
+                <img id=home_img src="~/images/home-1.png">
+            </div>
+            <a href="#">Home</a>
+            &gt;
+            <a href="#">고객관리 시스템</a>
+            &gt;
+            고객 목록
+        </div>
+        <br>
+        <hr style="width: 100%" />
+        <h3>Ki4C 회원정보를 확인하고 관리합니다.</h3>
+        <h4>전체가입자 100,000 | 회원수 99,999</h4>
+        <!-- 고객 목록 -->
+        <div style="display: inline-block;">
+            <div id="buttonLocation">
+                <select style="height: 30px; font-size: 16px; padding-right: 30px;
+                    margin-bottom: 3px;">
+                    <option>회원구분</option>
+                    <option>아이디</option>
+                    <option>이메일</option>
+                    <option>회사명</option>
+                    <option>부서명</option>
+                </select>
+            </div>
+            <div id="buttonLocation">
+                <input class="inputType1" type="text" id="searchBox" placeholder="검색어 입력" />
+                <button class="btnType1" id="searchButton">검색</button>
+            </div>
+            <br>
+            <div style="width: 90%; margin: auto;">
+                <table class="display" id="DiagnosisClassList">
+                </table>
+            </div>
+        </div>
+        @*<div class="board_list_wrap">
+                    <table class="board_list">
+                        <thead>
+                            <tr>
+                                <th>기업번호</th>
+                                <th>회원구분</th>
+                                <th>아이디</th>
+                                <th>이메일</th>
+                                <th>회사명</th>
+                                <th>부서명</th>
+                                <th>휴대전화</th>
+                                <th>메일링수신여부</th>
+                                <th>가입일시</th>
+                                <th>로그인수(최종로그인)</th>
+                                <th>활동정보</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>일반</td>
+                                <td>adasd</td>
+                                <td>adasd@gmail.com</td>
+                                <td>34상사</td>
+                                <td>마케팅</td>
+                                <td>010-1234-5678</td>
+                                <td><input type="checkbox"></td>
+                                <td>2023.03.15 18:00</td>
+                                <td>27(2023.04.22 13:00)</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>일반</td>
+                                <td>adasd</td>
+                                <td>adasd@gmail.com</td>
+                                <td>34상사</td>
+                                <td>마케팅</td>
+                                <td>010-1234-5678</td>
+                                <td><input type="checkbox"></td>
+                                <td>2023.03.15 18:00</td>
+                                <td>27(2023.04.22 13:00)</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>일반</td>
+                                <td>adasd</td>
+                                <td>adasd@gmail.com</td>
+                                <td>099커뮤니케이션</td>
+                                <td>마케팅</td>
+                                <td>010-1234-5678</td>
+                                <td><input type="checkbox"></td>
+                                <td>2023.03.15 18:00</td>
+                                <td>27(2023.04.22 13:00)</td>
+                                <td>탈퇴</td>*@
+
+                    <!-- 콘텐츠 -->
+        </section>
+        <!-- 섹션 -->
+
+<script>let DiagnosisClassJS = {
+        init: function () {
+            let _this = this;
+            $('#searchButton').on('click', function () {
+                _this.search();
+            });
+            $(document).on('click', '#DiagnosisClassNumber', function () {
+                if ($(this).is(':checked')) {
+                    $(this).parent().parent().siblings().find('#DiagnosisClassNumber').prop('checked', false);
+                }
+            });
+            $(document).on('change', '#DiagnosisClassNumber', function () {
+                _this.checkedChange();
+            });
+        },
+        search: function () {
+            //search button
+        },
+        DiagnosisClassList: function () {
+            //api/APIManagerStandardInforMgr/DiagnosisClass/getAll
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisClass/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                let html = '<thead><tr align="center" bgcolor="#2B92D5" style="color:#F8F8FF">'
+                    + '<td> 기업번호 </td>'
+                    + '<td> 회원구분 </td>'
+                    + '<td> 아이디 </td>'
+                    + '<td> 이메일 </td>'
+                    + '<td> 회사명 </td>'
+                    + '<td> 부서명 </td>'
+                    + '<td> 휴대전화 </td>'
+                    + '<td> 메일링수신여부 </td>'
+                    + '<td> 로그인수(최종로그인) </td>'
+                    + '<td> 활동정보 </td>'
+                    + '</tr></thead><tbody>';
+                data.forEach(function (item) {
+                    html += '<tr align="center" bgcolor="white">';
+                    html += '<td>' + item.CompanyNumber + '</td>';
+                    html += '<td>' + item.CustomerType + '</td>';
+                    html += '<td>' + item.CustomerId + '</td>';
+                    html += '<td>' + item.CustomerEmail + '</td>';
+                    html += '<td>' + item.CompanyName + '</td>';
+                    html += '<td>' + item.DepartmentName + '</td>';
+                    html += '<td>' + item.CustomerPhoneNumber + '</td>';
+                    html += '<td><input type="checkbox" id="CustomerEmailCheck" value="' + item.CustomerEmailCheck + '"></td>';
+                    html += '<td>' + item.CustomerLoginTime + '</td>';
+                    html += '<td>' + item.CustomerActiveInfo + '</td>';
+                    html += '</tr>';
+                });
+                html += '</tbody>';
+                DiagnosisClassJS.RefreshDiagnosisTypeList();
+                $('#DiagnosisClassList').append(html);
+                $('#DiagnosisClassList').DataTable({
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/1.13.3/i18n/ko.json'
+                    },
+                });
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        DiagnosisTypeList: function () {
+            //DiagnosisTypeSelecter select tag add option
+            $.ajax({
+                type: 'GET',
+                url: '/api/APIManagerStandardInforMgr/DiagnosisType/getAll',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (data) {
+                data = JSON.parse(data);
+                let html = '<option value="0">진단종류</option>';
+                data.forEach(function (item) {
+                    html += '<option value="' + item.DiagnosisTypeNumber + '">' + item.DiagnosisTypeNumber + ' - ' + item.DiagnosisTypeCode + ' - ' + item.DiagnosisTypeName + '</option>';
+                });
+                $('#DiagnosisTypeSelecter').empty();
+                $('#DiagnosisTypeSelecter').append(html);
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        },
+        RefreshDiagnosisTypeList: function () {
+            $('#DiagnosisClassList').empty();
+        },
+        checkedChange: function () {
+            let DiagnosisTypeNumber = [];
+            let DiagnosisClassCode = [];
+            let DiagnosisClassName = [];
+            $('#DiagnosisClassNumber:checked').each(function () {
+                let typeNumber = $(this).parent().parent().find('td:eq(1)').text();
+                let code = $(this).parent().parent().find('td:eq(2)').text();
+                let name = $(this).parent().parent().find('td:eq(3)').text();
+                DiagnosisTypeNumber.push(typeNumber);
+                DiagnosisClassCode.push(code);
+                DiagnosisClassName.push(name);
+            });
+            $('#DiagnosisTypeSelecter').val(DiagnosisTypeNumber);
+            $('#DiagnosisClassCode').val(DiagnosisClassCode);
+            $('#DiagnosisClassName').val(DiagnosisClassName);
+        },
+    }
+
+    $(document).ready(function () {
+        DiagnosisClassJS.init();
+        DiagnosisClassJS.DiagnosisTypeList();
+        DiagnosisClassJS.DiagnosisClassList();
+        const searchBox = document.querySelector("#DiagnosisClassList_filter label input");
+        searchBox.placeholder = "검색어 입력";
+    });
+
+    //const searchBox = document.querySelector("#DiagnosisClassList_filter");
+    //console.log(searchBox);
+    //const searchBoxLabel = searchBox.querySelector("label");
+    //const searchBoxInput = searchBoxLabel.querySelector("input");
+    //searchBoxInput.setItem("placeholder", "검색어 입력");
+
+
+</script>

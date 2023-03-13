@@ -1,5 +1,5 @@
 ﻿<style>
-    /*    #table {
+    #table {
         border: "1";
         width: 800px;
         height: 100px;
@@ -7,7 +7,7 @@
         background-color: #34B0C7;
         border-color: white;
         table-layout: fixed;
-    }*/
+    }
 
     td {
         font-size: 14px;
@@ -46,7 +46,7 @@
         height: 30px;
     }
 
-    #buttonLocation, #DiagnosisTypeList_filter {
+    #buttonLocation {
         float: right;
         margin-right: -50px;
     }
@@ -161,9 +161,6 @@
         .inputType2 {
             width: 150px;
         }
-        select {
-            width: 130px;
-        }
     }
 </style>
 <aside>
@@ -183,31 +180,13 @@
         <img id="menuLogo" src="~/images/menu1.png">
     </div>
     <div id="menuTitle">
-        기준 정보
+        고객관리 시스템
     </div>
     <hr style="border: solid 0.5px black;">
     <div id="lnb" style="height: 300px;">
         <ul style="list-style:none; padding-left:0px;">
             <li class="menu">
-                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisType">진단 종류</a>
-            </li>
-            <li class="menu">
-                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisClass">진단 구분</a>
-            </li>
-            <li class="menu">
-                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationArea">진단 평가영역</a>
-            </li>
-            <li class="menu">
-                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationQnA">평가문제와 지문</a>
-            </li>
-            <li class="menu">
-                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisInputType">입력 형식</a>
-            </li>
-            <li class="menu">
-                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisEvaluationMeasurement">평가 척도</a>
-            </li>
-            <li class="menu">
-                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisLevel">진단 수준</a>
+                <a asp-area="" asp-controller="ManagerStandardInforMgr" asp-action="DiagnosisType">고객 목록</a>
             </li>
         </ul>
     </div>

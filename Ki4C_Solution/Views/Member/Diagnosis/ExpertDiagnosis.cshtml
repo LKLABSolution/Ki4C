@@ -3,15 +3,27 @@
     ViewData["Title"] = "진단/자체 진단";
 }
 <style>
-    /* ExpertDiagnosis.html */
     #data {
         margin-left: 100px; margin-right: 100px;
+    }
+    p {
+        line-height: 2em;
     }
     @@media (max-width: 768px){
         #data{
             margin-left: 0px; margin-right: 0px;
             width: 105%;
         }
+    }
+    .btnType1 {
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+        background-color: #2B92D5;
+        border: none;
+        width: 130px;
+        height: 30px;
+        border-radius: 20px;
     }
 </style>
 
@@ -20,8 +32,10 @@
     <!-- 콘텐츠 -->
     <div id="wrap" style="width: 80%;">
         <div id=contetns style="text-align: center;">
+            <br> <br> <br>
             <h2>디지털혁신역량(DIC, Digital Innovation Competency)</h2>
             <h2>전문가 진단(제조업)</h2>
+            <br>
             <div id=diagnosisImg>
                 <img style="width: 280px; height: 230px; " src="~/images/diagnosisImg.png">
             </div>
@@ -29,12 +43,14 @@
             <div id=data>
                 <p>세계 경제는 4차 산업혁명 본격 도래에 따른 디지털 전환이 가속화되며, 생산.유통,소비 전 과정에 걸쳐 디지털과 물리적 세상의 연결을 통해 자본 효율성을 최적화하는 '자본 생산성의 혁명'이 진행되고 있습니다. 디지털 전환은 'ICT를 활용해 새로운 솔루션 창출, 운영 혁신, 사업 기반 재구축 등으로 경쟁력을 제고하고 신성장을 추구하는 활동'을 의미하며, 디지털 전환 전략은 제조혁명과 4차 산업력명이 대두된 2010년대 등어와 개념이 화장되면서 더욱 가속화되는 추세입니다.</p>
                 <p>이에 케이아이포씨(KI4C)에서는 WC300기업의 디지털 준비도 및 역량 수준에 대한 객관적 진단 및 평가를 통해 디지털혁신역량 자체 진단을 실시합니다.</p>
+                <br> <br>
                 <p><strong>개인정보 및 수집 및 동의</strong></p>
                 <p>본 자체 진단 결과는 철저히 대외비로 처리됩니다.</p>
-                <input type="checkbox" />당사는 상기 내용에 따른 정보 수집 및 이용에 동의합니다.
+                <input type="checkbox" /> 당사는 상기 내용에 따른 정보 수집 및 이용에 동의합니다.
+                <br>
             </div>
             <div style="padding-top: 30px; padding-bottom: 30px;">
-                <button onClick="location.href='/MemberDiagnosis/ExpertDiagnosisQuestion'" id="startButton">진단 시작하기</button>
+                <button class="btnType1" onClick="location.href='/MemberDiagnosis/ExpertDiagnosisQuestion'" id="startButton">진단 시작하기</button>
             </div>
         </div>
     </div>

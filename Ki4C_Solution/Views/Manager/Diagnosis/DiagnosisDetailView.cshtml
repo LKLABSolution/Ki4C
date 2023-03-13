@@ -1,0 +1,417 @@
+@{
+    // Used Table [Member]
+    // 마이페이지 - 탈퇴
+    ViewData["Title"] = "진단 결과 보고서";
+}
+
+
+<style>
+    select {
+        width: 100px;
+    }
+    .subTitle {
+        font-size: 30px;
+        font-weight: 500;
+    }
+    #box1 {
+            display:inline-block;
+            background: rgb(135, 198, 199); 
+            padding: 20px;
+        }
+    #box2 {
+        display:inline-block;
+        background: rgb(208, 249, 250);
+        padding: 20px;
+    }
+    #titleBox {
+        width: 20%; height: 100%;
+        display: inline-block;
+        float: left;
+        font-size: 22px;
+    }
+    #titleBox p {
+        width: 80%;
+        text-align: center;
+        margin: auto;
+        padding-top: 20px;
+        font-weight: 800;
+    }
+    #resultBox {
+        width: 70%; height: 100%;
+        float: left;
+        padding-top: 20px; padding-left: 20px;
+    }
+    #guide p:first-child {
+        font-weight: 600;
+    }
+    #boxHR {
+        border: dashed 1px black;
+    }
+    /* 테이블 */
+    table {
+        width: 100%;
+        border-top: 1px solid #444444;
+        border-collapse: collapse;
+    }
+    th, td {
+        border-bottom: 1px solid #444444;
+        padding: 10px;
+    }
+    th:nth-child(2n), td:nth-child(2n) {
+        background-color: #bbdefb;
+    }
+    th:nth-child(2n+1), td:nth-child(2n+1) {
+        background-color: #e3f2fd;
+    }
+</style>
+
+<!-- 섹션 -->
+<section>
+    <!-- 콘텐츠 -->
+    <div id=contents style="width: 100%;">
+        <h2>진단 결과 보고서</h2>
+        <br>
+        <div id="menuIdx">
+            <div style="float: left;">
+                <img id=home_img src="~/images/home-1.png">
+            </div>
+            <a href="#">Home</a>
+            &gt;
+            <a href="#">진단 관리</a>
+            &gt;
+            진단 평가
+        </div>
+        <br>
+        <hr width: 100%;" /> <br>
+        <!-- 진단결과 보고서 -->
+        <div style="display: inline-block;">
+            <div style="width: 90%; margin: auto; background-color: aliceblue;">
+                • 교수님, <br>
+                • 본 보고서는 000 기업이 00년 00월 00일 실시한 진단 (자체 진단과 전문가 진단) 결과를 바탕으로 교수님의 기업 상담을 지원하기 위해 작성된 것입니다. 본 진단은 DX 시작한 기업을 대상으로 하고 있습니다. <br>
+                • 이번 진단은 000 기업에 대해 아래의 사항을 진단하였습니다. <br>
+                • 자체진단 <br>
+                • 전문가진단 <br>
+                • 진단 결과 주요 발견 사항은 아래와 같습니다. <br>
+                <p class="subTitle">기업 기초 정보 </p>
+                <div id="questions"></div>
+                <p class="subTitle">DX 자체 진단 결과 보고서</p>
+                <div style="width: 800px; height: 600px; margin: auto; background-color: skyblue; ">
+                    이미지
+                </div>
+                <div id="report" style="width: 94%; margin: auto;"></div>
+                <br> 진단 결과 주요 발견 사항은 아래와 같습니다. <br>
+                <div style="width: 90%; margin: auto;">
+                    <table id="tableResult">
+                        <th>항목</th>
+                        <th>FINDINGS</th>
+                        </tr>
+                    </table>
+                </div>
+                <!-- 5개 선택지 -->
+                <div id="5section">
+                    <div id="wrap" style="width: 90%;">
+                        <div id=contetns>
+                            <h2>디지털전환(DX) 수준진단</h2>
+                            <hr style="border: solid 0.3px black;">
+                            <p id="category"></p>
+                            <p id="question"></p>
+                            <p>※ 아래의 표를 참고하여 0 ~ 5 사이의 점수를 선택</p>
+                        </div>
+                        <div id="wrap" style="width: 90%; text-align: center;">
+                            <div>
+                                <table id="table_1">
+                                    <tr align="center" bgcolor="skyblue">
+                                        <td>①</td>
+                                        <td>②</td>
+                                        <td>③</td>
+                                        <td>④</td>
+                                        <td>⑤</td>
+                                    </tr>
+                                    <tr id="questionData" align="center" bgcolor="white">
+                                    </tr>
+                                </table>
+                                <div id="wrap" style="width: 80%; text-align: right;">
+                                    <input type="radio" name="score"> 1점
+                                    <input type="radio" name="score"> 2점
+                                    <input type="radio" name="score"> 3점
+                                    <input type="radio" name="score"> 4점
+                                    <input type="radio" name="score"> 5점
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 5개 선택지 -->
+                    <div>
+                        <p>각 항목별 전문가 의견</p>
+                        <p>결과 보고를 위한 전문가 의견</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 콘텐츠 -->
+</section>
+<!-- 섹션 -->
+<script>
+    const questions = document.querySelector("#questions");
+
+    const QUESTIONS_KEY = "companyBasic";
+
+    function readQuestions(items) {
+        
+        if (items['type'] === "essay") {
+            const div = document.createElement("div");
+            const h3 = document.createElement("h3");
+            const input = document.createElement("input");const hr = document.createElement("hr");
+
+            div.appendChild(h3);
+            h3.innerText = items['q1']
+            input.setAttribute("class", "essay");
+            input.setAttribute("type", "text");
+            input.setAttribute("placeholder", "100자 이내");
+
+            div.appendChild(input);
+            div.appendChild(hr);
+            questions.appendChild(div);
+
+        } else {
+            const div = document.createElement("div");
+            const h3 = document.createElement("h3");
+            const p = document.createElement("p");
+            const hr = document.createElement("hr");
+
+            div.appendChild(h3);
+            div.appendChild(p);
+
+            h3.innerText = items['q1']
+            p.innerText = items['q2']
+            div.appendChild(h3);
+            div.appendChild(p);
+            
+            for (i=0; i < items['q3'].length; i++){
+                window["input_"+i] = document.createElement("input");
+                window["input_"+i].setAttribute("type", "radio");
+
+                window["label_"+i] = document.createElement("label");
+                window["label_"+i].innerText = items['q3'][i]
+
+                div.appendChild(window["input_"+i]);
+                div.appendChild(window["label_"+i]);
+            }
+
+            div.appendChild(hr);
+            questions.appendChild(div)
+        }
+    }
+
+    // 테스트 데이터
+    const data = [
+        {
+            type:"essay",
+            q1: "기업명"
+        }, 
+        {
+            type:"multiple",
+            q1: "기업구분",
+            q2: "귀사의 기업 구분에 해당하는 항목은 무엇입니까?", 
+            q3: ["중견기업", "중소기업", "기타"]
+        }, {
+            type: "multiple",
+            q1: "업종구분",
+            q2: "귀사의 업종에 해당하는 항목은 무엇입니까?",
+            q3: ["기계소재", "전기전자", "화학", "정보통신", "바이오의료", "에너지 자원", "지식서비스"]
+        }, {
+            type: "multiple",
+            q1: "기업규모(종업원수)",
+            q2: "귀사의 상시 종업원 수에 해당하는 항목은 무엇입니까?",
+            q3: ["19명 이하", "20-99명", "100-249명", "250-499명", "500명-999명", "1,000명 이상"]
+        }, {
+            type: "multiple",
+            q1: "기업매출",
+            q2: "귀사의 전년도 매출은 어떠한 수준입니까?",
+            q3: ["200억원 미만", "200억원 ~ 400억원 미만", "400억원 ~ 500억원 미만","500억원 ~ 1,500억원 미만",
+            "1,500억원 ~ 3,000억원 미만", "3,000억원 ~5,000억원 미만", "5,000억원 이상"]
+        }, {
+            type: "multiple",
+            q1: "기업소재지",
+            q2: "귀사의 소재지역(본사기준)에 해당하는 항목은 무엇입니까?",
+            q3: ["서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기", "강원", "충북",
+            "충남", "전북", "전남", "경북", "경남", "제주"]
+        }
+
+    ]
+    localStorage.setItem(QUESTIONS_KEY, JSON.stringify(data));
+
+    const savedQuestions = localStorage.getItem(QUESTIONS_KEY);
+    const parsedQuestions = JSON.parse(savedQuestions);
+    parsedQuestions.forEach(readQuestions);
+
+    /* 2번째 */
+    const report = document.querySelector("#report");
+    const DATA_KEY = "dgDetail";
+
+    function readData(items) {
+        const box = document.createElement("div");
+        const titleBox = document.createElement("div");
+        const p = document.createElement("p");
+        const resultBox = document.createElement("div");
+        const dgReult = document.createElement("div");
+        const hr = document.createElement("hr");
+        const guide = document.createElement("div");
+
+        if (items['type'] === "Customer Understanding" || 
+            items['type'] === "Technology & Infrastructure" ||
+            "People Organization & Culture") {
+            box.setAttribute("id", "box1");
+        } else {
+            box.setAttribute("id", "box2");
+        }
+        titleBox.setAttribute("id", "titleBox");
+        resultBox.setAttribute("id", "resultBox");
+        dgReult.setAttribute("id", "dgReult");
+        hr.setAttribute("id", "boxHR");
+        guide.setAttribute("id", "guide");
+
+        p.innerText = items['type']
+        dgReult.innerText = "📊 진단결과";
+        guide.innerText = "📄 한줄 가이드";
+    
+        box.appendChild(titleBox);
+        titleBox.appendChild(p);
+        box.appendChild(resultBox);
+
+        for (i=0; i < items['result'].length; i++){
+            window["p_"+i] = document.createElement("p");
+            window["p_"+i].innerText = items['result'][i]
+
+            dgReult.appendChild(window["p_"+i]);
+        }
+
+        for (i=0; i < items['guide_details'].length; i++){
+            window["p_"+i] = document.createElement("p");
+            window["p_"+i].innerText = items['guide_details'][i]
+
+            guide.appendChild(window["p_"+i]);
+        }
+
+        resultBox.appendChild(dgReult);
+        resultBox.appendChild(hr);
+        resultBox.appendChild(guide);
+
+        report.appendChild(box);
+    }
+
+    // 테스트 데이터
+    const data2 = [
+        {
+            type:"Customer Understanding",
+            result: ["고객(기업고객 또는 최종소비자)이 우리 회사 제품/서비스를 사용/소비하는 과정에서 발생하는 이슈, 문의사항, 만족도 등에 대한 데이터를 취합하여 관리하며, 업무 수행시에 참조하고 있습니다.",
+                "고객과의 거래/협력/소통을 위하여 전통적인 방식(대면 방문, 유선 통화, 우편, FAX 등)과 디지털 기술이 반영된 방식(E-mail, SNS, 화상회의, 모바일앱 등)의 다양한 채널을 개별적으로 운영하고 있으며, 각 채널별로 고객데이터를 관리하고 있습니다."],
+            guide: "Customer Understanding은 고객경험/가치의 업무연계와 고객 채널/데이터 통합관리가 중요합니다.",
+            guide_details: ["고객경험/가치의 업무연계 측면에서 고객의 이슈, 문의사항, 만족도 등에 대한 데이터를 주기적 통합관리/모니터링하여 대응/조치하는 것이 필요합니다.",
+                "고객 채널 및 데이터 통합관리 측면에서 여러 채널을 연계하여 운영하고, 고객 데이터를 통합 관리하는 것이 필요합니다."]
+        }, 
+        {
+            type:"Strategy & Leadership",
+            result: ["디지털 전략(AI, Blockchain, Cloud 등 디지털 기술을 활용하여 사업 전반을 혁신하는 전략)을 정의하였으나, 이를 경영/투자에 반영하지 않고 있습니다.",
+                "디지털 기술을 적용하기 위한 별도의 디지털 전환(DT) 과제에 대한 기획과 투자가 없습니다."],
+            guide: "Strategy & Leadership은 디지털 전략과 투자간 연계와 디지털 전환(DT) 과제 기획/투자가 중요합니다.",
+            guide_details: ["디지털 전략과 투자간 연계 측면에서 디지털 전략을 전사 차원의 경영/투자에 반영하는 것이 필요합니다.",
+                "디지털 전환(DT) 과제 기획/투자 관점에서 디지털 신기술에 대한 PoC 소규모 투자 및 PJT 제한적 투자부터 시작하기 바랍니다."]
+        }, 
+        {
+            type:"Technology & Infrastructure",
+            result: ["업무 시스템에 대한 관리체계를 일부 정의하였습니다. 업무 시스템 정보는 제공하나, 체계적으로 통합 관리되지 않고 있습니다.",
+                "업무상 발생하는 데이터를 수집/분석하여 현황을 파악하고 있습니다. 업무 수행시 발생 건에 대한 현황/분석 정보를 의사결정권자들에게 리포팅하고 있습니다."],
+            guide: "Technology & Infrastructure는 업무시스템 관리체계와 데이터 분석의 업무 활용이 중요합니다.",
+            guide_details: ["애플리케이션 관리 측면에서 업무 시스템에 대한 표준화된 관리체계를 수립하고, 시스템 정보를 통합관리하는 것이 필요합니다.",
+                "데이터 분석의 업무 활용을 위하여 정기적 현황 분석을 통하여 업무 산황에 대한 전망/예측하는 체계를 정립하는 것이 필요합니다."]
+        }, 
+        {
+            type:"Operations",
+            result: ["업무 자동화 솔루션(예: 챗봇, RPA, 머신러닝 등) 도입에 대한 계획이 없거나, 검토 단계에 머물러 있습니다.",
+                "VDI(Virtual Desktop Infrastructure, 데스크탑 가상화) 등을 활용하여 인터넷에 접속하면 사내 업무 시스템을 사용할 수 있는 가상 업무환경을 제공합니다."],
+            guide: "Operation은 업무 자동화와 디지털 업무환경이 중요합니다.",
+            guide_details: ["업무 자동화 솔루션에 대한 업무 적용성을 검토하고, 일부 업무에 시범적용을 하는 것이 필요합니다.",
+                "디지털 업무환경 측면에서 가상 업무환경 및 모바일 서비스를 활용하여 기본 업무 기능(메일링, 결재, 일정관리 등)에 대한 모빌리티 서비스를 제공하는 것이 필요합니다."]
+            }, 
+        {
+            type:"People Organization & Culture",
+            result: ["디지털 전환(Digital Transfotmation) 관련 역할과 책임이 임시적으로 최소 수준으로 정의되어 있습니다.",
+                "디지털 전환(DT)을 시도하고 있으나, 새로운 시도에 대한 지원과 성공/실폐 사례에 대한 학슴은 거의 일어나지 않는 단계입니다."],
+            guide: "조직/문화는 디지털 전환(DT) 관련 업무 R&R 정착과 경험 기반 학습문화가 중요합니다.",
+            guide_details: ["조직 R&R 측면에서 전사/사업부의 디지털 전환(DT) 업무 R&R을 정의하는 것이 필요합니다.",
+                "업무문화 측면에서 디지털 전환(DT) 시도에 대한 전사 차원의 지원과 지식자산화(경험/사례 확보) 추진이 필요합니다."]
+        }
+    ]
+    localStorage.setItem(DATA_KEY, JSON.stringify(data2));
+
+    const savedData = localStorage.getItem(DATA_KEY);
+    const parsedData = JSON.parse(savedData);
+    parsedData.forEach(readData);
+
+    /* 3번째 */
+    const tableResult = document.querySelector("#tableResult");
+    const RESULT_KEY = "rstDetail";
+
+    function readResults(items) {
+        console.log(items)
+        const tr =  document.createElement("tr");
+        const td =  document.createElement("td");
+        td.innerText = items['type']
+        tr.appendChild(td);
+
+        const td2 =  document.createElement("td");
+        td2.innerText = `디지털 전략 진단결과, 전체 평균 점수는 최고(5점) 기준으로 ${items['result'][0]}점이며
+        ${items['result'][1]} 부분에서 상대적으로 낮은 점수를 나타낸 반면
+        ${items['result'][2]} 부분에서 상대적으로 높은 점수를 나타냄.`
+
+        tr.appendChild(td2);
+
+        tableResult.appendChild(tr);
+    }
+
+    // 테스트 데이터
+    const data3 = [
+        {
+            type:"디지털 전략",
+            result: [
+                "3.38점", 
+                "디지털 혁신 추진조직, 디지털 경영계획, 수직적 가치사슬 디지털화 수준, 수평적 가치사슬 디지털화 수준, 디지털 전환(DX) 과제기획 및 투자",
+                "디지털 전환 전략 및 목표관리, 데이터 공유 전략 수준, 디지털기술 활용전략과 투자 연계"
+            ]
+        }, {
+            type:"디지털 비즈니스",
+            result: [
+                "3.38점", 
+                "고객만족 서비스 전략, 수요예측 운영 수준, 데이터 기반 주문, 디지털 마케팅 지원 수준, 디지털 요소 적용 수준",
+                "비즈니스 디지털화, 디지털 상품기획, 단가협상 및 계약"
+            ]
+        }, {
+            type:"디지털 비즈니스",
+            result: [
+                "3.47점", 
+                "디지털 과제 정보관리, 디지털 협업 정보 공유, 디지털 공급망 계획, 디지털 생산운영, 설비자동화, 디지털 공장운영 시스템, 디지털 물류 Visibility, 실시간 입고 처리, 정보시스템 운영",
+                "디지털기술 활용수준, 디지털 업무프로세스, 디지털기술 활용 제품설계, 디지털 생산관리, 디지털 공정관리, 디지털 품질관리, 디지털 설비관리, 디지털 물류운영"
+            ]
+        }, {
+            type:"디지털 비즈니스",
+            result: [
+                "3.56점", 
+                "데이터 기반 고객대응, 고객경험/ 가치의 업무연계, 고객 채널/데이터 통합관리, 데이터 분석의 업무 활용수준",
+                "데이터 통합 관리 체계, 고객 데이터 통합/관리 시스템, 데 이터 접근성 디지털 기술 기반 업무 자동화, 시공간 제약없는 디지털 업무환경 제공"
+            ]
+        }, {
+            type:"디지털 비즈니스",
+            result: [
+                "3.38점", 
+                "디지털화 스킬 및 역량 개발 지원, 애자일 기반 조직 및 의사결정구조, 디지털 기술인력 공급수준, 디지털 전환(DX) 경험기반 학습문화, 디지털 혁신성과 보상체계",
+                "디지털 인사관리, 데이터기반 의사결정, 애플리케이션 아키텍처 관리"
+            ]
+        }
+    ]
+
+    localStorage.setItem(RESULT_KEY, JSON.stringify(data3));
+
+    const savedResult = localStorage.getItem(RESULT_KEY);
+    const parsedResult = JSON.parse(savedResult);
+    parsedResult.forEach(readResults);
+</script>

@@ -6,111 +6,35 @@
     ViewData["Title"] = "기준정보 관리/진단 종류";
 }
 <style>
-    /* 테이블 기본 설정 */
- /*   input[type="checkbox"] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        width: 1.5em;
-        height: 1.5em;
-        border: 2px solid #ccc;
-        border-radius: 0.25em;
-        outline: none;
-        transition: all 0.2s;
-        margin-right: 0.5em;
-        position: relative;
+    #DiagnosisEvaluationQuestionList_filter > label > input {
+        width: 150px;
+        height: 25px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 2px;
+        margin-right: 5px;
     }
 
-    input[type="checkbox"]::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1.2em;
-        color: #2B92D5;
-        opacity: 0;
-        transition: opacity 0.2s;
+    #DiagnosisEvaluationQuestionList_length > label > select {
+        width: 150px;
+        height: 25px;
+        padding: 3px;
+        border: solid 0.3px #34B0C7;
+        border-radius: 0.5em;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
     }
 
-    input[type="checkbox"]:checked {
-        border-color: #2B92D5;
-        transform: scale(1.2);
+    #DiagnosisEvaluationQuestionList_paginate {
+        float: left;
+        margin-left: 25%;
     }
 
-    input[type="checkbox"]:checked::before {
-        opacity: 1;
-        content: "\2714";
-    }
-
-    .dataTables_paginate .paginate_button {
-        border: 2px solid #ccc;
-        background-color: #fff;
-        color: #2B92D5;
-        border-radius: 0.25em;
-        padding: 0.5em 1em;
-        margin-right: 0.5em;
-        transition: all 0.2s;
-    }
-
-        .dataTables_paginate .paginate_button:hover {
-            background-color: #2B92D5;
-            color: #fff;
-            border-color: #2B92D5;
+    @@media (max-width: 768px) {
+        #DiagnosisEvaluationQuestionList_paginate {
+            float: left;
+            margin-left: 15%;
         }
-
-    .dataTables_filter input[type="search"] {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        width: 100%;
-        height: 2.5em;
-        border: 2px solid #ccc;
-        border-radius: 0.25em;
-        outline: none;
-        transition: all 0.2s;
-        padding: 0.5em;
     }
-
-        .dataTables_filter input[type="search"]:focus {
-            border-color: #2B92D5;
-        }
-
-    .dataTables_length select {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        width: 1000px;
-        width: 1.5em;
-        height: 1.5em;
-        border: 2px solid #ccc;
-        border-radius: 0.25em;
-        outline: none;
-        transition: all 0.2s;
-        margin-right: 0.5em;
-        position: relative;
-    }
-
-        .dataTables_length select::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.2em;
-            color: #2B92D5;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .dataTables_length select:focus {
-            border-color: #2B92D5;
-        }
-
-            .dataTables_length select:focus::before {
-                opacity: 1;
-                content: "\25BC";
-            }*/
 </style>
 <!-- 섹션 -->
 <section>
@@ -145,11 +69,6 @@
                         margin-bottom: 3px;" id="DiagnosisEvaluationAreaSelecter">
                 </select>
             </div>
-            @*            <div style="padding-left: 50px; display: inline-block;">
-            <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
-                    margin-bottom: 3px;" id="inputTypeSelecter">
-            </select>
-        </div>*@
             <br>
             <a>평가문제 코드 : </a>
             <div style="padding-top: 10px; display: inline-block;">
@@ -165,10 +84,27 @@
                         margin-bottom: 3px;" id="EvaluationQuestionContents" />
             </div>
             <br>
-
-            @*<div style="display: inline-block;">
-            <h4 style="display: inline;">지문:</h4>
-        </div>*@
+            <a>입력방식 : </a>
+            <div style="padding-top: 10px; display: inline-block;">
+                <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
+                        margin-bottom: 3px;" id="inputTypeSelecter">
+                </select>
+            </div>
+            <br>
+            <a>평가척도 : </a>
+            <div style="padding-top: 10px; display: inline-block;">
+                <select style="max-width: 200px; width: 130%; height: 30px; font-size: 16px;
+                        margin-bottom: 3px;" id="MeasurementSelecter">
+                </select>
+            </div>
+            <br>
+            <a>지문 : </a>
+            <div id="answerForm" style="display: inline-block;">
+                <input class="inputType2" type="text" id="answerInput" placeholder="추가할 지문을 입력하세요" required />
+                <button class="btnType1" id="answerButton" type="button">추가</button>
+            </div>
+            <ul id="answerList"></ul>
+            <br>
             <div style="padding-top: 30px; padding-left: 50px;">
                 <input class="btnType1" id="registButton" type="submit" value="등록" />
                 <input class="btnType1" id="modifyButton" type="submit" value="수정" />
@@ -179,10 +115,6 @@
         <hr />
         <!-- 평가문제 목록 -->
         <div style="display: inline-block;">
-            <div id="buttonLocation">
-                <input class="inputType1" type="text" placeholder="검색어 입력" />
-                <button class="btnType1" id="searchButton">검색</button>
-            </div>
             <br>
             <div style="width: 80%; margin: 0 auto;">
                 <table class="table display"
@@ -197,8 +129,7 @@
         <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
-<script>
-    let DiagnosisClassSelecterObj = [];
+<script>let DiagnosisClassSelecterObj = [];
     let DiagnosisEvaluationAreaSelecterObj = [];
     let DiagnosisEvaluationQuestionListObj = [];
 
@@ -206,12 +137,12 @@
         init: function () {
             let _this = this;
             $('#registButton').on('click', function () {
-                if(_this.ValidateCheck()){
+                if (_this.ValidateCheck()) {
                     _this.regist();
                 }
             });
             $('#modifyButton').on('click', function () {
-                if (_this.ValidateCheck()){
+                if (_this.ValidateCheck()) {
                     _this.modify();
                 }
             });
@@ -241,13 +172,13 @@
                 if (diagnosisClassNumber) {
                     // filter area list by selected diagnosis class
                     var filteredAreaList = $.grep(DiagnosisEvaluationAreaSelecterObj, function (area) {
-                    return area.DiagnosisClassNumber == diagnosisClassNumber;
+                        return area.DiagnosisClassNumber == diagnosisClassNumber;
                     });
-                    if(filteredAreaList.length == 0){
+                    if (filteredAreaList.length == 0) {
                         $(DiagnosisEvaluationAreaSelecter).append('<option value="0">평가구분없음</option>');
                         //disable
                         $(DiagnosisEvaluationAreaSelecter).prop('disabled', true);
-                    }else{
+                    } else {
                         $.each(filteredAreaList, function (index, value) {
                             $(DiagnosisEvaluationAreaSelecter).append('<option value="' + value.AreaNumber + '">' + value.AreaNumber + ' - ' + value.EvaluationAreaCode + ' - ' + value.EvaluationAreaName + '</option>');
                         });
@@ -350,7 +281,7 @@
                 return false;
             }
         },
-        ValidateCheck : function(){
+        ValidateCheck: function () {
             if ($('input:checkbox[id="EvaluationQuestionNumber"]:checked').length == null || $('input:checkbox[id="EvaluationQuestionNumber"]:checked').length == 0) {
                 alert('수정 및 삭제할 항목을 선택해주세요.');
                 return false;
@@ -377,14 +308,14 @@
             }
             return true;
         },
-        DeleteValidateCheck : function(){
+        DeleteValidateCheck: function () {
             if ($('input:checkbox[id="EvaluationQuestionNumber"]:checked').length == null || $('input:checkbox[id="EvaluationQuestionNumber"]:checked').length == 0) {
                 alert('삭제할 항목을 선택해주세요.');
                 return false;
             }
             return true;
         },
-        DiagnosisClassList : function(){
+        DiagnosisClassList: function () {
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisClass/getAll',
@@ -403,7 +334,7 @@
                 }
             });
         },
-        DiagnosisEvaluationAreaList : function(){
+        DiagnosisEvaluationAreaList: function () {
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationArea/getAll',
@@ -415,7 +346,7 @@
                 }
             });
         },
-        DiagnosisInputTypeList : function(){
+        DiagnosisInputTypeList: function () {
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/InputType/getAll',
@@ -426,13 +357,13 @@
                     let html = '';
                     html += '<option value="0">입력방식</option>';
                     $.each(data, function (index, item) {
-                        html += '<option value="' + item.InputTypeNumber + '">' + item.InputTypeNumber + ' - ' + item.InputTypeCode  + ' - ' + item.InputTypeName + '</option>';
+                        html += '<option value="' + item.InputTypeNumber + '">' + item.InputTypeNumber + ' - ' + item.InputTypeCode + ' - ' + item.InputTypeName + '</option>';
                     });
                     $('#inputTypeSelecter').html(html);
                 }
             });
         },
-        DiagnosisMeasurementList : function(){
+        DiagnosisMeasurementList: function () {
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/Measurement/getAll',
@@ -449,7 +380,7 @@
                 }
             });
         },
-        DiagnosisEvaluationQuestionList : function(){
+        DiagnosisEvaluationQuestionList: function () {
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisEvaluationQuestion/getAll',
@@ -471,10 +402,10 @@
                     html += '<tbody>';
                     $.each(data, function (index, item) {
                         html += '<tr align="center" bgcolor="white">';
-                        html += '<td>' + item.EvaluationQuestionNumber+ '</td>';
-                        html += '<td>' + item.AreaNumber+ '</td>';
-                        html += '<td>' + item.EvaluationQuestionCode+ '</td>';
-                        html += '<td>' + item.EvaluationQuestionContents+ '</td>';
+                        html += '<td>' + item.EvaluationQuestionNumber + '</td>';
+                        html += '<td>' + item.AreaNumber + '</td>';
+                        html += '<td>' + item.EvaluationQuestionCode + '</td>';
+                        html += '<td>' + item.EvaluationQuestionContents + '</td>';
                         html += '<td><input type="checkbox" id="EvaluationQuestionNumber" value="' + item.EvaluationQuestionNumber + '"></td>';
                         html += '</tr>';
                     });
@@ -496,14 +427,14 @@
         RefreshDiagnosisEvaluationAreaSelecter: function () {
             $('#DiagnosisEvaluationAreaSelecter').empty();
         },
-        RefreshDiagnosisClassSelecter : function(){
+        RefreshDiagnosisClassSelecter: function () {
             $('#DiagnosisClassSelecter').empty();
         },
-        RefreshDiagnosisEvaluationQuestionList : function(){
+        RefreshDiagnosisEvaluationQuestionList: function () {
             $('#DiagnosisEvaluationQuestionList').empty();
         },
-        checkedChange : function(){
-            //checkbox checked 
+        checkedChange: function () {
+            //checkbox checked
             let DiagnosisEvaluationAreaNumber = [];
             let EvaluationQuestionNumber = [];
             let EvaluationQuestionCode = [];
@@ -525,7 +456,7 @@
             $('#EvaluationQuestionCode').val(EvaluationQuestionCode);
             $('#EvaluationQuestionContents').val(EvaluationQuestionContents);
         },
-        addAnswer : function(){
+        addAnswer: function () {
             // answer-input text add answer-list
             let answer = $('#answerInput').val();
             let html = '';
@@ -542,7 +473,7 @@
             $('#answerList').append(html);
             $('#answerInput').val('');
         },
-        deleteAnswer : function(obj){
+        deleteAnswer: function (obj) {
             $(obj).parent().parent().parent().remove();
         },
     };
@@ -555,6 +486,29 @@
         DiagnosisEvaluationQnAJS.DiagnosisInputTypeList();
         DiagnosisEvaluationQnAJS.DiagnosisMeasurementList();
         DiagnosisEvaluationQnAJS.DiagnosisEvaluationQuestionList();
+
+        const tableName = 'DiagnosisEvaluationQuestionList';
+        const insideTable = document.querySelector(`#${tableName}`);
+        if (matchMedia("screen and (min-width: 768px)").matches) {
+            // 768px 이상에서 사용할 JavaScript
+            insideTable.style.width = "700px";
+        } else {
+            // 768px 미만에서 사용할 JavaScript
+            insideTable.style.width = "350px";
+        }
+        insideTable.style.padding = "5px";
+
+        const search = document.querySelector(`#${tableName}_filter`);
+        //const searchLabel = document.querySelector(`#${tableName}_filter label`);
+        //searchLabel.innerText = searchLabel.innerText.replace("검색:", "");
+        const button = document.createElement("button");
+        button.classList.add("btnType1");
+        button.id = "searchButton";
+        button.innerText = "검색";
+        search.appendChild(button);
+
+        const searchBox = document.querySelector(`#${tableName}_filter label input`);
+        searchBox.placeholder = "검색어 입력";
     });
 
 
@@ -576,5 +530,4 @@
 
         //등록된 url 및 window 속성 기준으로 팝업창을 연다.
         window.open(url, "hello popup", windowStatus);
-    }
-</script>
+    }</script>

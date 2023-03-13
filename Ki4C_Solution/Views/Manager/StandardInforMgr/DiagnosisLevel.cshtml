@@ -6,6 +6,37 @@
     ViewData["Title"] = "기준정보 관리/진단 종류";
 }
 <!-- 섹션 -->
+<style>
+    #DiagnosisLevelList_filter > label > input {
+        width: 150px;
+        height: 25px;
+        border: solid 0.5px #2B92D5;
+        border-radius: 10px;
+        padding: 2px;
+        margin-right: 5px;
+    }
+
+    #DiagnosisLevelList_length > label > select {
+        width: 150px;
+        height: 25px;
+        padding: 3px;
+        border: solid 0.3px #34B0C7;
+        border-radius: 0.5em;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    #DiagnosisLevelList_paginate {
+        float: left;
+        margin-left: 25%;
+    }
+
+    @@media (max-width: 768px) {
+        #DiagnosisLevelList_paginate {
+            float: left;
+            margin-left: 15%;
+        }
+    }
+</style>
 <section>
     <!-- 콘텐츠 -->
     <div id=contetns style="width: 100%;">
@@ -47,56 +78,8 @@
         <hr />
         <!-- 진단수준 목록 -->
         <div style="display: inline-block;">
-            <div id="buttonLocation">
-                <input class="inputType1" type="text" id="searchBox" placeholder="검색어 입력" />
-                <button class="btnType1" id="searchButton">검색</button>
-            </div>
             <br>
             <div style="width: 90%; margin: auto;">
-                <table id="table">
-                    <tr id="header" align="center" bgcolor="#34B0C7">
-                        <td>번호</td>
-                        <td>진단수준코드</td>
-                        <td>진단수준명</td>
-                        <td>삭제</td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>1</td>
-                        <td>G1</td>
-                        <td>Level 1</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>2</td>
-                        <td>G2</td>
-                        <td>Level 2</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>3</td>
-                        <td>G3</td>
-                        <td>Level 3</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>4</td>
-                        <td>G4</td>
-                        <td>Level 4</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr align="center" bgcolor="white">
-                        <td>5</td>
-                        <td>G5</td>
-                        <td>Level 5</td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                    </tr>
-                </table>
                 <table id="DiagnosisLevelList" class="display"></table>
             </div>
             <div id="buttonLocation">
@@ -108,9 +91,7 @@
 </section>
 <!-- 섹션 -->
 
-<script>
-
-    let DiagnosisLevelJS = {
+<script>let DiagnosisLevelJS = {
         init: function () {
             let _this = this;
             $('#registButton').on('click', function () {
@@ -158,14 +139,14 @@
         },
         modify: function () {
             let DiagnosisLevelNumber = $('#DiagnosisLevelNumber:checked').val();
-            if(DiagnosisLevelNumber == null || DiagnosisLevelNumber.length == 0){
+            if (DiagnosisLevelNumber == null || DiagnosisLevelNumber.length == 0) {
                 alert('수정할 항목을 선택해주세요.');
                 return;
             }
             let DiagnosisLevelCode = $('#DiagnosisLevelCode').val();
             let DiagnosisLevelName = $('#DiagnosisLevelName').val();
             let data = {
-                DiagnosisLevelNumber : DiagnosisLevelNumber,
+                DiagnosisLevelNumber: DiagnosisLevelNumber,
                 DiagnosisLevelCode: DiagnosisLevelCode,
                 DiagnosisLevelName: DiagnosisLevelName
             };
@@ -189,7 +170,7 @@
             if (DiagnosisLevelNumber == null || DiagnosisLevelNumber.length == 0) {
                 alert('삭제할 항목을 선택해주세요.');
                 return;
-            }            
+            }
             let data = {
                 DiagnosisLevelNumber: DiagnosisLevelNumber,
                 DiagnosisLevelCode: DiagnosisLevelCode,
@@ -220,7 +201,7 @@
             return true;
         },
         // /api/APIManagerStandardInforMgr/DiagnosisLevel/getAll
-        DiagnosisLevelList : function(){
+        DiagnosisLevelList: function () {
             $.ajax({
                 type: 'GET',
                 url: '/api/APIManagerStandardInforMgr/DiagnosisLevel/getAll',
@@ -258,10 +239,10 @@
                 }
             });
         },
-        RefreshDiagnosisLevelList : function(){
+        RefreshDiagnosisLevelList: function () {
             $('#DiagnosisLevelList').empty();
         },
-        checkedChange : function(){
+        checkedChange: function () {
             //checkbox checked
             let DiagnosisLevelNumber = [];
             let DiagnosisLevelCode = [];
@@ -287,7 +268,28 @@
     $(document).ready(function () {
         DiagnosisLevelJS.init();
         DiagnosisLevelJS.DiagnosisLevelList();
+
+        const tableName = 'DiagnosisLevelList';
+        const insideTable = document.querySelector(`#${tableName}`);
+        if (matchMedia("screen and (min-width: 768px)").matches) {
+            // 768px 이상에서 사용할 JavaScript
+            insideTable.style.width = "700px";
+        } else {
+            // 768px 미만에서 사용할 JavaScript
+            insideTable.style.width = "350px";
+        }
+        insideTable.style.padding = "5px";
+
+        const search = document.querySelector(`#${tableName}_filter`);
+        //const searchLabel = document.querySelector(`#${tableName}_filter label`);
+        //searchLabel.innerText = searchLabel.innerText.replace("검색:", "");
+        const button = document.createElement("button");
+        button.classList.add("btnType1");
+        button.id = "searchButton";
+        button.innerText = "검색";
+        search.appendChild(button);
+
+        const searchBox = document.querySelector(`#${tableName}_filter label input`);
+        searchBox.placeholder = "검색어 입력";
     });
-
-
 </script>
