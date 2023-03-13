@@ -228,11 +228,10 @@
 
     readQuestions(parsedQuestions[0], 0);
 
-
     function handleLinkClick(event) {
         if (confirm("제출하시겠습니까?") == true) {
             console.log(result);
-            window.location.href = "/member/diagnosis/DiagnosisFinished.html";
+            window.location.href = "/MemberDiagnosis/DiagnosisFinished";
         } else {
             return false;
         }

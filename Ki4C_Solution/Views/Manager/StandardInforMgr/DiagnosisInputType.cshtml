@@ -24,6 +24,18 @@
         border-radius: 0.5em;
         box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
     }
+
+    #InputTypeList_paginate {
+        float: left;
+        margin-left: 25%;
+    }
+
+    @@media (max-width: 768px) {
+        #InputTypeList_paginate {
+            float: left;
+            margin-left: 15%;
+        }
+    }
 </style>
 <section>
     <!-- 콘텐츠 -->
@@ -66,10 +78,6 @@
         <hr />
         <!-- 진단 평가영역 목록 -->
         <div style="display: inline-block;">
-            <div id="buttonLocation">
-                <input class="inputType1" type="text" placeholder="검색어 입력" />
-                <button class="btnType1" id="searchButton">검색</button>
-            </div>
             <br>
             <div style="width: 90%; margin: auto;">
                 <table id="InputTypeList" class="display">
@@ -80,15 +88,12 @@
             </div>
         </div>
         <!-- 입력 형식 -->
-        <!-- 콘텐츠 -->
+    </div>
+    <!-- 콘텐츠 -->
 </section>
 <!-- 섹션 -->
-
-
-<script>
-
-    let InputTypeJS = {
-        init : function(){
+<script>let InputTypeJS = {
+        init: function () {
             let _this = this;
             $('#registButton').on('click', function () {
                 if (_this.ValidateCheck()) {
@@ -117,7 +122,7 @@
                 _this.checkedChange();
             });
         },
-        InputTypeList : function(){
+        InputTypeList: function () {
             // /api/APIManagerStandardInforMgr/InputType/getAll
             $.ajax({
                 type: 'GET',
@@ -154,10 +159,10 @@
                 alert(JSON.stringify(error));
             });
         },
-        ReflashInputTypeList : function(){
+        ReflashInputTypeList: function () {
             $('#InputTypeList').empty();
         },
-        ValidateCheck : function(){
+        ValidateCheck: function () {
             if ($('#InputTypeCodeText').val() == '') {
                 alert('입력형식 코드를 입력해주세요.');
                 return false;
@@ -168,7 +173,7 @@
             }
             return true;
         },
-        regist : function(){
+        regist: function () {
             let data = {
                 InputTypeCode: $('#InputTypeCodeText').val(),
                 InputTypeName: $('#InputTypeNameText').val()
@@ -186,8 +191,8 @@
                 alert(JSON.stringify(error));
             });
         },
-        modify : function(){
-            if (InputTypeJS.isEmpty($('input:checkbox[id="InputTypeNumber"]:checked').val())){
+        modify: function () {
+            if (InputTypeJS.isEmpty($('input:checkbox[id="InputTypeNumber"]:checked').val())) {
                 alert('항목을 선택해주세요.');
                 return false;
             }
@@ -209,8 +214,8 @@
                 alert(JSON.stringify(error));
             });
         },
-        delete : function(){
-            if (InputTypeJS.isEmpty($('input:checkbox[id="InputTypeNumber"]:checked').val())){
+        delete: function () {
+            if (InputTypeJS.isEmpty($('input:checkbox[id="InputTypeNumber"]:checked').val())) {
                 alert('항목을 선택해주세요.');
                 return false;
             }
@@ -230,7 +235,7 @@
                 alert(JSON.stringify(error));
             });
         },
-        checkedChange : function(){
+        checkedChange: function () {
             let InputTypeNumber = [];
             let InputTypeCode = [];
             let InputTypeName = [];
@@ -246,9 +251,9 @@
             $('#InputTypeCodeText').val(InputTypeCode);
             $('#InputTypeNameText').val(InputTypeName);
         },
-        search : function(){
+        search: function () {
         },
-        isEmpty : function(value){
+        isEmpty: function (value) {
             if (value == null || value == undefined || value == '') {
                 return true;
             }
@@ -261,8 +266,27 @@
     $(document).ready(function () {
         InputTypeJS.init();
         InputTypeJS.InputTypeList();
-    });
 
+        const tableName = 'InputTypeList'
+        const insideTable = document.querySelector(`#${tableName}`);
+        if (matchMedia("screen and (min-width: 768px)").matches) {
+            // 768px 이상에서 사용할 JavaScript
+            insideTable.style.width = "700px";
+        } else {
+            // 768px 미만에서 사용할 JavaScript
+            insideTable.style.width = "350px";
+        }
+        insideTable.style.padding = "5px";
 
+        const search = document.querySelector(`#${tableName}_filter`);
+        //const searchLabel = document.querySelector(`#${tableName}_filter label`);
+        //searchLabel.innerText = searchLabel.innerText.replace("검색:", "");
+        const button = document.createElement("button");
+        button.classList.add("btnType1");
+        button.id = "searchButton";
+        button.innerText = "검색";
+        search.appendChild(button);
 
-</script>
+        const searchBox = document.querySelector(`#${tableName}_filter label input`);
+        searchBox.placeholder = "검색어 입력";
+    });</script>
